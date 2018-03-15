@@ -65,4 +65,4 @@ $Gui.Controls
 $Gui.Gui.show()
 ``` 
 
-![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-items.jpeg?raw=true "Basic controls")
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-items.jpeg?raw=true "Items controls")

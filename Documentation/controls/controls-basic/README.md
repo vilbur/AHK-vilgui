@@ -77,7 +77,8 @@ callbackFN($Event, $params*){
 	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5
 }
 ```
-<p align="left">
-	<img align="center" src="https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic.jpeg?raw=true">
+<p align="center">
+ ![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-basic.jpeg?raw=true)
 </p>
+
  
