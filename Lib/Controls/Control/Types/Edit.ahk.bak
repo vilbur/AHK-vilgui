@@ -1,0 +1,21 @@
+/** Class Edit_vgui
+*/
+Class Edit_vgui extends Control_vgui{
+	;test := "variable"
+	;__New(){
+	;	MsgBox,262144,, Edit_vgui, 2
+	;}
+	/** add
+	*/
+	;add($name:=""){
+	;	this.name($name)
+	;	this.addLabel()
+	;	;this.options( this._Options.get() " " this._getVerticalAlign())
+	;
+	;	return % this.addControl()
+	;	;return this.parent()
+	;}
+
+
+
+}

@@ -1,0 +1,21 @@
+/** Class RadioTest
+*/
+Class RadioTest{
+
+	runMainTest(){
+		$GuiTest.Controls
+			.GroupBox().layout("column").add("GUI_Radio")
+				.Radio().items("String A|String B|String C").add("RadioString")
+				.section()
+				.Radio().items(["Array item A", "Array item B", "Array item C"]).checked(2).add("RadioArray")
+				.section()
+				.Radio().items({"objKey1":"Obj item A", "objKey2":"Obj item B", "objKey3":"Obj item C"}).checked("objKey3").add("RadioObj1")
+				; .section()
+				; .Radio().items(["Vertical Radio A", "Vertical Radio B"]).checked(1).add("RadioObj2")
+
+	}
+	
+	
+	
+
+}

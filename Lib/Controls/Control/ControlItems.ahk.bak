@@ -1,0 +1,92 @@
+/** Class Control
+*/
+Class ControlItems_vgui extends Control_vgui{
+
+	_items := {"string":"", "array":[]}
+
+	/** set items for radio buttons or tabs
+	*/
+	items($items:=""){
+		this._items.string	:= !isObject($items) ? $items : this._getItemsString($items)
+		this._items.array	:=  isObject($items) ? $items : this._getItemsArray($items)
+		;Dump(this._items, "this._items", 1)
+		return this
+	}
+	/** Set checked radio button key or number
+		@param int|string $key of checked item
+	*/
+	checked($checked){
+
+		For $checked_key, $checked in (isObject($checked)?$checked:[$checked])
+			For $key, $item in this._items.array
+				if(this._keyOrValueMatchChecked($checked, $key, $item) && !this._isItemPiped($item) )
+					this._items.array[$key] := $item "|" (A_Index==this.items_length?"|":"")
+
+		;Dump(this._items, "this._items", 1)
+		this._items.string	:= this._getItemsString(this._items.array)
+		;Dump(this._items.string, "this._items", 1)
+		return this
+	}
+	/** _getItemsString
+	*/
+	_getItemsString($items){
+		this._setItemsLenght($items)
+		For $key, $item in $items
+			$string .=  $item (A_Index<this.items_length?"|":"")
+		return %$string%
+	}
+	/** _getItemsArray
+	*/
+	_getItemsArray($items){
+		$items := RegExReplace( $items, "\|\|", "~#~|" )
+		$array := []
+		For $key, $item in StrSplit($items, "|")
+			if($item || A_Index==1)
+				$array.push( RegExReplace( $item, "~#~", "|" ))
+		this._setItemsLenght($array)
+		return %$array%
+	}
+	/** _setItemsLenght
+	*/
+	_setItemsLenght($items){
+		this.items_length :=	$items.maxIndex() ? $items.maxIndex() : $items.GetCapacity()
+	}
+
+	/** Is radio button checked ?
+		@param int|string $key of checked radio button
+	*/
+	_getCheckedPipe($key, $item){
+
+		;Dump(this._keyOrValueMatchChecked($key, $item), "this._keyOrValueMatchChecked($key, $item)", 1)
+		return % ( this._type!="Radio" && !this._isItemPiped($item) && (this._keyOrValueMatchChecked($key, $item) || this._isNextItemEmpty($key) )) ? "|":""
+	}
+
+	/** Is radio button checked ?
+		If this.checked_key == key
+		Or if next item is empty because of items was entered as string E.G: "Item A||Item B|Item C"
+
+		@param int|string $key of checked radio button
+	*/
+	_isCheckedTest($key, $item){
+		return % (this._keyOrValueMatchChecked($key, $item) || this._isItemPiped($item) || this._isNextItemEmpty($key) )
+	}
+	/** _keyOrValueMatchChecked
+	*/
+	_keyOrValueMatchChecked($checked, $key, $item){
+		return % $checked == $key || $checked == $item
+	}
+	/** _isItemPiped
+	*/
+	_isItemPiped($item){
+		return % RegExMatch( $item, "i)\|$" )
+	}
+
+	/** isNextItemEmpty
+	*/
+	_isNextItemEmpty($key){
+		if $key is number
+			return %  $key<this.items_length && this._items[$key+1] == ""
+
+	}
+
+}

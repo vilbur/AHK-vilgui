@@ -1,0 +1,91 @@
+/** Class ListView_vgui
+	Forum GuiListViewEx: https://autohotkey.com/board/topic/80686-class-guilistviewex-added-functions-for-gui-listviews/
+*/
+
+
+Class ModifyCol_vgui {
+
+	_hwnd	:= {"gui":"", "list_view":""}
+	_options 	:= []
+
+	/** hwnd
+	*/
+	hwnd($gui, $list_view){
+		this._hwnd.gui	:= $gui
+		this._hwnd.list_view	:= $list_view
+	}
+
+	/*-----------------------------------------
+		MOFIFY METHODS
+	-----------------------------------------
+	*/
+	/**  modifyCol HELP: https://autohotkey.com/docs/commands/ListView.htm#bifCol
+		A) modifyCol()	; Run modify all columns by this._options
+		B) modifyCol("Auto")	; Modify all columns by value
+		C) modifyCol(1, "Auto")	; Modify columns 1 with value
+		D) modifyCol([1,3], "Auto")	; Modify columns 1 & 3 with value
+		E) modifyCol({1:64, 3:"Auto"})	; modify exact column with their value
+	*/
+	modifyCol($param1:="", $param2:=""){
+
+		if($param1 && !$param2)                        ; example B
+			this._optionToAll($param1)
+		 else if( $param1 is number && $param2)        ; example C
+			this._addOption($param1, $param2)
+		 else if( isObject($param1) && $param2)        ; example D
+			this._addOptionToColumns($param1, $param2)
+		else if( isObject($param1) )                   ; example E
+			this._addOptionsObject($param1)
+
+		if(this._hwnd.list_view)
+			For $column, $options In % this._options
+				this._applyOptions($column, $option)
+	}
+	/** _applyOptions
+
+	*/
+	_applyOptions($column, $options){
+		this.activateListView()
+		LV_ModifyCol($column, $options)
+	}
+
+	/*-----------------------------------------
+
+	-----------------------------------------
+	*/
+	/** Add Option To All columns
+	*/
+	_optionToAll($option){
+		For $column, $options In % this._options
+			this._addOption($column, $option)
+	}
+	/** Add Option To All columns
+	*/
+	_addOptionToColumns($columns, $option){
+		For $i, $column in % $columns
+			this._addOption($column, $option)
+	}
+	/** Set options for columns
+	*/
+	_addOptionsObject($options){
+		For $column, $option In % $options
+			this._addOption($column, $option)
+	}
+	/** _addOption
+	*/
+	_addOption($column, $option){
+		this._options[$column] .= " " $option
+	}
+	/** Activate ListView for manipulation
+	*/
+	_activateListView(){
+		Gui, % this._hwnd.gui ":Default"
+		Gui, % this._hwnd.gui ":ListView", % this._hwnd.list_view
+	}
+	;/** _columsCount
+	;*/
+	;_columsCount(){
+	;	return % this._options.MaxIndex()
+	;}
+
+}

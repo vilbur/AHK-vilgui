@@ -1,0 +1,16 @@
+/** Class GroupBox_vgui
+*/
+Class GroupBox_vgui extends Control_vgui{
+
+	;__New(){
+	;	;MsgBox,262144,, Button_vgui, 2
+	;
+	;}
+	/** Set layout of Controls in GroupBox
+		@param "row|column" $layout
+	*/
+	layout($layout){
+		this._layout := $layout
+		return this
+	}
+}

@@ -1,0 +1,55 @@
+/** Class MouseEvents_vgui
+*/
+Class MouseEvents_vgui{
+
+	/** Call function on mouse wheel event
+		Allow scrolling
+	*/
+	bindWheel(){
+		WM_MOUSEHWHEEL := 0x020A
+		OnMessage(WM_MOUSEHWHEEL, "onMouseWheelMessage")
+		return this
+	}
+
+	/** When user scroll with scrollbar
+	*/
+	bindScroll(){
+		WM_VSCROLL := 0x0115
+		OnMessage(WM_VSCROLL, "onScrollMessage")
+		return this
+	}
+
+}
+
+/*-----------------------------------------
+	CALLBACK
+-----------------------------------------
+*/
+
+/** Recive Mouse Wheel Message
+  */
+onMouseWheelMessage( wParam,lParam ){
+	DetectHiddenWindows, On
+	hwnd := WinExist()
+	if(wParam==4287102976) ; mouse wheel down
+		OnScroll(1, 0, 0x115, hwnd )
+	else if(wParam==7864320)  ; mouse wheel up
+		OnScroll(0, 0, 0x115, hwnd )
+
+
+	;else
+	;	MsgBox,262144,, %wParam%,3
+}
+/** Recive Mouse Wheel Message
+*/
+onScrollMessage( wParam, lParam ){
+	DetectHiddenWindows, On
+	hwnd := WinExist()
+	;;if(wParam==4287102976) ; mouse wheel down
+		;OnScroll(1, 0, 0x0115, hwnd )
+		OnScroll(wParam,lParam, 0x0115, hwnd )
+	;;else if(wParam==7864320)  ; mouse wheel up
+	;;	OnScroll(0, 0, 0x115, hwnd )
+	;;else
+		;MsgBox,262144,SCROLL, %lParam%,1
+}

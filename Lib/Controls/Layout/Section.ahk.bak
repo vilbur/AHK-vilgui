@@ -1,0 +1,133 @@
+/** Section is row or column of controls
+	Control is Gui element (Button,Text,Edit etc.) OR another Container (Tab, Groupbox)
+
+*/
+Class Section_vgui{
+
+	Bbox	:= ""
+	Controls	:= []
+	_type	:= "control"	; type of container`s control "ui|container|control"
+	_layout	:= "row"
+	;_layout	:= "column"
+	;_origin	:= {}	; origin of current section (Row|Column)
+	;_pos	:= {}
+	_next	:= {}	; position of next control
+
+	/** addToSection
+	*/
+	addToSection($item){
+		this.Controls.push($item)
+	}
+	/** Set layout of Control in section
+		@param "row|column" $layout
+	*/
+	layout($layout){
+		this._layout := $layout
+		return this
+	}
+	/** type
+	*/
+	type($type){
+		this._type := $type
+		;Dump(this._type, "this._type", 1)
+		return this
+	}
+	/** sort
+	*/
+	sortControls(){
+		this.Bbox := new Bbox_vgui()
+		For $c, $item in this.Controls
+			this.moveControl($item)
+		return this.Bbox
+		;.remove(this._origin)
+	}
+	/** origin
+	*/
+	origin($origin){
+		this._origin	:= $origin
+		return this
+	}
+	/** next RENAME TO _next_pos
+	*/
+	next($next){
+		this._next	:= $next
+		return this
+	}
+	/** control
+	*/
+	control($ctr_addr){
+		return % Object($ctr_addr)
+	}
+
+	/** move Control to position of new section_vgui or behind previous control
+
+	*/
+	moveControl($item){
+		;Dump($item, "moveControl.item", 0)
+
+		$Control	:= isObject($item) ? this.control($item._ctr_addr) :this.control($item)
+
+		Dump($Control, "Control", 1)
+
+		$control_type	:= isObject($item)	? "groupbox" : "control"
+		;$hwnd_ctrl	:= $control_type=="control"	? $item.hwnd : $item._hwnd ; if control is Control OR Container
+		$hwnd_ctrl	:= $Control.hwnd
+
+		;Dump($hwnd_ctrl, "hwnd_ctrl", 1)
+
+		this._next.y += 0 ; ($item._Control._Options.get("y")?$item._Control._Options.get("y"):0)   ;+ $GUI_margin[this._type].y()
+		this._next.x += 0 ; ($item._Control._Options.get("x")?$item._Control._Options.get("x"):0)   ;+ $GUI_margin[this._type].y()
+
+		$xp := this._next.x ;+ $GUI_margin[this._type].x()
+		$yp := this._next.y  ;+ $GUI_margin[this._type].y()
+
+		;;GuiControl, % $hwnd ":Move", %$hwnd_ctrl%, % " x"  $xp " y" $yp
+		$Control.move($xp, $yp)
+
+		this._sortSectionsInGroupBox($item)
+		this._addLabelTextAlign($item, $hwnd_ctrl)
+		this._getNextControlPosition($item, $hwnd_ctrl)
+	}
+	/** _update CurrenPos
+		@param hwnd $hwnd of Groupbox|Control
+	*/
+	_getNextControlPosition($item, $hwnd_ctrl){
+		GuiControlGet, $control_pos, Pos, %$hwnd_ctrl%
+		$label	:= $item._label==1
+		this._next.x	+= this._layout != "row"	? 0 : $control_posW + ($label?5:$GUI_margin[this._type].x()) ; Add margin after first element of section, remove margin if label
+		this._next.y	+= this._layout == "row"	? 0 : $control_posH + ($label?2:$GUI_margin[this._type].y())
+
+		this.Bbox.add({"x": $control_posX + $control_posW, "y": $control_posY + $control_posH})
+	}
+
+	/** _addLabelTextAlign
+	*/
+	_addLabelTextAlign(byRef $item, $hwnd_ctrl){
+		if($item._label==1&&this._layout == "row")
+			GuiControl, % $hwnd ":+Right" , %$hwnd_ctrl%
+	}
+	/** _sortSectionsInGroupBox
+	*/
+	_sortSectionsInGroupBox(byRef $item){
+		if(isObject($item))
+			$item.setOriginByPosition()
+					.sortSections()
+					.resizeContainerToBBox()
+	}
+
+
+
+	/** _SectionsLast
+	*/
+	_ControlLast(){
+		return % this.Controls[this.Controls.MaxIndex()]
+	}
+
+
+
+
+
+
+
+
+}

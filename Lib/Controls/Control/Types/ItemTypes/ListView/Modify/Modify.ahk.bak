@@ -1,0 +1,46 @@
+/** Class ListView_vgui
+	Forum GuiListViewEx: https://autohotkey.com/board/topic/80686-class-guilistviewex-added-functions-for-gui-listviews/
+*/
+
+
+Class Modify_vgui {
+	_options 	:= []
+
+
+
+
+	/** Add Option To All columns
+	*/
+	_optionToAll($option){
+		;MsgBox,262144,_optionToAll, %$option%,3
+		For $column, $o In % this._options
+			this._addOption($column, $option)
+	}
+	/** Add Option To All columns
+	*/
+	_addOptionToColumns($columns, $option){
+		;MsgBox,262144,, _addOptionToColumns,2
+		For $i, $column in % $columns
+			this._addOption($column, $option)
+	}
+	/** Set options for columns
+	*/
+	_addOptionsObject($options){
+		;MsgBox,262144,, _addOptionsObject,2
+		For $column, $option In % $options
+			this._addOption($column, $option)
+	}
+	/** _addOption
+	*/
+	_addOption($column, $option){
+		this._options[$column] .= " " $option
+	}
+	/** Activate ListView for manipulation
+	*/
+	_activateListView(){
+		if(this._hwnd.list_view) {  ; If list view already exists
+			Gui, % this._hwnd.gui ":Default"
+			Gui, % this._hwnd.gui ":ListView", % this._hwnd.list_view
+		}
+	}
+}

@@ -1,0 +1,131 @@
+/** Class ListView_vgui
+	Forum GuiListViewEx: https://autohotkey.com/board/topic/80686-class-guilistviewex-added-functions-for-gui-listviews/
+
+	LISTVIEW DEFAULTS:
+		EVENTS: RightClick - display context menu in list view
+
+		MENU: RightClick context menu
+
+		MENU ITEMS: Remove row
+
+*/
+Class ListView_vgui extends ListViewEvents_vgui{
+
+	_data	:= [] ; data for listbox
+	_checkbox	:= false
+	Menu	:= new Menu()
+	_ModifyCol	:= new ModifyCol_vgui()
+
+	/** Button
+	*/
+	add($name:=""){
+		this.name($name)
+		this._bindDefaultCallback(&this "._eventDefault")
+		this._menuDefaults()
+		;this.menu(this._name "Context")
+
+		this.Controls().add(this) ; clone added object if user insert one object multiple times
+		this.addData(this._data)
+		this._ModifyCol.hwnd(this._guihwnd, this.hwnd).modifyCol()
+		return % this.Controls() ; Return Parent GUI, it allows chaining when controls are added
+	}
+	/** get
+	*/
+	get(){
+
+	}
+
+	/** Add default methods to menu
+	*/
+	_menuDefaults(){
+		;this.Menu.parent(this._parent)
+		this.Menu.defaults("Remove", &this ".removeRow")
+		this.Menu.menu("RightClick")
+					.item("Remove")
+
+		return this
+	}
+	/*-----------------------------------------
+		PROPERTIES SETUP
+	-----------------------------------------
+	*/
+	/** Columns in ListView
+	*/
+	columns($columns){
+		this.items($columns)
+		this._ModifyCol.setColumns(this._items.MaxIndex())
+		return this
+	}
+	/** Default data for listview
+	*/
+	data($data){
+		this._data := $data
+		return this
+	}
+	/** add Data to ListView
+	*/
+	addData($data){
+		this.activateListView()
+		if(!isObject($data[1])) ; set data to 2D matrix
+			$data	:= [$data]
+		For $r, $row_data in $data
+			LV_Add("",  $row_data*)
+		return this
+	}
+	/** checkbox
+	*/
+	checkbox($toggle:=true){
+		this._checkbox	:= $toggle
+		if($toggle)
+			this._Options.add("checked")
+		return this
+	}
+	/*-----------------------------------------
+		MODIFY LISTVIEW METHODS
+	-----------------------------------------
+	*/
+	/** Change Order of columns
+	*/
+	changeOrder(){
+		GuiControl, -ReDraw, % this.hwnd
+		GuiListViewEx.SetColumnOrder(this.hwnd, [3, 2, 1])
+
+		$ColArr := GuiListViewEx.GetColumnOrder(this.hwnd)
+		For $i, $id In $ColArr
+			LV_ModifyCol($id, "AutoHdr")
+		GuiControl, +ReDraw, % this.hwnd
+	}
+	/** Set\Apply modifyCol OR get _ModifyCol class
+		@params reference: ModifyCol.modifyCol()
+
+		@return object this OR ModifyCol class
+	*/
+	modifyCol($param1:="", $param2:=""){
+
+		if($param1=="" && $param2=="")
+			return % this._ModifyCol
+
+		this._ModifyCol.modifyCol($param1, $param2)
+		return this
+	}
+	/** Is Row checked
+		@param	int $row_num row number to check, FOCUSED ROW IS USED IF UNDEFINED
+		@return boolean
+	*/
+	isChecked($row_num:=""){
+		this.activateListView()
+		if(!$row_num)
+			$row_num :=  LV_GetNext("F")
+
+		SendMessage, 4140, $row_num - 1, 0xF000,,  % "ahk_id " this.hwnd  ; 4140 is LVM_GETITEMSTATE.  0xF000 is LVIS_STATEIMAGEMASK.
+		return % (ErrorLevel >> 12) - 1	> 0
+	}
+	/** Activate ListView for manipulation
+	*/
+	activateListView(){
+		Gui, % this._guihwnd ":Default"
+		Gui, % this._guihwnd ":ListView", % this.hwnd
+	}
+
+
+}
