@@ -106,9 +106,8 @@ Class Gui_vgui{
 	/** _guiShow
 	*/
 	_guiShow($options:=""){
-
 		;Dump(this.parent().hwnd, "this.", 1)
-		Gui, % this.parent().hwnd ":Show", %$options%, % this.parent().hwnd
+		Gui, % this.parent().hwnd ":Show", %$options%, % this.parent().hwnd ; !!! BUG: GUI BREAKS if title "this.parent().title" has whitespace
 		return this
 	}
 	/** _guiShow

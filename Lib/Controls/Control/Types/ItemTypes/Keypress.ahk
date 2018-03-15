@@ -1,4 +1,7 @@
 /** Class Keypress_vgui
+  
+  MOVE THIS FILE SOMEWHERE, IT SHOULD BE NOT PLACED IN itemTypes
+  
 */
 Class Keypress_vgui extends Edit_vgui{
 	/** Add to GUI

@@ -11,6 +11,7 @@ Class VilGUIv3{
 
 	__New($hwnd){
 		this.hwnd	:= $hwnd
+		;this.hwnd	:= RegExReplace( $hwnd, "\s+", "" )
 		this.Margin	:= new GuiMargin_vgui()
 		$GUI[$hwnd]	:= this
 		$GUI_margin	:= this.Margin ; Set Global Margin BBFORE Layout Configured

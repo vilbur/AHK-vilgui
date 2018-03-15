@@ -1,6 +1,5 @@
-/**
-	Global data for test of item types
-  */
+/** Global data for test of item types
+*/
 global	$test_items :=	{"1_string"	:	"String A||String B|String C"
 		,"2_array"	:	["Array item A|", "Array item B", "Array item C"]
 		,"3_object"	:	{"objKey1":"Obj item A|", "objKey2":"Obj item B", "objKey3":"Obj item C"}

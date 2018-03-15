@@ -40,20 +40,20 @@ Class VilGUIv3Test{
 	Controls	:=	[ new MarginTest()
 			,new MenuTest()
 			,new GuiEventsTest()
-			 ,new ControlsTest()
-			; ,new CheckboxTest()
+			,new ControlsTest()
+			,new CheckboxTest()
 
-			; ,new RadioTest()
-			; ,new DropdownTest()
-			; ,new ListBoxTest()
-			; ,new ListBoxViewTest()
-			; ,new PathTest()
-			; ,new LabelTest()
-			,new TabsTest()
-			;;;,new TabsTest("new section")
-			,new ListViewTest()
-			,new ListViewInTabsTest()
-			,new ButtonsTest()]
+				;,new RadioTest()
+				;,new DropdownTest()
+				;,new ListBoxTest()
+				;,new ListBoxViewTest()
+				;,new PathTest()
+				;,new LabelTest()
+				;,new TabsTest()
+				;;;,new TabsTest("new section")
+				,new ListViewTest()
+				,new ListViewInTabsTest()
+				,new ButtonsTest()]
 
 
 	/** GuiTestTest

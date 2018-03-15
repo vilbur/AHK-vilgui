@@ -5,7 +5,7 @@ Class Options_vgui{
 	options	:= ""
 
 	/** Set Control Options
-		@param string options of control // help: https://autohotkey.com/docs/commands/Gui.htm#OtherOptions
+		@param string options of control // https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options
 		@param string $control_type_defaults ALLOWS CHANGE TYPE OF CONTROL for default values E.G: for control type Text set defaults of "Label"
 	*/
 	set($options){
