@@ -18,7 +18,7 @@ $GuiTest.Controls
 $GuiTest.Controls
 			.Edit().label("Label of Edit", "w128").add()
 			.Edit().value("Edit Text").add()
-			.Edit().callback("callbackFN", "Paramater 1", "Paramater 2").add("Callback Edit") ; BUG: on write event has type "leftclick"
+			.Edit().value("Callback").callback("callbackFN", "Paramater 1", "Paramater 2").add("Callback Edit") ; BUG: on write event has type "leftclick"
 
 /* Text
 */

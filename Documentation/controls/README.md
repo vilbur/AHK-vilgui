@@ -46,3 +46,5 @@ callbackFN($Event, $params*){
 	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5
 }
 ```
+
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic.jpeg?raw=true "Basic controls")
