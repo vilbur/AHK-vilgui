@@ -4,8 +4,8 @@
   
 __GUI__  
 __[Create GUI](/Documentation/gui)__  
-__GUI Events__  
-__[Create GUI](/Documentation/events/gui)__  
+__Events__  
+__[GUI Events](/Documentation/events/gui)__  
   
 
 
