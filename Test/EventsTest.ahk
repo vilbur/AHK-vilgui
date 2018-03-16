@@ -3,9 +3,10 @@
 
 
 $GuiTest := new VilGUIv3("GuiTest")
-
+$GuiTest.Controls.Button().add()
 ;Dump($GuiTest, "GuiTest", 1)
-;$GuiTest.create()
+
+$GuiTest.Gui.show()
 
 
 /**

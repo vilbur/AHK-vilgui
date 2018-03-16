@@ -40,8 +40,8 @@ Class VilGUIv3Test{
 	Controls	:=	[ new MarginTest()
 			,new MenuTest()
 			,new GuiEventsTest()
-			,new ControlsTest()
-			,new CheckboxTest()
+			;,new ControlsTest()
+			;,new CheckboxTest()
 
 				;,new RadioTest()
 				;,new DropdownTest()
@@ -51,8 +51,8 @@ Class VilGUIv3Test{
 				;,new LabelTest()
 				;,new TabsTest()
 				;;;,new TabsTest("new section")
-				,new ListViewTest()
-				,new ListViewInTabsTest()
+				;,new ListViewTest()
+				;,new ListViewInTabsTest()
 				,new ButtonsTest()]
 
 
@@ -92,17 +92,17 @@ Class VilGUIv3Test{
 	/** GUI SETUP EXAMPLE 1
 	*/
 	showSetup_1(){
-		$GuiTest.Gui.show()
+		$GuiTest.show()
 				; .alwaysOnTop()
 			; .resizeable(false)
 			; .autosize()
 		; $GuiTest2.controls.button().add()
-		; $GuiTest2.Gui.show()
+		; $GuiTest2.show()
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/
 	showSetup_2(){
-		$GuiTest.Gui.show()
+		$GuiTest.show()
 				.alwaysOnTop()
 				.resizeable()
 				.minSize("500", "500" )
@@ -115,7 +115,7 @@ Class VilGUIv3Test{
 	/** GUI SETUP EXAMPLE 3
 	*/
 	showSetup_3(){
-		$GuiTest.Gui.show()
+		$GuiTest.show()
 			   .resizeable()
 			   .autosize()
 			   .fixedWidth()

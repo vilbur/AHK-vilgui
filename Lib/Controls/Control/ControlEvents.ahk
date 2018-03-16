@@ -27,6 +27,7 @@ Class ControlEvents_vgui {
 	*/
 	_mainCallback($params*){
 		;;;; /** TODO save to ini*/
+		;MsgBox,262144,, _mainCallback,2 
 		this.Event.control(this).callAllCallbacks()
 	}
 	/*---------------------------------------
@@ -38,8 +39,6 @@ Class ControlEvents_vgui {
 	_bindDefaultCallback($callback, $aParams*){
 		;MsgBox,262144,, _bindDefaultCallback,2
 		this.Event.bind("default", $callback, $aParams*)
-
-
 	}
 
 	/*---------------------------------------

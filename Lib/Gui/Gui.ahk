@@ -3,44 +3,36 @@
 Class Gui_vgui{
 
 	Monitor	:= new Monitor()
-	;_resizable	:= false
+	;;;_resizable	:= false
 	_center	:= {x:true, y:false}
 	_size	:= {"min":	{w:0,	h:256}	; store min sizes of gui
 		   ,"max":	{w:0,	h:1024}	; store max sizes of gui
 		   ,"auto":	{w:0,	h:0}}	; store auto sizes of gui
 
-	/**
-	  */
-	show($options:=""){
-		;MsgBox,262144,, Test,2
-		this.parent().create()
-		this.autosize()
-		this.parent()._tabsAutoSize()
-
-		this.fixedWidth()
-		this._setMaxHeightByMonitor()
-
-		;this.center("x",this._center.x)
-		;this.center("y",this._center.y)
-		this._guiShow($options)
-		return this
-	}
 	/*---------------------------------------
-		GUI SET OPTIONS
+		GUI METHODS
 	-----------------------------------------
 	*/
-	/** Resize GUI by content in current tab
+	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm#Options
+	 *	@param string $options strings from documentation 
 	*/
-	size($w:="", $h:=""){
-		this._setSize("w", $w)
-		this._setSize("h", $h)
+	options($option:=""){
+		Gui, % this.hwnd ":" $option
+		return this
+	}
+	/** Resize GUI
+	  *
+	  */
+	size($width:="", $height:=""){
+		this._setSize("w", $width)
+		this._setSize("h", $height)
 		this._scrollbar()
 		return this
 	}
-	/** autosize
+	/** Resize GUI by its content
 	*/
 	autosize(){
-		;this._margin($GUI_margin.ui.x(), $GUI_margin.ui.y())
+		;;;this._margin($GUI_margin.ui.x(), $GUI_margin.ui.y())
 		this._guiShow("AutoSize")
 		this._correctMarginOfGui()
 		this._scrollbar()
@@ -48,27 +40,33 @@ Class Gui_vgui{
 		this._size.auto 	:= {w:$size.w,	h:$size.h}
 		return this
 	}
-	/** resizeable
+	
+	/*---------------------------------------
+		GUI SET OPTIONS METHODS
+	-----------------------------------------
+	*/
+	/** make gui resizeable
+	  * default is unresizable gui 
 	*/
 	resizeable($toggle:=true){
-		this._guiOption(this._getPlusMinus($toggle) "Resize")
+		this.options(this._getPlusMinus($toggle) "Resize")
 		return this
 	}
-	/** maxSize
+	/** set minimal size of gui
 	*/
-	maxSize($w:="",$h:=""){
-		this._minMaxSize("Max", "w", $w)
-		this._minMaxSize("Max", "h", $h)
+	minSize($width:=128,$height:=128){
+		this._minMaxSize("Min", "w", $width)
+		this._minMaxSize("Min", "h", $height)
 		return this
 	}
-	/** minSize
+	/** set maximal size of gui
 	*/
-	minSize($w:="",$h:=""){
-		this._minMaxSize("Min", "w", $w)
-		this._minMaxSize("Min", "h", $h)
+	maxSize($width :="",$height:=""){
+		this._minMaxSize("Max", "w", $width)
+		this._minMaxSize("Max", "h", $height)
 		return this
 	}
-	/** fixedWidth
+	/** set fixed with of gui
 	*/
 	fixedWidth($width:=""){
 		if(!$width)
@@ -79,13 +77,14 @@ Class Gui_vgui{
 
 		return this
 	}
-	/** alwaysOnTop
+	/** set window always on top
 	*/
 	alwaysOnTop($toggle:=true){
-		this._guiOption(this._getPlusMinus($toggle) "AlwaysOnTop")
+		this.options(this._getPlusMinus($toggle) "AlwaysOnTop")
 		return this
 	}
-	/** center
+	/** center gui on display
+	  * @param string $xy "x|y"
 	*/
 	center($xy, $toggle:=true){
 		this._center[$xy] := $toggle
@@ -93,29 +92,20 @@ Class Gui_vgui{
 			this._guiShow($xy "Center")
 		return this
 	}
-	;/** close
-	;*/
-	;close(){
-	;	this._guiOption("Destroy")
-	;	return this
-	;}
+
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-	/** _guiShow
-	*/
+	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
+	 *	@param string $options
+	 */
 	_guiShow($options:=""){
-		;Dump(this.parent().hwnd, "this.", 1)
-		Gui, % this.parent().hwnd ":Show", %$options%, % this.parent().hwnd ; !!! BUG: GUI BREAKS if title "this.parent().title" has whitespace
+		;Dump(this.hwnd, "this.", 1)
+		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
 		return this
 	}
-	/** _guiShow
-	*/
-	_guiOption($option:=""){
-		Gui, % this.parent().hwnd ":" $option
-		return this
-	}
+
 	/** _getPlusMinus
 	*/
 	_getPlusMinus($toggle){
@@ -125,21 +115,21 @@ Class Gui_vgui{
 	*/
 	_minMaxSize($minMax, $wh, $value){
 		this._size[$minMax][$wh] := $value
-		this._guiOption( "+" $minMax "Size" ($wh=="w" ? $value : "") "x" ($h := $wh=="h" ? $value : ""))
+		this.options( "+" $minMax "Size" ($wh=="w" ? $value : "") "x" ($h := $wh=="h" ? $value : ""))
 	}
 	/** _margin
 	*/
 	_margin($x, $y){
-		Gui, % this.parent().hwnd ":Margin", %$x%, %$y%
+		Gui, % this.hwnd ":Margin", %$x%, %$y%
 		return this
 	}
 	/** _scrollbar
 	*/
 	_scrollbar($toggle:=true){
 		if($toggle && this._isScrollbarNeeded())
-			UpdateScrollBars(this.parent().hwnd, $width, this._getGuiSize().h )
+			UpdateScrollBars(this.hwnd, $width, this._getGuiSize().h )
 		else
-			Gui,% this.parent().hwnd ":-0x200000"
+			Gui,% this.hwnd ":-0x200000"
 		return this
 	}
 	/** Set relative or absolute size of gui
@@ -168,18 +158,18 @@ Class Gui_vgui{
 	/** _isScrollbarNeeded
 	*/
 	_isScrollbarNeeded(){
-		;WinGetPos,,,$width, $height, % this.parent().hwnd
+		;WinGetPos,,,$width, $height, % this.hwnd
 		return % this._getGuiSize().h < this._getControlsBboxSize("y")
 	}
 	/** _getControlsBboxSize
 	*/
 	_getControlsBboxSize($xy){
-		return % this.parent().Controls._Layout.ContainerMain.Bbox[$xy]
+		return % this.Controls._Layout.ContainerMain.Bbox[$xy]
 	}
 	/** _getGuiSize
 	*/
 	_getGuiSize(){
-		hwnd := WinExist(this.parent().hwnd)
+		hwnd := WinExist(this.hwnd)
 		VarSetCapacity(rc, 16)
 		DllCall("GetClientRect", "uint", hwnd, "uint", &rc)
 		return {w:NumGet(rc, 8, "int"), h:NumGet(rc, 12, "int")}
@@ -189,13 +179,6 @@ Class Gui_vgui{
 	_setMaxHeightByMonitor(){
 		this._minMaxSize("Max", "h", this.Monitor.getDimensions("height", this.Monitor.findMonitorActive().monitor.active))
 	}
-	/* Set address of parent gui
-	   Parent gui is main Gui Or Tabs object for tabs
-	*/
-	parent($Parent:=""){
-		if($Parent)
-			this._parent	:= &$Parent
-		return % $Parent ? this : Object(this._parent)
-	}
+
 
 }

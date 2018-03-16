@@ -5,37 +5,42 @@ global $GUI_margin
 
 /** Class VilGUIv3
 */
-Class VilGUIv3{
+Class VilGUIv3 extends Gui_vgui{
 
-	;_Tabs	:= []
 
 	__New($hwnd){
-		this.hwnd	:= $hwnd
+		this.hwnd	:= $hwnd		
 		;this.hwnd	:= RegExReplace( $hwnd, "\s+", "" )
+		;this.title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
 		this.Margin	:= new GuiMargin_vgui()
 		$GUI[$hwnd]	:= this
-		$GUI_margin	:= this.Margin ; Set Global Margin BBFORE Layout Configured
+		$GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
 		this.List	:= new ControlsList_vgui()
 		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
-		this.Gui	:= new Gui_vgui().parent(this)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 	}
-	/** create()
+	/**
 	*/
-	create(){
+	show($options:=""){
 		;MsgBox,262144,, Test,2
-		this.sortLayouts()
-		this.Menus.Main.show(this.hwnd)
-		this.Menus.Tray.show()
+		this._sortLayouts()
+		this._addMenu()
+		this._addTrayMenu()
+		this._bindMouseEvents()
+		
+		this.minSize()
+		this.autosize()		
+		this._tabsAutoSize()
 
-		this.Events.Mouse.bindWheel().bindScroll()	; Allow scroll
-		;this.Events.Mouse.bindEvent()	; Allow scroll
-		;Dump(this.List, "this.List", 0)
-		;Dump(this, "this", 0)
+		this.fixedWidth()
+		this._setMaxHeightByMonitor()
+
+		;this.center("x",this._center.x)
+		;this.center("y",this._center.y)
+		this._guiShow($options)
 		return this
 	}
-
 	/** submit gui
 		@return object values of all controls
 	*/
@@ -62,12 +67,32 @@ Class VilGUIv3{
 			ExitApp
 	}
 	/*---------------------------------------
+		PRIVATE METHODS ON GUI CREATE
+	-----------------------------------------
+	*/
+	/** _addMenu()
+	*/
+	_addMenu(){
+		this.Menus.Main.show(this.hwnd)
+	}
+	/** _addTrayMenu()
+	*/
+	_addTrayMenu(){
+		this.Menus.Tray.show()
+	}
+	/** _bindMouseEvents()
+	*/
+	_bindMouseEvents(){
+		this.Events.Mouse.bindWheel().bindScroll()	; Allow scroll
+	}
+
+	/*---------------------------------------
 		Layout
 	-----------------------------------------
 	*/
-	/** sortLayouts
+	/** _sortLayouts
 	*/
-	sortLayouts(){
+	_sortLayouts(){
 		;this.Controls.Layout.ContainerMain.origin({"x":$GUI_margin.ui.x(), "y": $GUI_margin.ui.y()}) ; Set margins to TOP & LEFT of UI
 		this.Controls._Layout.sort()	; Sort layout
 		this._sortTabsLayout()	; Sort layout in tabs

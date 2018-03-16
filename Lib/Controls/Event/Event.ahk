@@ -23,7 +23,7 @@ Class Event_vgui {
 
 		return this
 	}
-	/** Call all callbacks in squence:
+	/** Call all callbacks in sequence:
 		1) Default callback - get event data
 		2) Custom or Event callback
 	*/

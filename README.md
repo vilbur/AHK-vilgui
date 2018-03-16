@@ -1,6 +1,6 @@
 # OOP Gui for Autohotkey  
 
-## Documentation
+## Documentation & Examples
   
 __GUI__  
 __[Create GUI](/Documentation/create-gui)__  

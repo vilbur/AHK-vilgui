@@ -123,6 +123,7 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	/** 	_set Default Value
 	*/
 	_setDefaultValue(){
+		
 		$set_value := true
 		if(RegExMatch(this._Control._type, "i)edit|radio")) ; type is Edit|Radio
 			$set_value := false

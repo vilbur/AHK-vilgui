@@ -27,6 +27,7 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	/** Edit value of control in GUI
 	*/
 	edit($value){
+		;MsgBox,262144,, edit,2 
 		GuiControl,, % this.hwnd, %$value%
 		return this
 	}

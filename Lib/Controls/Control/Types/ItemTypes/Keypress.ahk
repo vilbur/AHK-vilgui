@@ -11,6 +11,7 @@ Class Keypress_vgui extends Edit_vgui{
 		this.name($name)
 		;this.Controls().edit()
 						;.options("AltSubmit")
+						
 		this.type("Edit")
 				this.callback(&this ".test")
 						;.add()
