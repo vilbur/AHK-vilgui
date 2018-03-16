@@ -48,16 +48,17 @@ Class VilGUIv3{
 		;this.Events.gui.call("submit", $form_data)	; call GUI events
 		return %$form_data%
 	}
-	/** close
+	/** close window
 	*/
 	close(){
 		;MsgBox,262144,, CLOSE,2
 		this.Gui._guiOption("Destroy")
 	}
-	/** exit
+	/** exit script
 	*/
 	exit($callback_custom:=""){
-		if(!$callback_custom)
+		;MsgBox,262144,, EXIT,2		
+		if(!$callback_custom || !$callback_custom.type!="default")
 			ExitApp
 	}
 	/*---------------------------------------
