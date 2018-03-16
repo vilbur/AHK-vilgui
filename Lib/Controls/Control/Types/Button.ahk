@@ -18,7 +18,7 @@ Class Button_vgui extends Control_vgui{
 	/** Exit
 	*/
 	exit($name:="Exit"){
-		this._bindDefaultCallback( &this.Base() ".exit", this.Event.custom)
+		this._bindDefaultCallback( &this.Base() ".exit")
 		return % this.add($name)
 	}
 

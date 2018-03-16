@@ -48,7 +48,7 @@ Class VilGUIv3Test{
 				;,new ListBoxTest()
 				;,new ListBoxViewTest()
 				;,new PathTest()
-				;,new LabelTest()
+				,new LabelTest()
 				;,new TabsTest()
 				;;;,new TabsTest("new section")
 				;,new ListViewTest()

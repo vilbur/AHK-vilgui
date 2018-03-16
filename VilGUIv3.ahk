@@ -26,7 +26,7 @@ Class VilGUIv3 extends Gui_vgui{
 		;MsgBox,262144,, Test,2
 		this._sortLayouts()
 		this._addMenu()
-		this._addTrayMenu()
+		;this._addTrayMenu() ; BUG: default menu does not show
 		this._bindMouseEvents()
 		
 		this.minSize()
@@ -35,7 +35,6 @@ Class VilGUIv3 extends Gui_vgui{
 
 		this.fixedWidth()
 		this._setMaxHeightByMonitor()
-
 		;this.center("x",this._center.x)
 		;this.center("y",this._center.y)
 		this._guiShow($options)
@@ -44,27 +43,31 @@ Class VilGUIv3 extends Gui_vgui{
 	/** submit gui
 		@return object values of all controls
 	*/
-	submit($Events:=""){
-
+	submit(){
+		;MsgBox,262144,, submit,2
+		;Dump(this.Events, "this.Events", 1)
 		$form_data := this.Controls.values()
 		For $tabs_name, $address in this.Controls.Types.Tabs
-				$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
+			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
 
-		;this.Events.gui.call("submit", $form_data)	; call GUI events
+		this.Events.gui.call("submit", $form_data)	; call GUI events
 		return %$form_data%
 	}
 	/** close window
 	*/
 	close(){
-		;MsgBox,262144,, CLOSE,2
-		this.Gui._guiOption("Destroy")
+		;MsgBox,262144,, CLOSE,200
+		;Dump(this.Events, "this.Events", 0)
+		this.Events.gui.call("close")
+		this.options("Destroy")
 	}
 	/** exit script
 	*/
 	exit($callback_custom:=""){
 		;MsgBox,262144,, EXIT,2		
-		if(!$callback_custom || !$callback_custom.type!="default")
-			ExitApp
+		;if(!$callback_custom || !$callback_custom.type!="default") ; DELETE
+		this.Events.gui.call("exit")
+		ExitApp
 	}
 	/*---------------------------------------
 		PRIVATE METHODS ON GUI CREATE
@@ -117,7 +120,7 @@ Class VilGUIv3 extends Gui_vgui{
 	*/
 	_tabsAutoSize(){
 		if($width := this.Controls._OptionsDefaults.getDefaultOption("Tabs","w")=="auto"){
-			$width := this.Gui._getGuiSize().w - $GUI_margin.ui.x()*2
+			$width := this._getGuiSize().w - $GUI_margin.ui.x()*2
 			For $tabs_name, $address in this.List._ControlsTypes.Tabs
 				this[$tabs_name].size($width )
 

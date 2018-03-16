@@ -31,7 +31,7 @@ Class MouseEvent_vgui {
 		;MsgBox,262144, MouseEvent_vgui, %$callback%,2
 
 		this.bindMouseEvent(this.event($on_event))
-		this[this.event($on_event)+0] := new Callback($callback, $aParams*)
+		this[this.event($on_event)+0] := new Callback_vgui($callback, $aParams*)
 
 	}
 	/** bindMouseEvent

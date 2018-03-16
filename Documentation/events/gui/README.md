@@ -1,57 +1,90 @@
+# Gui events
 
-### Create gui
+## Event Buttons
+
+* Submit button
+* Close button
+* Exit button
+
+### Button methods
+
+__submit__( [string __$button_text__] )  
+//  mnakes submit button  
+
+__close__( [string __$button_text__] )  
+//  mnakes close gui button  
+
+__exit__( [string __$button_text__] )  
+//  mnakes exit script button  
+
+__Produce this buttons__  
+![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/eventn-buttons.jpeg?raw=true "Event buttons")  
+
+## Gui events
+
+* onSubmit
+* onEscape
+* onClose
+* onExit
+
+### Events methods
+
+__onSubmit__( string|boolean __$callback__, mixin __$parameters*__ )  
+// fired on gui is submitted  
+
+__onEscape__( string|boolean __$callback__, mixin __$parameters*__ )  
+// fired on escape pressed  
+
+__onClose__( string|boolean __$callback__, mixin __$parameters*__ )  
+// fired on gui close with "X"  
+
+__onExit__( string|boolean __$callback__, mixin __$parameters*__ )  
+// fired on gui is exiting script  
+
+__@pram $callback__  
+$callback := __"customFunction"__ custom callback function  
+$callback := __"close|exit"__ default callbacks, fired after custom callback  
+$callback := __false__ remove callbacks  
+
+__@pram $parameters__  
+Any number of parameters  
+First parameter passed to callback is __[$Event](Documentation/events/event/)__ object  
+
 
 ``` php  
-#SingleInstance force
-#Include %A_LineFile%\..\..\..\VilGUIv3.ahk
-
-/* GUI setup 1
+/* GUI setup 1  
 */  
 $GuiEvents := new VilGUIv3("GuiEvents")  
 
-	$GuiEvents.Controls  
-		.Edit().value("Lorem ipsum").add()  
+	$GuiEvents.Controls.layout("row")  
+		.Edit().value("Lorem ipsum").label("Test Input").add().section()  
+		.GroupBox().layout("row").add("Event Buttons")  
 
-		.GroupBox().layout("row").add("ButtonsTest")  
-			; BUTTONS  
-			.Button().submit("Submit Button")  
-			.Button().close("Close button")  
+		; EVENT BUTTONS  
+		.Button().submit()  
+		.Button().close()  
+		.Button().exit()  
 
+	$GuiEvents.Events.Gui  
+		.onEscape("callbackFunction", "onEscape", "Custom") ; 1) Call this function on Escape pressed  
+		.onEscape("close")                                  ; 2) Then close gui window  
 
-		$GuiEvents.Events.Gui  
-			.escape("guiEventTest", "On escape event", "Gui will be destroyed")  ;  1)  
-			.escape("close")  
+		.onSubmit("callbackFunction", "onSubmit", "Custom") ; 1) Call this function on onSubmit pressed  
+		.onSubmit("close")                               ; 2) then exit script  
 
-		$GuiEvents.Events.Gui  
-			.submit("submitGuiCallbackTest", "EVENT", "BY", "GUI")  
-			.submit("close")  
+		.onClose("callbackFunction", "onClose", "Custom")	; 1) Call this function on window closed  
+		.onClose("exit")  
 
-		 $GuiEvents.Events.Gui  
-			 ;.close("guiEventTest", "On close event", "Script will exit")  
-			 .close("exit")  
+		.onExit("callbackFunction", "onExit", "Custom")	; 1) Call this function on exiting script  
+		;.onExit(false)	; remove callbacks  
 
-
-$GuiEvents.Gui.show()  
-			;.size(360, 720)	; initial size of gui ( width, height )  
-			;.alwaysOnTop()	; default false  
-			;.resizeable()	; default unresizable  
-			;.minSize("500", "500" )	; min size of gui if resizable  
-			;.maxSize("1000", "1000" )	; max size of gui if resizable  
-			;.center("x")	; center to monitor on init horizontal  
-			;.center("y")	; center to monitor on init vertically  
+$GuiEvents.show()  
 
 
-/** guiEventTest
+/** callbackFunction  
 */  
-guiEventTest($Event:="", $params*){  
-	MsgBox,262144,, guiEventTest,3  
+callbackFunction($Event:="", $params*){  
+	MsgBox,262144,callbackFunction, % $params[1] "`n" $params[2] "`n" $params[3],5  
 	$Event.message()  
-}  
-/** buttonCallbackTest
-*/  
-submitGuiCallbackTest($Event, $params*){  
-	MsgBox,262144,, submitGuiCallbackTest,3  
-	$Event.message()  
-	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5  
 }  
 ```  

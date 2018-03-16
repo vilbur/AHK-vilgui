@@ -18,7 +18,7 @@ Class GuiEvents_vgui{
 			E.G:	.onEscape("onCloseCallback")	; 1) Call this function on escape pressed
 				.onEscape("exit|close")	; 2) then exit script or destroy GUI
 	*/
-	escape($callback, $aParams*){
+	onEscape($callback, $aParams*){
 		this.parent().Key.bindEvents()
 		this._setCallback("escape", $callback, $aParams*)
 		return this
@@ -29,19 +29,29 @@ Class GuiEvents_vgui{
 			E.G:	.onClose("onCloseCallback")	; 1) Call this function on window closed
 				.onClose("exit|close")	; 2) then exit script or destroy GUI
 	*/
-	close($callback, $aParams*){
+	onClose($callback, $aParams*){
 		this.parent().Window.bindEvents()
 		this._setCallback("close", $callback, $aParams*)
 		return this
 	}
 	/** On Window Closed
-		@param string $callback event "close|exit" or user defined function
+		@param string $callback event "close|exit|false|callbackFn"
 
 			E.G:	.onClose("onCloseCallback")	; 1) Call this function on window closed
 				.onClose("exit|close")	; 2) then exit script or destroy GUI
 	*/
-	submit($callback, $aParams*){
+	onSubmit($callback, $aParams*){
 		this._setCallback("submit", $callback, $aParams*)
+		return this
+	}
+	/** On Window Closed
+		@param string $callback event "close|exit|false|callbackFn"
+
+			E.G:	.onClose("onCloseCallback")	; 1) Call this function on window closed
+				.onClose("exit|close")	; 2) then exit script or destroy GUI
+	*/
+	onExit($callback, $aParams*){
+		this._setCallback("exit", $callback, $aParams*)
 		return this
 	}
 	/*-----------------------------------------
@@ -59,16 +69,40 @@ Class GuiEvents_vgui{
 	}
 	/** _setCallback
 	*/
-	_setCallback($event, $callback, $aParams*){
+	_setCallback($event, $callback, $aParams*)
+	{
+		if( $callback!=0 )
+			(! RegExMatch( $callback, "i)^close|exit$") )? this._setCustomCallback($event, $callback, $aParams*) : this._setDefaultCallback($event, $callback )
+		else
+			this._removeCallback($event)
+		;Dump(this.events, "this.events", 1)
+	}
+	/** set Event object if not defined yet
+	*/
+	_setEventObject($event)
+	{
 		if(!this.events[$event])
 			this.events[$event] :=  new Event_vgui()
-
-		if(RegExMatch( $callback, "i)^close|exit$"))
-			this.events[$event].bind( "default", &this.parent().parent() "." $callback ) ; callback of VilGUIv3.close()|.exit()
-		else
-			this.events[$event].bind( $event, $callback, $aParams*)
 	}
-
+	/**
+	 */
+	_setDefaultCallback($event, $callback)
+	{
+		this._setEventObject($event)
+		this.events[$event].bind( "default", &this.parent().parent() "." $callback ) ; callback of VilGUIv3.close()|.exit()
+	}
+	/**
+	 */
+	_setCustomCallback($event, $callback, $aParams*)
+	{
+		this._setEventObject($event)
+		this.events[$event].bind( $event, $callback, $aParams*)
+	}
+	/** _removeCallback
+	 */
+	_removeCallback($event){
+		this.events[$event] := ""
+	}
 	/*-----------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------

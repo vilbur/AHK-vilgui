@@ -19,7 +19,7 @@ Class Event_vgui {
 		if(RegExMatch( $on_event, "i)^mouse(.*)", $event_match ))
 			this.mouse.bind($event_match1, $callback, $aParams*)
 		else
-			this[$on_event] := new Callback($callback, $aParams*)
+			this[$on_event] := new Callback_vgui($callback, $aParams*)			
 
 		return this
 	}

@@ -1,52 +1,38 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\VilGUIv3.ahk
+#Include %A_LineFile%\..\..\..\..\VilGUIv3.ahk
 
 /* GUI setup 1
 */
 $GuiEvents := new VilGUIv3("GuiEvents")
 
-	$GuiEvents.Controls
-		.Edit().value("Lorem ipsum").add()
-	
-		.GroupBox().layout("row").add("ButtonsTest")
-			; BUTTONS
-			.Button().submit("Submit Button")
-			.Button().close("Close button")
+	$GuiEvents.Controls.layout("row")
+		.Edit().value("Lorem ipsum").label("Test Input").add().section()
+		.GroupBox().layout("row").add("Event Buttons")
+
+		; EVENT BUTTONS
+		.Button().submit()
+		.Button().close()
+		.Button().exit()			
+		
+	$GuiEvents.Events.Gui
+		.onEscape("callbackFunction", "onEscape", "Custom") ; 1) Call this function on Escape pressed
+		.onEscape("close")                                  ; 2) Then close gui window
+		
+		.onSubmit("callbackFunction", "onSubmit", "Custom") ; 1) Call this function on onSubmit pressed
+		.onSubmit("close")                               ; 2) then exit script
+		
+		.onClose("callbackFunction", "onClose", "Custom")	; 1) Call this function on window closed
+		.onClose("exit")                                         
+
+		.onExit("callbackFunction", "onExit", "Custom")	; 1) Call this function on exiting script
+		;.onExit(false)	; remove callbacks
+
+$GuiEvents.show()
 
 
-		$GuiEvents.Events.Gui
-			.escape("guiEventTest", "On escape event", "Gui will be destroyed")	; 1) Call this function on Escape pressed
-			.escape("close")
-
-		$GuiEvents.Events.Gui
-			.submit("submitGuiCallbackTest", "EVENT", "BY", "GUI")	; 1) Call this function on submit pressed
-			.submit("close")                         ; 2) then close gui on Escape pressed
-			
-		 $GuiEvents.Events.Gui
-			 ;.close("guiEventTest", "On close event", "Script will exit")	; 1) Call this function on window closed
-			 .close("exit")
-
-
-$GuiEvents.Gui.show()
-			;.size(360, 720)	; initial size of gui ( width, height )
-			;.alwaysOnTop()	; default false
-			;.resizeable()	; default unresizable
-			;.minSize("500", "500" )	; min size of gui if resizable
-			;.maxSize("1000", "1000" )	; max size of gui if resizable
-			;.center("x")	; center to monitor on init horizontal
-			;.center("y")	; center to monitor on init vertically
-
-
-/** guiEventTest
+/** callbackFunction
 */
-guiEventTest($Event:="", $params*){
-	MsgBox,262144,, guiEventTest,3
+callbackFunction($Event:="", $params*){
+	MsgBox,262144,callbackFunction, % $params[1] "`n" $params[2] "`n" $params[3],5
 	$Event.message()
-}
-/** buttonCallbackTest
-*/
-submitGuiCallbackTest($Event, $params*){
-	MsgBox,262144,, submitGuiCallbackTest,3
-	$Event.message()
-	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5
 }
