@@ -3,7 +3,7 @@
 ## Documentation & Examples
   
 __GUI__  
-__[Create GUI](/Documentation/create-gui)__  
+__[Create GUI](/Documentation/gui)__  
 
 
 __Controls__  
