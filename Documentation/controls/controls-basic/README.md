@@ -1,82 +1,56 @@
-# Basic controls
+# Controls
+
+### Methods for every control
+__add__( [string __$id__] ) // @return object __Control__  
+	// add control to gui with given id, $id is used as value if value is not defined  
+
+__callback__( $string __$fnName__, __$params__* )  
+	// callback fn for control, any number of parameters  
+
+__options__( string __$options__ )  
+	// @param __$options__ strings of [options](https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options)  
+	// E.G: "w256 h64 x+16 y+32 border"  
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+## Basic controls
 
 * Button
 * Edit
 * Text
 * Checkbox
 
-### Methods
-__add__( [string __$id__] ) // @return object __Control__  
-    // add control to gui with given id, $id is used as value if value is not defined  
-
 __value__( string __$value__ )  
 // value of control  
 
-__callback__( $string __$fnName__, __$params__* )  
-// callback fn for control, any number of parameters  
+``` php
+/* Button*/$Gui.Controls	.Button().add()	.Button()		.value("Callback Button")                             ; text of button		.callback("callbackFN", "Paramater 1", "Paramater 2") ; callback function		.options("w96 x+16")                                  ; set options to control 		.add("Button 2")                                      ; add control with name "Button 2"/* Edit*/$Gui.Controls	.Edit()		.value("Edit Control")		.options("x-16 y+32")		.callback("callbackFN", "Paramater 1", "Paramater 2") ; BUG: on event has type "leftclick"		.add()/* Text*/$Gui.Controls	.Text()		.options("border")		.add("Bordered Text")	.Text()		.value("Bar Text")		.add()/* Checkbox*/$Gui.Controls	.Checkbox().add()	.Checkbox()		.value("Callback Checkbox").add()		.callback("callbackFN", "Paramater 1", "Paramater 2")		.add() ; TODO: Send value with event/** Callback*/callbackFN($Event, $params*){	$Event.message(100)	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5}
+```  
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-basic.jpeg?raw=true)  
 
-__options__( string __$options__ )  
-// @param __$options__ strings of [options](https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options)  
-// E.G: "w256 h64 x+16 y+32 border"  
+------------------------------------------------------------------------------------------------------------------------------------
 
+## Items controls
+
+* Dropdown
+* Radio
+* ListBox
+
+__items__( string|array|object __$items__ )  
+    // items in control  
+    // selected item in array & object is marked with pipe "|" on end of item E.G: __"A|B||C"__  
+    // selected item in string is maked with doublepipe "||"  E.G: __["A", "B|", "C"]__  
+
+__checked__( int|string __$key__ )  
+    // key or index of seleted item  
+    // overides items selection, in listbox add to selection  
 
 ## Examples
 
-``` php  
-/* GUI  
-*/  
-$Gui := new VilGUIv3("BasicControls")  
-
-/* Button  
-*/  
-$Gui.Controls  
-    .Button().add()  
-    .Button()  
-        .value("Button Text")   ; text of button  
-        .callback("callbackFN", "Paramater 1", "Paramater 2")   ; callback function  
-        .options("w96 x+16")    ; set options to control  
-        .add("Button 2")    ; add control with name "Button 2", used as value of if value() is not defined  
-
-/* Edit  
-*/  
-$Gui.Controls  
-    .Edit()  
-        .value("Edit Control")  
-        .options("x-16 y+32")  
-        .callback("callbackFN", "Paramater 1", "Paramater 2") ; BUG: on write event has type "leftclick"  
-        .add()  
-
-/* Text  
-*/  
-$Gui.Controls  
-    .Text()  
-        .options("border")  
-        .add("Bordered Text")  
-    .Text()  
-        .value("Bar Text")  
-        .add()  
-
-
-/* Checkbox  
-*/  
-$Gui.Controls  
-    .Checkbox().add()  
-    .Checkbox()  
-        .value("Callback Checkbox").add()  
-        .callback("callbackFN", "Paramater 1", "Paramater 2")  
-        .add() ; TODO: Send value with event  
-
-/* Show GUI  
-*/  
-$Gui.Gui.show()  
-
-/** Callback  
-*/  
-callbackFN($Event, $params*){  
-    $Event.message(100)  
-    MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5  
-}  
+``` php
+/* Items for controls*/$items := {"1_string":               "String A selected||String B|String C"          ,"2_array":                ["Array item A|", "Array item B", "Array item C"]          ,"3_object":               {"key1":"item A", "key2":"item B", "key3":"item C"}          ,"4_empty_item_multi_sel": [ "", "List with empty item|",	"Foo selected", "Bar"]          ,"5_nothing_selected":     [ "1 nothing selected", "2", "3"]}$Gui.Controls	/* Dropdown	*/	.Dropdown()		.items($items["1_string"]) ; checked by pipe "||"		.add()			/* Radio	*/	.Radio()		.items($items["2_array"])		.checked(3) ; checked by array index		.add()			/* ListBox	*/	.ListBox()		.items($items["3_object"])		.checked("key2") ; checked by object key		.add()		
 ```  
-![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-basic.jpeg?raw=true)  
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-items.jpeg?raw=true)  
+
 
   
