@@ -94,7 +94,7 @@ Class Layout_vgui {
 		Bind Layout in tabs to outer Layout.Containers.Tabs
 	*/
 	_firstContainer(){
-		;MsgBox,262144,Layout_vgui, %  $GUI_margin.ui.x(),5
+		;MsgBox,262144,Layout_vgui, %  $_GUI_margin.ui.x(),5
 		this.ContainerMain._layout	:= "column"
 		this.ContainerMain._type	:= "ui"
 	}

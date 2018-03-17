@@ -93,7 +93,7 @@ Class Container_vgui{
 	*/
 	resizeContainerToBBox(){
 		if(!this._isSectionsEmpty())
-			this.control().size(this.Bbox.x - this._origin.x + $GUI_margin.control.x(), this.Bbox.y - this._origin.y + 5 )
+			this.control().size(this.Bbox.x - this._origin.x + $_GUI_margin.control.x(), this.Bbox.y - this._origin.y + 5 )
 	}
 	/** Add new section_vgui if last section is not empty
 	*/
@@ -113,11 +113,11 @@ Class Container_vgui{
 
 		$control_type	:= this.control()._type
 		;Dump($control_type, "control_type", 1)
-		$margin_x	:= !$control_type ? $GUI_margin.ui.x()	: $GUI_margin.control.x()
-		$margin_y	:= !$control_type ? $GUI_margin.container.y()	: $GUI_margin.control.y()
+		$margin_x	:= !$control_type ? $_GUI_margin.ui.x()	: $_GUI_margin.control.x()
+		$margin_y	:= !$control_type ? $_GUI_margin.container.y()	: $_GUI_margin.control.y()
 
 		;;; /* Add extra margin to top of Groupbox & Tabs */
-		$margin_y += $control_type && $GUI_margin.control.y()<12 && (this._layout == "column" || $index == 1) ? 12 : 0 ; if container is groupBox or tabs && margin in less then 12 && first control of column || first control of row
+		$margin_y += $control_type && $_GUI_margin.control.y()<12 && (this._layout == "column" || $index == 1) ? 12 : 0 ; if container is groupBox or tabs && margin in less then 12 && first control of column || first control of row
 
 		return %	{"x": (this._layout == "row"	? this._origin.x	: this.Bbox.x) +$margin_x
 			,"y": (this._layout == "column"	? this._origin.y	: this.Bbox.y) +$margin_y }

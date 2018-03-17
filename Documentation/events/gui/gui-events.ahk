@@ -1,38 +1,33 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\..\VilGUIv3.ahk
+#Include %A_LineFile%\..\..\..\gui\gui-create.ahk
 
-/* GUI setup 1
+$Gui.Controls.layout("row")
+	.Edit().value("Lorem ipsum").label("Test Input").add().section()
+	.GroupBox().layout("row").add("Event Buttons")
+
+	; EVENT BUTTONS
+	.Button().submit()
+	.Button().close()
+	.Button().exit()			
+	
+$Gui.Events.Gui
+	.onEscape("callbackGui", "onEscape", "Custom") ; 1) Call this function on Escape pressed
+	.onEscape("close")                                  ; 2) Then close gui window
+	
+	.onSubmit("callbackGui", "onSubmit", "Custom") ; 1) Call this function on onSubmit pressed
+	.onSubmit("close")                               ; 2) then exit script
+	
+	.onClose("callbackGui", "onClose", "Custom")	; 1) Call this function on window closed
+	.onClose("exit")                                         
+
+	.onExit("callbackGui", "onExit", "Custom")	; 1) Call this function on exiting script
+	;.onExit(false)	; remove callbacks
+
+/** callbackGui
 */
-$GuiEvents := new VilGUIv3("GuiEvents")
-
-	$GuiEvents.Controls.layout("row")
-		.Edit().value("Lorem ipsum").label("Test Input").add().section()
-		.GroupBox().layout("row").add("Event Buttons")
-
-		; EVENT BUTTONS
-		.Button().submit()
-		.Button().close()
-		.Button().exit()			
-		
-	$GuiEvents.Events.Gui
-		.onEscape("callbackFunction", "onEscape", "Custom") ; 1) Call this function on Escape pressed
-		.onEscape("close")                                  ; 2) Then close gui window
-		
-		.onSubmit("callbackFunction", "onSubmit", "Custom") ; 1) Call this function on onSubmit pressed
-		.onSubmit("close")                               ; 2) then exit script
-		
-		.onClose("callbackFunction", "onClose", "Custom")	; 1) Call this function on window closed
-		.onClose("exit")                                         
-
-		.onExit("callbackFunction", "onExit", "Custom")	; 1) Call this function on exiting script
-		;.onExit(false)	; remove callbacks
-
-$GuiEvents.show()
-
-
-/** callbackFunction
-*/
-callbackFunction($Event:="", $params*){
-	MsgBox,262144,callbackFunction, % $params[1] "`n" $params[2] "`n" $params[3],5
+callbackGui($Event:="", $params*){
+	MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5
 	$Event.message()
 }
+
+#Include %A_LineFile%\..\..\..\gui\gui-show.ahk 

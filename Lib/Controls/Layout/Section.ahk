@@ -75,8 +75,8 @@ Class Section_vgui{
 		$control_type	:= isObject($item)	? "groupbox" : "control"
 		$hwnd_ctrl	:= $Control.hwnd
 
-		this._next_pos.y += ($Control._Options.get("y")?$Control._Options.get("y"):0)   ;+ $GUI_margin[this._type].y()
-		this._next_pos.x += ($Control._Options.get("x")?$Control._Options.get("x"):0)   ;+ $GUI_margin[this._type].y()
+		this._next_pos.y += ($Control._Options.get("y")?$Control._Options.get("y"):0)   ;+ $_GUI_margin[this._type].y()
+		this._next_pos.x += ($Control._Options.get("x")?$Control._Options.get("x"):0)   ;+ $_GUI_margin[this._type].y()
 
 		$xp := this._next_pos.x
 		$yp := this._next_pos.y
@@ -97,8 +97,8 @@ Class Section_vgui{
 
 		;$label	:= $Control._label==1
 		$label	:= $Control._is_label
-		this._next_pos.x	+= this._layout != "row"	? 0 : $control_posW + ($label?5:$GUI_margin[this._type].x()) ; Add margin after first element of section, remove margin if label
-		this._next_pos.y	+= this._layout == "row"	? 0 : $control_posH + ($label?2:$GUI_margin[this._type].y())
+		this._next_pos.x	+= this._layout != "row"	? 0 : $control_posW + ($label?5:$_GUI_margin[this._type].x()) ; Add margin after first element of section, remove margin if label
+		this._next_pos.y	+= this._layout == "row"	? 0 : $control_posH + ($label?2:$_GUI_margin[this._type].y())
 
 		this.Bbox.add({"x": $control_posX + $control_posW, "y": $control_posY + $control_posH})
 	}

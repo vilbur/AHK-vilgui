@@ -1,7 +1,7 @@
 #Include %A_LineFile%\..\Lib\Includes.ahk
 
-global $GUI := {}
-global $GUI_margin
+global $_GUI := {}
+global $_GUI_margin
 
 /** Class VilGUIv3
 */
@@ -13,8 +13,8 @@ Class VilGUIv3 extends Gui_vgui{
 		;this.hwnd	:= RegExReplace( $hwnd, "\s+", "" )
 		;this.title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
 		this.Margin	:= new GuiMargin_vgui()
-		$GUI[$hwnd]	:= this
-		$GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
+		$_GUI[$hwnd]	:= this
+		$_GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
 		this.List	:= new ControlsList_vgui()
 		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
 		this.Events	:= new Events_vgui().parent(this)
@@ -96,7 +96,7 @@ Class VilGUIv3 extends Gui_vgui{
 	/** _sortLayouts
 	*/
 	_sortLayouts(){
-		;this.Controls.Layout.ContainerMain.origin({"x":$GUI_margin.ui.x(), "y": $GUI_margin.ui.y()}) ; Set margins to TOP & LEFT of UI
+		;this.Controls.Layout.ContainerMain.origin({"x":$_GUI_margin.ui.x(), "y": $_GUI_margin.ui.y()}) ; Set margins to TOP & LEFT of UI
 		this.Controls._Layout.sort()	; Sort layout
 		this._sortTabsLayout()	; Sort layout in tabs
 
@@ -120,7 +120,7 @@ Class VilGUIv3 extends Gui_vgui{
 	*/
 	_tabsAutoSize(){
 		if($width := this.Controls._OptionsDefaults.getDefaultOption("Tabs","w")=="auto"){
-			$width := this._getGuiSize().w - $GUI_margin.ui.x()*2
+			$width := this._getGuiSize().w - $_GUI_margin.ui.x()*2
 			For $tabs_name, $address in this.List._ControlsTypes.Tabs
 				this[$tabs_name].size($width )
 

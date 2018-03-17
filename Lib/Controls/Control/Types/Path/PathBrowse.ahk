@@ -73,8 +73,8 @@ Class PathBrowse_vgui extends Control_vgui{
 		;Dump($width_label, "width_label", 1)
 		;Dump(this._Label._Options.get("w"), "this._Label._Options.get()", 1)
 		;Dump(this._Label, "this._Label", 1)
-		;return % " w" $width_of_set -  this.width_browse_btn - (this._label ? this._Label._Options.get("w") : - $GUI_margin.control.x()  ) + $GUI_margin.control.x()
-		return % " w" $width_of_set - this.width_browse_btn - $width_label + $GUI_margin.control.x()
+		;return % " w" $width_of_set -  this.width_browse_btn - (this._label ? this._Label._Options.get("w") : - $_GUI_margin.control.x()  ) + $_GUI_margin.control.x()
+		return % " w" $width_of_set - this.width_browse_btn - $width_label + $_GUI_margin.control.x()
 	}
 
 }

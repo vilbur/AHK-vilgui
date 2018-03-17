@@ -185,7 +185,7 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	}
 	ControlsList(){
 		;return % this.parent().List
-		return % $GUI[this._hwnd].List
+		return % $_GUI[this._hwnd].List
 	}
 	/** hwnd of gui
 	*/

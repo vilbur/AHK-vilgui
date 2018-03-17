@@ -1,6 +1,6 @@
 # Controls
 
-### Methods for every control
+#### Methods
 __add__( [string __$id__] ) // @return object __Control__  
 	// add control to gui with given id, $id is used as value if value is not defined  
 
@@ -20,11 +20,13 @@ __options__( string __$options__ )
 * Text
 * Checkbox
 
+#### Methods 
+
 __value__( string __$value__ )  
 // value of control  
 
 [include:\controls-basic.ahk]  
-![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-basic.jpeg?raw=true)  
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic.jpeg?raw=true)  
 
 ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -34,10 +36,12 @@ __value__( string __$value__ )
 * Radio
 * ListBox
 
+#### Methods
+
 __items__( string|array|object __$items__ )  
     // items in control  
     // selected item in array & object is marked with pipe "|" on end of item E.G: __"A|B||C"__  
-    // selected item in string is maked with doublepipe "||"  E.G: __["A", "B|", "C"]__  
+    // selected item in string is maked with doublepipe "||"  E.G: __["A", "B|", "C"]__   
 
 __checked__( int|string __$key__ )  
     // key or index of seleted item  
@@ -46,7 +50,7 @@ __checked__( int|string __$key__ )
 ## Examples
 
 [include:\controls-items.ahk]  
-![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-basic/controls-items.jpeg?raw=true)  
+![alt text](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/controls/controls-main/controls-items.jpeg?raw=true)  
 
 
   

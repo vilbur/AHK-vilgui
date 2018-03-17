@@ -90,7 +90,7 @@ UpdateScrollBars(GuiNum, GuiWidth, GuiHeight){
     $Right	+= 8
     $Bottom	+= 8
     ScrollWidth	:= $Right-$Left
-    ScrollHeight	:= $Bottom-$Top  ; + $GUI_margin.ui.y()*2 ; + $GUI_margin.container.y()
+    ScrollHeight	:= $Bottom-$Top  ; + $_GUI_margin.ui.y()*2 ; + $_GUI_margin.container.y()
 
     ; Initialize SCROLLINFO.
     VarSetCapacity(si, 28, 0)

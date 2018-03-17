@@ -22,9 +22,9 @@ Class WindowEvents_vgui{
 onWindowMessage( wParam,lParam ){
 	DetectHiddenWindows, On
 	WinGetTitle, $winTitle, ahk_id %lParam%
-	if($GUI[$winTitle])
+	if($_GUI[$winTitle])
 		if(wParam==2) ; if window is closed
-			$GUI[$winTitle].Events.Gui.call("close")
+			$_GUI[$winTitle].Events.Gui.call("close")
 	;else
 		;MsgBox,262144,wParam, %wParam%,3
 }

@@ -8,9 +8,9 @@ Class Modify_vgui {
 
 	/** hwnd
 	*/
-	hwnd($gui, $list_view){
-		;MsgBox,262144,gui, %$gui%,3
-		this._hwnd.gui	:= $gui
+	hwnd($_GUI, $list_view){
+		;MsgBox,262144,gui, %$_GUI%,3
+		this._hwnd.gui	:= $_GUI
 		this._hwnd.list_view	:= $list_view
 		return this
 	}

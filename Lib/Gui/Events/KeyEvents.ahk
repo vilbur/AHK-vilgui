@@ -19,11 +19,11 @@ Class KeyEvents_vgui{
   */
 onKeyDownMessage(W, L, M, H) {
 	WinGetTitle, $winTitle, A
-	if($GUI[$winTitle] && W==27) ; if escape pressed
-		$GUI[$winTitle].Events.Gui.call("escape")
+	if($_GUI[$winTitle] && W==27) ; if escape pressed
+		$_GUI[$winTitle].Events.Gui.call("escape")
 	else {
-		;$control := $GUI[$winTitle].List.get(H, "hwnd" )
-		$GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})
+		;$control := $_GUI[$winTitle].List.get(H, "hwnd" )
+		$_GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})
 		;Dump($control, "control", 1)
 	}
 

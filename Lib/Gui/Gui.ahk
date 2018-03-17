@@ -32,7 +32,7 @@ Class Gui_vgui{
 	/** Resize GUI by its content
 	*/
 	autosize(){
-		;;;this._margin($GUI_margin.ui.x(), $GUI_margin.ui.y())
+		;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
 		this._guiShow("AutoSize")
 		this._correctMarginOfGui()
 		this._scrollbar()
@@ -153,7 +153,7 @@ Class Gui_vgui{
 	*/
 	_correctMarginOfGui(){
 		this.size("-8") ; remove margin added with autosize()
-		this.size("+" $GUI_margin.ui.x(), "+" $GUI_margin.ui.y())
+		this.size("+" $_GUI_margin.ui.x(), "+" $_GUI_margin.ui.y())
 	}
 	/** _isScrollbarNeeded
 	*/

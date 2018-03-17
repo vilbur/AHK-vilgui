@@ -10,8 +10,8 @@ Class ModifyCol_vgui {
 
 	/** hwnd
 	*/
-	hwnd($gui, $list_view){
-		this._hwnd.gui	:= $gui
+	hwnd($_GUI, $list_view){
+		this._hwnd.gui	:= $_GUI
 		this._hwnd.list_view	:= $list_view
 	}
 

@@ -79,9 +79,9 @@ MouseEventsMainCallback(W, L, M, H){
 
 
 	;;; call custom callback on control
-	$GUI[$winTitle].List.get(H, "hwnd" ).Event.mouse.call(W, L, M, H)
+	$_GUI[$winTitle].List.get(H, "hwnd" ).Event.mouse.call(W, L, M, H)
 
-	;$GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("mouseTest")
+	;$_GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("mouseTest")
 
 }
 

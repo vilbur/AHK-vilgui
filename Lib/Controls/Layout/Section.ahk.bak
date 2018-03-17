@@ -75,11 +75,11 @@ Class Section_vgui{
 
 		;Dump($hwnd_ctrl, "hwnd_ctrl", 1)
 
-		this._next.y += 0 ; ($item._Control._Options.get("y")?$item._Control._Options.get("y"):0)   ;+ $GUI_margin[this._type].y()
-		this._next.x += 0 ; ($item._Control._Options.get("x")?$item._Control._Options.get("x"):0)   ;+ $GUI_margin[this._type].y()
+		this._next.y += 0 ; ($item._Control._Options.get("y")?$item._Control._Options.get("y"):0)   ;+ $_GUI_margin[this._type].y()
+		this._next.x += 0 ; ($item._Control._Options.get("x")?$item._Control._Options.get("x"):0)   ;+ $_GUI_margin[this._type].y()
 
-		$xp := this._next.x ;+ $GUI_margin[this._type].x()
-		$yp := this._next.y  ;+ $GUI_margin[this._type].y()
+		$xp := this._next.x ;+ $_GUI_margin[this._type].x()
+		$yp := this._next.y  ;+ $_GUI_margin[this._type].y()
 
 		;;GuiControl, % $hwnd ":Move", %$hwnd_ctrl%, % " x"  $xp " y" $yp
 		$Control.move($xp, $yp)
@@ -94,8 +94,8 @@ Class Section_vgui{
 	_getNextControlPosition($item, $hwnd_ctrl){
 		GuiControlGet, $control_pos, Pos, %$hwnd_ctrl%
 		$label	:= $item._label==1
-		this._next.x	+= this._layout != "row"	? 0 : $control_posW + ($label?5:$GUI_margin[this._type].x()) ; Add margin after first element of section, remove margin if label
-		this._next.y	+= this._layout == "row"	? 0 : $control_posH + ($label?2:$GUI_margin[this._type].y())
+		this._next.x	+= this._layout != "row"	? 0 : $control_posW + ($label?5:$_GUI_margin[this._type].x()) ; Add margin after first element of section, remove margin if label
+		this._next.y	+= this._layout == "row"	? 0 : $control_posH + ($label?2:$_GUI_margin[this._type].y())
 
 		this.Bbox.add({"x": $control_posX + $control_posW, "y": $control_posY + $control_posH})
 	}
