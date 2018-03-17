@@ -100,8 +100,8 @@ Class Container_vgui{
 	newSection(){
 		if(this._isSectionsEmpty() || !this._isLastSectionEmpty())
 			this.Sections.push( new Section_vgui()
-											.type(this._type=="ui"?"container":"control")
-											.layout(this._layout) )
+										.type(this._type=="ui"?"container":"control")
+										.layout(this._layout) )
 	}
 	/*---------------------------------------
 		PRIVATE METHODS

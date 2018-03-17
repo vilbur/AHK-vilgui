@@ -23,7 +23,7 @@ Class VilGUI extends Gui_vgui{
 	/**
 	*/
 	create($options:=""){
-		;MsgBox,262144,, Test,2
+
 		this._sortLayouts()
 		this._addMenu()
 		;this._addTrayMenu() ; BUG: default menu does not show
@@ -37,6 +37,8 @@ Class VilGUI extends Gui_vgui{
 		this._setMaxHeightByMonitor()
 		;this.center("x",this._center.x)
 		;this.center("y",this._center.y)
+		;Dump(this.Controls._Layout, "this.Controls._Layout", 1)
+		
 		this.show($options)
 		return this
 	}

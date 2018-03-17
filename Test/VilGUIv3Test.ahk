@@ -92,7 +92,7 @@ Class VilGUITest{
 	/** GUI SETUP EXAMPLE 1
 	*/
 	showSetup_1(){
-		$GuiTest.show()
+		$GuiTest.create()
 				; .alwaysOnTop()
 			; .resizeable(false)
 			; .autosize()
@@ -102,7 +102,7 @@ Class VilGUITest{
 	/** GUI SETUP EXAMPLE 2
 	*/
 	showSetup_2(){
-		$GuiTest.show()
+		$GuiTest.create()
 				.alwaysOnTop()
 				.resizeable()
 				.minSize("500", "500" )
@@ -115,7 +115,7 @@ Class VilGUITest{
 	/** GUI SETUP EXAMPLE 3
 	*/
 	showSetup_3(){
-		$GuiTest.show()
+		$GuiTest.create()
 			   .resizeable()
 			   .autosize()
 			   .fixedWidth()

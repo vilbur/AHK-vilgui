@@ -81,7 +81,7 @@ Class Section_vgui{
 		$xp := this._next_pos.x
 		$yp := this._next_pos.y
 
-		$Control.move($xp, $yp)
+		$Control.pos($xp, $yp)
 
 		if($control_type=="groupbox")
 			this._sortSectionsInGroupBox($item)

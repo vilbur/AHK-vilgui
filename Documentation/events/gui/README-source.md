@@ -1,12 +1,12 @@
-# Gui events
+# Gui events  
 
-## Event Buttons
+## Event Buttons  
 
-* Submit button
-* Close button
-* Exit button
+* Submit button  
+* Close button  
+* Exit button  
 
-### Button methods
+### Button methods  
 
 __submit__( [string __$button_text__] )  
 //  mnakes submit button  
@@ -20,14 +20,14 @@ __exit__( [string __$button_text__] )
 __Produce this buttons__  
 ![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/eventn-buttons.jpeg?raw=true "Event buttons")  
 
-## Gui events
+## Gui events  
 
-* onSubmit 
-* onEscape
-* onClose
-* onExit
+* onSubmit  
+* onEscape  
+* onClose  
+* onExit  
 
-### Events methods
+### Events methods  
 
 __onSubmit__( string|boolean __$callback__, mixin __$parameters*__ )  
 // fired on gui is submitted  
@@ -49,5 +49,7 @@ $callback := __false__ // remove callbacks
 __@pram $parameters__  
 Any number of parameters  
 First parameter passed to callback is __[$Event](Documentation/events/event/)__ object  
+
+## Examples  
 
 [include:\gui-events.ahk]  

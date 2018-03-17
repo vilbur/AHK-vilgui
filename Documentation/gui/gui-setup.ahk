@@ -4,7 +4,7 @@
 */
 $Gui := new VilGUI("Gui")
 
-$Gui.show()
+$Gui.create()
 	.alwaysOnTop()	; default false
 	;.resizeable()	; default unresizable
 	.minSize(500, 500 )	; min size of gui if resizable
@@ -17,7 +17,7 @@ $Gui.show()
 */
 $Gui2 := new VilGUI("Gui2")
 
-$Gui2.show()
+$Gui2.create()
 	.resizeable()
 	.autosize()	; autoresize gui by content
 	.fixedWidth()	; with of gui is fixed
