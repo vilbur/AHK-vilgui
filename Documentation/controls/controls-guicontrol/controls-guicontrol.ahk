@@ -30,8 +30,8 @@ onButtonClick($Event, $params*){
 	$Edit.guiControl("Hide")
 
 	$Event.control()
-		.size("", 64)
-		.move("", 15)		
+		.size("", 44)
+		.pos("", 15)		
 		.edit($Edit.value())
 		.guiControl("Disable")			
 		
