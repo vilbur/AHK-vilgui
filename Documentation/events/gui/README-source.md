@@ -9,13 +9,13 @@
 ### Button methods  
 
 __submit__( [string __$button_text__] )  
-//  mnakes submit button  
+//  makes submit button  
 
 __close__( [string __$button_text__] )  
-//  mnakes close gui button  
+//  makes close gui button  
 
 __exit__( [string __$button_text__] )  
-//  mnakes exit script button  
+//  makes exit script button  
 
 __Produce this buttons__  
 ![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/eventn-buttons.jpeg?raw=true "Event buttons")  

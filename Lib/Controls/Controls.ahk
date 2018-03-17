@@ -186,7 +186,7 @@ Class Controls_vgui extends ControlsTypes_vgui{
 		PARENTS
 	-----------------------------------------
 	*/
-	/** parent
+	/** set\get parent class
 	*/
 	Parent($Parent:=""){
 		if($Parent)

@@ -11,17 +11,17 @@ $Gui.Controls.layout("row")
 	.Button().exit()			
 	
 $Gui.Events.Gui
-	.onEscape("callbackGui", "onEscape", "Custom") ; 1) Call this function on Escape pressed
-	.onEscape("close")                                  ; 2) Then close gui window
+	.onEscape("callbackGui", "onEscape", "Custom") 
+	.onEscape("close")
 	
-	.onSubmit("callbackGui", "onSubmit", "Custom") ; 1) Call this function on onSubmit pressed
-	.onSubmit("close")                               ; 2) then exit script
+	.onSubmit("callbackGui", "onSubmit", "Custom") 
+	.onSubmit("close")
 	
-	.onClose("callbackGui", "onClose", "Custom")	; 1) Call this function on window closed
-	.onClose("exit")                                         
+	.onClose("callbackGui", "onClose", "Custom")	
+	.onClose("exit")
 
-	.onExit("callbackGui", "onExit", "Custom")	; 1) Call this function on exiting script
-	;.onExit(false)	; remove callbacks
+	.onExit("callbackGui", "onExit", "Custom")	
+	;.onExit(false) ; remove callbacks
 
 /** callbackGui
 */

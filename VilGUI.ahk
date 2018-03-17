@@ -22,8 +22,8 @@ Class VilGUI extends Gui_vgui{
 	}
 	/**
 	*/
-	create($options:=""){
-
+	create($options:="")
+	{
 		this._sortLayouts()
 		this._addMenu()
 		;this._addTrayMenu() ; BUG: default menu does not show
@@ -45,7 +45,8 @@ Class VilGUI extends Gui_vgui{
 	/** submit gui
 		@return object values of all controls
 	*/
-	submit(){
+	submit()
+	{
 		;MsgBox,262144,, submit,2
 		;Dump(this.Events, "this.Events", 1)
 		$form_data := this.Controls.values()
@@ -57,7 +58,8 @@ Class VilGUI extends Gui_vgui{
 	}
 	/** close window
 	*/
-	close(){
+	close()
+	{
 		;MsgBox,262144,, CLOSE,200
 		;Dump(this.Events, "this.Events", 0)
 		this.Events.gui.call("close")
@@ -65,9 +67,9 @@ Class VilGUI extends Gui_vgui{
 	}
 	/** exit script
 	*/
-	exit($callback_custom:=""){
+	exit()
+	{
 		;MsgBox,262144,, EXIT,2		
-		;if(!$callback_custom || !$callback_custom.type!="default") ; DELETE
 		this.Events.gui.call("exit")
 		ExitApp
 	}
@@ -77,17 +79,20 @@ Class VilGUI extends Gui_vgui{
 	*/
 	/** _addMenu()
 	*/
-	_addMenu(){
+	_addMenu()
+	{
 		this.Menus.Main.show(this.hwnd)
 	}
 	/** _addTrayMenu()
 	*/
-	_addTrayMenu(){
+	_addTrayMenu()
+	{
 		this.Menus.Tray.show()
 	}
 	/** _bindMouseEvents()
 	*/
-	_bindMouseEvents(){
+	_bindMouseEvents()
+	{
 		this.Events.Mouse.bindWheel().bindScroll()	; Allow scroll
 	}
 

@@ -12,24 +12,28 @@ Class Control_vgui extends ControlSetup_vgui{
 	}
 	/** add
 	*/
-	add($name:=""){
+	add($name:="")
+	{
 		this.name($name)
 		return % this.Controls().add(this) ; clone added object if user insert one object multiple times
 	}
 	/** Get configured Control object which is able passed to Controls.add()
 	*/
-	get(){
+	get()
+	{
 		this.preAdd()
 		return this
 	}
 	/** _getValueOrItems
 	*/
-	_getValueOrItems(){
+	_getValueOrItems()
+	{
 		return % RegExMatch( this._type, "i)(Tab|ListView|ListBox|Dropdown)") ? this._items.string: this._value ; this._value
 	}
 	/** sanitizeName
 	*/
-	_sanitizeName(){
+	_sanitizeName()
+	{
 		;this._name := RegExReplace( this._name, "\s+", "" )
 		;this._name := RegExReplace( this._name, "[\s_-]+", "" )
 		this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
