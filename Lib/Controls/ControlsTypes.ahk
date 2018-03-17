@@ -22,7 +22,7 @@ Class ControlsTypes_vgui{
 	}
 	/** button
 	*/
-	Button($value:=""){
+	button($value:=""){
 		;MsgBox,262144,, Button,2
 		return % new Button_vgui(this).value($value)
 	}

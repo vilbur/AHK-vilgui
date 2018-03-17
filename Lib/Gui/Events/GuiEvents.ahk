@@ -89,7 +89,7 @@ Class GuiEvents_vgui{
 	_setDefaultCallback($event, $callback)
 	{
 		this._setEventObject($event)
-		this.events[$event].bind( "default", &this.parent().parent() "." $callback ) ; callback of VilGUIv3.close()|.exit()
+		this.events[$event].bind( "default", &this.parent().parent() "." $callback ) ; callback of VilGUI.close()|.exit()
 	}
 	/**
 	 */

@@ -9,6 +9,23 @@ Class Gui_vgui{
 		   ,"max":	{w:0,	h:1024}	; store max sizes of gui
 		   ,"auto":	{w:0,	h:0}}	; store auto sizes of gui
 
+	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm
+	 ;*	@param string $options strings from documentation 
+	*/
+	gui($command, $param1:="", $param2:="", $param3:="")
+	{
+		Gui, % this.hwnd ":" $command, %$param1%, %$param2%, %$param3%
+		return this
+	}
+	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
+	 *	@param string $options
+	 */
+	show($options:=""){
+		;Dump(this.hwnd, "this.", 1)
+		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
+		return this
+	}	
+	
 	/*---------------------------------------
 		GUI METHODS
 	-----------------------------------------
@@ -33,14 +50,13 @@ Class Gui_vgui{
 	*/
 	autosize(){
 		;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
-		this._guiShow("AutoSize")
+		this.show("AutoSize")
 		this._correctMarginOfGui()
 		this._scrollbar()
 		$size	:= this._getGuiSize()
 		this._size.auto 	:= {w:$size.w,	h:$size.h}
 		return this
 	}
-	
 	/*---------------------------------------
 		GUI SET OPTIONS METHODS
 	-----------------------------------------
@@ -89,22 +105,14 @@ Class Gui_vgui{
 	center($xy, $toggle:=true){
 		this._center[$xy] := $toggle
 		if(this._center[$xy])
-			this._guiShow($xy "Center")
+			this.show($xy "Center")
 		return this
 	}
-
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
-	 *	@param string $options
-	 */
-	_guiShow($options:=""){
-		;Dump(this.hwnd, "this.", 1)
-		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
-		return this
-	}
+
 
 	/** _getPlusMinus
 	*/
@@ -145,8 +153,9 @@ Class Gui_vgui{
 			$value := ($wh=="w" ? $size.w : $size.h) + $value
 		}
 		if($value)
-			this._guiShow( $wh $value) ; Heght: -52 when menu is -32 without menu
-			;this._guiShow( $wh this._getSizeValue($wh, $value)) ; Heght: -52 when menu is -32 without menu
+			this.show($wh $value, this.hwnd )
+			;this.show( $wh $value) ; Heght: -52 when menu is -32 without menu
+			;this.show( $wh this._getSizeValue($wh, $value)) ; Heght: -52 when menu is -32 without menu
 	}
 	/** Add _margin to right and bottom of gui
 		Margin is missing if elements are positioned with sections

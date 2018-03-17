@@ -2,10 +2,9 @@
 */
 Class Controls_vgui extends ControlsTypes_vgui{
 
-	;List	:= new ControlsList_vgui()
 	_Layout	:= new Layout_vgui()
 	_OptionsDefaults	:= new OptionsDefault_vgui()
-	_Control	:= "" ; Store current control
+	_Control	:= "" ; Store last added control
 
 	/** add
 	*/
@@ -25,20 +24,14 @@ Class Controls_vgui extends ControlsTypes_vgui{
 		;Hex := this._Control.hwnd
 		;Dec := Hex + 0
 
-		;Dump( (this._Control.hwnd + 0), this._Control._name ".hwnd", 0)
-		;Dump(this._Control.hwnd, this._Control._name ".hwnd", 0)
 		this._Control	:= &this._Control
-		;Dump(this.parent().List, "this.parent().List", 0)
-
 		return this
 	}
 	/** setControl
 	*/
-	setControl($Control){
+	setControl($Control)
+	{
 		this._Control	:= this.ControlsList().controlClassExists($Control) ? $Control.clone() : $Control ; clone object if user insert one object multiple times
-		;this._Control	:=  $Control.clone()
-		;this._Control	:=  $Control
-		;this._Control._self	:= &this._Control ; DEBUG, just for check of object
 	}
 	/** Get current (last) control, new control object or existing control from list
 		$param string $ctrl type of control, or name of control
@@ -47,10 +40,20 @@ Class Controls_vgui extends ControlsTypes_vgui{
 		 		get("Button")	- return this.Button()	( new control )
 				get("ButtonFoo")	- return this.List.ButtonFoo	( existing control )
 
-		@return $Control
+		@return object $Control
 	*/
-	get($control_name:=""){
-		return % $control_name=="" ? Object(this._Control) : (this.ControlsList()._ControlsTypes.hasKey($control_name) ? this[$control_name]() : this.ControlsList.get($control_name))
+	get($control_name:="")
+	{
+		;Dump(this.ControlsList(), "this.ControlsList()", 1)
+		if( $control_name=="" )
+			return % Object(this._Control) ; return Last created Control
+			
+		else if( this.ControlsList()._ControlsTypes.hasKey($control_name) )
+			return % this[$control_name]() ; return NEW Control object
+			
+		else
+			return % this.ControlsList().get($control_name) ; return Control object from list
+
 	}
 	/*---------------------------------------
 		OPTIONS
@@ -58,7 +61,8 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	*/
 	/** Set default options
 	*/
-	options($control_type, $param1, $param2:=""){
+	options($control_type, $param1, $param2:="")
+	{
 		this._OptionsDefaults.set($control_type, $param1, $param2)
 		return this
 	}
@@ -96,7 +100,8 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	*/
 	/** addControlToGui
 	*/
-	_addControlToGui(){
+	_addControlToGui()
+	{
 		this._tabActivate()
 		;Dump(this._Control._getValueOrItems(), "this._Control._getValueOrItems()", 1)
 		;Dump(this._Control, "this._Control", 0)
@@ -109,12 +114,13 @@ Class Controls_vgui extends ControlsTypes_vgui{
 		2) if not defined use value as name
 		3) if not defined value and name, use control type
 	*/
-	_setDefaultName(){
+	_setDefaultName()
+	{
 		;;;/* GET DEFAULT NAME */
-		if(!this._Control._name)
-			this._Control._name := this._Control._value ? this._Control._value : this._Control._type "1"
+		if( ! this._Control._name )
+			this._Control._name := this._Control._value && RegExMatch( this._Control._type, "i)button|text|checkbox", "" ) ? this._Control._value : this._Control._type "1"
 
-		if(!this._Control._value)
+		if( ! this._Control._value )
 			this._setDefaultValue() ; set value as not sanitized name
 
 		;;;/* GET UNIQUE NAME */
@@ -122,19 +128,22 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	}
 	/** 	_set Default Value
 	*/
-	_setDefaultValue(){
+	_setDefaultValue()
+	{
 		
 		$set_value := true
+		
 		if(RegExMatch(this._Control._type, "i)edit|radio")) ; type is Edit|Radio
 			$set_value := false
+		
 		if(this.List._ControlsTypes.hasKey( RegExReplace( this._Control._name, "\d+$", "" ))) ; if value is control type E.G: "button"
 			$set_value := false
+		
 		if(RegExMatch(this._Control._name, "i)groupbox") ) ; Groupbox without value
 			$set_value := false
 
 		if($set_value)
 		    this._Control._value := this._Control._name
-
 	}
 	/** _getAddControlType
 	*/
@@ -163,13 +172,14 @@ Class Controls_vgui extends ControlsTypes_vgui{
 	*/
 	/** _addToControlsList
 	*/
-	_addToControlsList(){
+	_addToControlsList()
+	{
 		this.ControlsList().set(this._Control)
-
 	}
 	/** _addToLayout
 	*/
-	_addToLayout(){
+	_addToLayout()
+	{
 		this._Layout.addControl(this._Control)
 	}
 	/*---------------------------------------
@@ -183,15 +193,15 @@ Class Controls_vgui extends ControlsTypes_vgui{
 			this._Parent	:= &$Parent
 		return % $Parent ? this : Object(this._Parent)
 	}
-	ControlsList(){
-		;return % this.parent().List
+	ControlsList()
+	{
 		return % $_GUI[this._hwnd].List
 	}
 	/** hwnd of gui
 	*/
-	hwnd($hwnd:=""){
+	hwnd($hwnd:="")
+	{
 		;MsgBox,262144,, IS THIS METHOD USED `nControls_vgui.hwnd()? ,2
-		;this._hwnd	:= $hwnd
 		if($hwnd)
 			this._hwnd	:= $hwnd
 		return % $hwnd ? this : this._hwnd
@@ -223,7 +233,7 @@ Class Controls_vgui extends ControlsTypes_vgui{
 		;Dump(this.ControlsList(), "this.ControlsList()", 0)
 		For $control_name, $control in  this.ControlsList()                       ; for each control of control type
 			if($values_types.hasKey($control._type))                    ; control can has value
-				if(!($control._type=="Radio"&& $control.value()==0))   ; if not unselected RADIO or CHECKBOX button
+				if(!($control._type=="Radio" && $control.value()==0))   ; if not unselected RADIO or CHECKBOX button
 					$form_data[$control_name]	:= $control.value()
 		;Dump($form_data, "form_data", 1)
 		;sleep 100000

@@ -40,7 +40,7 @@ Class Event_vgui {
 		@return mixin
 	*/
 	_callDefaultCallback(){
-		this.event_data	:= this.default.call(this)	; bind events to callback, default callback then can custom callback	E.G: VilGUIv3.submit()
+		this.event_data	:= this.default.call(this)	; bind events to callback, default callback then can custom callback	E.G: VilGUI.submit()
 	}
 	/** Call Event callback
 		@param string	$event_type name of

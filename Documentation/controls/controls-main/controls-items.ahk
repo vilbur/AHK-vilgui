@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\gui-create.ahk
+#Include %A_LineFile%\..\..\..\gui\gui-construct.ahk
 /* Items for controls
 */
 $items := {"1_string":               "String A selected||String B|String C"
@@ -29,4 +29,4 @@ $Gui.Controls
 		.checked("key2") ; checked by object key
 		.add()
 		
-#Include %A_LineFile%\..\..\..\gui\gui-show.ahk 
+#Include %A_LineFile%\..\..\..\gui\gui-create.ahk 

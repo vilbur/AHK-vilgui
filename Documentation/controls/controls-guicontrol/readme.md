@@ -1,0 +1,3 @@
+  # Controls GuiControl  ``` php
+/* Controls*/$Gui.Controls	.Button()		.value("Callback Button")  ; text of button		.callback("onButtonClick")		.add()                     ; add control with name "Button 2"			.Edit()		.value("Input text")		.add()	.Text()		.value("Lorem Ipsum")		.add("Text1")	.Checkbox()		.add() ; TODO: Send value with event/** Callback*/onButtonClick($Event, $params*){	$Gui.gui("Font", " cBlue bold italic")	$Event.control()		.size("", 64)		.guiControl("Disable")						$Edit := $Gui.Controls.get("Edit1")	$Edit.guiControl("Hide")	$Gui.Controls.get("Text1")		.edit($Edit.value())		.guiControl("Font")				$Gui.Controls.get("Checkbox1")		.edit(true)}
+```    

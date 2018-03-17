@@ -85,7 +85,7 @@ class addRowDialog{
 		this.Event	:= $Event
 		this.list_view	:= $Event.control()
 		;Dump(this._Control, "this._Control", 1)
-		this.dialog := new VilGUIv3("addRow")
+		this.dialog := new VilGUI("addRow")
 		this.dialog.Events.Gui.submit("close")
 		this.addControls()
 		this.dialog.gui.show().alwaysOnTop()

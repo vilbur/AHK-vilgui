@@ -2,40 +2,49 @@
 */
 Class GuiControl_vgui extends ControlEvents_vgui{
 
-
 	/** size
-	*/
-	size($w:="",$h:=""){
+	 * @return object $Control
+	 */
+	size($width:="",$height:="")
+	{
 		GuiControlGet, $pos, Pos, % this.hwnd
-		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "w" ($w=="" ? $posW : $w) " h" ($h=="" ? $posH : $h)
+		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "w" ($width=="" ? $posW : $width) " h" ($height=="" ? $posH : $height)
+		return this
 	}
-	/** move
-	*/
-	move($x:="",$y:=""){
-		;MsgBox,262144,, move,2
-		;Dump(this, "this.", 1)
-		GuiControlGet, $pos, Pos, % this.hwnd
-		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
-	}
-	/** pos
-	*/
-	pos(){
+	/** get control position 
+	 * @return object position 
+	 */
+	pos()
+	{
 		GuiControlGet, $pos, Pos, % this.hwnd
 		return % {"x": $posX, "y": $posY}
 	}
-
 	/** Edit value of control in GUI
-	*/
-	edit($value){
-		;MsgBox,262144,, edit,2 
+	 * @return object $Control
+	 */
+	edit($value)
+	{
 		GuiControl,, % this.hwnd, %$value%
 		return this
 	}
-	/** GuiControl of current control
-	*/
-	GuiControl($align:=""){
-		GuiControl, % this._guihwnd ":" $align, % this.hwnd
+	/** move control 
+	 * @return object $Control
+	 */
+	move($x:="",$y:="")
+	{
+		GuiControlGet, $pos, Pos, % this.hwnd
+		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
+		return this
 	}
-
+	/** guiControl of current control
+	  * wrapper for https://autohotkey.com/docs/commands/GuiControl.htm
+	*/
+	guiControl($command, $value:="")
+	{
+		GuiControl, % this._guihwnd ":" $command, % this.hwnd, %$value%
+		
+		return this
+	}
+	
 
 }

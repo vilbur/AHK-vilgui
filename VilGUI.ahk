@@ -3,9 +3,9 @@
 global $_GUI := {}
 global $_GUI_margin
 
-/** Class VilGUIv3
+/** Class VilGUI
 */
-Class VilGUIv3 extends Gui_vgui{
+Class VilGUI extends Gui_vgui{
 
 
 	__New($hwnd){
@@ -22,7 +22,7 @@ Class VilGUIv3 extends Gui_vgui{
 	}
 	/**
 	*/
-	show($options:=""){
+	create($options:=""){
 		;MsgBox,262144,, Test,2
 		this._sortLayouts()
 		this._addMenu()
@@ -37,7 +37,7 @@ Class VilGUIv3 extends Gui_vgui{
 		this._setMaxHeightByMonitor()
 		;this.center("x",this._center.x)
 		;this.center("y",this._center.y)
-		this._guiShow($options)
+		this.show($options)
 		return this
 	}
 	/** submit gui

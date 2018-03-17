@@ -62,12 +62,12 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 			.name( $label "Label")
 			.options($options).controlIsLabel()
 
-
 		else
 			this._label := false ; this allows set label false to turn off default labels of "File" and "Folder" controls
 		return this
 	}
 	/** add Label before
+		TODO: RENAME THIS TO PRIVATE
 	*/
 	addLabel(){
 		;MsgBox,262144,, addLabel,2

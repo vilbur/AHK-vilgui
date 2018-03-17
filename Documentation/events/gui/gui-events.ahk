@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\gui-create.ahk
+#Include %A_LineFile%\..\..\..\gui\gui-construct.ahk
 
 $Gui.Controls.layout("row")
 	.Edit().value("Lorem ipsum").label("Test Input").add().section()
@@ -30,4 +30,4 @@ callbackGui($Event:="", $params*){
 	$Event.message()
 }
 
-#Include %A_LineFile%\..\..\..\gui\gui-show.ahk 
+#Include %A_LineFile%\..\..\..\gui\gui-create.ahk 

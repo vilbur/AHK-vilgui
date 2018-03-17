@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\VilGUIv3.ahk
+#Include %A_LineFile%\..\..\VilGUI.ahk
 
 #Include %A_LineFile%\..\Gui\GuiEventsTest.ahk
 #Include %A_LineFile%\..\Gui\MarginTest.ahk
@@ -27,9 +27,9 @@
 global $GuiTest
 global $GuiTest2
 
-/** Class VilGUIv3Test
+/** Class VilGUITest
 */
-Class VilGUIv3Test{
+Class VilGUITest{
 
 	__New(){
 		setWorkingDir, %A_LineFile%\..\..\
@@ -78,8 +78,8 @@ Class VilGUIv3Test{
 	/** setupGui
 	*/
 	setupGui(){
-		$GuiTest := new VilGUIv3("GuiTest")
-		$GuiTest2 := new VilGUIv3("GuiTest2")
+		$GuiTest := new VilGUI("GuiTest")
+		$GuiTest2 := new VilGUI("GuiTest2")
 
 		;$GuiTest.Controls
 			;.layout("column")
@@ -140,4 +140,4 @@ Class VilGUIv3Test{
 	RUN TEST
 -----------------------------------------
 */
-new VilGUIv3Test().test()
+new VilGUITest().test()

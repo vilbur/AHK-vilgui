@@ -1,8 +1,8 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\VilGUIv3.ahk
+#Include %A_LineFile%\..\..\VilGUI.ahk
 
 
-$GuiTest := new VilGUIv3("GuiTest")
+$GuiTest := new VilGUI("GuiTest")
 $GuiTest.Controls.Button().add()
 ;Dump($GuiTest, "GuiTest", 1)
 

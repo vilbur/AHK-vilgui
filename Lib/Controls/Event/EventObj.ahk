@@ -13,18 +13,17 @@ Class EventObj_vgui {
 			this.address	:= $address
 		return this
 	}
-
+	/** Msgbox of Events properties
+	*/
+	message($timeout:=3){
+		MsgBox,262144,Event message, % this._getMessageString(this), 3
+	}
 	/** set value of Control
 	*/
 	set($key, $value){
 		if($value || $value==0)
 			this[$key]	:= $value
 		return this
-	}
-	/** Msgbox of Events properties
-	*/
-	message($timeout:=3){
-		MsgBox,262144,Event message, % this._getMessageString(this), 3
 	}
 	/** _getMessageString
 	*/

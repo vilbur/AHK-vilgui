@@ -1,9 +1,8 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\VilGUIv3.ahk
-
+#Include %A_LineFile%\..\..\..\VilGUI.ahk
 /* GUI setup
 */
-$Gui := new VilGUIv3("Gui")
+$Gui := new VilGUI("Gui")
 
 $Gui.show()
 	.alwaysOnTop()	; default false
@@ -16,7 +15,7 @@ $Gui.show()
 
 /* GUI setup 2
 */
-$Gui2 := new VilGUIv3("Gui2")
+$Gui2 := new VilGUI("Gui2")
 
 $Gui2.show()
 	.resizeable()

@@ -1,5 +1,4 @@
-#Include %A_LineFile%\..\..\..\VilGUIv3.ahk
-
-/* GUI setup
-*/
-$Gui := new VilGUIv3("Gui")
+$Gui.create()
+	.resizeable()
+	.autosize()	; autoresize gui by content
+	.fixedWidth()	; with of gui is fixed

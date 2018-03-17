@@ -1,4 +1,4 @@
-# Controls
+# Controls construct
 
 #### Methods
 __add__( [string __$id__] ) // @return object __Control__  

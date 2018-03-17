@@ -107,7 +107,7 @@ Class Section_vgui{
 	*/
 	_addLabelTextAlign($Control){
 		if($Control._is_label && this._layout == "row")
-			$Control.GuiControl("+right")
+			$Control.guiControl("+right")
 	}
 	/** _sortSectionsInGroupBox
 	*/
