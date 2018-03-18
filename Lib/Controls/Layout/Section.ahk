@@ -5,7 +5,7 @@
 Class Section_vgui{
 
 	Bbox	:= ""
-	Controls	:= []
+	Controls	:= [] ; array keep order of items, object does not
 	_type	:= "control"	; type of container`s control "ui|container|control"
 	_layout	:= "row"
 	;_layout	:= "column"
@@ -17,14 +17,48 @@ Class Section_vgui{
 	*/
 	addControl($Control){
 		;Dump($Control, "Control", 1)
+		$Control._layout_container := &this
 		this.Controls.push(&$Control)
 	}
 	/** addToSection
 	*/
-	addContainer($Container){
+	addContainer($Control){
 		;Dump($Container, "Container", 1)
+		$Container	:=  new Container_vgui()
+		$Container._ctr_addr	:= &$Control
+		$Container._name	:= $Control._name
+		$Container._layout	:= $Control._layout
+		
+		$Control._layout_container := &this		
 		this.Controls.push($Container)
 	}
+	/**
+	 */
+	deleteControl($Control)
+	{
+		$index := this._findControlInControls(&$Control)
+
+		if isObject(this.Controls[$index])
+			this.deleteNestedControls(this.Controls[$index])
+
+		this.controls.removeAt($index)
+	}
+	/**
+	 */
+	deleteNestedControls($Control)
+	{
+		For $i, $Section in $Control.Sections
+			$Section.deleteAllControls()
+	}
+	
+	/**
+	 */
+	deleteAllControls()
+	{
+		For $i, $control in this.controls
+			this.control($control).delete()
+	}
+	
 	/** Set layout of Control in section
 		@param "row|column" $layout
 	*/
@@ -39,6 +73,11 @@ Class Section_vgui{
 		;Dump(this._type, "this._type", 1)
 		return this
 	}
+	/*---------------------------------------
+		SORTING CONTROLS
+	-----------------------------------------
+	*/
+		
 	/** sort
 	*/
 	sortControls(){
@@ -60,12 +99,6 @@ Class Section_vgui{
 		this._next_pos	:= $next
 		return this
 	}
-	/** control
-	*/
-	control($ctr_addr){
-		return % Object($ctr_addr)
-	}
-
 	/** move Control to position of new section_vgui or behind previous control
 
 	*/
@@ -117,12 +150,27 @@ Class Section_vgui{
 				  .sortSections()
 				  .resizeContainerToBBox()
 	}
+
+
+
+
 	/** _SectionsLast
 	*/
 	_ControlLast(){
 		return % this.Controls[this.Controls.MaxIndex()]
 	}
-
-
+	/** get control by address
+	*/
+	control($ctr_addr){
+		return % Object($ctr_addr)
+	}
+	/**
+	 */
+	_findControlInControls($ctr_addr)
+	{
+		For $i, $control in this.controls
+			if( $control == $ctr_addr || ($control.hasKey("_ctr_addr") && $control._ctr_addr == $ctr_addr) )
+			 return %$i% 
+	} 
 
 }

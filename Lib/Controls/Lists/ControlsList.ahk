@@ -7,7 +7,7 @@ Class ControlsList_vgui{
 	/** Set Control to list
 	*/
 	set($Control){
-		this[$Control._name] := $Control
+		this[$Control.hwnd] := $Control
 		this._ControlsTypes.add($Control)
 	}
 	/** get control from list by given control name and key
@@ -41,6 +41,7 @@ Class ControlsList_vgui{
 				return true
 		return
 	}
+	
 
 
 }

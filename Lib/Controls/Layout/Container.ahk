@@ -40,6 +40,16 @@ Class Container_vgui{
 		this._ctr_addr	:= $ctr_addr
 		return this
 	}
+	;/**
+	; */
+	;deleteControlFromSection($Control)
+	;{
+	;	;Dump(this.Sections, &$Control, 1)
+	;	;MsgBox,262144,, deleteControlFromSection,2
+	;	For $k, $Section in this.Sections
+	;		$Section.deleteControl($Control)
+	;}
+	
 	/*---------------------------------------
 		PUBLIC METHODS
 	-----------------------------------------
@@ -47,11 +57,9 @@ Class Container_vgui{
 	/** addContainer
 	*/
 	addContainer($Control){
-		$Container_nested	:=  new Container_vgui()
-		$Container_nested._ctr_addr	:= &$Control
-		$Container_nested._name	:= $Control._name
-		$Container_nested._layout	:= $Control._layout
-		this.sectionsLast().addContainer($Container_nested)
+
+		;$Container_nested._hwnd	:= $Control.hwnd		
+		this.sectionsLast().addContainer($Control)
 	}
 	/** Get last section, add first if not exists yet
 		@return Object Section
@@ -71,7 +79,6 @@ Class Container_vgui{
 
 		For $s, $Section in this.Sections {
 			$next_section_pos	:= this._getNextSectionOrigin($s)
-			;Dump($next_section_pos, "next_section_pos", 1)
 			$Section_Bbox	:= $Section.nextPosition( $next_section_pos ).sortControls()
 			this.Bbox.add( $Section_Bbox )
 		}

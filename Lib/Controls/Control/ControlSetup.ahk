@@ -44,7 +44,7 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	/** _setToEmptyValue
 	*/
 	_setToEmptyValue($name){
-		MsgBox,262144,, SMAZAT METHODU _setToEmptyValue(),2
+		MsgBox,262144,, SMAZAT METHODU ? `n`n ControlSetup._setToEmptyValue(),2
 		if(this._value=="")
 			this._value := $name
 	}

@@ -17,6 +17,17 @@ Class Control_vgui extends ControlSetup_vgui{
 		this.name($name)
 		return % this.Controls().add(this) ; clone added object if user insert one object multiple times
 	}
+	/** delete control from Layout, ControlList and Gui 
+	 */
+	delete()
+	{
+		Object(this._layout_container).deleteControl(this)
+		this.Controls()._List.delete(this.hwnd)
+			
+		WM_CLOSE=0x10
+		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
+	}
+	
 	/** Get configured Control object which is able passed to Controls.add()
 	*/
 	get()
@@ -49,8 +60,6 @@ Class Control_vgui extends ControlSetup_vgui{
 	*/
 	_sanitizeName()
 	{
-		;this._name := RegExReplace( this._name, "\s+", "" )
-		;this._name := RegExReplace( this._name, "[\s_-]+", "" )
 		this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
 		return this
 	}
@@ -61,13 +70,16 @@ Class Control_vgui extends ControlSetup_vgui{
 	*/
 	/** Controls
 	*/
-	Controls(){
+	Controls()
+	{
 		return % Object(this._Controls)
 	}
-	/** Get Base lass VilGUI
+	/** Get Base class VilGUI
 		@return object
 	*/
-	Base(){
+	Base()
+	{
+		MsgBox,262144,, "Control.Base() SMAZAT METODU",2 
 		return % this.Controls().Parent()
 	}
 

@@ -24,6 +24,8 @@
 
 #Include %A_LineFile%\..\Controls\ListViewInTabsTest.ahk
 
+#Include %A_LineFile%\..\Controls\use-case\control-delete.ahk
+
 global $GuiTest
 global $GuiTest2
 
@@ -38,22 +40,26 @@ Class VilGUITest{
 		COMMENT IN\OUT ITEMS OF CONTROL TO ON\OFF TEST
 	*/
 	Controls	:=	[ new MarginTest()
-			,new MenuTest()
-			,new GuiEventsTest()
+			;,new MenuTest()
+			;,new GuiEventsTest()
 			;,new ControlsTest()
 			;,new CheckboxTest()
-
-				;,new RadioTest()
-				;,new DropdownTest()
-				;,new ListBoxTest()
-				;,new ListBoxViewTest()
-				;,new PathTest()
-				,new LabelTest()
-				;,new TabsTest()
-				;;;,new TabsTest("new section")
-				;,new ListViewTest()
-				;,new ListViewInTabsTest()
-				,new ButtonsTest()]
+			
+			;,new RadioTest()
+			;,new DropdownTest()
+			;,new ListBoxTest()
+			;,new ListBoxViewTest()
+			
+			;,new PathTest()
+			;,new LabelTest()
+			;,new TabsTest()
+			
+			;,new ListViewTest()
+			;,new ListViewInTabsTest()
+			
+			,new controlDelete()]			
+			
+			;,new ButtonsTest()]
 
 
 	/** GuiTestTest

@@ -42,17 +42,26 @@ Class Layout_vgui {
 		this.groupbox_close := false
 	}
 
+	;/**
+	; */
+	;deleteControl( $Control )
+	;{
+	;	this.ContainerMain.deleteControlFromSection($Control)
+	;}
+
 	/** Set layout of Containers
 		@param "row|column" $layout*
 	*/
-	layout($layout){
+	layout($layout)
+	{
 		;this.ContainerMain.layout($layout)
 		this.ContainerMain._layout := $layout
 		return this
 	}
 	/** sort
 	*/
-	sort(){
+	sort()
+	{
 		;Dump(this.ContainerMain, "this.ContainerMain", 0)
 		this.ContainerMain.sortSections()
 		return this

@@ -70,8 +70,7 @@ Class Tabs_vgui extends ControlItems_vgui {
 	/** sortTabsLayouts
 	*/
 	sortTabsLayouts(){
-		;MsgBox,262144,, sortTabsLayouts,2
-		;Dump($Tab, "Tab", 0)
+
 		$Bbox_all_tabs	:= new Bbox_vgui()
 		For $t, $Tab in this.Tabs
 			$Bbox_all_tabs.add( $Tab.Controls._Layout.ContainerMain

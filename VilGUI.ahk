@@ -5,7 +5,8 @@ global $_GUI_margin
 
 /** Class VilGUI
 */
-Class VilGUI extends Gui_vgui{
+Class VilGUI extends Gui_vgui
+{
 
 
 	__New($hwnd){
@@ -15,7 +16,7 @@ Class VilGUI extends Gui_vgui{
 		this.Margin	:= new GuiMargin_vgui()
 		$_GUI[$hwnd]	:= this
 		$_GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
-		this.List	:= new ControlsList_vgui()
+		;this.List	:= new ControlsList_vgui()
 		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
@@ -102,7 +103,8 @@ Class VilGUI extends Gui_vgui{
 	*/
 	/** _sortLayouts
 	*/
-	_sortLayouts(){
+	_sortLayouts()
+	{
 		;this.Controls.Layout.ContainerMain.origin({"x":$_GUI_margin.ui.x(), "y": $_GUI_margin.ui.y()}) ; Set margins to TOP & LEFT of UI
 		this.Controls._Layout.sort()	; Sort layout
 		this._sortTabsLayout()	; Sort layout in tabs
@@ -110,22 +112,27 @@ Class VilGUI extends Gui_vgui{
 	}
 	/** _sortTabsLayout
 	*/
-	_sortTabsLayout(){
-		;Dump(this.List, "this.List", 0)
-		For $tabs_name, $address in this.List._ControlsTypes.Tabs {
+	_sortTabsLayout()
+	{
+		;Dump(this.Controls._List, "this.List", 0)
+		;Dump(this.Controls._Layout, "this.Controls._Layout", 0)
+		For $tabs_name, $address in % this.Controls._List._ControlsTypes.Tabs {
+			;Dump($tabs_name, "tabs_name", 1)
 			this[$tabs_name].sortTabsLayouts()
 			this.Controls._Layout.sort()	; Sort layout again - Sort controls under tabs
-			;this[$tabs_name].sortTabsLayouts()
+		;	;;;this[$tabs_name].sortTabsLayouts()
 		}
 	}
 	/** tabs
 	*/
-	tabs($tabs){
+	tabs($tabs)
+	{
 		return % new Tabs_vgui(this.Controls).items($tabs)
 	}
 	/** _tabsAutoSize
 	*/
-	_tabsAutoSize(){
+	_tabsAutoSize()
+	{
 		if($width := this.Controls._OptionsDefaults.getDefaultOption("Tabs","w")=="auto"){
 			$width := this._getGuiSize().w - $_GUI_margin.ui.x()*2
 			For $tabs_name, $address in this.List._ControlsTypes.Tabs
