@@ -16,7 +16,7 @@ Class EventObj_vgui {
 	/** Msgbox of Events properties
 	*/
 	message($timeout:=3){
-		MsgBox,262144,Event message, % this._getMessageString(this), 3
+		MsgBox,262144,Event message, % this._getMessageString(this), %$timeout%
 	}
 	/** set value of Control
 	*/

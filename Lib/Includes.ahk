@@ -18,7 +18,13 @@
 #Include %A_LineFile%\..\Gui\Events\MouseEvents.ahk
 #Include %A_LineFile%\..\Gui\Events\KeyEvents.ahk
 
-
+/*---------------------------------------
+   EVENT
+-----------------------------------------
+*/
+#Include %A_LineFile%\..\Event\Event.ahk
+#Include %A_LineFile%\..\Event\EventObj.ahk
+#Include %A_LineFile%\..\Event\MouseEvent.ahk
 /*---------------------------------------
 	CONTROLS
 -----------------------------------------
@@ -31,12 +37,7 @@
 */
 #Include %A_LineFile%\..\Controls\Lists\ControlsList.ahk
 #Include %A_LineFile%\..\Controls\Lists\ControlsListTypes.ahk
-/*
-   Callback
-*/
-#Include %A_LineFile%\..\Controls\Event\Event.ahk
-#Include %A_LineFile%\..\Controls\Event\EventObj.ahk
-#Include %A_LineFile%\..\Controls\Event\MouseEvent.ahk
+
 /*
    CONTROL
 */
