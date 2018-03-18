@@ -26,9 +26,10 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	/** Edit value of control in GUI
 	 * @return object $Control
 	 */
-	edit($value)
+	edit($value:="")
 	{
-		GuiControl,, % this.hwnd, %$value%
+		this._setValue($value)
+		GuiControl,, % this.hwnd, % this._getValueOrItems()
 		return this
 	}
 	/** guiControl of current control

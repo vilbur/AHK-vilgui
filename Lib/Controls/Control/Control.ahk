@@ -24,12 +24,27 @@ Class Control_vgui extends ControlSetup_vgui{
 		this.preAdd()
 		return this
 	}
+	/** set Value Or Items
+	*/
+	_setValue($value)
+	{
+		if(this._isControlItemType())
+			this.items($value)
+		else 
+			this.value($value)			
+	}
 	/** _getValueOrItems
 	*/
 	_getValueOrItems()
 	{
-		return % RegExMatch( this._type, "i)(Tab|ListView|ListBox|Dropdown)") ? this._items.string: this._value ; this._value
+		return % this._isControlItemType() ? this._items.string : this._value ; this._value
 	}
+	/**
+	 */
+	_isControlItemType()
+	{
+		return % RegExMatch( this._type, "i)(Tab|ListView|ListBox|Dropdown)")
+	} 
 	/** sanitizeName
 	*/
 	_sanitizeName()

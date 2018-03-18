@@ -29,6 +29,13 @@ Class ControlItems_vgui extends Control_vgui{
 		;Dump(this._items.string, "this._items", 1)
 		return this
 	}
+	/** clear values in item types control
+	  * TODO: Tested on Dropdown, needs to be tesed on others
+	 */
+	clear()
+	{
+		return % this.edit("|")
+	}
 	/*---------------------------------------
 		PROCESS ITEMS ARRAY & STRING
 	-----------------------------------------

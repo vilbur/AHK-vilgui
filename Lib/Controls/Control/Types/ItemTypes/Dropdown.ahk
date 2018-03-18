@@ -7,5 +7,8 @@ Class Dropdown_vgui extends ControlItems_vgui{
 	;	this.name($name)
 	;	return % this.Controls().add(this) ; clone added object if user insert one object multiple times
 	;}
+	/**
+	 */
+
 
 }
