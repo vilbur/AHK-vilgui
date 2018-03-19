@@ -21,13 +21,20 @@ Class Control_vgui extends ControlSetup_vgui{
 	 */
 	delete()
 	{
-		Object(this._layout_container).deleteControl(this)
-		this.Controls()._List.delete(this.hwnd)
-			
+		;MsgBox,262144,DELETE CONTROL, % this._name ,3
+		Object(this._layout_container).deleteControlFromSection(this)
+
+	}
+	/**
+	 */
+	removeFromGui()
+	{
+		;MsgBox,262144,DELETE CONTROL, % this._name ,3
+
+		;this.Controls()._List.delete(this.hwnd)
 		WM_CLOSE=0x10
 		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
 	}
-	
 	/** Get configured Control object which is able passed to Controls.add()
 	*/
 	get()

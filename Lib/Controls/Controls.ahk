@@ -21,7 +21,6 @@ Class Controls_vgui extends ControlsTypes_vgui
 		this._Control.bindKeypressEvent()
 		this._addToControlsList()
 		this._addToLayout()
-		
 		;SetFormat, Integer, D
 		;Hex := this._Control.hwnd
 		;Dec := Hex + 0
@@ -111,7 +110,6 @@ Class Controls_vgui extends ControlsTypes_vgui
 		;Dump(CtrlHWND, this._Control._type, 1)
 		;this._Control.hwnd := CtrlHWND + 0
 		this._Control.hwnd := CtrlHWND 	
-		
 		this._tabDeactivate()
 	}
 	/** _setControlName

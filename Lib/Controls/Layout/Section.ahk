@@ -34,30 +34,37 @@ Class Section_vgui{
 	}
 	/**
 	 */
-	deleteControl($Control)
+	deleteAllControls()
+	{		
+		For $index, $control in this.Controls {
+			
+			;sleep, 1000
+			if (isObject($control)){
+				$control.deleteSectionsFromContainer()
+				object($control._ctr_addr).removeFromGui()
+
+			}else
+				this.control($control).removeFromGui()
+		}
+		this.Controls := []
+	}
+	/**
+	 */
+	deleteControlFromSection($Control)
 	{
 		$index := this._findControlInControls(&$Control)
-
-		if isObject(this.Controls[$index])
-			this.deleteNestedControls(this.Controls[$index])
-
-		this.controls.removeAt($index)
-	}
-	/**
-	 */
-	deleteNestedControls($Control)
-	{
-		For $i, $Section in $Control.Sections
-			$Section.deleteAllControls()
-	}
+	;	
+	;	MsgBox,262144,DELETE CONTROL, %$index% ,5
+	;	;Dump( &$Control, "Control", 1)
+	;	;Dump(this.Controls[$index], "this.Controls[$index]", 1)
+	;	
+	;	;if (isObject(this.Controls[$index]))
+	;		;this.Controls[$index].deleteSectionsFromContainer()
 	
-	/**
-	 */
-	deleteAllControls()
-	{
-		For $i, $control in this.controls
-			this.control($control).delete()
+		$Control.removeFromGui()
+		this.Controls.removeAt($index)
 	}
+
 	
 	/** Set layout of Control in section
 		@param "row|column" $layout

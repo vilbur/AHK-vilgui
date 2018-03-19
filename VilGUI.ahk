@@ -39,6 +39,7 @@ Class VilGUI extends Gui_vgui
 		;this.center("x",this._center.x)
 		;this.center("y",this._center.y)
 		;Dump(this.Controls._Layout, "this.Controls._Layout", 1)
+		;Dump(this, "this.", 0)
 		
 		this.show($options)
 		return this

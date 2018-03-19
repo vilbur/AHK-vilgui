@@ -46,7 +46,7 @@ Class Tabs_vgui extends ControlItems_vgui {
 		@return object of active tab
 	*/
 	getActive(){
-		return % this[this.active()]
+		return % this.Tabs[this.active()]
 	}
 	/** Highlight tabs title
 	*/
@@ -60,7 +60,17 @@ Class Tabs_vgui extends ControlItems_vgui {
 		SendMessage, 0x1330, % $tab_num-1,,, % "ahk_id " this.hwnd
 	}
 
-
+	/** delete control from Layout, ControlList and Gui 
+	 */
+	delete()
+	{
+		;MsgBox,262144,, DELETE TABS,2 
+		;Object(this._layout_container).deleteControl(this)
+		;this.Controls()._List.delete(this.hwnd)
+		;	
+		;WM_CLOSE=0x10
+		;PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
+	}
 
 
 	/*---------------------------------------

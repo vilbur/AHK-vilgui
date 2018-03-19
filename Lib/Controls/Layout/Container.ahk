@@ -40,15 +40,14 @@ Class Container_vgui{
 		this._ctr_addr	:= $ctr_addr
 		return this
 	}
-	;/**
-	; */
-	;deleteControlFromSection($Control)
-	;{
-	;	;Dump(this.Sections, &$Control, 1)
-	;	;MsgBox,262144,, deleteControlFromSection,2
-	;	For $k, $Section in this.Sections
-	;		$Section.deleteControl($Control)
-	;}
+	/**
+	 */
+	deleteSectionsFromContainer()
+	{
+		For $k, $Section in this.Sections
+			$Section.deleteAllControls()
+			
+	}
 	
 	/*---------------------------------------
 		PUBLIC METHODS

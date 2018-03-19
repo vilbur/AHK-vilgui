@@ -41,7 +41,17 @@ Class ControlsList_vgui{
 				return true
 		return
 	}
-	
+	/** delelte all controls
+	 */
+	deleteAllControls()
+	{
+		For $key, $Control in this
+			if($key!="_ControlsTypes") {
+				;MsgBox,262144,DELETE CONTROL, % $Control._name ,3
+				$Control.delete()
+				;sleep, 1500
+			}
+	}
 
 
 }
