@@ -18,7 +18,7 @@ Class TabsTest{
 				 $Tabs.Tabs[A_Index].Controls
 					 .GroupBox().layout($tabs_layouts[A_Index]).add("GroupBoxTabs " A_Index " A")
 						.Button().callback("callbackTest", "Param").add("Test Callback")
-						.Button().add()
+						.Button().callback("getActiveTab").add("getActiveTab")
 					 .GroupBox().add("GroupBoxTabs1 B")
 						.Edit().value("Tab 1 Edit").add()
 						.Button().add()
@@ -44,7 +44,7 @@ Class TabsTest{
 
 /** callbackTest
 */
-callbackTest($Event:="", $params*){
+callbackTest($Event, $params*){
 	;MsgBox,262144,, Test,2
 	$Event.message()
 	;$GuiTest.Menu.Context.show()
@@ -52,9 +52,17 @@ callbackTest($Event:="", $params*){
 
 /*
 */
-tabsCallback($Event:="", $params*){
+tabsCallback($Event, $params*){
 	$Event.message()
 	$Event.Control().highlight($Event.data.tab)
-
-
+}
+/*
+*/
+getActiveTab($Event, $params*){
+	;$Event.message()
+	;Dump($GuiTest, "GuiTest", 0)
+	;$Event.Control().highlight($Event.data.tab)
+	$tab := $GuiTest.controls.get("Tabs1").active()
+	MsgBox,262144,getActiveTab, % "ACTIVE TAB -" $tab,3 
+	
 }

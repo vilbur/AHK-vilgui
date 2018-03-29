@@ -1,17 +1,27 @@
 /** Class Tab_vgui
 */
 Class Tab_vgui {
-	tab_num	:= ""
+	
+	Controls	:= {}
+	tab_num	:= ""	
 	_name	:= ""
+	
 	__New($tab_num){
 		this.tab_num := $tab_num
 	}
-	/** set name
+	
+	/** Get\ Set name of tab
+	  
+		TODO: GETTING Should be done by SendMessage dynamically
 	*/
-	name($name){
-		this._name	:= $name
+	name($name:="~null"){
+		if($name=="~null"){
+			return % this._name
+		}
+		this._name := $name
 		return this
 	}
+
 	/** setControls
 	*/
 	setControls($Tabs){

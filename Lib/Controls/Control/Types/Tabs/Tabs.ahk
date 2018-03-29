@@ -1,4 +1,9 @@
 /** Class Tabs_vgui
+  
+   MESSAGE CONSTANTS: https://autohotkey.com/boards/viewtopic.php?p=25871#p25871
+   
+   
+   
 */
 Class Tabs_vgui extends ControlItems_vgui {
 
@@ -34,15 +39,15 @@ Class Tabs_vgui extends ControlItems_vgui {
 		return %$tabs_form_data%
 	}
 	/** get Active Tab Number
-		NOTE: Tabs option "AltSubmit" MUST BE SET FOR tab number, without return tab title
 		@return int|string number of title of active name
 	*/
-	active(){
-		GuiControlGet, $active_tab,, % this.hwnd
-		return %$active_tab%
+	active()
+	{
+		SendMessage, 0x130B, 0, 0, ,  % "ahk_id " this.hwnd
+		$active_tab_index = %ErrorLevel%
+		return % $active_tab_index +1
 	}
 	/** Get Active Tab Object
-		NOTE: Tabs option "AltSubmit" MUST BE SET FOR tab number, without return tab title
 		@return object of active tab
 	*/
 	getActive(){
@@ -59,7 +64,13 @@ Class Tabs_vgui extends ControlItems_vgui {
 	select($tab_num){
 		SendMessage, 0x1330, % $tab_num-1,,, % "ahk_id " this.hwnd
 	}
-
+	/** Get Text of active tab
+		TODO: Should be reached by SendMessage dynamically
+	 */
+	value()
+	{
+		return % this.Tabs[this.active()]._name
+	}
 	/** delete control from Layout, ControlList and Gui 
 	 */
 	delete()
@@ -104,3 +115,4 @@ Class Tabs_vgui extends ControlItems_vgui {
 
 
 }
+

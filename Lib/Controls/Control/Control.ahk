@@ -23,17 +23,6 @@ Class Control_vgui extends ControlSetup_vgui{
 	{
 		;MsgBox,262144,DELETE CONTROL, % this._name ,3
 		Object(this._layout_container).deleteControlFromSection(this)
-
-	}
-	/**
-	 */
-	removeFromGui()
-	{
-		;MsgBox,262144,DELETE CONTROL, % this._name ,3
-
-		;this.Controls()._List.delete(this.hwnd)
-		WM_CLOSE=0x10
-		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
 	}
 	/** Get configured Control object which is able passed to Controls.add()
 	*/
@@ -41,6 +30,13 @@ Class Control_vgui extends ControlSetup_vgui{
 	{
 		this.preAdd()
 		return this
+	}
+	/** clear values in item types control
+	  * TODO: Tested on Dropdown, needs to be tesed on others
+	 */
+	clear()
+	{
+		return % this.edit("")
 	}
 	/** set Value Or Items
 	*/
@@ -70,7 +66,16 @@ Class Control_vgui extends ControlSetup_vgui{
 		this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
 		return this
 	}
+	/** TODO: rename to private
+	 */
+	removeFromGui()
+	{
+		;MsgBox,262144,DELETE CONTROL, % this._name ,3
 
+		this.Controls()._List.delete(this.hwnd)
+		WM_CLOSE=0x10
+		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
+	}
 	/*---------------------------------------
 		PARENTS
 	-----------------------------------------
@@ -86,7 +91,6 @@ Class Control_vgui extends ControlSetup_vgui{
 	*/
 	Base()
 	{
-		MsgBox,262144,, "Control.Base() SMAZAT METODU",2 
 		return % this.Controls().Parent()
 	}
 

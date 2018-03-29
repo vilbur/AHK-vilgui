@@ -2,6 +2,14 @@
 */
 Class GuiControl_vgui extends ControlEvents_vgui{
 
+	/** Focus to control
+		wrapper for: https://autohotkey.com/docs/commands/ControlFocus.htm
+	 */
+	focus( )
+	{
+		ControlFocus,, % "ahk_id " this.hwnd
+		return this
+	}
 	/** size
 	 * @return object $Control
 	 */

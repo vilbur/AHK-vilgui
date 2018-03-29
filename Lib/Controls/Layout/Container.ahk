@@ -40,13 +40,16 @@ Class Container_vgui{
 		this._ctr_addr	:= $ctr_addr
 		return this
 	}
-	/**
+	/** delete all sections from container
 	 */
 	deleteSectionsFromContainer()
 	{
 		For $k, $Section in this.Sections
 			$Section.deleteAllControls()
-			
+
+		;object(this._ctr_addr).removeFromGui()
+
+		this.Sections := []
 	}
 	
 	/*---------------------------------------

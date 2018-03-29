@@ -104,12 +104,10 @@ Class Controls_vgui extends ControlsTypes_vgui
 	_addControlToGui()
 	{
 		this._tabActivate()
-		;Dump(this._Control._getValueOrItems(), "this._Control._getValueOrItems()", 1)
-		;Dump(this._Control, "this._Control", 0)
+
 		Gui, % this._hwnd ":Add", % this._getAddControlType(), % "hwndCtrlHWND " this._getOptions(),  % this._Control._getValueOrItems()
-		;Dump(CtrlHWND, this._Control._type, 1)
-		;this._Control.hwnd := CtrlHWND + 0
-		this._Control.hwnd := CtrlHWND 	
+		this._Control.hwnd := CtrlHWND
+		
 		this._tabDeactivate()
 	}
 	/** _setControlName
@@ -137,7 +135,7 @@ Class Controls_vgui extends ControlsTypes_vgui
 		
 		$set_value := true
 		
-		if(RegExMatch(this._Control._type, "i)edit|radio")) ; type is Edit|Radio
+		if(RegExMatch(this._Control._type, "i)edit|radio|text")) ; type is Edit|Radio
 			$set_value := false
 		
 		if(this.List._ControlsTypes.hasKey( RegExReplace( this._Control._name, "\d+$", "" ))) ; if value==control_type E.G: "button|edit"

@@ -42,25 +42,20 @@ Class Section_vgui{
 			if (isObject($control)){
 				$control.deleteSectionsFromContainer()
 				object($control._ctr_addr).removeFromGui()
-
 			}else
 				this.control($control).removeFromGui()
 		}
 		this.Controls := []
 	}
-	/**
+	/** remove single control from section
 	 */
 	deleteControlFromSection($Control)
 	{
 		$index := this._findControlInControls(&$Control)
-	;	
-	;	MsgBox,262144,DELETE CONTROL, %$index% ,5
-	;	;Dump( &$Control, "Control", 1)
-	;	;Dump(this.Controls[$index], "this.Controls[$index]", 1)
-	;	
-	;	;if (isObject(this.Controls[$index]))
-	;		;this.Controls[$index].deleteSectionsFromContainer()
-	
+		
+		if (isObject(this.Controls[$index]))
+			this.Controls[$index].deleteSectionsFromContainer()
+
 		$Control.removeFromGui()
 		this.Controls.removeAt($index)
 	}
@@ -107,7 +102,6 @@ Class Section_vgui{
 		return this
 	}
 	/** move Control to position of new section_vgui or behind previous control
-
 	*/
 	moveControl($item){
 		$Control	:= isObject($item) ? this.control($item._ctr_addr) :this.control($item)

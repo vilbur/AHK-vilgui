@@ -36,6 +36,15 @@ Class ControlItems_vgui extends Control_vgui{
 	{
 		return % this.edit("|")
 	}
+	/** Select item in ListBox, DropDownList, ComboBox, or Tab
+		wrapper: https://www.autohotkey.com/docs/commands/GuiControl.htm
+			"GuiControl, Choose" 
+	 */
+	select( $index )
+	{
+		;GuiControl, Choose, ControlID, N
+		this.guiControl( "Choose", $index )
+	}
 	/*---------------------------------------
 		PROCESS ITEMS ARRAY & STRING
 	-----------------------------------------

@@ -19,10 +19,10 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	value($value:="~null"){
 		if($value=="~null"){
 			GuiControlGet, $value,, % this.hwnd
-			;MsgBox,262144,, value,2 
 			return %$value%
 		}
 		this._value := $value
+
 		return this
 	}
 	/** Set Control Options

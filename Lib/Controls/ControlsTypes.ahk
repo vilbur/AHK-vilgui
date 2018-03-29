@@ -2,7 +2,7 @@
 */
 Class ControlsTypes_vgui{
 
-	_groupbox_layout := "row" ; store last used layout of group box for nex groupboxes
+	_groupbox_layout := "row" ; store last used layout of group box for next groupbox
 
 	/** GroupBox
 	*/
@@ -18,6 +18,7 @@ Class ControlsTypes_vgui{
 	/** text
 	*/
 	text($value:=""){
+		;MsgBox,262144,value, %$value%,3 
 		return % new Text_vgui(this).value($value)
 	}
 	/** button
