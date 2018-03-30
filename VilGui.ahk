@@ -7,9 +7,10 @@ global $_GUI_margin
 */
 Class VilGUI extends Gui_vgui
 {
+	_last_active_window	:= "" ; store last active window for centering
 
-
-	__New($hwnd){
+	__New($hwnd)
+	{	
 		this.hwnd	:= $hwnd		
 		;this.hwnd	:= RegExReplace( $hwnd, "\s+", "" )
 		;this.title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
@@ -20,9 +21,15 @@ Class VilGUI extends Gui_vgui
 		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
+		
+		this._setLastActiveWindow()
+
 	}
-	/**
-	*/
+	/** create gui
+	 * Options are aplied after Gui is created
+	 *
+	 *
+	 */
 	create($options:="")
 	{
 		this._sortLayouts()
@@ -141,5 +148,12 @@ Class VilGUI extends Gui_vgui
 
 		}
 	}
+	/** store last active window for centering
+	 */
+	_setLastActiveWindow()
+	{
+		WinGet, $last_active_window, ID, A		
+		this._last_active_window := $last_active_window
+	} 
 
 }

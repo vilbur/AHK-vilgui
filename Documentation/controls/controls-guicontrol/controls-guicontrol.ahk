@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\gui-construct.ahk
+#Include %A_LineFile%\..\..\..\gui\lib\gui-construct.ahk
 /* Controls
 */
 $Gui.Controls
@@ -41,4 +41,4 @@ onButtonClick($Event, $params*){
 	$Gui.Controls.get("Checkbox1")
 		.edit(true)
 }
-#Include %A_LineFile%\..\..\..\gui\gui-create.ahk
+#Include %A_LineFile%\..\..\..\gui\lib\gui-create.ahk

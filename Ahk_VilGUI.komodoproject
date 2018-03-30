@@ -13,6 +13,8 @@
 </livefolder>
 <livefolder id="9352353a-feff-4baf-a980-d6ade8c6d032" idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" name="Test" url="Test/">
 </livefolder>
+<file id="9e32fa70-1069-45f2-b8d2-de5cc093d884" idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" name="VilGui.ahk" url="VilGui.ahk">
+</file>
 <preference-set idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" id="project" preftype="project">
   <long id="prefs_version">1</long>
 </preference-set>

@@ -4,7 +4,7 @@ Class Gui_vgui{
 
 	Monitor	:= new Monitor()
 	;;;_resizable	:= false
-	_center	:= {x:true, y:false}
+	_center	:= {x:true, y:false, window:false}
 	_size	:= {"min":	{w:0,	h:256}	; store min sizes of gui
 		   ,"max":	{w:0,	h:1024}	; store max sizes of gui
 		   ,"auto":	{w:0,	h:0}}	; store auto sizes of gui
@@ -22,6 +22,7 @@ Class Gui_vgui{
 	 */
 	show($options:=""){
 		;Dump(this.hwnd, "this.", 1)
+		;MsgBox,262144,options, %$options%,3 
 		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
 		return this
 	}	
@@ -84,7 +85,8 @@ Class Gui_vgui{
 	}
 	/** set fixed with of gui
 	*/
-	fixedWidth($width:=""){
+	fixedWidth($width:="")
+	{
 		if(!$width)
 			$width := this._getGuiSize().w
 
@@ -95,28 +97,49 @@ Class Gui_vgui{
 	}
 	/** set window always on top
 	*/
-	alwaysOnTop($toggle:=true){
+	alwaysOnTop($toggle:=true)
+	{
 		this.options(this._getPlusMinus($toggle) "AlwaysOnTop")
 		return this
 	}
 	/** center gui on display
-	  * @param string $xy "x|y"
+	  * @param string $xy	"x|y|window" // center x|y to scree, center to current window if "window" ( for multiple display setup  )
+	  * @param boolean $toggle  
 	*/
-	center($xy, $toggle:=true){
+	center($xy, $toggle:=true)
+	{
 		this._center[$xy] := $toggle
-		if(this._center[$xy])
+		
+		if( $xy=="window" )
+			this._centerToWindow()
+		
+		else if(this._center[$xy])
 			this.show($xy "Center")
+			
 		return this
 	}
+	
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/** Center Gui window to active window
+	 */
+	_centerToWindow()
+	{
+		if(this._center.window){
+			WinGetPos, $X, $Y, $W, $H, % "ahk_id " this._last_active_window
+			if WinExist( "ahk_id " this._last_active_window ){
+				WinGetPos,,, $mW, $mH, % this.hwnd				
+				WinMove, % this.hwnd,, ($W-$mW)/2 + $X, ($H-$mH)/2 + $Y
+			}
+		}
+	} 
 
-
-	/** _getPlusMinus
+	/** contvert boolean to string "+|-"
 	*/
-	_getPlusMinus($toggle){
+	_getPlusMinus($toggle)
+	{
 		return % $toggle ? "+" : "-"
 	}
 	/** _minMaxSize

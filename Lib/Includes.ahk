@@ -101,7 +101,6 @@
    Tabs
 */
 #Include %A_LineFile%\..\Controls\Control\Types\Tabs\Tabs.ahk
-; #Include %A_LineFile%\..\Controls\Control\Types\Tabs\Tab2.ahk
 #Include %A_LineFile%\..\Controls\Control\Types\Tabs\Tab.ahk
 
 /*---------------------------------------
