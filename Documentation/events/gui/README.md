@@ -7,7 +7,10 @@
 * Exit button  
 
 ### Button methods  
-
+| Name     | Character |
+| ---      | ---       |
+| Backtick | `         |
+| Pipe     | \|        |
 
 | __submit__( [$text] )    |Makes submit button    |  
 |--  
@@ -79,5 +82,35 @@ First parameter passed to callback is __[$Event](Documentation/events/event/)__ 
 ## Examples  
 
 ``` php
-$Gui.Controls.layout("row")    .Edit().value("Lorem ipsum").label("Test Input").add().section()    .GroupBox().layout("row").add("Event Buttons")    ; EVENT BUTTONS    .Button().submit()    .Button().close()    .Button().exit()                $Gui.Events.Gui    .onEscape("callbackGui", "onEscape", "Custom")     .onEscape("close")        .onSubmit("callbackGui", "onSubmit", "Custom")     .onSubmit("close")        .onClose("callbackGui", "onClose", "Custom")        .onClose("exit")    .onExit("callbackGui", "onExit", "Custom")        ;.onExit(false) ; remove callbacks/** callbackGui*/callbackGui($Event:="", $params*){    MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5    $Event.message()}
+
+$Gui.Controls.layout("row")
+    .Edit().value("Lorem ipsum").label("Test Input").add().section()
+    .GroupBox().layout("row").add("Event Buttons")
+
+    ; EVENT BUTTONS
+    .Button().submit()
+    .Button().close()
+    .Button().exit()            
+    
+$Gui.Events.Gui
+    .onEscape("callbackGui", "onEscape", "Custom") 
+    .onEscape("close")
+    
+    .onSubmit("callbackGui", "onSubmit", "Custom") 
+    .onSubmit("close")
+    
+    .onClose("callbackGui", "onClose", "Custom")    
+    .onClose("exit")
+
+    .onExit("callbackGui", "onExit", "Custom")    
+    ;.onExit(false) ; remove callbacks
+
+/** callbackGui
+*/
+callbackGui($Event:="", $params*){
+    MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5
+    $Event.message()
+}
+
+
 ```  
