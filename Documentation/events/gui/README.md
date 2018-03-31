@@ -12,9 +12,10 @@
 | Backtick | `         |
 | Pipe     | \|        |
 
+
 | __submit__( [$text] )    |Makes submit button    |  
-|--  
-|`@param string` [ $text="Submit" ]    |    ||  
+|--  | --- |
+|`@param string` [ $text="Submit" ]    |    |  
 
 ##  
 
