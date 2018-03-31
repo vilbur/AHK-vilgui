@@ -14,7 +14,7 @@
 
 
 | __submit__( [$text] )    |Makes submit button    |  
-|--  | --- |
+|:---  |:--- |
 |`@param string` [ $text="Submit" ]    |    |  
 
 ##  
