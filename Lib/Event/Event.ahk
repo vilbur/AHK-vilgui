@@ -6,16 +6,20 @@ Class Event_vgui {
 	default	:= "" ; fired as first, default callback for control, E.G: submit() for submit button
 	custom	:= "" ; fired as second, defined callback, called after default callback
 
-	/** Set control of events
+	/** Get\Set control of event
 	*/
-	control($Control){
+	control($Control:="")
+	{
+		if( ! $Control )
+			return % Object(this._ctr_addr)
+
 		this._ctr_addr	:= &$Control
 		return this
 	}
 	/** Bind new event to class
 	*/
-	bind($on_event, $callback:="", $aParams*){
-
+	bind($on_event, $callback:="", $aParams*)
+	{
 		if(RegExMatch( $on_event, "i)^mouse(.*)", $event_match ))
 			this.mouse.bind($event_match1, $callback, $aParams*)
 		else
@@ -27,7 +31,8 @@ Class Event_vgui {
 		1) Default callback - get event data
 		2) Custom or Event callback
 	*/
-	callAllCallbacks(){
+	callAllCallbacks()
+	{
 		;this._event_type	:= this._getEventType()
 		this._callDefaultCallback()
 		;;;; DEACTIVATED: if(this.event_data!=false) ; IF DEFAULT EVENT RETURN FALSE E.G: SUBMIT dialog itself call Event Callback and return false to avoid double triggering
@@ -39,14 +44,16 @@ Class Event_vgui {
 		RETURNED DATA ARE BIND TO Event.data of custom callback
 		@return mixin
 	*/
-	_callDefaultCallback(){
+	_callDefaultCallback()
+	{
 		this.event_data	:= this.default.call(this)	; bind events to callback, default callback then can custom callback	E.G: VilGUI.submit()
 	}
 	/** Call Event callback
 		@param string	$event_type name of
 		@param mixin	$event_data for bind to call back
 	*/
-	callEventCallback($event_type:="", $event_data:=""){
+	callEventCallback($event_type:="", $event_data:="")
+	{
 		this._event_type := $event_type ? $event_type :  this._getEventType()
 		$event_callback	:= this[this._event_type] ? this._event_type : "custom"
 
@@ -63,20 +70,23 @@ Class Event_vgui {
 	*/
 	/** _getEventObject
 	*/
-	_getEventObject(){
+	_getEventObject()
+	{
 		this.Event := new EventObj_vgui()
 							.control(this._ctr_addr)
 							.set("type",	this._event_type)
-							;.set("type",	this._getEventType())
+							.set("value", this.control().value() )
 							.set("key",	this._event_type == "KeyPress" ? GetKeyName(Format("vk{:x}", A_EventInfo)) : "")
 							.set("data",	this.event_data)
+							
 		this._event_type := "" ; reset event type for next call
 		return % this.Event
 	}
 	/** _getEventType https://autohotkey.com/docs/commands/ListView.htm#notify
 		$event.types = "LeftClick|RightClick|DoubleClick|DoubleClickRight|Drag|Activated|Edit|MouseRelease|Focus|ItemChanged|KeyPress|Selection|Scroll"
 	*/
-	_getEventType(){
+	_getEventType()
+	{
 		$events := 	{Normal:	"LeftClick"
 			,R:	"DoubleClickRight"
 			,D:	"Drag"
