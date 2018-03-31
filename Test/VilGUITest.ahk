@@ -66,7 +66,7 @@ Class VilGUITest{
 	*/
 	test(){
 		this.setupGui()
-		;this.MenusTest.runMainTest()
+		this.MenusTest.runMainTest()
 
 		For $c, $Control in this.Controls {
 			/* SPLIT UI TO SECTIONS
