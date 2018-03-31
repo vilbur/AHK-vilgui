@@ -6,7 +6,11 @@ Class ControlItems_vgui extends Control_vgui{
 
 	/** set items for radio buttons or tabs
 	*/
-	items($items:=""){
+	items($items:="")
+	{
+		if( isObject($items) )
+			$items := $items.clone() ; clone object, otherwise it will modify original array
+	
 		this._items.string	:= !isObject($items) ? $items : this._getItemsString($items)
 		this._items.array	:=  isObject($items) ? $items : this._getItemsArray($items)
 		;Dump(this._items, "this._items", 1)
@@ -17,16 +21,14 @@ Class ControlItems_vgui extends Control_vgui{
 
 		@param int|string $checked key or value of checked item
 	*/
-	checked($checked){
-
+	checked($checked)
+	{
 		For $checked_key, $checked in (isObject($checked)?$checked:[$checked])
 			For $key, $item in this._items.array
 				if(this._checkedMatchKeyOrValue($checked, $key, $item) && !this._isItemPiped($item) )
 					this._items.array[$key] := $item "|" (A_Index==this.items_length?"|":"")
 
-		;Dump(this._items, "this._items", 1)
 		this._items.string	:= this._getItemsString(this._items.array)
-		;Dump(this._items.string, "this._items", 1)
 		return this
 	}
 	/** clear values in item types control
@@ -51,7 +53,8 @@ Class ControlItems_vgui extends Control_vgui{
 	*/
 	/** Get string of items E.G: "A|B||C"
 	*/
-	_getItemsString($items){
+	_getItemsString($items)
+	{
 		this._setItemsLenght($items)
 		For $key, $item in $items
 			$string .=  $item (A_Index<this.items_length?"|":"")
@@ -60,7 +63,8 @@ Class ControlItems_vgui extends Control_vgui{
 	/** Get array of items
 		Add "|" suffix to selected item
 	*/
-	_getItemsArray($items){
+	_getItemsArray($items)
+	{
 		$items := RegExReplace( $items, "\|\|", "~#~|" )
 		$array := []
 		For $key, $item in StrSplit($items, "|")
@@ -71,7 +75,8 @@ Class ControlItems_vgui extends Control_vgui{
 	}
 	/** GEt length of items
 	*/
-	_setItemsLenght($items){
+	_setItemsLenght($items)
+	{
 		this.items_length :=	$items.maxIndex() ? $items.maxIndex() : $items.GetCapacity()
 	}
 
@@ -81,17 +86,20 @@ Class ControlItems_vgui extends Control_vgui{
 	*/
 	/** _checkedMatchKeyOrValue
 	*/
-	_checkedMatchKeyOrValue($checked, $key, $item){
+	_checkedMatchKeyOrValue($checked, $key, $item)
+	{
 		return % $checked == $key || $checked == $item
 	}
 	/** _isItemPiped
 	*/
-	_isItemPiped($item){
+	_isItemPiped($item)
+	{
 		return % RegExMatch( $item, "i)\|$" )?1:0
 	}
 	/** isNextItemEmpty
 	*/
-	_isNextItemEmpty($key){
+	_isNextItemEmpty($key)
+	{
 		if $key is number
 			return %  $key<this.items_length && this._items[$key+1] == ""
 

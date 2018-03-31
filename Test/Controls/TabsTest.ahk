@@ -12,7 +12,11 @@ Class TabsTest{
 			$GuiTest.Controls.section()
 
 		Loop, 1 {
-			$Tabs := $GuiTest.Tabs("Tabs " A_Index " - A|   B|   C").add("Tabs" A_Index).get()
+			$Tabs := $GuiTest.Tabs("Tabs " A_Index " - A|   B|   C")
+							.checked(2)
+							.add("Tabs" A_Index)
+							.get()
+			
 			Loop, 2 {
 
 				 $Tabs.Tabs[A_Index].Controls
