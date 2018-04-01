@@ -22,7 +22,7 @@
 
 | __onSubmit__( $callback, $params* )    |Fired on gui is submitted.    |  
 |:---    |:---    |  
-|`@param string` $callback    |event "close__\|__exit__\|__false__\|__callbackFn"    |  
+|`@param string` $callback    |event "close**\|**exit__\|__false__\|__callbackFn"    |  
 |`@param string` $params*    |    |  
 
 ##  
