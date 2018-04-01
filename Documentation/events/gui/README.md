@@ -13,16 +13,19 @@
 | Pipe     | \|        |
 
 
+
 | __submit__( [$text] )    |Makes submit button    |  
-|:---  |:--- |
+|:---    |:---    |  
 |`@param string` [ $text="Submit" ]    |    |  
 
 ##  
 
-| __close__( [$text] )    |Makes close button    |  
-|--  
-|`@param string` [ $text="Close" ]    |    ||  
+| __onSubmit__( $callback, $params* )    |Fired on gui is submitted.    |  
+|:---    |:---    |  
+|`@param string` $callback    |event "close__\|__exit__\|__false__\|__callbackFn"    |  
+|`@param string` $params*    |    |  
 
+##  
 ##  
 
 | __exit__( [$text] )    |Makes exit button    |  
