@@ -12,6 +12,7 @@ Class GuiEvents_vgui{
 		BIND EVENTS
 	-----------------------------------------
 	*/
+	
 	/** Fired on gui is submitted.
 
 		@param string $callback event "close|exit|false|callbackFn"
