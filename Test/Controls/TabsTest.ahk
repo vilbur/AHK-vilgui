@@ -26,6 +26,13 @@ Class TabsTest{
 					 .GroupBox().add("GroupBoxTabs1 B")
 						.Edit().value("Tab 1 Edit").add()
 						.Button().add()
+					
+					.section()
+						.Radio()
+							.items(["Item1","Item12"])
+							.options("w64 ")
+							.checked(1)
+							.add("R_TabsGroup")	
 
 			}
 		}

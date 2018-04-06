@@ -29,7 +29,7 @@ class ControlsTest{
 
 			$Control.clone().add()
 			$Control.clone().add("Add Name")
-			$Control.clone().value("Value`nSecondLIne").add()
+			$Control.clone().value("Value`nSecondLine").add()
 			$Control.clone().value("Value And Name").add("Add Name")
 
 			if(A_Index<this.controls_main.MaxIndex()) ; dont add new section after last control

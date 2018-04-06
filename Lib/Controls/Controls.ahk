@@ -45,7 +45,6 @@ Class Controls_vgui extends ControlsTypes_vgui
 	*/
 	get($control_name:="")
 	{
-		;Dump(this._List, "this._List", 1)
 		if( $control_name=="" )
 			return % Object(this._Control) ; return Last created Control
 			
@@ -75,21 +74,24 @@ Class Controls_vgui extends ControlsTypes_vgui
 		This method allows chaining when controls are added
 		@param boolean $section
 	*/
-	section($section:=true){
+	section($section:=true)
+	{
 		if($section)
 			this._Layout.next_section	:= true
 		return this
 	}
 	/** End of groupbox, Next control will be added to main container
 	*/
-	groupEnd(){
+	groupEnd()
+	{
 		this._Layout.groupbox_close := true
 		return this
 	}
 	/** Set layout of Main Container
 		@param "row|column" $layout
 	*/
-	layout($layout:=""){
+	layout($layout:="")
+	{
 		if($layout!="")
 			this._Layout.layout($layout)
 
@@ -126,13 +128,11 @@ Class Controls_vgui extends ControlsTypes_vgui
 
 		;;;/* GET UNIQUE NAME */
 		this._Control._name := this._List.getUniqueName(this._Control._sanitizeName())
-		;Dump(this._Control._name, "this._Control._name", 1)
 	}
 	/** 	_set Default Value
 	*/
 	_setDefaultValue()
 	{
-		
 		$set_value := true
 		
 		if(RegExMatch(this._Control._type, "i)edit|radio|text")) ; type is Edit|Radio
@@ -146,13 +146,11 @@ Class Controls_vgui extends ControlsTypes_vgui
 
 		if($set_value)
 		    this._Control._value := this._Control._name
-			
-			
 	}
 	/** _getAddControlType
 	*/
-	_getAddControlType(){
-
+	_getAddControlType()
+	{
 		if(this._Control._type=="Dropdown")
 			return % "DropdownList"
 		else if(this._Control._type=="Tabs")
@@ -167,7 +165,8 @@ Class Controls_vgui extends ControlsTypes_vgui
 	}
 	/** _getOptions
 	*/
-	_getOptions(){
+	_getOptions()
+	{
 		return % this._OptionsDefaults.get(this._Control._type) " " this._Control._Options.get()
 	}
 	/*---------------------------------------
@@ -192,7 +191,8 @@ Class Controls_vgui extends ControlsTypes_vgui
 	*/
 	/** set\get parent class
 	*/
-	Parent($Parent:=""){
+	Parent($Parent:="")
+	{
 		if($Parent)
 			this._Parent	:= &$Parent
 		return % $Parent ? this : Object(this._Parent)
@@ -211,36 +211,70 @@ Class Controls_vgui extends ControlsTypes_vgui
 		return % $hwnd ? this : this._hwnd
 	}
 	/*---------------------------------------
-		Tabs
+		TABS
 	-----------------------------------------
 	*/
-	/** _tabActivate
+	/** Activate tab for adding of control to right tab
 	*/
-	_tabActivate(){
-		;MsgBox,262144, _tabActivate, % this._name,2
+	_tabActivate()
+	{
 		if(this.parent().tab_num)
 			Gui, % this._hwnd ":Tab", % this.parent().tab_num
 	}
-	/** _tabDeactivate
-	*/
-	_tabDeactivate(){
-		;MsgBox,262144, _tabActivate, % this._name,2
-		if(this.parent().tab_num)
+	/** Deactivate tabs if parent is not tab
+	  * Used for adding controls after tabs
+	  */
+	_tabDeactivate()
+	{
+		if( ! this.parent().tab_num)
 			Gui, % this._hwnd ":Tab"
 	}
+	/*---------------------------------------
+		SUBMIT
+	-----------------------------------------
+	*/
 	/** get values of GUI controls
 	*/
-	values(){
-		;MsgBox,262144,, values,2
+	values()
+	{
+		
 		$values_types	:= {"Edit":"", "Checkbox":"", "ListBox":"", "Dropdown":"", "Radio":"", "File":"", "Folder":"", "ListView":""  }
 		$form_data	:= {}
-		;Dump(this._List, "this._List", 0)
-		For $control_name, $control in  this._List                       ; for each control of control type
+
+		For $control_hwnd, $control in  this._List                      ; for each control of control type
 			if($values_types.hasKey($control._type))                    ; control can has value
-				if(!($control._type=="Radio" && $control.value()==0))   ; if not unselected RADIO or CHECKBOX button
-					$form_data[$control_name]	:= $control.value()
-		;Dump($form_data, "form_data", 1)
-		;sleep 100000
+				this._getControlValue( $form_data ,$Control )
+
  		return % $form_data.GetCapacity() ? $form_data : false
 	}
+	/**
+	 */
+	_getControlValue( ByRef $form_data ,$Control )
+	{
+		if( $Control._type!="Radio" )   ; if not unselected RADIO or CHECKBOX button
+			$form_data[$Control._name]	:= $Control.value()		
+		else
+			this._getRadioValue( $form_data ,$Control )
+	}
+	
+	/** split radion button name to name of set and value of radio button
+	  *
+	  * @example "NameOfSet.Value Of Button"		>>>		"NameOfSet": "Value Of Button"
+	 */
+	_getRadioValue( ByRef $form_data ,$Control )
+	{
+		if( $Control.value()!=0 )
+		{
+			$name_value	:= StrSplit( $Control._name, ".")	
+			$form_data[$name_value[1]]	:= $name_value[2]
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,24 +1,65 @@
 /** Class Path_vgui
+ 
 */
 Class PathBrowse_vgui extends Control_vgui{
 
 	default_value	:= "Set path..."
 	width_browse_btn	:= 96
 	root_file_or_dir	:= A_WorkingDir
-	filter	:= ""
+	_prompt	:= ""
+	_filter	:= ""
+	_select_options	:= ""
 
 	/*---------------------------------------
 		PUBLIC METHODS
 	-----------------------------------------
 	*/
+	/** root
+	*/
+	root($root_file_or_dir)
+	{
+		this.root_file_or_dir := Path($root_file_or_dir).getPath()
+		return this
+	}
+	/** filter
+	*/
+	filter($filter)
+	{
+		this._filter := $filter
+		return this
+	}
+	/** prompt
+	*/
+	prompt($prompt)
+	{
+		this._prompt := $prompt
+		return this
+	}
+	/** options for picker
+	  
+		HELP: section OPTIONS
+			https://autohotkey.com/docs/commands/FileSelectFile.htm
+			https://autohotkey.com/docs/commands/FileSelectFolder.htm
+	 */
+	selectOptions( $options:="" )
+	{
+		this._select_options := $options
+		return this
+	}
+	/*---------------------------------------
+		PRIVATE METHODS
+	-----------------------------------------
+	*/
 	/** Proceed methods necessary BEFORE adding of object to GUI
 	*/
-	preAdd(){
+	preAdd()
+	{
 		this.addInputSet()
 	}
 	/** Path
 	*/
-	addInputSet(){
+	addInputSet()
+	{
 		;MsgBox,262144,, addInputSet,2
 		this.setLabel()
 		this.addEdit()
@@ -27,39 +68,50 @@ Class PathBrowse_vgui extends Control_vgui{
 	}
 	/** set default Label if not defined
 	*/
-	setLabel(){
+	setLabel()
+	{
 		if(!this._label && this._label!=false)
 			this.label(this._type)
 	}
 	/** addEdit
 	*/
-	addEdit(){
+	addEdit()
+	{
 		$options	:= this._Options.get() " left " this._getEditWidth()
 		;Dump($options, "options", 1)
 		$EditControl := this.Controls().Edit()
-								.name( this._name?this._name:this._type )
+								.name( this._name ? this._name : this._type )
 								.value(this.root_file_or_dir)
 								.options( $options )
 		if(this._label)
 			$EditControl := $EditControl.label(this._label)
+			
 		this.EditControl := &$EditControl.add().get()
 	}
 	/** add Browse Button
 	*/
-	addBrowseButton(){
+	addBrowseButton()
+	{		
 		;Dump(this.EditControl, "this.EditControl", 1)
 		this.Controls().Button()
 					.value("Browse...")
-					.callback("browseCallback", this._type, this.root_file_or_dir, this.EditControl)
+					.callback("browseCallback", this._type, this._getSelectOptions(), this.root_file_or_dir, this._getPrompt(), this._filter,  this.EditControl)
 					.options("w" this.width_browse_btn)
 					.add(this._name "Browse")
 	}
-	/** root
-	*/
-	root($root_file_or_dir){
-		this.root_file_or_dir := Path($root_file_or_dir).getPath()
-		return this
-	}
+	/**
+	 */
+	_getPrompt()
+	{
+		StringLower, $type, % this._type
+		return % this._prompt ? this._prompt : "Browse a " $type
+	} 
+	/**
+	 */
+	_getSelectOptions()
+	{
+		return % this._select_options ? this._select_options : ( this._type=="File" ? 3 : 3 )
+	} 
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
@@ -81,11 +133,11 @@ Class PathBrowse_vgui extends Control_vgui{
 
 /** browseCallback
 */
-browseCallback($Event, $type, $root, $Control_edit){
+browseCallback($Event, $type, $options, $root, $prompt, $filter, $Control_edit){
 	if($type=="File")
-		FileSelectFile, $browsed_path, 3, %  $root, Browse a file
+		FileSelectFile, $browsed_path, %$options%, %$root%, %$prompt%, %$filter%
 	else
-		FileSelectFolder, $browsed_path, %  $root, Browse a folder
+		FileSelectFolder, $browsed_path, %$root%, %$options%,%$prompt%
 
 	if($browsed_path)
 		Object($Control_edit).edit($browsed_path)

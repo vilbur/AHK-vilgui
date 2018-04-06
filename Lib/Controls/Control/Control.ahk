@@ -63,7 +63,9 @@ Class Control_vgui extends ControlSetup_vgui{
 	*/
 	_sanitizeName()
 	{
-		this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
+		;this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
+		this._name := RegExReplace( this._name, "i)`n", " " )		
+		
 		return this
 	}
 	/** TODO: rename to private

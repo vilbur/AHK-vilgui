@@ -42,17 +42,17 @@ Class VilGUITest{
 	Controls	:=	[ new MarginTest()
 			;,new MenuTest()
 			;,new GuiEventsTest()
-			;,new ControlsTest()
+			,new ControlsTest()
 			;,new CheckboxTest()
 			
-			;,new RadioTest()
+			,new RadioTest()
 			;,new DropdownTest()
 			;,new ListBoxTest()
 			;,new ListBoxViewTest()
 			
 			;,new PathTest()
 			;,new LabelTest()
-			,new TabsTest()
+			;,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()
@@ -73,7 +73,7 @@ Class VilGUITest{
 			*/
 			; if(this._newSectionNeeded(A_Index))
 				; $GuiTest.Controls.section()
-
+				
 			$Control.runMainTest()
 		}
 		this.showSetup_1()
@@ -84,8 +84,8 @@ Class VilGUITest{
 	/** setupGui
 	*/
 	setupGui(){
-		$GuiTest := new VilGUI("GuiTest")
-		$GuiTest2 := new VilGUI("GuiTest2")
+		$GuiTest	:= new VilGUI("GuiTest")
+		$GuiTest2	:= new VilGUI("GuiTest2")
 
 		;$GuiTest.Controls
 			;.layout("column")
@@ -104,6 +104,7 @@ Class VilGUITest{
 			; .autosize()
 		; $GuiTest2.controls.button().add()
 		; $GuiTest2.show()
+		;Dump($GuiTest.Controls._list, "GuiTest", 0)
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/

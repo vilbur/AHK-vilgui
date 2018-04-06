@@ -15,7 +15,8 @@ Class OptionsDefault_vgui{
 		,"Checkbox":	{"shared":	"common"}
 		,"Radio":	{"shared":	"common"}
 		,"Label":	{"shared":	"common", "w":	64}
-		,"File":	{"shared":	"browse"}
+		,"Path":	{"shared":	"browse"}
+		,"File":	{"shared":	"browse"}		
 		,"Folder":	{"shared":	"browse"}
 		,"Tabs":	{"options":	"AltSubmit", "w":"auto"}
 		,"Dropdown":	{"shared":	"commonW"}

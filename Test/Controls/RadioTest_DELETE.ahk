@@ -3,11 +3,12 @@
 Class RadioTest{
 
 	runMainTest(){
+		MsgBox,262144,, Test,2  
 		$GuiTest.Controls
 			.GroupBox().layout("column").add("GUI_Radio")
-			this.itemsString()
-			this.itemsArray()
-			this.itemsObject()
+			;this.itemsString()
+			;this.itemsArray()
+			;this.itemsObject()
 	}
 	/** itemsString
 	*/

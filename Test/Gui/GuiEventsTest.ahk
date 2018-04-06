@@ -45,6 +45,6 @@ guiEventTest($Event:="", $params*){
 */
 submitGuiCallbackTest($Event, $params*){
 	 MsgBox,262144,, submitGuiCallbackTest,2
-	$Event.message()
+	$Event.message(50)
 	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5
 }
