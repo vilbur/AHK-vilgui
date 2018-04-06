@@ -42,7 +42,7 @@ Class VilGUITest{
 	Controls	:=	[ new MarginTest()
 			;,new MenuTest()
 			;,new GuiEventsTest()
-			,new ControlsTest()
+			;,new ControlsTest()
 			;,new CheckboxTest()
 			
 			,new RadioTest()

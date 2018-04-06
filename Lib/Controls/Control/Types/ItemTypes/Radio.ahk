@@ -39,7 +39,7 @@ Class Radio_vgui extends ControlItems_vgui{
 								.name( this._name "." this._getButtonName($key, $item) )						
 								;.name( this._name )								
 								.value(RegExReplace( $item, "i)\|+$", "" )) ; remove "|" of selected item
-								.options( (A_Index==1 ? " Group ":"") " checked" this._isItemPiped($item) )
+								.options( (A_Index==1 ? " Group ":" ") this._Options.get()  " checked" this._isItemPiped($item) )
 				
 				this.Controls()
 					.add($Button)

@@ -19,6 +19,9 @@ global	$checked_items := [ "String C", 3, "objKey3", 4, "" ]
 
 */
 class _ItemTypesTest {
+	
+	
+	
 	/**
 	*/
 	runTestOfType($ctr_type, $GroupBox:=""){
@@ -27,7 +30,11 @@ class _ItemTypesTest {
 			if($GroupBox)
 				$GuiTest.Controls.GroupBox().layout("row").add($ctr_type " " RegExReplace( $type, "i)_", " " ) )
 
-			$GuiTest.Controls.get($ctr_type).items($data).add($ctr_type " " $type)
+			$GuiTest.Controls.get($ctr_type)
+					.items($data)
+					.add($ctr_type " " $type)
+			
+			
 			;if(RegExMatch( $ctr_type, "i)radio" ) && A_Index<$test_items.GetCapacity()) ; new section after NON last item
 				;$GuiTest.Controls.section()
 		}
