@@ -52,7 +52,7 @@ Class VilGUITest{
 			
 			;,new PathTest()
 			;,new LabelTest()
-			;,new TabsTest()
+			,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()

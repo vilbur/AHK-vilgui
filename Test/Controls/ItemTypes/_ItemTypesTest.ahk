@@ -31,6 +31,7 @@ class _ItemTypesTest {
 				$GuiTest.Controls.GroupBox().layout("row").add($ctr_type " " RegExReplace( $type, "i)_", " " ) )
 
 			$GuiTest.Controls.get($ctr_type)
+					;.options("w64 border")
 					.items($data)
 					.add($ctr_type " " $type)
 			

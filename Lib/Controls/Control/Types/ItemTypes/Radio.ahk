@@ -32,14 +32,15 @@ Class Radio_vgui extends ControlItems_vgui{
 	  * name of each radio button = "RadioButtonsName.RadioButtonValue"
 	*/
 	addEachRadiobutton(){
+		
+		$options := this._Options.get()
+		
 		For $key, $item in this._items.array
 			if($item){
 				$Button := this.clone()
-								;.name( this._name "-" this._getButtonName($key, $item) )
 								.name( this._name "." this._getButtonName($key, $item) )						
-								;.name( this._name )								
 								.value(RegExReplace( $item, "i)\|+$", "" )) ; remove "|" of selected item
-								.options( (A_Index==1 ? " Group ":" ") this._Options.get()  " checked" this._isItemPiped($item) )
+								.options( (A_Index==1 ? " Group ":" ") $options " checked" this._isItemPiped($item) )
 				
 				this.Controls()
 					.add($Button)
