@@ -52,7 +52,7 @@ Class VilGUITest{
 			
 			;,new PathTest()
 			;,new LabelTest()
-			,new TabsTest()
+			;,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()
@@ -104,7 +104,7 @@ Class VilGUITest{
 			; .autosize()
 		; $GuiTest2.controls.button().add()
 		; $GuiTest2.show()
-		;Dump($GuiTest.Controls._list, "GuiTest", 0)
+		
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/

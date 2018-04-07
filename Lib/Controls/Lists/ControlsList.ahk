@@ -16,7 +16,8 @@ Class ControlsList_vgui{
 	 * @param string $key_in_Control is key in Control object
 	 *
 	 */
-	get($control_name, $key_in_Control:="_name"){
+	get($control_name, $key_in_Control:="_name")
+	{
 		For $c, $Control in this
 			if($Control[$key_in_Control]==$control_name)
 				return %$Control%		

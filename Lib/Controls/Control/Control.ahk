@@ -4,7 +4,8 @@ Class Control_vgui extends ControlSetup_vgui{
 
 	_Options := new Options_vgui()
 
-	__New($Controls){
+	__New($Controls)
+	{
 		this._Controls	:= &$Controls
 		this._guihwnd	:= $Controls._hwnd
 		this._type	:= RegExReplace(  this.__class, "_vgui$", "" )

@@ -4,9 +4,10 @@ Class Tab_vgui {
 	
 	Controls	:= {}
 	tab_num	:= ""	
-	_name	:= ""
+	_name	:= ""	
 	
-	__New($tab_num){
+	__New($tab_num)
+	{
 		this.tab_num := $tab_num
 	}
 	
@@ -14,9 +15,10 @@ Class Tab_vgui {
 	  
 		TODO: GETTING Should be done by SendMessage dynamically
 	*/
-	name($name:="~null"){
+	name($name:="~null")
+	{
 		if($name=="~null"){
-			return % this._name
+			return % RegExReplace( this._name, "\|+", "" ) 
 		}
 		this._name := $name
 		return this
@@ -24,12 +26,8 @@ Class Tab_vgui {
 
 	/** setControls
 	*/
-	setControls($Tabs){
-		;this.Controls	:= new Controls_vgui().parent(this).hwnd($hwnd)
-		;Dump($Controls()._hwnd, "Controls()._hwnd", 1)
-		;Dump($Tab2.Controls()._hwnd, "", 1)
-		;MsgBox,262144,, % $Tab2.hwnd,2
-
+	setControls($Tabs)
+	{
 		this.Controls	:= new Controls_vgui().parent(this).hwnd($Tabs.Controls()._hwnd)
 		this.Controls._Layout.ContainerMain.control(&$Tabs)
 		;Dump(this.Controls, "this.Controls", 0)

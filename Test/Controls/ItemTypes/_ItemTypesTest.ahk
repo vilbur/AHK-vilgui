@@ -1,9 +1,9 @@
 /** Global data for test of item types
 */
 global	$test_items :=	{"1_string"	:	"String A||String B|String C"
-		,"2_array"	:	["Array item A|", "Array item B", "Array item C"]
-		,"3_object"	:	{"objKey1":"Obj item A|", "objKey2":"Obj item B", "objKey3":"Obj item C"}
-		,"4_empty_item_multi_sel"	:	[ "", "List with empty item|",	"Foo selected", "Bar"]
+		;,"2_array"	:	["Array item A|", "Array item B", "Array item C"]
+		;,"3_object"	:	{"objKey1":"Obj item A|", "objKey2":"Obj item B", "objKey3":"Obj item C"}
+		;,"4_empty_item_multi_sel"	:	[ "", "List with empty item|",	"Foo selected", "Bar"]
 		,"5_nothing_selected"	:	[ "1 nothing selected",	"2", "3"]}
 
 
@@ -33,7 +33,7 @@ class _ItemTypesTest {
 			$GuiTest.Controls.get($ctr_type)
 					;.options("w64 border")
 					.items($data)
-					.add($ctr_type " " $type)
+					.add($ctr_type "_" $type)
 			
 			
 			;if(RegExMatch( $ctr_type, "i)radio" ) && A_Index<$test_items.GetCapacity()) ; new section after NON last item

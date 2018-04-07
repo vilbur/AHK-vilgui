@@ -10,20 +10,21 @@ Class Controls_vgui extends ControlsTypes_vgui
 
 	/** add
 	*/
-	add($Control){
+	add($Control)
+	{
 		$Control.addLabel()
+		
 		this.setControl($Control)
-		;Dump(this._Control, this._Control._type " A", 0)
+
 		this._setControlName()
 		this._addControlToGui()
+		
 		this._Control.postAdd()
 		this._Control.bindMainCallback()
 		this._Control.bindKeypressEvent()
+		
 		this._addToControlsList()
 		this._addToLayout()
-		;SetFormat, Integer, D
-		;Hex := this._Control.hwnd
-		;Dec := Hex + 0
 
 		this._Control	:= &this._Control
 		return this
@@ -105,12 +106,11 @@ Class Controls_vgui extends ControlsTypes_vgui
 	*/
 	_addControlToGui()
 	{
-		this._tabActivate()
+		this._tabActivateToggle()
 
 		Gui, % this._hwnd ":Add", % this._getAddControlType(), % "hwndCtrlHWND " this._getOptions(),  % this._Control._getValueOrItems()
 		this._Control.hwnd := CtrlHWND
 		
-		this._tabDeactivate()
 	}
 	/** _setControlName
 		1) sanitize name
@@ -214,20 +214,39 @@ Class Controls_vgui extends ControlsTypes_vgui
 		TABS
 	-----------------------------------------
 	*/
-	/** Activate tab for adding of control to right tab
+	/** Start new tab or close tabs
+	*/
+	_tabActivateToggle()
+	{
+		$current_tab := this.parent().tab_num
+		
+		if( $_GUI_tab_last != $current_tab  ){
+			if( $current_tab  )
+				this._tabActivate()
+			else
+				this._tabDeactivate()				
+		}
+		
+		this._storeLastTab($current_tab)
+	}
+	/** Activate tab for adding of control to tab
 	*/
 	_tabActivate()
 	{
-		if(this.parent().tab_num)
-			Gui, % this._hwnd ":Tab", % this.parent().tab_num
+		Gui, % this._hwnd ":Tab", % this.parent().tab_num
 	}
 	/** Deactivate tabs if parent is not tab
 	  * Used for adding controls after tabs
 	  */
 	_tabDeactivate()
 	{
-		if( ! this.parent().tab_num)
-			Gui, % this._hwnd ":Tab"
+		Gui, % this._hwnd ":Tab"
+	}
+	/** Store current tab number if any for enxt control
+	  */
+	_storeLastTab($current_tab)
+	{
+		$_GUI_tab_last	:=  $current_tab 
 	}
 	/*---------------------------------------
 		SUBMIT
@@ -237,7 +256,6 @@ Class Controls_vgui extends ControlsTypes_vgui
 	*/
 	values()
 	{
-		
 		$values_types	:= {"Edit":"", "Checkbox":"", "ListBox":"", "Dropdown":"", "Radio":"", "File":"", "Folder":"", "ListView":""  }
 		$form_data	:= {}
 
@@ -252,6 +270,7 @@ Class Controls_vgui extends ControlsTypes_vgui
 	_getControlValue( ByRef $form_data ,$Control )
 	{
 		if( $Control._type!="Radio" )   ; if not unselected RADIO or CHECKBOX button
+		;if( !( $Control._type=="Radio" &&  $Control.value()=0  ) )   ; if not unselected RADIO or CHECKBOX button
 			$form_data[$Control._name]	:= $Control.value()		
 		else
 			this._getRadioValue( $form_data ,$Control )
@@ -264,10 +283,7 @@ Class Controls_vgui extends ControlsTypes_vgui
 	_getRadioValue( ByRef $form_data ,$Control )
 	{
 		if( $Control.value()!=0 )
-		{
-			$name_value	:= StrSplit( $Control._name, ".")	
-			$form_data[$name_value[1]]	:= $name_value[2]
-		}
+			$form_data[$Control.RadioGroup] := $Control._name
 	}
 	
 	

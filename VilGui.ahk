@@ -2,6 +2,7 @@
 
 global $_GUI := {}
 global $_GUI_margin
+global $_GUI_tab_last
 
 /** Class VilGUI
 */
@@ -23,7 +24,6 @@ Class VilGUI extends Gui_vgui
 		this.Menus	:= new Menus()
 		
 		this._setLastActiveWindow()
-
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
