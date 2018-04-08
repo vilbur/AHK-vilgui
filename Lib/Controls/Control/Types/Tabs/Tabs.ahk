@@ -10,20 +10,23 @@ Class Tabs_vgui extends ControlItems_vgui {
 	Tabs	:= []
 	/** add
 	*/
-	add($name:=""){
+	add($name:="")
+	{
 		this.name($name)
 		return % this.Controls().add(this)
 	}
 	/**  Executed by Controls() class after adding to Gui
 		 Proceed methods necessary ADTER adding of object to GUI
 	*/
-	postAdd(){
+	postAdd()
+	{
 		this.addTabs()
 		this.Controls().parent()[this._name] := this
 	}
 	/** setTab
 	*/
-	addTabs(){
+	addTabs()
+	{
 		For $t, $tab_name in this._items.array
 			this.Tabs.push(new Tab_vgui(A_Index).name($tab_name).setControls(this))
 		return this
@@ -31,7 +34,8 @@ Class Tabs_vgui extends ControlItems_vgui {
 	/** get Controls Values from each tab
 		@return [{ctrl_name:value}] array of tabs with objects of control names and values
 	*/
-	getControlsValues(){
+	getControlsValues()
+	{
 		$tabs_form_data := []
 		For $t, $Tab in this.Tabs
 			if($tab_form_data := $Tab.Controls.values())
@@ -50,18 +54,21 @@ Class Tabs_vgui extends ControlItems_vgui {
 	/** Get Active Tab Object
 		@return object of active tab
 	*/
-	getActive(){
+	getActive()
+	{
 		return % this.Tabs[this.active()]
 	}
 	/** Highlight tabs title
 	*/
-	highlight($tab_num, $toggle:=true){
+	highlight($tab_num, $toggle:=true)
+	{
 		PostMessage, 0x1333, % $tab_num-1 , %$toggle%,, % "ahk_id " this.hwnd
 		return this
 	}
 	/**
 	*/
-	select($tab_num){
+	select($tab_num)
+	{
 		SendMessage, 0x1330, % $tab_num-1,,, % "ahk_id " this.hwnd
 	}
 	/** Get Text of active tab
@@ -69,7 +76,7 @@ Class Tabs_vgui extends ControlItems_vgui {
 	 */
 	value()
 	{
-		return % this.Tabs[this.active()]._name
+		return % this.Tabs[this.active()].name()
 	}
 	/** delete control from Layout, ControlList and Gui 
 	 */
@@ -90,7 +97,8 @@ Class Tabs_vgui extends ControlItems_vgui {
 	*/
 	/** sortTabsLayouts
 	*/
-	sortTabsLayouts(){
+	sortTabsLayouts()
+	{
 
 		$Bbox_all_tabs	:= new Bbox_vgui()
 		For $t, $Tab in this.Tabs
@@ -102,7 +110,8 @@ Class Tabs_vgui extends ControlItems_vgui {
 	}
 	/** resizeTabsByBoundingBox
 	*/
-	resizeTabsByBoundingBox($Bbox){
+	resizeTabsByBoundingBox($Bbox)
+	{
 		;Dump($Bbox, "Bbox", 1)
 		$tabs_min_size	:= {"x":200, "y":100}
 		$width	:= ($Bbox.x>$tabs_min_size.x ? $Bbox.x : $tabs_min_size.x) + $_GUI_margin.container.x() +5	; Set margins to RIGHT of TAB
