@@ -46,19 +46,13 @@ __Produce this buttons__
 
 ##  
 
-| __onExit__( $callback, $params* )	|Fired on gui is exiting script.	|  
-|:---	|:---	|  
-|	|	|  
-
-##  
-
-| __onEscape__( $callback, $params* )	|Fired on escape pressed.	|  
-|:---	|:---	|  
-|	|	|  
-
-##  
-
 | __onClose__( $callback, $params* )	|Fired on gui close with "X" button.	|  
+|:---	|:---	|  
+|	|	|  
+
+##  
+
+| __onExit__( $callback, $params* )	|Fired on gui is exiting script.	|  
 |:---	|:---	|  
 |	|	|  
 

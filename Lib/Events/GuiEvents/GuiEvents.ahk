@@ -1,12 +1,12 @@
 /** Class GuiEvents_vgui
 */
-Class GuiEvents_vgui
+Class GuiEvents_vgui extends EventBind_vgui
 {
 
 	;events	:=	{"close":	{"default":"", "callback":""}
 	;		,"escape":	{"default":"", "callback":""}
 	;		,"submit":	{"default":"", "callback":""}}
-	events	:=	{}
+	;events	:=	{}
 
 	/*-----------------------------------------
 		BIND EVENTS
@@ -18,14 +18,7 @@ Class GuiEvents_vgui
 	*/
 	onSubmit($callback, $params*)
 	{
-		this._setCallback("submit", $callback, $params*)
-		return this
-	}
-	/** Fired on gui is exiting script.
-	*/
-	onExit($callback, $params*)
-	{
-		this._setCallback("exit", $callback, $params*)
+		this._setUserOrDefaultCallback("submit", $callback, $params*)
 		return this
 	}
 	/** Fired on gui close with "X" button.
@@ -33,9 +26,17 @@ Class GuiEvents_vgui
 	onClose($callback, $params*)
 	{
 		this.parent().Window.bindEvents()
-		this._setCallback("close", $callback, $params*)
+		this._setUserOrDefaultCallback("close", $callback, $params*)
 		return this
 	}
+	/** Fired on gui is exiting script.
+	*/
+	onExit($callback, $params*)
+	{
+		this._setUserOrDefaultCallback("exit", $callback, $params*)
+		return this
+	}
+
 	/*-----------------------------------------
 		SET & CALL CALLBACK
 	-----------------------------------------
@@ -43,48 +44,45 @@ Class GuiEvents_vgui
 	/** 1) Call custom  callback
 		2) Call default callback
 	*/
-	call($event, $event_data:=""){
-		;MsgBox,262144,, Call,2
-		this.events[$event].callEventCallback($event,	$event_data)
-		this.events[$event].callEventCallback("default",	$event_data)
-		;Dump(this.events[$event], "this.events."$event, 1)
-	}
-	/** _setCallback
-	*/
-	_setCallback($event, $callback, $params*)
+	call($event)
 	{
-		if( $callback!=0 )
-			(! RegExMatch( $callback, "i)^close|exit$") )? this._setCustomCallback($event, $callback, $params*) : this._setDefaultCallback($event, $callback )
-		else
+		$EventObj := this._getEventObject($event)
+							;Dump(this, "this.", 1)
+		this._callCallback($event, $EventObj)
+		this._callCallback($event "-default", $EventObj)		
+
+	}
+	/** _setUserOrDefaultCallback
+	*/
+	_setUserOrDefaultCallback($event, $callback, $params*)
+	{
+		if( $callback )
+		{
+			if ( RegExMatch( $callback, "i)^close|exit$") )
+				this._bindDefaultCallback($event, $callback )
+			
+			else
+				this._bindCallback($event, $callback, $params*)
+			
+		} else
 			this._removeCallback($event)
-		;Dump(this.events, "this.events", 1)
 	}
-	/** set Event object if not defined yet
-	*/
-	_setEventObject($event)
+	/** Bind default callback
+	  * Callback is method from class VilGUI E.G.: VilGUI.close() OR VilGUI.exit()
+	 */
+	_bindDefaultCallback($event, $callback)
 	{
-		if(!this.events[$event])
-			this.events[$event] :=  new Event_vgui()
+		this._bindCallback( $event "-default", &this.parent().parent() "." $callback ) 
 	}
 	/**
 	 */
-	_setDefaultCallback($event, $callback)
+	_getEventObject($event)
 	{
-		this._setEventObject($event)
-		this.events[$event].bind( "default", &this.parent().parent() "." $callback ) ; callback of VilGUI.close()|.exit()
-	}
-	/**
-	 */
-	_setCustomCallback($event, $callback, $params*)
-	{
-		this._setEventObject($event)
-		this.events[$event].bind( $event, $callback, $params*)
-	}
-	/** _removeCallback
-	 */
-	_removeCallback($event){
-		this.events[$event] := ""
-	}
+		$EventObj := new EventObj_vgui()
+							.set("event", $event)
+		
+		return $EventObj 
+	} 
 	/*-----------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------

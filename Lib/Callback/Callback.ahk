@@ -39,7 +39,6 @@ Class Callback_vgui{
 	call($Event:="")
 	{
 		this._setCallParams($Event)
-		;Dump($Event, "Event", 1)
 		if(!RegExMatch( this._callback, "i)^\d+", $string_match ))
 			return % this._callFunction()
 		else
@@ -51,7 +50,6 @@ Class Callback_vgui{
 	_callFunction()
 	{
 		;Dump(this, "this.", 1)
-		
 		if(this._callback)
 			return % Func(this._callback).call(this._params_call*)
 	}

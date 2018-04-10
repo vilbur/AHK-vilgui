@@ -35,7 +35,7 @@ Class EventBind_vgui
 	 */
 	_setCallback($event, $callback, $params*)
 	{
-		this.events[$event] := new Callback_vgui($callback, $aParams*)
+		this.events[$event] := new Callback_vgui($callback, $params*)
 	}
 
 	/** _removeCallback

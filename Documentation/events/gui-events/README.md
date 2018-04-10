@@ -46,19 +46,13 @@ __Produce this buttons__
 
 ##  
 
-| __onExit__( $callback, $params* )    |Fired on gui is exiting script.    |  
-|:---    |:---    |  
-|    |    |  
-
-##  
-
-| __onEscape__( $callback, $params* )    |Fired on escape pressed.    |  
-|:---    |:---    |  
-|    |    |  
-
-##  
-
 | __onClose__( $callback, $params* )    |Fired on gui close with "X" button.    |  
+|:---    |:---    |  
+|    |    |  
+
+##  
+
+| __onExit__( $callback, $params* )    |Fired on gui is exiting script.    |  
 |:---    |:---    |  
 |    |    |  
 
@@ -77,5 +71,5 @@ First parameter passed to callback is __[$Event](Documentation/events/event/)__ 
 ## Examples  
 
 ``` php
-$Gui.Controls.layout("row")    .Edit().value("Lorem ipsum").label("Test Input").add().section()    .GroupBox().layout("row").add("Event Buttons")    ; EVENT BUTTONS    .Button().submit()    .Button().close()    .Button().exit()                $Gui.Events.Gui    .onEscape("callbackGui", "onEscape", "Custom")     .onEscape("close")        .onSubmit("callbackGui", "onSubmit", "Custom")     .onSubmit("close")        .onClose("callbackGui", "onClose", "Custom")        .onClose("exit")    .onExit("callbackGui", "onExit", "Custom")        ;.onExit(false) ; remove callbacks/** callbackGui*/callbackGui($Event:="", $params*){    MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5    $Event.message()}
+$Gui.Controls.layout("row")    .Edit().value("Lorem ipsum").label("Test Input").add().section()    .GroupBox().layout("row").add("Event Buttons")    ; EVENT BUTTONS    .Button().submit()    .Button().close()    .Button().exit()                $Gui.Events.Gui    .onSubmit("callbackGui", "onSubmit Custom", "param")     .onSubmit("close")        .onClose("callbackGui", "onClose Custom", "param")        .onClose("exit")        .onExit("callbackGui", "onExit Custom", "param")        ;.onExit(false) ; remove callback/** callbackGui*/callbackGui($Event:="", $params*){    MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5    $Event.message()}
 ```  

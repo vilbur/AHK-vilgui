@@ -2,12 +2,25 @@
 */
 Class KeyEvents_vgui extends EventBind_vgui
 {
-	
+	/** Fired on escape pressed.
+	*/
+	onEscape($callback, $params*)
+	{
+		this._bindCallback("Escape", $callback, $params*)
+		return this
+	}
+	/** Fired on enter pressed.
+	*/
+	onEnter($callback, $params*)
+	{
+		this._bindCallback("Enter", $callback, $params*)
+		return this
+	}
 	/**
 	 */
 	bind( $key, $callback, $params* )
 	{
-		this._bindEvents()
+		this._bindKeyMainCallBack()
 		this._bindCallback( $key, $callback, $params* )
 	}
 	/**
@@ -27,7 +40,7 @@ Class KeyEvents_vgui extends EventBind_vgui
 	} 
 	/** Call function on keypress
 	*/
-	_bindEvents()
+	_bindKeyMainCallBack()
 	{
 		if(!this.allready_bind)
 		{
