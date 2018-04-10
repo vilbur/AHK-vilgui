@@ -11,9 +11,7 @@ $Gui.Controls.layout("row")
 	.Button().exit()			
 	
 $Gui.Events.Gui
-	.onEscape("callbackGui", "onEscape param", "Custom") 
-	.onEscape("close")
-	
+
 	.onSubmit("callbackGui", "onSubmit param", "Custom") 
 	.onSubmit("close")
 	

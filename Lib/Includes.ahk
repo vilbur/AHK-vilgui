@@ -23,16 +23,19 @@
 */
 #Include %A_LineFile%\..\Gui\Gui.ahk
 #Include %A_LineFile%\..\Gui\ScollBar.ahk
-#Include %A_LineFile%\..\Gui\Events\Events.ahk
-#Include %A_LineFile%\..\Gui\Events\GuiEvents.ahk
-#Include %A_LineFile%\..\Gui\Events\WindowEvents.ahk
-#Include %A_LineFile%\..\Gui\Events\MouseEvents.ahk
-#Include %A_LineFile%\..\Gui\Events\KeyEvents.ahk
 
 /*---------------------------------------
    EVENT
 -----------------------------------------
 */
+#Include %A_LineFile%\..\Events\Events.ahk
+#Include %A_LineFile%\..\Events\EventBind.ahk
+
+#Include %A_LineFile%\..\Events\GuiEvents\GuiEvents.ahk
+#Include %A_LineFile%\..\Events\KeyEvents\KeyEvents.ahk
+#Include %A_LineFile%\..\Events\MouseEvents\MouseEvents.ahk
+#Include %A_LineFile%\..\Events\WindowEvents\WindowEvents.ahk
+
 #Include %A_LineFile%\..\Event\Event.ahk
 #Include %A_LineFile%\..\Event\EventObj.ahk
 #Include %A_LineFile%\..\Event\MouseEvent.ahk

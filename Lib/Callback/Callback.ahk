@@ -8,7 +8,8 @@ Class Callback_vgui{
 	_params	:= []
 	_params_call	:= []
 
-	__New($callback:="", $aParams*){
+	__New($callback:="", $aParams*)
+	{
 		if($callback)
 			this.callback($callback)
 		if($aParams)
@@ -18,14 +19,16 @@ Class Callback_vgui{
 	/** _callback
 		@params string $callback name of callback function or object address and method E.G: "globalFunction" OR "123456789.methodName"
 	*/
-	callback($callback:=""){
+	callback($callback:="")
+	{
 		this._callback := $callback
 		return this
 	}
 	/** setParams
 		@param mixin $aParams any count of parameters E.G: .params("param1", "param2", "param3")
 	*/
-	params($aParams*){
+	params($aParams*)
+	{
 		For $i, $param in $aParams
 			this._params.push($param)
 
@@ -33,8 +36,10 @@ Class Callback_vgui{
 	}
 	/** Call this._callback function
 	*/
-	call($Event:=""){
+	call($Event:="")
+	{
 		this._setCallParams($Event)
+		;Dump($Event, "Event", 1)
 		if(!RegExMatch( this._callback, "i)^\d+", $string_match ))
 			return % this._callFunction()
 		else
@@ -43,14 +48,17 @@ Class Callback_vgui{
 
 	/** call global Function
 	*/
-	_callFunction(){
+	_callFunction()
+	{
 		;Dump(this, "this.", 1)
+		
 		if(this._callback)
 			return % Func(this._callback).call(this._params_call*)
 	}
 	/** call method in object
 	*/
-	_callObjectMethod(){
+	_callObjectMethod()
+	{
 		;MsgBox,262144,, _callObjectMethod,2
 		;Dump(this, "this.", 1)
 		$obj_func_split	:= StrSplit(this._callback, ".")
@@ -61,7 +69,8 @@ Class Callback_vgui{
 	}
 	/** _setCallParams
 	*/
-	_setCallParams($Event:=""){
+	_setCallParams($Event:="")
+	{
 		this._params_call	:= this._params.clone()
 		;$Event	:=  new EventObj_vgui()
 		if($Event!="")
