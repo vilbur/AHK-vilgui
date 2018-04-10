@@ -2,10 +2,6 @@
 #Include %A_LineFile%\..\..\..\gui\lib\gui-construct.ahk
 
 
-
-
-
-
 $Gui.Controls.layout("row")
 	.Edit().value("Lorem ipsum").label("Test Input").add().section()
 	.GroupBox().layout("row").add("Event Buttons")

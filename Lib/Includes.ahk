@@ -30,6 +30,7 @@
 */
 #Include %A_LineFile%\..\Events\Events.ahk
 #Include %A_LineFile%\..\Events\EventBind.ahk
+#Include %A_LineFile%\..\Events\EventBindDefault.ahk
 
 #Include %A_LineFile%\..\Events\GuiEvents\GuiEvents.ahk
 #Include %A_LineFile%\..\Events\KeyEvents\KeyEvents.ahk

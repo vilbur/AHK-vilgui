@@ -57,7 +57,7 @@ Class GuiEvents_vgui extends EventBind_vgui
 	_setUserOrDefaultCallback($event, $callback, $params*)
 	{
 		if( $callback )
-		{
+		{ 
 			if ( RegExMatch( $callback, "i)^close|exit$") )
 				this._bindDefaultCallback($event, $callback )
 			
@@ -83,16 +83,6 @@ Class GuiEvents_vgui extends EventBind_vgui
 		
 		return $EventObj 
 	} 
-	/*-----------------------------------------
-		PRIVATE METHODS
-	-----------------------------------------
-	*/
-	/** parent
-	*/
-	parent($Parent:=""){
-		if($Parent)
-			this._Parent	:= &$Parent
-		return % $Parent ? this : Object(this._Parent)
-	}
+
 
 }

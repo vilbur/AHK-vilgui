@@ -1,6 +1,6 @@
 /** Class EventBind_vgui
 */
-Class EventBind_vgui
+Class EventBind_vgui extends EventBindDefault_vgui
 {
 
 	events	:=	{}
@@ -11,6 +11,14 @@ Class EventBind_vgui
 	*/
 	/** 1) Call custom  callback
 		2) Call default callback
+	*/
+	call($event)
+	{
+		$EventObj := this._getEventObject($event)
+		this._callCallback($event, $EventObj)
+		this._callCallback($event "-default", $EventObj)		
+	}
+	/**
 	*/
 	_callCallback($event, $EventObj)
 	{
