@@ -11,16 +11,16 @@ $Gui.Controls.layout("row")
 	.Button().exit()			
 	
 $Gui.Events.Gui
-	.onEscape("callbackGui", "onEscape", "Custom") 
+	.onEscape("callbackGui", "onEscape param", "Custom") 
 	.onEscape("close")
 	
-	.onSubmit("callbackGui", "onSubmit", "Custom") 
+	.onSubmit("callbackGui", "onSubmit param", "Custom") 
 	.onSubmit("close")
 	
-	.onClose("callbackGui", "onClose", "Custom")	
+	.onClose("callbackGui", "onClose param", "Custom")	
 	.onClose("exit")
 
-	.onExit("callbackGui", "onExit", "Custom")	
+	.onExit("callbackGui", "onExit param", "Custom")	
 	;.onExit(false) ; remove callbacks
 
 /** callbackGui

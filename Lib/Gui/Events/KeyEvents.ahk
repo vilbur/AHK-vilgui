@@ -13,20 +13,26 @@ Class KeyEvents_vgui{
 
 }
 
-
 /** Recive Key Down Message
 	https://autohotkey.com/board/topic/88725-detecting-keypress-in-edit-control/
   */
 onKeyDownMessage(W, L, M, H) {
 	WinGetTitle, $winTitle, A
-	if($_GUI[$winTitle] && W==27) ; if escape pressed
-		$_GUI[$winTitle].Events.Gui.call("escape")
-	else {
-		;$control := $_GUI[$winTitle].List.get(H, "hwnd" )
-		$_GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})
+	$GUI := $_GUI[$winTitle]
+	
+	if($GUI)
+	{
+		$Events := $GUI.Events.Gui
+		
+		if( W==27) ; on escape pressed
+			$Events.call("escape")
+		else if( W==13) ; on enter pressed
+			$Events.call("enter")
+		
+	}else {
+		;$control := $GUI.List.get(H, "hwnd" )
+		$GUI.List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})
 		;Dump($control, "control", 1)
 	}
-
-
 
 }

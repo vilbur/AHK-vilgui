@@ -17,27 +17,39 @@ Class GuiEvents_vgui{
 
 		@param string $callback event "close|exit|false|callbackFn"
 	*/
-	onSubmit($callback, $params*){
+	onSubmit($callback, $params*)
+	{
 		this._setCallback("submit", $callback, $params*)
 		return this
 	}
 
 	/** Fired on gui is exiting script.
 	*/
-	onExit($callback, $params*){
+	onExit($callback, $params*)
+	{
 		this._setCallback("exit", $callback, $params*)
 		return this
 	}
 	/** Fired on escape pressed.
 	*/
-	onEscape($callback, $params*){
+	onEscape($callback, $params*)
+	{
 		this.parent().Key.bindEvents()
 		this._setCallback("escape", $callback, $params*)
 		return this
 	}
+	/** Fired on enter pressed.
+	*/
+	onEnter($callback, $params*)
+	{
+		this.parent().Key.bindEvents()
+		this._setCallback("enter", $callback, $params*)
+		return this
+	}
 	/** Fired on gui close with "X" button.
 	*/
-	onClose($callback, $params*){
+	onClose($callback, $params*)
+	{
 		this.parent().Window.bindEvents()
 		this._setCallback("close", $callback, $params*)
 		return this
