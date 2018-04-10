@@ -8,7 +8,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 
 	/** name
 	*/
-	name($name:=""){
+	name($name:="")
+	{
 		if($name)
 			this._name	:= $name
 		;MsgBox,262144,, % this._type "`nNAME",2
@@ -16,7 +17,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	}
 	/** Set value of control if not added in GUI yet
 	*/
-	value($value:="~null"){
+	value($value:="~null")
+	{
 		if($value=="~null"){
 			GuiControlGet, $value,, % this.hwnd
 			return %$value%
@@ -29,7 +31,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 		@param string options of control // help: https://autohotkey.com/docs/commands/Gui.htm#OtherOptions
 		@param string $control_type_defaults allows change type of control for default values E.G: for control type Text set defaults of "Label"
 	*/
-	options($options:="~null"){
+	options($options:="~null")
+	{
 		if($options=="~null")
 			return % this._Options.get()
 
@@ -43,7 +46,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 
 	/** _setToEmptyValue
 	*/
-	_setToEmptyValue($name){
+	_setToEmptyValue($name)
+	{
 		MsgBox,262144,, SMAZAT METHODU ? `n`n ControlSetup._setToEmptyValue(),2
 		if(this._value=="")
 			this._value := $name
@@ -54,7 +58,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	*/
 	/** Set label
 	*/
-	label($label:="", $options:=""){
+	label($label:="", $options:="")
+	{
 		if($label!=false)
 			this._label	:= isObject($label) ? $label : this.Controls()
 			.Label($label)
@@ -69,7 +74,8 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	/** add Label before
 		TODO: RENAME THIS TO PRIVATE
 	*/
-	addLabel(){
+	addLabel()
+	{
 		;MsgBox,262144,, addLabel,2
 		;Dump(this._label, "this._label", 1)
 		if(this._label)

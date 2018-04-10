@@ -1,6 +1,7 @@
 /** Class Event store multiple callbacks for control
 */
-Class Event_vgui {
+Class ControlEvent_vgui
+{
 
 	mouse	:= new MouseEvent_vgui()
 	default	:= "" ; fired as first, default callback for control, E.G: submit() for submit button

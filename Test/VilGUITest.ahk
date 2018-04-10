@@ -7,6 +7,7 @@
 #Include %A_LineFile%\..\Menu\MenuTest.ahk
 
 #Include %A_LineFile%\..\Controls\ControlsTest.ahk
+#Include %A_LineFile%\..\Controls\ControlsEventTest.ahk
 
 #Include %A_LineFile%\..\Controls\CheckboxTest.ahk
 #Include %A_LineFile%\..\Controls\TabsTest.ahk
@@ -40,12 +41,15 @@ Class VilGUITest{
 		COMMENT IN\OUT ITEMS OF CONTROL TO ON\OFF TEST
 	*/
 	Controls	:=	[ new MarginTest()
+					 
 			;,new MenuTest()
 			;,new GuiEventsTest()
-			;,new ControlsTest()
-			;,new CheckboxTest()
 			
-			,new RadioTest()
+			;,new ControlsTest()
+			,new ControlsEventTest()			
+			
+			;,new CheckboxTest()
+			;,new RadioTest()
 			;,new DropdownTest()
 			;,new ListBoxTest()
 			;,new ListBoxViewTest()

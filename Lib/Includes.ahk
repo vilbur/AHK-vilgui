@@ -25,7 +25,7 @@
 #Include %A_LineFile%\..\Gui\ScollBar.ahk
 
 /*---------------------------------------
-   EVENT
+   EVENTS
 -----------------------------------------
 */
 #Include %A_LineFile%\..\Events\Events.ahk
@@ -37,9 +37,12 @@
 #Include %A_LineFile%\..\Events\MouseEvents\MouseEvents.ahk
 #Include %A_LineFile%\..\Events\WindowEvents\WindowEvents.ahk
 
-#Include %A_LineFile%\..\Event\Event.ahk
-#Include %A_LineFile%\..\Event\EventObj.ahk
+
 #Include %A_LineFile%\..\Event\MouseEvent.ahk
+
+#Include %A_LineFile%\..\Events\EventObj\EventObj.ahk
+#Include %A_LineFile%\..\Controls\Control\Event\ControlEvent.ahk
+
 /*---------------------------------------
 	CONTROLS
 -----------------------------------------

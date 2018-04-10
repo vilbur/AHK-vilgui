@@ -8,38 +8,8 @@
 */
 Class ControlEvents_vgui {
 
-	Event	:= new Event_vgui()
+	Event	:= new ControlEvent_vgui()
 
-	/*---------------------------------------
-		MAIN CALLBACK
-	-----------------------------------------
-	*/
-	/** Bind main callback to control
-		All controls callback fires this method first
-	*/
-	bindMainCallback(){
-		fn := this._mainCallback.bind( this )
-		GuiControl, +g, % this.hwnd, % fn
-	}
-
-	/** This Method is called, when user interact with control
-		It Calls Custom Events
-	*/
-	_mainCallback($params*){
-		;;;; /** TODO save to ini*/
-		;MsgBox,262144,, _mainCallback,2 
-		this.Event.control(this).callAllCallbacks()
-	}
-	/*---------------------------------------
-		DEFAULT CALLBACK
-	-----------------------------------------
-	*/
-	/** Bind Default Event
-	*/
-	_bindDefaultCallback($callback, $aParams*){
-		;MsgBox,262144,, _bindDefaultCallback,2
-		this.Event.bind("default", $callback, $aParams*)
-	}
 
 	/*---------------------------------------
 		CUSTOM CALLBACK
@@ -48,7 +18,8 @@ Class ControlEvents_vgui {
 	/** Bind Custom Callback for all events
 		FIRED ON EACH EVENT, IF CALLBACK FOR EVENT IS NOT DEFINED
 	*/
-	callback($callback:="", $aParams*){
+	callback($callback:="", $aParams*)
+	{
 		;MsgBox,262144,, callback ,2
 		this.Event.bind("custom", $callback, $aParams*)
 		return this
@@ -60,5 +31,40 @@ Class ControlEvents_vgui {
 		this.Event.bind($on_event, $callback, $aParams*)
 		return this
 	}
+	
+	/*---------------------------------------
+		MAIN CALLBACK
+	-----------------------------------------
+	*/
+	/** Bind main callback to control
+		All controls callback fires this method first
+	*/
+	bindMainCallback()
+	{
+		fn := this._mainCallback.bind( this )
+		GuiControl, +g, % this.hwnd, % fn
+	}
+
+	/** This Method is called, when user interact with control
+		It Calls Custom Events
+	*/
+	_mainCallback($params*)
+	{
+		;;;; /** TODO save to ini*/
+		;MsgBox,262144,, _mainCallback,2 
+		this.Event.control(this).callAllCallbacks()
+	}
+	/*---------------------------------------
+		DEFAULT CALLBACK
+	-----------------------------------------
+	*/
+	/** Bind Default Event
+	*/
+	_bindDefaultCallback($callback, $aParams*)
+	{
+		;MsgBox,262144,, _bindDefaultCallback,2
+		this.Event.bind("default", $callback, $aParams*)
+	}
+
 
 }
