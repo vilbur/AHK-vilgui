@@ -36,7 +36,9 @@ Class MouseEvent_vgui {
 	}
 	/** bindMouseEvent
 	*/
-	bindMouseEvent($message){
+	bindMouseEvent($message)
+	{
+		MsgBox,262144,, MouseEvent_vgui.bindMouseEvent(),2 
 		;MsgBox,262144,BIND, % $message +0,3
 		OnMessage($message , "MouseEventsMainCallback")
 	}

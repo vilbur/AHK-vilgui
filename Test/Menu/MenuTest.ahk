@@ -1,16 +1,16 @@
 /** Class MenuTest
 */
-Class MenuTest{
-
-
+Class MenuTest
+{
 	/** Test
 	*/
-	runMainTest(){
-		this.bindCustomDefaultItem()
-		this.addMainMenuItems()
-		this.addTrayMenuItems()
+	runMainTest()
+	{
+		;this.bindCustomDefaultItem()
+		;this.addMainMenuItems()
+		;this.addTrayMenuItems()
 		this.trayMenuIcon()
-		this.addCustomMenu()
+		;this.addCustomMenu()
 
 		return this
 	}

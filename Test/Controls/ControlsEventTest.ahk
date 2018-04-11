@@ -3,7 +3,7 @@
 class ControlsEventTest
 {
 
-	controls_main	:= ["Button", "Edit", "Text", "Checkbox"]
+	controls_main	:= ["Button", "Edit", "Checkbox"]
 	; controls_main	:= ["Button", "Button", "Button", "Button"]
 	; controls_main	:= ["Keypress"]
 	controls_items	:= ["Dropdown", "Radio"]

@@ -1,36 +1,33 @@
 #SingleInstance force
 
-#Include %A_LineFile%\..\Menus.ahk
+#Include %A_LineFile%\..\..\Menus.ahk
 setWorkingDir, %A_LineFile%\..\
 /** Class Menu
 */
-Class MenuTest {
+Class MenuTest
+{
 
 	hwnd	:= "TestMenuGui"
 	Menus	:= new Menus()
 
 	/** Test
 	*/
-	Test(){
-
-		this.bindCustomDefaultItem()
+	Test()
+	{
+		;this.bindCustomDefaultItem()
 		this.addMainMenuItems()
 		this.addTrayMenuItems()
 		this.trayMenuIcon()
 		this.addCustomMenu()
-
+		
+		;Dump(this.Menus.Main, "this.Menus.Main", 0)
 		this.Menus.Main.show(this.hwnd)
 		this.Menus.Tray.show()
-		;this.Menus._bindDefaultItemsMenu()
-		;Dump(this.Menus, "this.Menus", 0)
+		this.Menus._bindDefaultItemsMenu()
+		
 		this.showGUI()
+		
 		return this
-	}
-	/** showGUI
-	*/
-	showGUI(){
-		Gui, % this.hwnd ":Add", button, w256 gshowCustomMenu, Click for Custom menu
-		Gui, % this.hwnd ":Show", AutoSize , % this.hwnd
 	}
 
 	/*---------------------------------------
@@ -39,7 +36,8 @@ Class MenuTest {
 	*/
 	/** addMainMenuItems
 	*/
-	addMainMenuItems(){
+	addMainMenuItems()
+	{
 		this.Menus.Main
 			.menu("&Main Menu A")
 				.item("Menu A Item 1","MenuItemCallBack")
@@ -62,26 +60,33 @@ Class MenuTest {
 	*/
 	/** addTrayMenuItems
 	*/
-	addTrayMenuItems(){
+	addTrayMenuItems()
+	{
 		this.Menus.Tray
-					.defaults(false)	; ON\OFF default items
-					.tooltip("MenuTest tooltip")	; Custom tra icon tooltip
-					.menu("Menu1")
-						.item("Sub Item 1","MenuItemCallBack")
-						.item("Sub Item 2","MenuItemCallBack")
-						.parent()
-					.item("Tray Item 1","MenuItemCallBack")
-					.item()
-					.item("&Reload")
-					.item("&Exit")
-					.item("&Custom")
+			.defaults(false)	; ON\OFF default items
+			.tooltip("MenuTest tooltip")	; Custom tra icon tooltip
+			.menu("Menu1")
+				.item("Sub Item 1","MenuItemCallBack")
+				.item("Sub Item 2","MenuItemCallBack")
+				.parent()
+			.item("Tray Item 1","MenuItemCallBack")
+			.item()
+			.item("&Reload")
+			.item("&Exit")
+			.item("&Custom")
 	}
 	/** trayMenuIcon
 	*/
-	trayMenuIcon(){
+	trayMenuIcon()
+	{
+		$icon_path := "c:\GoogleDrive\Programs\Core\AutoHotkey\Lib\_vendor\_vilbur\VilGui\Lib\Menu\Test\Icons\Menus.ico"
+		
+		If ! FileExist( $icon_path )
+			MsgBox,262144,, % "FILE: " A_LineFile "`n`nMETHOD: trayMenuIcon()`n`nVARIABLE: $icon_path `n`nERROR: Icon does not exists`n`" $icon_path 
+		
 		this.Menus.Tray
 				.icon("")	; try get script name default icon
-				.icon("C:\GoogleDrive\Programs\Core\AutoHotkey\Class\Menu\Icons\Menus.ico") ; Absolute path to icon
+				.icon($icon_path)	; Absolute path to icon
 				.icon("Menus.ico")	; Try get "A_WorkingDir\Menus.ico" AND ; Try get "A_WorkingDir\Icons\Menus.ico"
 				.icon("\Icons\Menus.ico")	; file in working dir subdir
 				.item("&Custom")
@@ -94,7 +99,8 @@ Class MenuTest {
 
 	/** addCustomMenu
 	*/
-	addCustomMenu(){
+	addCustomMenu()
+	{
 		this.Menus.menu("Custom")
 					.item("Custom Item 1","MenuItemCallBack")
 					.item("Custom Item 2","MenuItemCallBack")
@@ -108,14 +114,27 @@ Class MenuTest {
 	*/
 	/** bindCustomDefaultItem
 	*/
-	bindCustomDefaultItem(){
+	bindCustomDefaultItem()
+	{
 		this.Menus.defaults("Custom",	&this ".customDefaultCallback")
-
 	}
 	/** customDefaultCallback
 	*/
-	customDefaultCallback(){
+	customDefaultCallback()
+	{
 		MsgBox,262144,, Custom Default Item,3
+	}
+	
+	/*---------------------------------------
+		GUI
+	-----------------------------------------
+	*/
+	/** showGUI
+	*/
+	showGUI()
+	{
+		Gui, % this.hwnd ":Add", button, w256 gshowCustomMenu, Click for Custom menu
+		Gui, % this.hwnd ":Show", AutoSize , % this.hwnd
 	}
 }
 
@@ -125,13 +144,15 @@ Class MenuTest {
 */
 /** trayMenuCallback
 */
-trayMenuCallback($param1:="", $param2:="", $param3:=""){
+trayMenuCallback($param1:="", $param2:="", $param3:="")
+{
 	MsgBox,262144,,trayMenuCallback ,2
 }
 
 /** showCustomMenu
 */
-showCustomMenu(){
+showCustomMenu()
+{
 	$MenuTest.Menus.Custom.show()
 }
 

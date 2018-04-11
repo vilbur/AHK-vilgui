@@ -28,7 +28,7 @@
 
 
 __Produce this buttons__  
-![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/eventn-buttons.jpeg?raw=true "Event buttons")  
+![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/event-buttons.jpeg?raw=true "Event buttons")  
 
 ## Gui events  
 

@@ -5,19 +5,23 @@
 	Remove default menu
 	Add "Reload" & "Exit" items
 
+	Tray menu MUST HAS NAME "Tray"
 */
-Class TrayMenu extends Menu {
+Class TrayMenu extends Menu
+{
 
-	script_name	:= RegExReplace( A_ScriptName, "i)\.(ahk|exe)$", "" )
-	_options	:= {"icon": this.script_name ".ico", "defaults":"NoStandard", "tooltip": this.script_name }
-
+	_script_name	:= RegExReplace( A_ScriptName, "i)\.(ahk|exe)$", "" )
+	_options	:= {"icon": this._script_name ".ico", "defaults":false, "tooltip": this._script_name }
+	static _name	:= "Tray" 
+	
 	/** show Main Menu
 	*/
-	show(){
+	show()
+	{
 		this.icon()
 		this.tooltip()
-		this.defaults(false)
 		this.createMenu()
+		this._setDefaultItems()
 	}
 	/** set Tray icon
 		Icon is automatically set IF:
@@ -26,7 +30,8 @@ Class TrayMenu extends Menu {
 
 		@param string $icon_path
 	*/
-	icon($icon_path:=""){
+	icon($icon_path:="")
+	{
 
 		if($icon_path!="")
 			this._options.icon:= $icon_path
@@ -36,7 +41,8 @@ Class TrayMenu extends Menu {
 	}
 	/** Tray tooltip
 	*/
-	tooltip($tip:=""){
+	tooltip($tip:="")
+	{
 		if($tip!="")
 			this._options.tooltip := $tip
 		Menu, Tray, Tip, % this._options.tooltip
@@ -48,15 +54,21 @@ Class TrayMenu extends Menu {
 		default(false)	// remove default menu
 		default(true)	// remove default menu AND add "Reload" & "Exit" items
 	*/
-	defaults($toggle:=true){
-
-		if($toggle!="")
-			this._options.defaults := $toggle ? "Standard" : "NoStandard"
-			;this._options.defaults := "NoStandard"
-
-		Menu, Tray, % this._options.defaults
+	defaults($toggle:=true)
+	{
+		this._options.defaults := $toggle
 		return this
 	}
+	/**
+	 */
+	_setDefaultItems()
+	{
+		$defaults := this._options.defaults  ? "Standard" : "NoStandard"
+			
+		Menu, Tray, % $defaults
+		;return this		
+	} 
+	
 	/** _get Icon Path
 		Default icon name = ScriptName.ico
 
@@ -66,7 +78,8 @@ Class TrayMenu extends Menu {
 
 		@return string path to icon
 	*/
-	_getIconPath(){
+	_getIconPath()
+	{
 		$paths := 	[this._options.icon
 			,A_WorkingDir "\\Icons\\" this._options.icon
 			,A_WorkingDir "\\" this._options.icon ]
