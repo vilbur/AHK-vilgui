@@ -22,6 +22,8 @@ Class KeyEvents_vgui extends EventBind_vgui
 	{
 		this._bindKeyMainCallBack()
 		this._setUserOrDefaultCallback( $key, $callback, $params* )
+		
+		return this
 	}
 	/**
 	 */

@@ -3,6 +3,7 @@
 global $_GUI := {}
 global $_GUI_margin
 global $_GUI_tab_last
+global $_GUI_title_last ; store gui name for lost focus event
 
 /** Class VilGUI
 */

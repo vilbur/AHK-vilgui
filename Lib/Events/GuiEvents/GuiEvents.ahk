@@ -50,7 +50,6 @@ Class GuiEvents_vgui extends EventBind_vgui
 							;Dump(this, "this.", 1)
 		this._callCallback($event, $EventObj)
 		this._callCallback($event "-default", $EventObj)		
-
 	}
 	/** _setUserOrDefaultCallback
 	*/

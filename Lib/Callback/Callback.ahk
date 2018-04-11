@@ -2,8 +2,8 @@
 	Set parameters
 	Call function
 */
-Class Callback_vgui{
-
+Class Callback_vgui
+{
 	_callback	:= ""
 	_params	:= []
 	_params_call	:= []

@@ -4,11 +4,11 @@
 $Gui.Events.Key
 	.onEscape("callbackKeyPress", "onEscape param", "Custom") 
 	.onEscape("close")
-;	
-;	.onEnter("callbackKeyPress", "onEnter param", "Custom") 
-;	.onEnter("close")
-;
-;	.bind("Space", "callbackKeyPress", "on F1 param", "Custom") 
+	
+	.onEnter("callbackKeyPress", "onEnter param", "Custom") 
+	.onEnter("close")
+
+	.bind("Space", "callbackKeyPress", "on F1 param", "Custom") 
 
 /** callbackKeyPress
 */
