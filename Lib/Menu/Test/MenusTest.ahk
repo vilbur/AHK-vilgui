@@ -21,6 +21,8 @@ Class MenuTest
 		this.addCustomMenu()
 		
 		;Dump(this.Menus.Main, "this.Menus.Main", 0)
+		Dump(this.Menus, "this.Menus", 0)
+		
 		this.Menus.Main.show(this.hwnd)
 		this.Menus.Tray.show()
 		this.Menus._bindDefaultItemsMenu()
@@ -112,11 +114,11 @@ Class MenuTest
 		CUSTOM MENU ITEM
 	-----------------------------------------
 	*/
-	/** bindCustomDefaultItem
+	/**  ; adding custom defaults is not supported currently 
 	*/
 	bindCustomDefaultItem()
 	{
-		this.Menus.defaults("Custom",	&this ".customDefaultCallback")
+		;this.Menus.defaults("Custom",	&this ".customDefaultCallback")
 	}
 	/** customDefaultCallback
 	*/
@@ -129,7 +131,7 @@ Class MenuTest
 		GUI
 	-----------------------------------------
 	*/
-	/** showGUI
+	/** THIS METHOD SHOULD BE IMPROVED, ADDING OF CUSTOM MENU SHOULD BE SUPPORTED WITH VilGUi
 	*/
 	showGUI()
 	{

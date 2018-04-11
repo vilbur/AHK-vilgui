@@ -2,7 +2,6 @@
 */
 Class Menu
 {
-
 	static  _defaults	:= {"Exit": "_TrayMenuDefaulExit", "Reload": "_TrayMenuDefaultReload"}
 	_items	:= []
 
@@ -34,7 +33,11 @@ Class Menu
 	menu($name)
 	{
 		$name_sanitized	:= this._sanitizeName($name)
-		this[$name_sanitized]	:= new this().name($name).parent(this).defaults(this._defaults)
+		this[$name_sanitized]	:= new this()
+					.name($name)
+					.parent(this)
+					;.defaults(this._defaults) ; adding custom defaults is not supported currently 
+		
 		this._items.push( $name_sanitized )
 		
 		return % this[$name_sanitized]
