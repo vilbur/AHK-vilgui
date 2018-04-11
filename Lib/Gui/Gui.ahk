@@ -1,6 +1,7 @@
 /** Class Gui
 */
-Class Gui_vgui{
+Class Gui_vgui
+{
 
 	Monitor	:= new Monitor()
 	;;;_resizable	:= false
@@ -20,7 +21,8 @@ Class Gui_vgui{
 	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
 	 *	@param string $options
 	 */
-	show($options:=""){
+	show($options:="")
+	{
 		;Dump(this.hwnd, "this.", 1)
 		;MsgBox,262144,options, %$options%,3 
 		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace

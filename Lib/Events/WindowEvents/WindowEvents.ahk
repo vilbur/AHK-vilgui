@@ -54,25 +54,27 @@ onWindowMessage( wParam, lParam )
 	
 	$events :=	{2:	"close"
 		,6:	"created"
-		,32772:	"focus"}	
+		,32772:	"focus"}
 	
-	$event := $events[wParam]
+	$event	:= $events[wParam]
+	$event_data	:= {title:$winTitle, event: $event}
 	
 	if($GUI && $event)
 	{
-		if($event=="created" && $_GUI_title_last != $winTitle ) ; prevent multiple fires on gui created
-			$GUI.Events.Window.call($event)
+		if($event=="created"){
+			if( $_GUI_title_last != $winTitle ) ; prevent multiple fires on gui created
+				$GUI.Events.Window.call($event, $event_data)
 		
-		else if($event=="close")
-			$GUI.Events.Gui.call("close")
+		} else if($event=="close")
+			$GUI.Events.Gui.call("close", $event_data)
 		
-		else if($event!="created" )
-			$GUI.Events.Window.call($event)
+		else
+			$GUI.Events.Window.call($event, $event_data)
 	
 		$_GUI_title_last := $winTitle
 				
 	}else if($event=="focus")
-		$_GUI[$_GUI_title_last].Events.Window.call("blur")
+		$_GUI[$_GUI_title_last].Events.Window.call("blur", $event_data)
 			
 }
 

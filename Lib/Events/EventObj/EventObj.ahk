@@ -3,12 +3,11 @@
 Class EventObj_vgui
 {
 
-	;_TEST	:= "TEST"
-
 	/** Control set or get control of event
 		@return object of Control which fires callback
 	*/
-	control($address:="~null"){
+	control($address:="~null")
+	{
 		if($address=="~null")
 			return % Object(this.address)
 
@@ -18,25 +17,43 @@ Class EventObj_vgui
 	}
 	/** Msgbox of Events properties
 	*/
-	message($timeout:=3){
+	message($timeout:=3)
+	{
 		MsgBox,262144,Event message, % this._getMessageString(this), %$timeout%
 	}
 	/** set value of Control
-	*/
-	set($key, $value){
-		if($value || $value==0)
-			this[$key]	:= $value
+	  * @param string|object	$param1 key of property or object
+	  * @param mixin	$param2 value of key
+	  */
+	set($param1, $param2:="")
+	{
+		if( isObject($param1) )
+			For $key, $value in $param1
+				this[$key]	:= $value
+		
+		else if( $param2 || $param2==0 )
+			this[$param1]	:= $param2
+			
 		return this
+	}
+	/**
+	 */
+	setData( $event_data )
+	{
+		For $key, $value in $event_data
+			this.set($key, $value)
 	}
 	/** _getMessageString
 	*/
-	_getMessageString($obj, $indent:=""){
+	_getMessageString($obj, $indent:="")
+	{
 		For $key, $value in $obj
 			if(!isObject($value))
 				$msg .= "`n" $indent $key ":`t"	$value
 			else
 				$msg .= "`n" $key ": {" this._getMessageString($value, "    ") "`n}"
-		return %$msg%
+				
+		return $msg
 	}
 
 }

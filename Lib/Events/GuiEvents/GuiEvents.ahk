@@ -41,16 +41,7 @@ Class GuiEvents_vgui extends EventBind_vgui
 		SET & CALL CALLBACK
 	-----------------------------------------
 	*/
-	/** 1) Call custom  callback
-		2) Call default callback
-	*/
-	call($event)
-	{
-		$EventObj := this._getEventObject($event)
-							;Dump(this, "this.", 1)
-		this._callCallback($event, $EventObj)
-		this._callCallback($event "-default", $EventObj)		
-	}
+
 	/** _setUserOrDefaultCallback
 	*/
 	_setUserOrDefaultCallback($event, $callback, $params*)

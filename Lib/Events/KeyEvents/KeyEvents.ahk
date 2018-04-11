@@ -30,7 +30,7 @@ Class KeyEvents_vgui extends EventBind_vgui
 	_getEventObject($key)
 	{
 		$EventObj := new EventObj_vgui()
-							.set("key", $key)
+						.set("key", $key)
 		
 		return $EventObj 
 	} 

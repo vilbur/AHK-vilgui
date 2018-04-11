@@ -63,7 +63,7 @@ Class VilGUI extends Gui_vgui
 		For $tabs_name, $address in this.Controls.Types.Tabs
 			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
 
-		this.Events.gui.call("submit", $form_data)	; call GUI events
+		this.Events.gui.call("submit", {data:$form_data})	; call GUI events
 		return %$form_data%
 	}
 	/** close window
