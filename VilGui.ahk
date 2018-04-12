@@ -23,7 +23,6 @@ Class VilGUI extends Gui_vgui
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		
-		WinGet, $_last_window, ID, A
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
@@ -32,7 +31,9 @@ Class VilGUI extends Gui_vgui
 	 */
 	create($options:="")
 	{
-		this._sortLayouts()
+		this._saveLastWindowCentering()
+		
+		this._sortLayouts()		
 		this._addMenu()
 		;this._addTrayMenu() ; BUG: default menu does not show
 		this._bindMouseEvents()
@@ -64,20 +65,16 @@ Class VilGUI extends Gui_vgui
 	*/
 	close()
 	{
-		WinClose, % this.hwnd
-		
+		;MsgBox,262144,, CLOSE,2		
 		this.Events.gui.call("onClose")
+		this.options("Destroy")
 	}
 	/** exit script
-	  * onExit callback must return true to exit script
 	*/
 	exit()
 	{
 		;MsgBox,262144,, EXIT,2		
-		if( this.Events.gui.has("onExit") )
-			if( ! this.Events.gui.call("onExit") )
-				return 
-
+		this.Events.gui.call("onExit")
 		ExitApp
 	} 
 	/*---------------------------------------
