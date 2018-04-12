@@ -33,8 +33,11 @@ Class KeyEvents_vgui extends EventBindDefault_vgui
 		if( $modifiers )
 			$EventObj.modifiers := $modifiers 
 		
+		$call_event := this.has($key_event) ? $key_event : (this.has($key) ? $key : false )
+
 		if( $key_event )
-			return % this._call( $key_event, $EventObj)		
+			return % this._call( $call_event, $EventObj)
+		
 	}
 	/** Fired on escape pressed.
 	*/

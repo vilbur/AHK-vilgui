@@ -8,11 +8,11 @@ $Gui.Events.Key
 	.onEnter("callbackKeyPress", "onEnter" ) 
 	.onEnter("close")
 	
-	.on("Space", "callbackKeyPress" )
 	.on("number", "callbackKeyPress" ) 	; NOTE: "number" is for numbers 0-9
 
-	.on( ["control", "shift",	"space"], "callbackKeyPress" )
-	.on( ["control", "lwin",	"X"], "callbackKeyPress" )	
+	.on("Space", "callbackKeyPress" )                        ; modifiers are passed to $Event object
+	.on( ["control", "shift", "space"], "callbackKeyPress" ) ; event is called only if modifier keys are pressed
+	.on( ["control", "lwin",  "X"], "callbackKeyPress" )	
 
 
 /** callbackKeyPress
