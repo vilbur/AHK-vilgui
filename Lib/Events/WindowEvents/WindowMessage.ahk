@@ -13,9 +13,11 @@ Class WindowMessage_vgui
 	{
 		$event	:= this._getEvent( wParam )
 		$method	:= this._getEventMethod( $event )
+		
+		$_last_window	:= this._data.title
 
-		;if( ! this.WindowEvents().has( $event ) )
-			;return 
+		if( ! this.WindowEvents().has( $event ) )
+			return 
 						
 		this._setEventData(lParam)
 		this._setWindowData(lParam)
@@ -26,7 +28,6 @@ Class WindowMessage_vgui
 		else
 			this.WindowEvents().call($event, this._data)
 		
-		$_last_window	:= this._data.title
 	}
 	/**
 	 */
