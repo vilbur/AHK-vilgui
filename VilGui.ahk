@@ -64,16 +64,20 @@ Class VilGUI extends Gui_vgui
 	*/
 	close()
 	{
-		MsgBox,262144,, CLOSE,2		
+		WinClose, % this.hwnd
+		
 		this.Events.gui.call("onClose")
-		this.options("Destroy")
 	}
 	/** exit script
+	  * onExit callback must return true to exit script
 	*/
 	exit()
 	{
-		MsgBox,262144,, EXIT,2		
-		this.Events.gui.call("onExit")
+		;MsgBox,262144,, EXIT,2		
+		if( this.Events.gui.has("onExit") )
+			if( ! this.Events.gui.call("onExit") )
+				return 
+
 		ExitApp
 	} 
 	/*---------------------------------------

@@ -1,6 +1,4 @@
-# Events  
-
-## Mouse events  
+# Mouse events  
 
 
 

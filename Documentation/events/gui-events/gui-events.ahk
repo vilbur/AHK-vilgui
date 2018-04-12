@@ -11,17 +11,17 @@ $Gui.Controls.layout("row")
 	.Button().submit()
 	.Button().close()
 	.Button().exit()			
-	
+
 /* GUI EVENTS
 */
 $Gui.Events.Gui
-	.onSubmit("callbackGui", "onSubmit Custom", "param") 
+	;.onSubmit("callbackGui", "onSubmit Custom") 
 	.onSubmit("close")
 	
-	.onClose("callbackGui", "onClose Custom", "param")	
+	.onClose("callbackGui", "onClose Custom")	
 	.onClose("exit")
 	
-	.onExit("callbackGui", "onExit Custom", "param")	
+	.onExit("confirmExit", "Exit script ?")	
 	;.onExit(false) ; remove callback
 
 
@@ -31,6 +31,15 @@ callbackGui($Event:="", $params*)
 {
 	MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5
 	$Event.message()
+}
+
+/** onExit callback must return true to exit script
+*/
+confirmExit($Event:="", $params*)
+{
+	MsgBox, 4,, % $params[1]
+	IfMsgBox, Yes
+		return true
 }
 
 

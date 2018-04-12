@@ -1,5 +1,4 @@
-# Events  
-## Mouse events  
+# Mouse events  
 
 ## Examples  
 ``` php

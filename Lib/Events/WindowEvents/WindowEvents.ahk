@@ -6,6 +6,17 @@ Class WindowEvents_vgui extends EventBind_vgui
 	_paused	:= {}	
 	Message 	:= new WindowMessage_vgui().WindowEvents(this)
 	
+	
+	/** 
+	*/
+	call($event, $event_data:="")
+	{	
+		this._call($event, $event_data)
+		
+		if( $event=="close" )
+			return % this.parent().gui.call("onClose")
+	}
+	
 	/**
 	 */
 	on( $event, $callback, $params* )
@@ -26,14 +37,14 @@ Class WindowEvents_vgui extends EventBind_vgui
 		if( $event_data )
 			$EventObj.set($event_data)
 		
-		return $EventObj 		
+		return $EventObj
 	}
 	/** Call function on window event
 	*/
 	setMessages($event)
 	{
 		if $event in  created,close,focus,blur
-			this._setOnMainEvents()
+			this._setOnMessageMain()
 			
 		else if $event in size,move,sizedmoved
 			this["_setOn" $event "Message"]()						
@@ -44,7 +55,7 @@ Class WindowEvents_vgui extends EventBind_vgui
 	*/
 	/** Call function on window event
 	*/
-	_setOnMainMessage()
+	_setOnMessageMain()
 	{
 		if( ! this._messages.main )
 		{

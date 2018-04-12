@@ -2,16 +2,6 @@
 */
 Class GuiEvents_vgui extends EventBindDefault_vgui
 {
-
-	;events	:=	{"close":	{"default":"", "callback":""}
-	;		,"escape":	{"default":"", "callback":""}
-	;		,"submit":	{"default":"", "callback":""}}
-	;events	:=	{}
-
-	/*-----------------------------------------
-		BIND EVENTS
-	-----------------------------------------
-	*/
 	/** Fired on gui is submitted.
 
 		@param string $callback event "close|exit|false|callbackFn"
@@ -19,13 +9,14 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 	onSubmit($callback, $params*)
 	{
 		this._setUserOrDefaultCallback("onSubmit", $callback, $params*)
+		
 		return this
 	}
 	/** Fired on gui close with "X" button.
 	*/
 	onClose($callback, $params*)
 	{
-		this.parent().Window.bindEvents()
+		;this.parent().Window.bindEvents()
 		this._setUserOrDefaultCallback("onClose", $callback, $params*)
 
 		return this
@@ -35,6 +26,7 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 	onExit($callback, $params*)
 	{
 		this._setUserOrDefaultCallback("onExit", $callback, $params*)
+		
 		return this
 	}
 	/**

@@ -9,8 +9,8 @@ Class EventBindDefault_vgui extends EventBind_vgui
 	{
 		if( $callback )
 		{ 
-			if ( RegExMatch( $callback, "i)^close|exit$") )
-				this._bindDefaultCallback($event, $callback )
+			if ( RegExMatch( $callback, "i)^(close|exit)$") )
+				this._bindDefaultCallback($event, $callback, $params* )
 			
 			else
 				this._bindCallback($event, $callback, $params*)

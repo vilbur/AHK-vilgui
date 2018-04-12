@@ -9,26 +9,25 @@ Class EventBind_vgui
 		SET & CALL CALLBACK
 	-----------------------------------------
 	*/
-	/** 1) Call custom  callback
-		2) Call default callback
+	/** 
 	*/
 	call($event, $event_data:="")
+	{	
+		return % this._call($event, $event_data)
+	}
+	/**
+	*/
+	_call($event, $event_data:="")
 	{
 		$EventObj := this._getEventObject($event, $event_data)
 	
-		this._callCallback($event, $EventObj)
+		return % this.events[$event].call($EventObj)
 	}
 	/** Find if event is defined
 	 */
 	has( $event )
 	{
 		return % this.events.hasKey($event)
-	}
-	/**
-	*/
-	_callCallback($event, $EventObj)
-	{
-		this.events[$event].call($EventObj)		
 	}
 	/**
 	 */
