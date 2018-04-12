@@ -81,8 +81,8 @@ Class TrayMenu extends Menu
 	_getIconPath()
 	{
 		$paths := 	[this._options.icon
-			,A_WorkingDir "\\Icons\\" this._options.icon
-			,A_WorkingDir "\\" this._options.icon ]
+			,A_ScriptDir "\\Icons\\" this._options.icon
+			,A_ScriptDir "\\" this._options.icon ]
 
 		For $i, $path in $paths
 			if(FileExist($path))
