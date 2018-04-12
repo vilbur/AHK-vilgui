@@ -2,10 +2,10 @@
 */
 Class Gui_vgui
 {
-
 	Monitor	:= new Monitor()
 	;;;_resizable	:= false
 	_center	:= {x:true, y:false, window:false}
+	_position	:= {x:0, y:0}
 	_size	:=	{"min":	{w:0,	h:256}	; store min sizes of gui
 			,"max":	{w:0,	h:1024}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
@@ -25,8 +25,6 @@ Class Gui_vgui
 	 */
 	show($options:="")
 	{
-		;Dump(this.hwnd, "this.", 1)
-		;MsgBox,262144,options, %$options%,3 
 		Gui, % this.hwnd ":Show", %$options%, % this.hwnd ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
 		return this
 	}	
@@ -75,6 +73,17 @@ Class Gui_vgui
 		GUI SET OPTIONS METHODS
 	-----------------------------------------
 	*/
+	/** set init position of gui
+	 */
+	position( $x, $y:="" )
+	{
+		this._position.x := $x
+
+		if( $y )
+			this._position.y := $y
+	
+		return this 
+	}
 	/** make gui resizeable
 	  * default is unresizable gui 
 	*/
@@ -119,7 +128,7 @@ Class Gui_vgui
 		return this
 	}
 	/** center gui on display
-	  * @param string $xy	"x|y|window" // center x|y to scree, center to current window if "window" ( for multiple display setup  )
+	  * @param string $xy	"x|y|window" // center x|y to screen, center to current window if "window" ( for multiple display setup  )
 	  * @param boolean $toggle  
 	*/
 	center($xy, $toggle:=true)
@@ -131,26 +140,43 @@ Class Gui_vgui
 		
 		else if(this._center[$xy])
 			this.show($xy "Center")
-			
+					
 		return this
 	}
-	
+	/** Move window to postion
+	 */
+	move( $x:="", $y:="" )
+	{
+		WinMove, % this.hwnd,, this._getPostion( "x", $x ), this._getPostion( "y", $y )
+		return this
+	}
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/** return value x|y if exists or current window position
+	 */
+	_getPostion( $xy, $value )
+	{
+		WinGetPos, $x, $y,,, % this.hwnd
+		
+		return % $value ? $value : ( $xy=="x" ? $x : $y )
+	} 
+	/**
+	 */
+	_saveLastWindowCentering()
+	{
+		this._last_active_window := WinExist("A")
+	} 
 	/** Center Gui window to active window
 	 */
 	_centerToWindow()
 	{
-		if(this._center.window)
+		WinGetPos, $X, $Y, $W, $H, % "ahk_id " this._last_active_window
+		if WinExist( "ahk_id " this._last_active_window )
 		{
-			WinGetPos, $X, $Y, $W, $H, % "ahk_id " $_last_window
-			if WinExist( "ahk_id " $_last_window )
-			{
-				WinGetPos,,, $mW, $mH, % this.hwnd				
-				WinMove, % this.hwnd,, ($W-$mW)/2 + $X, ($H-$mH)/2 + $Y
-			}
+			WinGetPos,,, $mW, $mH, % this.hwnd				
+			WinMove, % this.hwnd,, ($W-$mW)/2 + $X, ($H-$mH)/2 + $Y
 		}
 	} 
 	/** contvert boolean to string "+|-"
