@@ -14,11 +14,9 @@ Class WindowMessage_vgui
 		$event	:= this._getEvent( wParam )
 		$method	:= this._getEventMethod( $event )
 		
-		$_last_window	:= this._data.title
-
 		if( ! this.WindowEvents().has( $event ) )
-			return 
-						
+			return
+			
 		this._setEventData(lParam)
 		this._setWindowData(lParam)
 		
@@ -27,7 +25,6 @@ Class WindowMessage_vgui
 		
 		else
 			this.WindowEvents().call($event, this._data)
-		
 	}
 	/**
 	 */
@@ -84,17 +81,6 @@ Class WindowMessage_vgui
 		;return % this.HasKey( this._method )
 		return % this[$method] != ""
 	}
-	/** Recive Window Message
-	*/
-	_onWindowMessage( wParam, lParam:="" )
-	{
-
-		;else if( $event == "size" )
-		;	$GUI.Events.Window.call($event, $event_data)
-		;
-		;else if $event in "size,move,sized,moved"
-
-	}
 	/** WindowEvents
 	*/
 	WindowEvents($Parent:="")
@@ -139,16 +125,19 @@ onWindowMessage( wParam, lParam:="" )
 	if( ! lParam )
 		WinGet, lParam,	ID, A
 			
-	WinGetTitle, $winTitle, ahk_id %lParam%
+	WinGetTitle, $win_title, ahk_id %lParam%
 
-	$GUI	:= $_GUI[$winTitle]
-			
-	if( $GUI ) ; if blur
+	$GUI	:= $_GUI[$win_title]
+						
+	if( $GUI ){
+		$_last_window	:= $win_title ; save gui name for blur
 		$GUI.Events.Window.Message.callEvent(wParam, lParam)
+	}
 
-	else if( wParam==32772 ) ; if blur
+	else if( wParam==32772 ) { ; if blur
 		$_GUI[$_last_window].Events.Window.Message.callEvent("blur", lParam)
-
+		$_last_window	:= ""
+	}
 }
 
 
