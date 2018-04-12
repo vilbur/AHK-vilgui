@@ -1,6 +1,6 @@
 /** Class GuiEvents_vgui
 */
-Class GuiEvents_vgui extends EventBind_vgui
+Class GuiEvents_vgui extends EventBindDefault_vgui
 {
 
 	;events	:=	{"close":	{"default":"", "callback":""}
@@ -36,34 +36,6 @@ Class GuiEvents_vgui extends EventBind_vgui
 	{
 		this._setUserOrDefaultCallback("onExit", $callback, $params*)
 		return this
-	}
-
-	/*-----------------------------------------
-		SET & CALL CALLBACK
-	-----------------------------------------
-	*/
-
-	/** _setUserOrDefaultCallback
-	*/
-	_setUserOrDefaultCallback($event, $callback, $params*)
-	{
-		if( $callback )
-		{ 
-			if ( RegExMatch( $callback, "i)^close|exit$") )
-				this._bindDefaultCallback($event, $callback )
-			
-			else
-				this._bindCallback($event, $callback, $params*)
-			
-		} else
-			this._removeCallback($event)
-	}
-	/** Bind default callback
-	  * Callback is method from class VilGUI E.G.: VilGUI.close() OR VilGUI.exit()
-	 */
-	_bindDefaultCallback($event, $callback)
-	{
-		this._bindCallback( $event, &this.parent().parent() "." $callback ) 
 	}
 	/**
 	 */

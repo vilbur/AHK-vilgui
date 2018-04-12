@@ -27,7 +27,8 @@ $Gui.Events.Gui
 
 /** callbackGui
 */
-callbackGui($Event:="", $params*){
+callbackGui($Event:="", $params*)
+{
 	MsgBox,262144,callbackGui, % $params[1] "`n" $params[2] "`n" $params[3],5
 	$Event.message()
 }

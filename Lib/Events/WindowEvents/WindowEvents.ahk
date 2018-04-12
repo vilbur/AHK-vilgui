@@ -2,15 +2,15 @@
 */
 Class WindowEvents_vgui extends EventBind_vgui
 {
-	_binded_events	:= {}
+	_messages	:= {}
 	_paused	:= {}	
 	Message 	:= new WindowMessage_vgui().WindowEvents(this)
 	
 	/**
 	 */
-	bind( $event, $callback, $params* )
+	on( $event, $callback, $params* )
 	{
-		this.bindEvents($event)
+		this.setMessages($event)
 		this._bindCallback( $event, $callback, $params* )
 		
 		return this 
@@ -26,22 +26,17 @@ Class WindowEvents_vgui extends EventBind_vgui
 		if( $event_data )
 			$EventObj.set($event_data)
 		
-
-		;return this._setWindowInfo($EventObj)
 		return $EventObj 		
 	}
 	/** Call function on window event
 	*/
-	bindEvents($event)
+	setMessages($event)
 	{
-		
 		if $event in  created,close,focus,blur
-			this._bindMainEvents()
+			this._setOnMainEvents()
 			
 		else if $event in size,move,sizedmoved
-			this["_bind" $event "Events"]()			
-			;this._bindResizeEvents()			
-			
+			this["_setOn" $event "Message"]()						
 	}
 	/*-----------------------------------------
 		BIND ON WINDOW MESSAGES
@@ -49,9 +44,9 @@ Class WindowEvents_vgui extends EventBind_vgui
 	*/
 	/** Call function on window event
 	*/
-	_bindMainEvents()
+	_setOnMainMessage()
 	{
-		if( ! this._binded_events.main )
+		if( ! this._messages.main )
 		{
 			Gui +LastFound
 			
@@ -60,38 +55,38 @@ Class WindowEvents_vgui extends EventBind_vgui
 			MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
 			OnMessage( MsgNum, "onWindowMessage" )
 			
-			this._binded_events.main	:= true
+			this._messages.main	:= true
 		}
 	}
 	/** Call function on window event
 	*/
-	_bindSizeEvents()
+	_setOnSizeMessage()
 	{
-		if( ! this._binded_events.size )
+		if( ! this._messages.size )
 			OnMessage(0x05, "onWindowSizeMessage")
 			
-			this._binded_events.size	:= true
+			this._messages.size	:= true
 	}
 	/** Call function on window event
 	*/
-	_bindMoveEvents()
+	_setOnMoveMessage()
 	{
-		if( ! this._binded_events.moved )
+		if( ! this._messages.moved )
 			OnMessage(0x03 , "onWindowMoveMessage")			
 			
-			this._binded_events.moved	:= true
+			this._messages.moved	:= true
 	}
 	/** Call function on window event
 	*/
-	_bindSizedMovedEvents()
+	_setOnSizedMovedMessage()
 	{
-		if( ! this._binded_events.sizedmoved )
+		if( ! this._messages.sizedmoved )
 			OnMessage(0x232, "onWindowSizedMovedMessage")			
 			
-			this._binded_events.sizedmoved	:= true
+			this._messages.sizedmoved	:= true
 	}
 	/*-----------------------------------------
-		
+		PAUSE & RESUME EVENT
 	-----------------------------------------
 	*/
 	/**

@@ -9,7 +9,9 @@ Class Gui_vgui
 	_size	:=	{"min":	{w:0,	h:256}	; store min sizes of gui
 			,"max":	{w:0,	h:1024}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
-		   
+
+	_last_active_window	:= "" ; store last active window for centering
+	   
 	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm
 	 ;*	@param string $options strings from documentation 
 	*/
@@ -76,20 +78,23 @@ Class Gui_vgui
 	/** make gui resizeable
 	  * default is unresizable gui 
 	*/
-	resizeable($toggle:=true){
+	resizeable($toggle:=true)
+	{
 		this.options(this._getPlusMinus($toggle) "Resize")
 		return this
 	}
 	/** set minimal size of gui
 	*/
-	minSize($width:=128,$height:=128){
+	minSize($width:=128,$height:=128)
+	{
 		this._minMaxSize("Min", "w", $width)
 		this._minMaxSize("Min", "h", $height)
 		return this
 	}
 	/** set maximal size of gui
 	*/
-	maxSize($width :="",$height:=""){
+	maxSize($width :="",$height:="")
+	{
 		this._minMaxSize("Max", "w", $width)
 		this._minMaxSize("Max", "h", $height)
 		return this
@@ -140,14 +145,14 @@ Class Gui_vgui
 	{
 		if(this._center.window)
 		{
-			WinGetPos, $X, $Y, $W, $H, % "ahk_id " this._last_active_window
-			if WinExist( "ahk_id " this._last_active_window ){
+			WinGetPos, $X, $Y, $W, $H, % "ahk_id " $_last_window
+			if WinExist( "ahk_id " $_last_window )
+			{
 				WinGetPos,,, $mW, $mH, % this.hwnd				
 				WinMove, % this.hwnd,, ($W-$mW)/2 + $X, ($H-$mH)/2 + $Y
 			}
 		}
 	} 
-
 	/** contvert boolean to string "+|-"
 	*/
 	_getPlusMinus($toggle)

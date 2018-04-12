@@ -26,7 +26,7 @@ Class WindowMessage_vgui
 		else
 			this.WindowEvents().call($event, this._data)
 		
-		$_GUI_title_last	:= this._data.title
+		$_last_window	:= this._data.title
 	}
 	/**
 	 */
@@ -56,7 +56,7 @@ Class WindowMessage_vgui
 	 */
 	_callCreated($event)
 	{
-		if( $_GUI_title_last != this._data.title ) ; prevent multiple fires on gui created
+		if( $_last_window != this._data.title ) ; prevent multiple fires on gui created
 			this.WindowEvents().call($event, this._data)	
 	}
 	/*-----------------------------------------
@@ -94,9 +94,6 @@ Class WindowMessage_vgui
 		;else if $event in "size,move,sized,moved"
 
 	}
-
-
-	
 	/** WindowEvents
 	*/
 	WindowEvents($Parent:="")
@@ -149,7 +146,7 @@ onWindowMessage( wParam, lParam:="" )
 		$GUI.Events.Window.Message.callEvent(wParam, lParam)
 
 	else if( wParam==32772 ) ; if blur
-		$_GUI[$_GUI_title_last].Events.Window.Message.callEvent("blur", lParam)
+		$_GUI[$_last_window].Events.Window.Message.callEvent("blur", lParam)
 
 }
 

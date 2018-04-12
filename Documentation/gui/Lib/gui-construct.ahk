@@ -1,5 +1,9 @@
 #Include %A_LineFile%\..\..\..\..\VilGUI.ahk
-global $Gui 
+
+global $Gui
+
+$gui_name := "Gui" RegExReplace( A_ScriptName, ".ahk", "" ) 
+
 /* GUI setup
 */
-$Gui := new VilGUI("Gui")
+$Gui := new VilGUI( $gui_name )

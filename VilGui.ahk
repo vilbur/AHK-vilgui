@@ -3,28 +3,27 @@
 global $_GUI := {}
 global $_GUI_margin
 global $_GUI_tab_last
-global $_GUI_title_last ; store gui name for lost focus event
+global $_last_window ; store gui name for lost focus event
 
 /** Class VilGUI
 */
 Class VilGUI extends Gui_vgui
 {
-	_last_active_window	:= "" ; store last active window for centering
-	
 	__New($hwnd)
 	{	
-		this.hwnd	:= $hwnd		
-		;this.hwnd	:= RegExReplace( $hwnd, "\s+", "" )
+		;this.hwnd	:= $hwnd		
+		this.hwnd	:= RegExReplace( $hwnd, "i)[^A-Z0-9]+", "" )
+		
 		;this.title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
 		this.Margin	:= new GuiMargin_vgui()
-		$_GUI[$hwnd]	:= this
+		$_GUI[this.hwnd]	:= this
 		$_GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
 		;this.List	:= new ControlsList_vgui()
 		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		
-		this._setLastActiveWindow()
+		WinGet, $_last_window, ID, A
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
@@ -44,10 +43,6 @@ Class VilGUI extends Gui_vgui
 
 		this.fixedWidth()
 		this._setMaxHeightByMonitor()
-		;this.center("x",this._center.x)
-		;this.center("y",this._center.y)
-		;Dump(this.Controls._Layout, "this.Controls._Layout", 1)
-		;Dump(this, "this.", 0)
 		
 		this.show($options)
 				
@@ -58,8 +53,6 @@ Class VilGUI extends Gui_vgui
 	*/
 	submit()
 	{
-		;MsgBox,262144,, submit,2
-		;Dump(this.Events, "this.Events", 1)
 		$form_data := this.Controls.values()
 		For $tabs_name, $address in this.Controls.Types.Tabs
 			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
@@ -123,13 +116,10 @@ Class VilGUI extends Gui_vgui
 	*/
 	_sortTabsLayout()
 	{
-		;Dump(this.Controls._List, "this.List", 0)
-		;Dump(this.Controls._Layout, "this.Controls._Layout", 0)
 		For $tabs_name, $address in % this.Controls._List._ControlsTypes.Tabs {
 			;Dump($tabs_name, "tabs_name", 1)
 			this[$tabs_name].sortTabsLayouts()
 			this.Controls._Layout.sort()	; Sort layout again - Sort controls under tabs
-		;	;;;this[$tabs_name].sortTabsLayouts()
 		}
 	}
 	/** tabs
@@ -146,15 +136,8 @@ Class VilGUI extends Gui_vgui
 			$width := this._getGuiSize().w - $_GUI_margin.ui.x()*2
 			For $tabs_name, $address in this.List._ControlsTypes.Tabs
 				this[$tabs_name].size($width )
-
 		}
 	}
-	/** store last active window for centering
-	 */
-	_setLastActiveWindow()
-	{
-		WinGet, $last_active_window, ID, A		
-		this._last_active_window := $last_active_window
-	} 
+
 
 }

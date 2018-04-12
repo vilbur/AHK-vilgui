@@ -3,14 +3,14 @@
 
 
 $Gui.Events.Window
-	;.bind("created",	"callbackWindow", "On created")
-	;.bind("close",	"callbackWindow", "On close")	
-	;.bind("focus",	"callbackWindow", "On focus")
-	;.bind("blur",	"callbackWindow", "On blur")
+	.on("created",	"callbackWindow", "On created")
+	.on("close",	"callbackWindow", "On close")	
+	.on("focus",	"callbackWindow", "On focus")
+	.on("blur",	"callbackWindow", "On blur")
 	
-	;.bind("size",	"callbackWindow", "On size")
-	;.bind("move",	"callbackWindow", "On move")		
-	.bind("sizedmoved",	"callbackWindow", "On sizedmoved")	
+	.on("size",	"callbackWindow", "On size")
+	.on("move",	"callbackWindow", "On move")		
+	.on("sizedmoved",	"callbackWindow", "On sizedmoved")	
 	
 
 /** callbackWindow

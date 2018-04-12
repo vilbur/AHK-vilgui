@@ -8,7 +8,7 @@ $Gui.Events.Key
 	.onEnter("callbackKeyPress", "onEnter param", "Custom") 
 	.onEnter("close")
 
-	.bind("Space", "callbackKeyPress", "on F1 param", "Custom") 
+	.on("Space", "callbackKeyPress", "on Space param", "Custom") 
 
 /** callbackKeyPress
 */

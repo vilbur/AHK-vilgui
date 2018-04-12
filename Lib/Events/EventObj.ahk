@@ -2,9 +2,6 @@
 */
 Class EventObj_vgui
 {
-
-	;_TEST	:= "TEST"
-
 	/** Control set or get control of event
 		@return object of Control which fires callback
 	*/

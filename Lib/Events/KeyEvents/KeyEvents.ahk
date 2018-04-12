@@ -1,28 +1,28 @@
 /** Class KeyEvents_vgui
 */
-Class KeyEvents_vgui extends EventBind_vgui
+Class KeyEvents_vgui extends EventBindDefault_vgui
 {
+	/**
+	 */
+	on( $key, $callback, $params* )
+	{
+		this._setOnMessage()
+		this._setUserOrDefaultCallback( $key, $callback, $params* )
+		
+		return this
+	}
 	/** Fired on escape pressed.
 	*/
 	onEscape($callback, $params*)
 	{
-		this.bind("Escape", $callback, $params*)
+		this.on("Escape", $callback, $params*)
 		return this
 	}
 	/** Fired on enter pressed.
 	*/
 	onEnter($callback, $params*)
 	{
-		this.bind("Enter", $callback, $params*)
-		return this
-	}
-	/**
-	 */
-	bind( $key, $callback, $params* )
-	{
-		this._bindKeyMainCallBack()
-		this._setUserOrDefaultCallback( $key, $callback, $params* )
-		
+		this.on("Enter", $callback, $params*)
 		return this
 	}
 	/**
@@ -36,7 +36,7 @@ Class KeyEvents_vgui extends EventBind_vgui
 	} 
 	/** Call function on keypress
 	*/
-	_bindKeyMainCallBack()
+	_setOnMessage()
 	{
 		if(!this.allready_bind)
 		{
@@ -63,10 +63,7 @@ onKeyDownMessage(W, L, M, H)
 
 		$Events.call($key)
 		
-	}else {
-		;$control := $GUI.List.get(H, "hwnd" )
-		$GUI.List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})
-		;Dump($control, "control", 1)
-	}
+	}else 
+		$GUI.List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})	
 
 }
