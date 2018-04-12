@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
-<project id="aa2cfb20-df12-4737-95d0-2065c8d1cba2" kpf_version="5" name="Ahk_VilGUI.komodoproject">
+<project id="aa2cfb20-df12-4737-95d0-2065c8d1cba2" kpf_version="5" name="Ahk-VilGUI.komodoproject">
 <livefolder id="0713c023-e76f-478f-9445-c8ba7f77abff" idref="68ca1dae-cc62-4473-a9eb-e9d29e877138" name="Controls" url="Lib/Controls/">
 </livefolder>
 <livefolder id="11aa661d-1ffd-4da2-9e85-9efc03d95f3f" idref="68ca1dae-cc62-4473-a9eb-e9d29e877138" name="Control" url="Lib/Controls/Control/">

@@ -58,6 +58,12 @@ Class Tabs_vgui extends ControlItems_vgui {
 	{
 		return % this.Tabs[this.active()]
 	}
+	/** Get count of tabs
+	 */
+	count()
+	{
+		return % this.Tabs.length()
+	}
 	/** Highlight tabs title
 	*/
 	highlight($tab_num, $toggle:=true)

@@ -15,8 +15,8 @@ $Gui.Controls.layout("row")
 /* GUI EVENTS
 */
 $Gui.Events.Gui
-	;.onSubmit("callbackGui", "onSubmit Custom") 
-	.onSubmit("close")
+	.onSubmit("callbackGui", "onSubmit Custom") 
+	;.onSubmit("close")
 	
 	.onClose("callbackGui", "onClose Custom")	
 	.onClose("exit")

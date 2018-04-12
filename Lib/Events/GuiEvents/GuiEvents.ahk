@@ -29,15 +29,15 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 		
 		return this
 	}
-	/**
-	 */
-	_getEventObject($event)
-	{
-		$EventObj := new EventObj_vgui()
-							.set("event", $event)
-		
-		return $EventObj 
-	} 
+	;/**
+	; */
+	;_getEventObject($event)
+	;{
+	;	$EventObj := new EventObj_vgui()
+	;						.set("event", $event)
+	;	
+	;	return $EventObj 
+	;} 
 
 
 }

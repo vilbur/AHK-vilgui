@@ -26,19 +26,19 @@ Class WindowEvents_vgui extends EventBind_vgui
 		
 		return this 
 	}
-	/**
-	 */
-	_getEventObject($event, $event_data)
-	{
-		$EventObj := new EventObj_vgui()
-		
-		$EventObj.set("event", $event)
-		
-		if( $event_data )
-			$EventObj.set($event_data)
-		
-		return $EventObj
-	}
+	;/**
+	; */
+	;_getEventObject($event, $event_data)
+	;{
+	;	$EventObj := new EventObj_vgui()
+	;	
+	;	$EventObj.set("event", $event)
+	;	
+	;	if( $event_data )
+	;		$EventObj.set($event_data)
+	;	
+	;	return $EventObj
+	;}
 	/** Call function on window event
 	*/
 	setMessages($event)
