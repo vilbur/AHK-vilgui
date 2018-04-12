@@ -1,6 +1,6 @@
 /** Class EventBind_vgui
 */
-Class EventBind_vgui extends EventBindDefault_vgui
+Class EventBind_vgui
 {
 
 	events	:=	{}
@@ -14,13 +14,15 @@ Class EventBind_vgui extends EventBindDefault_vgui
 	*/
 	call($event, $event_data:="")
 	{
-		$EventObj := this._getEventObject($event)
-		
-		if( $event_data )
-			$EventObj.set($event_data)
-		
+		$EventObj := this._getEventObject($event, $event_data)
+	
 		this._callCallback($event, $EventObj)
-		this._callCallback($event "-default", $EventObj)		
+	}
+	/** Find if event is defined
+	 */
+	has( $event )
+	{
+		return % this.events.hasKey($event)
 	}
 	/**
 	*/
@@ -37,12 +39,6 @@ Class EventBind_vgui extends EventBindDefault_vgui
 		else
 			this._removeCallback($event)
 	}
-	/** Find if event is defined
-	 */
-	_has( $event )
-	{
-		return % this.events.hasKey($event)
-	}
 	/**
 	 */
 	_setCallback($event, $callback, $params*)
@@ -57,10 +53,22 @@ Class EventBind_vgui extends EventBindDefault_vgui
 		this.events[$event] := ""
 	}
 	/*-----------------------------------------
-		PRIVATE METHODS
+		
 	-----------------------------------------
 	*/
-
+	/**
+	 */
+	_getEventObject($event, $event_data:="")
+	{		
+		$EventObj := new EventObj_vgui()
+		
+		$EventObj.set("event", $event)
+		
+		if( $event_data )
+			$EventObj.set($event_data)
+			
+		return $EventObj 
+	}
 	/*-----------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------

@@ -18,7 +18,7 @@ Class GuiEvents_vgui extends EventBind_vgui
 	*/
 	onSubmit($callback, $params*)
 	{
-		this._setUserOrDefaultCallback("submit", $callback, $params*)
+		this._setUserOrDefaultCallback("onSubmit", $callback, $params*)
 		return this
 	}
 	/** Fired on gui close with "X" button.
@@ -26,14 +26,15 @@ Class GuiEvents_vgui extends EventBind_vgui
 	onClose($callback, $params*)
 	{
 		this.parent().Window.bindEvents()
-		this._setUserOrDefaultCallback("close", $callback, $params*)
+		this._setUserOrDefaultCallback("onClose", $callback, $params*)
+
 		return this
 	}
 	/** Fired on gui is exiting script.
 	*/
 	onExit($callback, $params*)
 	{
-		this._setUserOrDefaultCallback("exit", $callback, $params*)
+		this._setUserOrDefaultCallback("onExit", $callback, $params*)
 		return this
 	}
 
@@ -62,7 +63,7 @@ Class GuiEvents_vgui extends EventBind_vgui
 	 */
 	_bindDefaultCallback($event, $callback)
 	{
-		this._bindCallback( $event "-default", &this.parent().parent() "." $callback ) 
+		this._bindCallback( $event, &this.parent().parent() "." $callback ) 
 	}
 	/**
 	 */
@@ -76,3 +77,4 @@ Class GuiEvents_vgui extends EventBind_vgui
 
 
 }
+	

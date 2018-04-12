@@ -6,13 +6,15 @@ $Gui.Controls.layout("row")
 	.Edit().value("Lorem ipsum").label("Test Input").add().section()
 	.GroupBox().layout("row").add("Event Buttons")
 
-	; EVENT BUTTONS
+/* EVENT BUTTONS
+*/
 	.Button().submit()
 	.Button().close()
 	.Button().exit()			
 	
+/* GUI EVENTS
+*/
 $Gui.Events.Gui
-
 	.onSubmit("callbackGui", "onSubmit Custom", "param") 
 	.onSubmit("close")
 	
@@ -21,6 +23,7 @@ $Gui.Events.Gui
 	
 	.onExit("callbackGui", "onExit Custom", "param")	
 	;.onExit(false) ; remove callback
+
 
 /** callbackGui
 */

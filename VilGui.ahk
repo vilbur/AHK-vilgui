@@ -10,7 +10,7 @@ global $_GUI_title_last ; store gui name for lost focus event
 Class VilGUI extends Gui_vgui
 {
 	_last_active_window	:= "" ; store last active window for centering
-
+	
 	__New($hwnd)
 	{	
 		this.hwnd	:= $hwnd		
@@ -50,6 +50,7 @@ Class VilGUI extends Gui_vgui
 		;Dump(this, "this.", 0)
 		
 		this.show($options)
+				
 		return this
 	}
 	/** submit gui
@@ -63,26 +64,25 @@ Class VilGUI extends Gui_vgui
 		For $tabs_name, $address in this.Controls.Types.Tabs
 			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
 
-		this.Events.gui.call("submit", {data:$form_data})	; call GUI events
+		this.Events.gui.call("onSubmit", {data:$form_data})	; call GUI events
 		return %$form_data%
 	}
 	/** close window
 	*/
 	close()
 	{
-		;MsgBox,262144,, CLOSE,200
-		;Dump(this.Events, "this.Events", 0)
-		this.Events.gui.call("close")
+		MsgBox,262144,, CLOSE,2		
+		this.Events.gui.call("onClose")
 		this.options("Destroy")
 	}
 	/** exit script
 	*/
 	exit()
 	{
-		;MsgBox,262144,, EXIT,2		
-		this.Events.gui.call("exit")
+		MsgBox,262144,, EXIT,2		
+		this.Events.gui.call("onExit")
 		ExitApp
-	}
+	} 
 	/*---------------------------------------
 		PRIVATE METHODS ON GUI CREATE
 	-----------------------------------------

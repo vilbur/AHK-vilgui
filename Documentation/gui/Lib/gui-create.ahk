@@ -1,4 +1,5 @@
 $Gui.create()
 	.resizeable()
+	.minSize(256)
 	.autosize()	; autoresize gui by content
 	.fixedWidth()	; with of gui is fixed

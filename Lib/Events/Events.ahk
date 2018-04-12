@@ -11,14 +11,12 @@ Class Events_vgui{
 
 	/** parent
 	*/
-	parent($Parent:=""){
-
+	parent($Parent:="")
+	{
 		if($Parent)
 			this._Parent	:= &$Parent
 		return % $Parent ? this : Object(this._Parent)
 	}
-
-
 
 
 }

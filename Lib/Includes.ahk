@@ -30,13 +30,12 @@
 */
 #Include %A_LineFile%\..\Events\Events.ahk
 #Include %A_LineFile%\..\Events\EventBind.ahk
-#Include %A_LineFile%\..\Events\EventBindDefault.ahk
 
 #Include %A_LineFile%\..\Events\GuiEvents\GuiEvents.ahk
 #Include %A_LineFile%\..\Events\KeyEvents\KeyEvents.ahk
 #Include %A_LineFile%\..\Events\MouseEvents\MouseEvents.ahk
 #Include %A_LineFile%\..\Events\WindowEvents\WindowEvents.ahk
-
+#Include %A_LineFile%\..\Events\WindowEvents\WindowMessage.ahk
 
 #Include %A_LineFile%\..\Event\MouseEvent.ahk
 

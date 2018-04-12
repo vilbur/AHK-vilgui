@@ -2,31 +2,56 @@
 */
 Class WindowEvents_vgui extends EventBind_vgui
 {
+	_binded_events	:= {}
+	_paused	:= {}	
+	Message 	:= new WindowMessage_vgui().WindowEvents(this)
 	
 	/**
 	 */
 	bind( $event, $callback, $params* )
 	{
-		this.bindEvents()
-		this._setUserOrDefaultCallback( $event, $callback, $params* )
+		this.bindEvents($event)
+		this._bindCallback( $event, $callback, $params* )
 		
 		return this 
 	}
 	/**
 	 */
-	_getEventObject($event)
+	_getEventObject($event, $event_data)
 	{
 		$EventObj := new EventObj_vgui()
-							.set("event", $event)
 		
-		return $EventObj 
+		$EventObj.set("event", $event)
+		
+		if( $event_data )
+			$EventObj.set($event_data)
+		
+
+		;return this._setWindowInfo($EventObj)
+		return $EventObj 		
 	}
-	
 	/** Call function on window event
 	*/
-	bindEvents()
+	bindEvents($event)
 	{
-		if(!this.allready_bind)
+		
+		if $event in  created,close,focus,blur
+			this._bindMainEvents()
+			
+		else if $event in size,move,sizedmoved
+			this["_bind" $event "Events"]()			
+			;this._bindResizeEvents()			
+			
+	}
+	/*-----------------------------------------
+		BIND ON WINDOW MESSAGES
+	-----------------------------------------
+	*/
+	/** Call function on window event
+	*/
+	_bindMainEvents()
+	{
+		if( ! this._binded_events.main )
 		{
 			Gui +LastFound
 			
@@ -34,49 +59,82 @@ Class WindowEvents_vgui extends EventBind_vgui
 			DllCall( "RegisterShellHookWindow", UInt,Hwnd )
 			MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
 			OnMessage( MsgNum, "onWindowMessage" )
-
-			this.allready_bind	:= true
+			
+			this._binded_events.main	:= true
 		}
 	}
-
-}
-
-
-
-/** Recive Window Message
-*/
-onWindowMessage( wParam, lParam )
-{
-	DetectHiddenWindows, On
-	WinGetTitle, $winTitle, ahk_id %lParam%
-	
-	$GUI := $_GUI[$winTitle]
-	
-	$events :=	{2:	"close"
-		,6:	"created"
-		,32772:	"focus"}
-	
-	$event	:= $events[wParam]
-	$event_data	:= {title:$winTitle, event: $event}
-	
-	if($GUI && $event)
+	/** Call function on window event
+	*/
+	_bindSizeEvents()
 	{
-		if($event=="created"){
-			if( $_GUI_title_last != $winTitle ) ; prevent multiple fires on gui created
-				$GUI.Events.Window.call($event, $event_data)
-		
-		} else if($event=="close")
-			$GUI.Events.Gui.call("close", $event_data)
-		
-		else
-			$GUI.Events.Window.call($event, $event_data)
-	
-		$_GUI_title_last := $winTitle
-				
-	}else if($event=="focus")
-		$_GUI[$_GUI_title_last].Events.Window.call("blur", $event_data)
+		if( ! this._binded_events.size )
+			OnMessage(0x05, "onWindowSizeMessage")
 			
+			this._binded_events.size	:= true
+	}
+	/** Call function on window event
+	*/
+	_bindMoveEvents()
+	{
+		if( ! this._binded_events.moved )
+			OnMessage(0x03 , "onWindowMoveMessage")			
+			
+			this._binded_events.moved	:= true
+	}
+	/** Call function on window event
+	*/
+	_bindSizedMovedEvents()
+	{
+		if( ! this._binded_events.sizedmoved )
+			OnMessage(0x232, "onWindowSizedMovedMessage")			
+			
+			this._binded_events.sizedmoved	:= true
+	}
+	/*-----------------------------------------
+		
+	-----------------------------------------
+	*/
+	/**
+	 */
+	pause( $event )
+	{
+		if( ! this.events[$event] )
+			return 
+		
+		this._paused[$event] := this.events[$event]
+		
+		this.events.delete($event)
+	}
+	/**
+	 */
+	resume( $event )
+	{
+		if( ! this._paused[$event] )
+			return 
+		
+		this.events[$event] := this._paused[$event]
+		
+		this._paused.delete($event)
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
