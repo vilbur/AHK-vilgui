@@ -1,6 +1,7 @@
 /** Class Control
 */
-Class ControlItems_vgui extends Control_vgui{
+Class ControlItems_vgui extends Control_vgui
+{
 
 	_items := {"string":"", "array":[]}
 

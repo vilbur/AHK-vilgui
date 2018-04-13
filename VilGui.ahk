@@ -9,17 +9,16 @@ global $_last_window ; store gui name for lost focus event
 */
 Class VilGUI extends Gui_vgui
 {
+
 	__New($hwnd)
 	{	
-		;this.hwnd	:= $hwnd		
-		this.hwnd	:= RegExReplace( $hwnd, "i)[^A-Z0-9]+", "" )
+		this._title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
+		this._name	:= RegExReplace( $hwnd, "i)[^A-Z0-9]+", "" )
+		;$_GUI[this._name]	:= this
 		
-		;this.title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
 		this.Margin	:= new GuiMargin_vgui()
-		$_GUI[this.hwnd]	:= this
 		$_GUI_margin	:= this.Margin ; Set Global Margin BEFORE Layout Configured
-		;this.List	:= new ControlsList_vgui()
-		this.Controls	:= new Controls_vgui().parent(this).hwnd(this.hwnd)
+		this.Controls	:= new Controls_vgui().parent(this).guiName(this._name)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		
@@ -41,42 +40,17 @@ Class VilGUI extends Gui_vgui
 		this.minSize()
 		this.autosize()		
 		this._tabsAutoSize()
-
-		this.fixedWidth()
-		this._setMaxHeightByMonitor()
+		
+		;this.fixedWidth()
+		;this._setMaxHeightByMonitor()
 		
 		this.show($options)
-				
+		
+		this._setGuiToGlobal()
+		
 		return this
 	}
-	/** submit gui
-		@return object values of all controls
-	*/
-	submit()
-	{
-		$form_data := this.Controls.values()
-		For $tabs_name, $address in this.Controls.Types.Tabs
-			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
-
-		this.Events.gui.call("onSubmit", {data:$form_data})	; call GUI events
-		return %$form_data%
-	}
-	/** close window
-	*/
-	close()
-	{
-		;MsgBox,262144,, CLOSE,2		
-		this.Events.gui.call("onClose")
-		this.options("Destroy")
-	}
-	/** exit script
-	*/
-	exit()
-	{
-		;MsgBox,262144,, EXIT,2		
-		this.Events.gui.call("onExit")
-		ExitApp
-	} 
+	
 	/*---------------------------------------
 		PRIVATE METHODS ON GUI CREATE
 	-----------------------------------------
@@ -85,7 +59,7 @@ Class VilGUI extends Gui_vgui
 	*/
 	_addMenu()
 	{
-		this.Menus.Main.show(this.hwnd)
+		this.Menus.Main.show(this._name)
 	}
 	/** _addTrayMenu()
 	*/
@@ -99,46 +73,14 @@ Class VilGUI extends Gui_vgui
 	{
 		this.Events.Mouse.bindWheel().bindScroll()	; Allow scroll
 	}
-
-	/*---------------------------------------
-		Layout
-	-----------------------------------------
-	*/
-	/** _sortLayouts
-	*/
-	_sortLayouts()
+	/**
+	 */
+	_setGuiToGlobal()
 	{
-		;this.Controls.Layout.ContainerMain.origin({"x":$_GUI_margin.ui.x(), "y": $_GUI_margin.ui.y()}) ; Set margins to TOP & LEFT of UI
-		this.Controls._Layout.sort()	; Sort layout
-		this._sortTabsLayout()	; Sort layout in tabs
-
-	}
-	/** _sortTabsLayout
-	*/
-	_sortTabsLayout()
-	{
-		For $tabs_name, $address in % this.Controls._List._ControlsTypes.Tabs {
-			;Dump($tabs_name, "tabs_name", 1)
-			this[$tabs_name].sortTabsLayouts()
-			this.Controls._Layout.sort()	; Sort layout again - Sort controls under tabs
-		}
-	}
-	/** tabs
-	*/
-	tabs($tabs)
-	{
-		return % new Tabs_vgui(this.Controls).items($tabs)
-	}
-	/** _tabsAutoSize
-	*/
-	_tabsAutoSize()
-	{
-		if($width := this.Controls._OptionsDefaults.getDefaultOption("Tabs","w")=="auto"){
-			$width := this._getGuiSize().w - $_GUI_margin.ui.x()*2
-			For $tabs_name, $address in this.List._ControlsTypes.Tabs
-				this[$tabs_name].size($width )
-		}
-	}
+		WinGet, $hwnd, ID, A		
+		
+		$_GUI[$hwnd]	:= this
+	} 
 
 
 }

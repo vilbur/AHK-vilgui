@@ -1,13 +1,15 @@
 /** Class Control
 */
-Class Control_vgui extends ControlSetup_vgui{
+Class Control_vgui extends ControlSetup_vgui
+{
 
 	_Options := new Options_vgui()
 
 	__New($Controls)
 	{
+		this.guiName($Controls.guiName())
+		
 		this._Controls	:= &$Controls
-		this._guihwnd	:= $Controls._hwnd
 		this._type	:= RegExReplace(  this.__class, "_vgui$", "" )
 		this.address()
 	}
@@ -79,10 +81,27 @@ Class Control_vgui extends ControlSetup_vgui{
 		WM_CLOSE=0x10
 		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
 	}
+	/**
+	 */
+	color()
+	{
+		Gui, Font, cRed
+		GuiControl, Font, % "ahk_id " this.hwnd
+		GuiControl,, % "ahk_id " this.hwnd, BLUE	
+	}
 	/*---------------------------------------
 		PARENTS
 	-----------------------------------------
 	*/
+	/** name of gui
+	*/
+	guiName($gui:="")
+	{
+		if($gui)
+			this._gui	:= $gui
+			
+		return % $gui ? this : this._gui
+	}	
 	/** Controls
 	*/
 	Controls()

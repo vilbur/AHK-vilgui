@@ -1,6 +1,7 @@
 /** Class Tab_vgui
 */
-Class Tab_vgui {
+Class Tab_vgui
+{
 	
 	Controls	:= {}
 	tab_num	:= ""	
@@ -28,7 +29,7 @@ Class Tab_vgui {
 	*/
 	setControls($Tabs)
 	{
-		this.Controls	:= new Controls_vgui().parent(this).hwnd($Tabs.Controls()._hwnd)
+		this.Controls	:= new Controls_vgui().parent(this).guiName( $Tabs.Controls().guiName() )
 		this.Controls._Layout.ContainerMain.control(&$Tabs)
 		;Dump(this.Controls, "this.Controls", 0)
 		return this

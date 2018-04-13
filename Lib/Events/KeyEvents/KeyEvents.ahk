@@ -121,15 +121,16 @@ Class KeyEvents_vgui extends EventBindDefault_vgui
 /** Recive Key Down Message
 	https://autohotkey.com/board/topic/88725-detecting-keypress-in-edit-control/
   */
-onKeyDownMessage(W, L, M, H)
+onKeyDownMessage(wParam, lParam, M, H)
 {
-	WinGetTitle, $winTitle, A
-	$GUI := $_GUI[$winTitle]
+
+	;WinGetTitle, $winTitle, A
+	$GUI := $_GUI[lParam]
 	
 	if($GUI && A_TimeIdleKeyboard==0 )
 	{
 		$Events	:= $GUI.Events.Key
-		$key	:=  GetKeyName(Format("vk{:x}", W))
+		$key	:=  GetKeyName(Format("vk{:x}", wParam))
 		
 		if( $Events.has("number") && RegExMatch( $key, "[0-9]" ) )
 			$Events.call("number", {key:$key})
@@ -138,7 +139,7 @@ onKeyDownMessage(W, L, M, H)
 			$Events.call($key)
 		
 	}else 
-		$GUI.List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", W))})	
+		$GUI.List.get(H, "hwnd" ).Event.callEventCallback("keyPress", {"key": GetKeyName(Format("vk{:x}", wParam))})	
 
 }
 

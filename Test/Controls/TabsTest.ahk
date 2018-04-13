@@ -1,18 +1,21 @@
 /** Class TabsTest
 */
-Class TabsTest{
-	__New($new_section:=""){
+Class TabsTest
+{
+	__New($new_section:="")
+	{
 		this.new_section := $new_section
-		
 	}
-	runMainTest(){
+	
+	runMainTest()
+	{
 		
 		$tabs_layouts := ["column","row"] ; layouts for each tabs
 		if(this.new_section!="")
 			$GuiTest.Controls.section()
 
 		Loop, 1 {
-			$Tabs := $GuiTest.Tabs("Tabs " A_Index " - A|   B|   C")
+			$Tabs := $GuiTest.Tabs("TabsTest " A_Index " - A|   B|   C")
 							.checked(2)
 							.add("Tabs" A_Index)
 							.get()
@@ -73,7 +76,7 @@ getActiveTab($Event, $params*){
 	;$Event.message()
 	;Dump($GuiTest, "GuiTest", 0)
 	;$Event.Control().highlight($Event.data.tab)
-	$tab := $GuiTest.controls.get("Tabs1").active()
+	$tab := $GuiTest.controls.get("TabsTest1").active()
 	MsgBox,262144,getActiveTab, % "ACTIVE TAB -" $tab,3 
 	
 }

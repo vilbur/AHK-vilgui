@@ -1,13 +1,12 @@
 /** Class Tabs_vgui
   
    MESSAGE CONSTANTS: https://autohotkey.com/boards/viewtopic.php?p=25871#p25871
-   
-   
-   
-*/
-Class Tabs_vgui extends ControlItems_vgui {
 
+*/
+Class Tabs_vgui extends ControlItems_vgui
+{
 	Tabs	:= []
+	
 	/** add
 	*/
 	add($name:="")
@@ -28,7 +27,7 @@ Class Tabs_vgui extends ControlItems_vgui {
 	addTabs()
 	{
 		For $t, $tab_name in this._items.array
-			this.Tabs.push(new Tab_vgui(A_Index).name($tab_name).setControls(this))
+			this.Tabs.push( new Tab_vgui(A_Index).name($tab_name).setControls(this) )
 		return this
 	}
 	/** get Controls Values from each tab
@@ -37,9 +36,11 @@ Class Tabs_vgui extends ControlItems_vgui {
 	getControlsValues()
 	{
 		$tabs_form_data := []
+		
 		For $t, $Tab in this.Tabs
 			if($tab_form_data := $Tab.Controls.values())
 				$tabs_form_data.push($tab_form_data)
+				
 		return %$tabs_form_data%
 	}
 	/** get Active Tab Number
@@ -49,6 +50,7 @@ Class Tabs_vgui extends ControlItems_vgui {
 	{
 		SendMessage, 0x130B, 0, 0, ,  % "ahk_id " this.hwnd
 		$active_tab_index = %ErrorLevel%
+		
 		return % $active_tab_index +1
 	}
 	/** Get Active Tab Object
@@ -95,7 +97,6 @@ Class Tabs_vgui extends ControlItems_vgui {
 		;WM_CLOSE=0x10
 		;PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
 	}
-
 
 	/*---------------------------------------
 		Layout

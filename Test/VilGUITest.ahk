@@ -12,7 +12,7 @@
 #Include %A_LineFile%\..\Controls\CheckboxTest.ahk
 #Include %A_LineFile%\..\Controls\TabsTest.ahk
 #Include %A_LineFile%\..\Controls\PathTest.ahk
-#Include %A_LineFile%\..\Controls\LabelTest.ahk
+;#Include %A_LineFile%\..\Controls\LabelTest.ahk
 #Include %A_LineFile%\..\Controls\ButtonsTest.ahk
 
 #Include %A_LineFile%\..\Controls\ItemTypes\_ItemTypesTest.ahk
@@ -42,21 +42,21 @@ Class VilGUITest{
 	*/
 	Controls	:=	[ new MarginTest()
 					 
-			,new MenuTest()
-			;,new GuiEventsTest()
+			;,new MenuTest()
+			,new GuiEventsTest()
 			
-			;,new ControlsTest()
-			,new ControlsEventTest()			
-			
+			,new ControlsTest()
+			;,new ControlsEventTest()			
+			;
 			;,new CheckboxTest()
 			;,new RadioTest()
 			;,new DropdownTest()
 			;,new ListBoxTest()
 			;,new ListBoxViewTest()
-			
+			;
 			;,new PathTest()
 			;,new LabelTest()
-			;,new TabsTest()
+			,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()
@@ -80,16 +80,16 @@ Class VilGUITest{
 				
 			$Control.runMainTest()
 		}
-		this.showSetup_1()
-		; this.showSetup_2()
+		;this.showSetup_1()
+		 this.showSetup_2()
 		; this.showSetup_3()
 	}
 
 	/** setupGui
 	*/
 	setupGui(){
-		$GuiTest	:= new VilGUI("GuiTest")
-		$GuiTest2	:= new VilGUI("GuiTest2")
+		$GuiTest	:= new VilGUI("Gui Test")
+		;$GuiTest2	:= new VilGUI("Gui Test 2")
 
 		;$GuiTest.Controls
 			;.layout("column")

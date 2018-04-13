@@ -9,7 +9,8 @@
 		MENU ITEMS: Remove row
 
 */
-Class ListView_vgui extends ListViewEvents_vgui{
+Class ListView_vgui extends ListViewEvents_vgui
+{
 
 	_data	:= [] ; data for listbox
 	_checkbox	:= false
@@ -23,7 +24,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	*/
 	/** Button
 	*/
-	add($name:=""){
+	add($name:="")
+	{
 		this.name($name)
 
 		this.preAdd()
@@ -33,19 +35,21 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	}
 	/** Proceed methods necessary BEFORE adding of object to GUI
 	*/
-	preAdd(){
+	preAdd()
+	{
 		this._bindDefaultCallback(&this "._eventDefault")
 		this._menuDefaults()
 	}
 	/**  Executed by Controls() class after adding to Gui
 		 Proceed methods necessary ADTER adding of object to GUI
 	*/
-	postAdd(){
+	postAdd()
+	{
 		if(this._data.MaxIndex())
 			this.addData(this._data)
 
-		this._Columns.hwnd(this._guihwnd, this.hwnd).modify()
-		this._Rows.hwnd(this._guihwnd, this.hwnd).modify()
+		this._Columns.hwnd(this.guiName(), this.hwnd).modify()
+		this._Rows.hwnd(this.guiName(), this.hwnd).modify()
 	}
 	/*-----------------------------------------
 		PUBLIC - SET PROPERTIES
@@ -53,7 +57,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	*/
 	/** Default data for listview
 	*/
-	data($data){
+	data($data)
+	{
 		this._data := $data
 		return this
 	}
@@ -63,7 +68,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 		@param array|object|2Dmatrix $data of rows E.g: [["row1","column2","column3"], ["row2","column2","column3"]]
 		@param string $options
 	*/
-	addData($data, $options:=""){
+	addData($data, $options:="")
+	{
 		$data := !isObject($data[1]) ? this.objToArray([$data]) : this.objToArray($data)
 
 		this._activateListView()
@@ -76,7 +82,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	}
 	/** checkbox
 	*/
-	checkbox($toggle:=true){
+	checkbox($toggle:=true)
+	{
 		this._checkbox	:= $toggle
 		if($toggle)
 			this._Options.add("checked")
@@ -89,7 +96,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	-----------------------------------------
 	/** Set value of control if not added in GUI yet
 	*/
-	value($value:="~null"){
+	value($value:="~null")
+	{
 		if($value=="~null"){
 			$selected_rows := {}
 			For $r, $row in % this._getCheckedOrFocusedRows()
@@ -101,7 +109,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	}
 	/** Change Order of columns
 	*/
-	changeOrder(){
+	changeOrder()
+	{
 		GuiControl, -ReDraw, % this.hwnd
 		GuiListViewEx.SetColumnOrder(this.hwnd, [3, 2, 1])
 
@@ -115,7 +124,8 @@ Class ListView_vgui extends ListViewEvents_vgui{
 
 		@return object this OR ModifyCol class
 	*/
-	modify($param1:="", $param2:=""){
+	modify($param1:="", $param2:="")
+	{
 		if($param1=="" && $param2=="")
 			return % this._Rows
 		this._Rows.modify($param1, $param2)
@@ -126,19 +136,19 @@ Class ListView_vgui extends ListViewEvents_vgui{
 
 		@return object this OR ModifyCol class
 	*/
-	modifyCol($param1:="", $param2:=""){
+	modifyCol($param1:="", $param2:="")
+	{
 		if($param1=="" && $param2=="")
 			return % this._Columns
 		this._Columns.modify($param1, $param2)
 		return this
 	}
-
-
 	/** Is Row checked
 		@param	int $row_num row number to check, FOCUSED ROW IS USED IF UNDEFINED
 		@return boolean
 	*/
-	isChecked($row_num:=""){
+	isChecked($row_num:="")
+	{
 		this._activateListView()
 		if(!$row_num)
 			$row_num :=  LV_GetNext("F")
@@ -153,16 +163,18 @@ Class ListView_vgui extends ListViewEvents_vgui{
 	*/
 	/** Set _Columns in ListView
 	*/
-	columns($columns){
+	columns($columns)
+	{
 		this.items($columns)
 		this._Columns.count(this._items.array.MaxIndex())
 		return this
 	}
 	/** Activate ListView for manipulation
 	*/
-	_activateListView(){
-		Gui, % this._guihwnd ":Default"
-		Gui, % this._guihwnd ":ListView", % this.hwnd
+	_activateListView()
+	{
+		Gui, % this.guiName() ":Default"
+		Gui, % this.guiName() ":ListView", % this.hwnd
 	}
 	/** Add default methods to menu
 	*/
@@ -186,9 +198,11 @@ Class ListView_vgui extends ListViewEvents_vgui{
 		HELPERS
 	-----------------------------------------
 	*/
+
 	/** objToArray
 	*/
-	objToArray($obj){
+	objToArray($obj)
+	{
 		$arr := []
 		For $i, $value in $obj
 			$arr.push(!isObject($value)?$value:this.objToArray($value))

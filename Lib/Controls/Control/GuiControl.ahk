@@ -16,7 +16,7 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	size($width:="",$height:="")
 	{
 		GuiControlGet, $pos, Pos, % this.hwnd
-		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "w" ($width=="" ? $posW : $width) " h" ($height=="" ? $posH : $height)
+		GuiControl, % this.guiName() ":Move", % this.hwnd, % "w" ($width=="" ? $posW : $width) " h" ($height=="" ? $posH : $height)
 		return this
 	}
 	/** set or get control position
@@ -45,16 +45,28 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	*/
 	guiControl($command, $value:="")
 	{
-		GuiControl, % this._guihwnd ":" $command, % this.hwnd, %$value%
+		GuiControl, % this.guiName() ":" $command, % this.hwnd, %$value%
 		return this
 	}
+	/**
+	 */
+	color()
+	{
+		;GuiControlGet, $name, Hwnd, % this.hwnd,
+		
+		;MsgBox,262144,gui(), % this._name
+		GuiControlGet, hwnd, hwnd, % this.hwnd
+
+		ControlCol( hwnd , this.guiName(), 0x00FF00, 0x00FF00 )
+		
+	} 
 	/** _move control 
 	 * @return object $Control
 	 */
 	_move($x:="",$y:="")
 	{
 		GuiControlGet, $pos, Pos, % this.hwnd
-		GuiControl, % this._guihwnd ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
+		GuiControl, % this.guiName() ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
 		return this
 	}
 

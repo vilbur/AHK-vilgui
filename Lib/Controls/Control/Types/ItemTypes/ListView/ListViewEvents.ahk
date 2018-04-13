@@ -1,14 +1,16 @@
 /** Class ListView_vgui
 	Forum GuiListViewEx: https://autohotkey.com/board/topic/80686-class-guilistviewex-added-functions-for-gui-listviews/
 */
-Class ListViewEvents_vgui extends ControlItems_vgui{
+Class ListViewEvents_vgui extends ControlItems_vgui
+{
 	/*-------------------------------------------------------------------------------------------------------------------------------
 		EVENTS - These methods fires events, it allows custom function after operation, E.G: Do something after row was removed
 	---------------------------------------------------------------------------------------------------------------------------------
 	*/
 	/** removeRow
 	*/
-	removeRow(){
+	removeRow()
+	{
 		$rows	:= this._arrayReverse( this._getCheckedOrFocusedRows())
 		;Dump($rows, "rows", 1)
 		For $i, $row_num in $rows
@@ -20,7 +22,8 @@ Class ListViewEvents_vgui extends ControlItems_vgui{
 	}
 	/** addRow
 	*/
-	addRow(){
+	addRow()
+	{
 		;MsgBox,262144,, addRow,2
 		this.Event.callEventCallback("Add", this._items.array)
 		;this.addData($data)
@@ -32,7 +35,8 @@ Class ListViewEvents_vgui extends ControlItems_vgui{
 	/** Event Default is fired before all custom events
 		@return object event data for custom event
 	*/
-	_eventDefault(){
+	_eventDefault()
+	{
 		;MsgBox,262144,, _eventDefault,2
 		this._showEventMenu()
 		return %	{"row":	A_GuiEvent=="ColClick" ? 0 : LV_GetNext("F")
@@ -40,7 +44,8 @@ Class ListViewEvents_vgui extends ControlItems_vgui{
 	}
 	/** Show Menu on Event
 	*/
-	_showEventMenu(){
+	_showEventMenu()
+	{
 		$event_type := this.Event._getEventType()
 
 		if(this.Menu[$event_type])
@@ -52,7 +57,8 @@ Class ListViewEvents_vgui extends ControlItems_vgui{
 	*/
 	/** Get Checked Or Focused Rows
 	*/
-	_getCheckedOrFocusedRows(){
+	_getCheckedOrFocusedRows()
+	{
 		this._activateListView()
 		$rows	:= []
 		$row_num	:= 0 ; This causes the first loop iteration to start the search at the top of the list.
@@ -64,7 +70,8 @@ Class ListViewEvents_vgui extends ControlItems_vgui{
 	}
 	/*
 	*/
-	_arrayReverse($array){
+	_arrayReverse($array)
+	{
 		$array_reversed := Array()
 		Loop, % $len:=$array.MaxIndex()
 			$array_reversed[$len-(A_Index-1)] := $array[A_Index]

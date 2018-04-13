@@ -125,12 +125,13 @@ onWindowMessage( wParam, lParam:="" )
 	if( ! lParam )
 		WinGet, lParam,	ID, A
 			
-	WinGetTitle, $win_title, ahk_id %lParam%
+	;WinGetTitle, $win_title, ahk_id %lParam%
 
-	$GUI	:= $_GUI[$win_title]
+	;$GUI	:= $_GUI[$win_title]
+	$GUI	:= $_GUI[lParam]	
 						
 	if( $GUI ){
-		$_last_window	:= $win_title ; save gui name for blur
+		$_last_window	:= lParam ; save gui name for blur
 		$GUI.Events.Window.Message.callEvent(wParam, lParam)
 	}
 

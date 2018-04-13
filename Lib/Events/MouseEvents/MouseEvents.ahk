@@ -57,7 +57,7 @@ Class MouseEvents_vgui extends EventBind_vgui
 
 /** onWheelOrScrollMessage
 */
-onMouseMainCallback(W, L, M, H)
+onMouseMainCallback(wParam, L, M, H)
 {
 	MsgBox,262144,, onMouseMainCallback,2 
 
@@ -65,7 +65,7 @@ onMouseMainCallback(W, L, M, H)
 
 /** onWheelOrScrollMessage
 */
-onWheelOrScrollMessage(W, L, M, H)
+onWheelOrScrollMessage(wParam, lParam, M, H)
 {
 
 	hwnd := WinExist()
@@ -79,9 +79,10 @@ onWheelOrScrollMessage(W, L, M, H)
 	else if(wParam==4287102976) ; on scrollbar drag
 		OnScroll(wParam,lParam, 0x115, hwnd )
 
+	
 
 	;;; call custom callback on control
-	$_GUI[$winTitle].List.get(H, "hwnd" ).Event.mouse.call(W, L, M, H)
+	$_GUI[lParam].List.get(H, "hwnd" ).Event.mouse.call(wParam, L, M, H)
 
 	;$_GUI[$winTitle].List.get(H, "hwnd" ).Event.callEventCallback("mouseTest")
 

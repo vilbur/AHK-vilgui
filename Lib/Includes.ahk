@@ -22,6 +22,10 @@
 -----------------------------------------
 */
 #Include %A_LineFile%\..\Gui\Gui.ahk
+#Include %A_LineFile%\..\Gui\GuiSize.ahk
+#Include %A_LineFile%\..\Gui\GuiPosition.ahk
+#Include %A_LineFile%\..\Gui\GuiLayout.ahk
+
 #Include %A_LineFile%\..\Gui\ScollBar.ahk
 
 /*---------------------------------------
