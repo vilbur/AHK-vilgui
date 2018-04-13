@@ -40,14 +40,20 @@ Class VilGUI extends Gui_vgui
 		this._bindMouseEvents()
 		
 		;this.minSize()
-		;this._tabsAutoSize()
+		this._tabsAutoSize()
 		
-		;this.fixedWidth()
-		;this._setMaxHeightByMonitor()
+		this._setMaxHeightByMonitor()
+		
+		this.show( this._getInitOptions() " " $options )
+		this._setHwnd()
+
 		this.autosize()
 		
-		this.show($options)
-
+		if( ! this._resizeable )
+			this.resizeable(false)		
+		
+		if( this._center.window )
+			this.center()
 		
 		this.Style.Color.hwnd(this._hwnd)
 
@@ -58,6 +64,40 @@ Class VilGUI extends Gui_vgui
 		PRIVATE METHODS ON GUI CREATE
 	-----------------------------------------
 	*/
+	/**
+	 */
+	_getInitOptions()
+	{
+		$options :=	{x:	this._position.x
+			,y:	this._position.y
+			,w:	this._sizes.size.w
+			,h:	this._sizes.size.h
+			,xCenter:	this._center.x
+			,yCenter:	this._center.y}
+
+		return % this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
+	}
+	/**
+	 */
+	_removeCenterIfPositionDefined( $options )
+	{
+		For $i, $xy in ["x", "y"]
+			if( $options.hasKey($xy) )
+				$options.delete($xy "Center")
+		
+		return $options
+	}
+	/**
+	 */
+	_joinOptions( $options )
+	{
+		For $option, $value in $options
+			if( $value )
+				$options_string .= $option ( RegExMatch( $option, "^[xywh]$") ? $value " " : " ")
+				
+		return $options_string
+	}
+	
 	/** _addMenu()
 	*/
 	_addMenu()

@@ -41,7 +41,7 @@ Class VilGUITest{
 		setWorkingDir, %A_LineFile%\..\..\
 	}
 	/**
-		COMMENT IN\OUT ITEMS OF CONTROL TO ON\OFF TEST
+		COMMENT IN\OUT ITEMS OF CONTROL TO ON\OFF runTest
 	*/
 	_Tests	:=	[ new MarginTest()
 					 
@@ -74,25 +74,25 @@ Class VilGUITest{
 
 	/** GuiTestTest
 	*/
-	TEST()
+	runTest()
 	{
 		this.setupGui()
 		this.MenusTest.runMainTest()
 
 		For $c, $test in this._Tests 
 			$test.runMainTest()
-
 		
 		;this.showDefault()
-		 ;this.showFixedHeight()
-		 this.showResizable()
+		;this.showFixedHeight()
+		this.showResizable()
 
 		;Dump($GuiTest, "GuiTest", 0)
 	}
 
 	/** setupGui
 	*/
-	setupGui(){
+	setupGui()
+	{
 		$GuiTest	:= new VilGUI("Gui Test")
 		;$GuiTest2	:= new VilGUI("Gui Test 2")
 
@@ -109,11 +109,6 @@ Class VilGUITest{
 	showDefault()
 	{
 		$GuiTest.create()
-				; .alwaysOnTop()
-			 ;.autosize()
-		; $GuiTest2.controls.button().add()
-		; $GuiTest2.show()
-		
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/
@@ -121,24 +116,24 @@ Class VilGUITest{
 	{
 		$GuiTest
 			.alwaysOnTop()
-			;.resizeable()
-			;.minSize("500", "500" )
-			;.maxSize("1000", "1000" )
+			.center("window")      ; center to active window
 			.resizeable(false)
 			.create()
 
-		}
+	}
 	/** GUI SETUP EXAMPLE 3
-	 * Resizable gui with INIT and MAX height
+	 *		RESIZABLE 
+	 *		INIT, MIN MAX height
+	 *		FIXED width
 	 */
 	showResizable()
 	{
 		$GuiTest
 			.resizeable()
 			.size("", 320 )
-			.fixedWidth()
 			.minSize("", 128 )
 			.maxSize("", 512 )						
+			.fixedWidth()
 			.create()
 
 	}
@@ -158,7 +153,7 @@ Class VilGUITest{
 
 
 /*---------------------------------------
-	RUN TEST
+	RUN runTest
 -----------------------------------------
 */
-new VilGUITest().TEST()
+new VilGUITest().runTest()

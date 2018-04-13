@@ -20,8 +20,8 @@ Class Gui_vgui extends GuiLayout_vgui
 	show($options:="")
 	{
 		Gui, % this._gui("Show"), %$options%, % this._title
-		
-		this._setHwnd()
+		;;Gui, % this._gui("Show"), , % this._title		
+		;MsgBox,262144,options, %$options%
 
 		return this
 	}	

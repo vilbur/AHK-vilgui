@@ -2,52 +2,62 @@
 */
 Class GuiPosition_vgui
 {
-	_center	:= {x:true, y:false, window:false}
-	_position	:= {x:0, y:0}
+	_center	:= {x:false, y:false, window:false}
+	_position	:= {x:0, y:0} ; store position for init
 	
-	/** set init position of gui
+	
+	/** set gui init
 	 */
-	position( $x, $y:="" )
+	position( $x:="", $y:="" )
 	{
-		this._position.x := $x
-
+		if( $x )
+			this._position.x := $x
+			
 		if( $y )
 			this._position.y := $y
-	
-		return this 
+
+		return this
 	}
-	
 	/** center gui on display
-	  * @param string $xy	"x|y|window" // center x|y to screen, center to current window if "window" ( for multiple display setup  )
-	  * @param boolean $toggle  
-	*/
-	center($xy, $toggle:=true)
+	 * @param string $xy	"x|y|window" // center "x|y" to screen, "window" center gui to CURRENT WINDOW
+	 * @param boolean $toggle  
+	 */
+	center($xy:="", $toggle:=true)
 	{
 		this._center[$xy] := $toggle
 		
-		if( $xy=="window" )
-			this._centerToWindow()
-		
-		else if(this._center[$xy])
-			this.show($xy "Center")
-					
+		if( this._hwnd )
+		{
+			if( ! this._center.window )
+			{
+				this._centerGui("x", "Center")
+				this._centerGui("y", "Center")
+			} else
+				this._centerToWindow()
+	
+		}
 		return this
 	}
 	/** Move window to postion
 	 */
 	move( $x:="", $y:="" )
 	{
-		WinMove, % this._gui(),, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
+		WinMove, % this.ahkId(),, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
 		
 		return this
 	}
-	
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/**
+	 */
+	_centerGui( $xy, $toggle )
+	{
+		if($toggle)
+			this.show( $xy "Center")
+	} 
 	/** Get position of Gui or given window
-	  
 	 */
 	_getPostion($hwnd:="")
 	{
@@ -60,14 +70,14 @@ Class GuiPosition_vgui
 	 */
 	_getPostionValue( $xy, $value )
 	{
-		WinGetPos, $x, $y,,, % this._name
-		
-		return % $value ? $value : ( $xy=="x" ? $x : $y )
+		;WinGetPos, $x, $y,,, % this._name
+		return % $value ? $value : ( $xy=="x" ? this._getPostion().x : this._getPostion().y )
 	} 
 	/**
 	 */
 	_saveLastWindowCentering()
 	{
+		;MsgBox,262144,, _saveLastWindowCentering
 		this._last_active_window := WinExist("A")
 	} 
 	/** Center Gui window to active window
@@ -76,7 +86,6 @@ Class GuiPosition_vgui
 	{
 		if ! WinExist( this.ahkId(this._last_active_window) )
 			return this
-
 		;MsgBox,262144,, % this._hwnd "`n" this._last_active_window 
 			
 		$size_gui	:= this._getGuiSize()

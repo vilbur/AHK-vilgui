@@ -2,12 +2,13 @@
 */
 Class GuiSize_vgui extends GuiPosition_vgui
 {
-	_sizes	:=	{"size":	{w:0,	h:0}	; store min sizes of gui
+	_sizes	:=	{"size":	{w:256,	h:128}	; store min sizes of gui
 			,"min":	{w:0,	h:0}	; store min sizes of gui
 			,"max":	{w:0,	h:0}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
 	
 	_resizable	:= false
+	_fixed_width	:= false	; store value for gui create()
 	
 	/** Resize GUI
 	  *
@@ -60,7 +61,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	}
 	/** set minimal size of gui
 	*/
-	minSize($width:=512,$height:=128)
+	minSize($width:="",$height:="")
 	{
 		this._minMaxSize("Min", "w", $width)
 		this._minMaxSize("Min", "h", $height)
@@ -84,22 +85,14 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		if(!$width)
 			$width := this._getGuiSize().w
 
-		this._minMaxSize("Min", "w", $width)
-		this._minMaxSize("Max", "w", $width)
+		if( this._hwnd && this._fixed_width ){
+			this._minMaxSize("Min", "w", $width)
+			this._minMaxSize("Max", "w", $width)
+		}else
+			this._fixed_width := true
 
 		return this
-	}
-	/* Fully clone object
-	*/
-	_objectClone($obj)
-	{
-		$obj_c := $obj.Clone()
-		for $k,$v in $obj_c
-			if IsObject($v)
-				$obj_c[$k] := this._objectClone($v)
-		return $obj_c
-	}
-		
+	}	
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
@@ -132,10 +125,11 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		}
 		if( ! $value)
 			return
-			
-		this.show( $wh $value, this._name )
-		
+
 		this._sizes.size[$wh] := $value
+			
+		if( this._hwnd )
+			this.show( $wh $value, this._name )
 	}
 	/** _minMaxSize
 	*/
@@ -179,5 +173,14 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	
 		this.maxSize(this._sizes.max.w, this._sizes.max.h)
 	} 
-	
+	/* Fully clone object
+	*/
+	_objectClone($obj)
+	{
+		$obj_c := $obj.Clone()
+		for $k,$v in $obj_c
+			if IsObject($v)
+				$obj_c[$k] := this._objectClone($v)
+		return $obj_c
+	}
 }

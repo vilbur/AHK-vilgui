@@ -1,6 +1,7 @@
 /** Class GuiControl_vgui
 */
-Class GuiControl_vgui extends ControlEvents_vgui{
+Class GuiControl_vgui extends ControlEvents_vgui
+{
 
 	/** Focus to control
 		wrapper for: https://autohotkey.com/docs/commands/ControlFocus.htm
@@ -25,11 +26,10 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	 */
 	pos($x:="",$y:="")
 	{
-		if( $x!="" || $y!="" )
+		if( $x!="" && $y!="" )
 			return % this._move($x, $y)
 		
-		GuiControlGet, $pos, Pos, % this.hwnd
-		return % {"x": $posX, "y": $posY}
+		return % this._getPostion()
 	}
 	/** Edit value of control in GUI
 	 * @return object $Control
@@ -71,6 +71,7 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	{
 		GuiControlGet, $pos, Pos, % this.hwnd
 		GuiControl, % this.guiName() ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
+		
 		return this
 	}
 
