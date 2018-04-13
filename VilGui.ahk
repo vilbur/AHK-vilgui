@@ -39,18 +39,24 @@ Class VilGUI extends Gui_vgui
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
 		this._bindMouseEvents()
 		
-		;this.minSize()
 		this._tabsAutoSize()
 		
 		this._setMaxHeightByMonitor()
+
 		
 		this.show( this._getInitOptions() " " $options )
 		this._setHwnd()
 
+		this.minSize( this._sizes.min.w, this._sizes.min.h )
+
+		
 		this.autosize()
 		
-		if( ! this._resizeable )
-			this.resizeable(false)		
+		if( this._fixed_width )
+			this.fixedWidth(this._fixed_width)		
+		
+		;if( ! this._resizeable )
+			;this.resizeable(this._resizeable)
 		
 		if( this._center.window )
 			this.center()
@@ -68,23 +74,25 @@ Class VilGUI extends Gui_vgui
 	 */
 	_getInitOptions()
 	{
+		;$abs_min_size := "w128 h24 " ; absolute minimum size to display gui without controls
+		
 		$options :=	{x:	this._position.x
 			,y:	this._position.y
 			,w:	this._sizes.size.w
 			,h:	this._sizes.size.h
 			,xCenter:	this._center.x
 			,yCenter:	this._center.y}
-
-		return % this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
+		;Dump($options, "options", 1)
+		return % $abs_min_size this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
 	}
 	/**
 	 */
 	_removeCenterIfPositionDefined( $options )
 	{
 		For $i, $xy in ["x", "y"]
-			if( $options.hasKey($xy) )
+			if( $options[$xy] )
 				$options.delete($xy "Center")
-		
+		;Dump($options, "options", 1)
 		return $options
 	}
 	/**
@@ -94,7 +102,7 @@ Class VilGUI extends Gui_vgui
 		For $option, $value in $options
 			if( $value )
 				$options_string .= $option ( RegExMatch( $option, "^[xywh]$") ? $value " " : " ")
-				
+		;MsgBox,262144,options_string, %$options_string%,3 
 		return $options_string
 	}
 	

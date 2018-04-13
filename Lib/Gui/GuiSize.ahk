@@ -2,8 +2,8 @@
 */
 Class GuiSize_vgui extends GuiPosition_vgui
 {
-	_sizes	:=	{"size":	{w:256,	h:128}	; store min sizes of gui
-			,"min":	{w:0,	h:0}	; store min sizes of gui
+	_sizes	:=	{"size":	{w:128,	h:64}	; store min sizes of gui
+			,"min":	{w:128,	h:64}	; store min sizes of gui
 			,"max":	{w:0,	h:0}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
 	
@@ -72,7 +72,6 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	maxSize($width :="",$height:="")
 	{
-		
 		this._minMaxSize("Max", "w", $width)
 		this._minMaxSize("Max", "h", $height)
 		
@@ -80,16 +79,19 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	}
 	/** set fixed with of gui
 	*/
-	fixedWidth($width:="")
+	fixedWidth($width:=true)
 	{
-		if(!$width)
+		if( $width==true && this._hwnd )
 			$width := this._getGuiSize().w
 
-		if( this._hwnd && this._fixed_width ){
+		if( this._hwnd && this._fixed_width )
+		{
+			this.size($width)
 			this._minMaxSize("Min", "w", $width)
 			this._minMaxSize("Max", "w", $width)
+			
 		}else
-			this._fixed_width := true
+			this._fixed_width := $width
 
 		return this
 	}	
@@ -103,7 +105,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	{
 		if( ! $hwnd )
 			$hwnd := this._hwnd
-		
+		;MsgBox,262144,hwnd, %$hwnd%,3 
 		VarSetCapacity(rc, 16)
 		DllCall("GetClientRect", "uint", $hwnd, "uint", &rc)
 		
@@ -145,7 +147,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		this.options( "+" $min_max "Size" ($wh=="w" ? $value : "") "x" ($h := $wh=="h" ? $value : ""))
 	}
 
-	/** Set size of guui as max size and backup this.sizes
+	/** Set size of guu as max size and backup this.sizes
 	  *
 	  * It allows autosize Gui only in one dimension
 	 */
@@ -156,7 +158,8 @@ Class GuiSize_vgui extends GuiPosition_vgui
 
 		this._sizes_autosize_bak := this._objectClone(this._sizes)
 
-		this.maxSize(this._sizes.size.w, this._sizes.size.h)
+		this.minSize(this._sizes.size.w, this._sizes.size.h)
+		this.maxSize(this._sizes.size.w, this._sizes.size.h)		
 	}
 	/** restore backuped this._sizes
 	 */
@@ -171,7 +174,8 @@ Class GuiSize_vgui extends GuiPosition_vgui
 
 		this.delete("_sizes_autosize_bak")
 	
-		this.maxSize(this._sizes.max.w, this._sizes.max.h)
+		this.minSize(this._sizes.min.w, this._sizes.min.h)
+		this.maxSize(this._sizes.max.w, this._sizes.max.h)		
 	} 
 	/* Fully clone object
 	*/

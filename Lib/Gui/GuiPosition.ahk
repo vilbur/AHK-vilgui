@@ -2,7 +2,7 @@
 */
 Class GuiPosition_vgui
 {
-	_center	:= {x:false, y:false, window:false}
+	_center	:= {x:true, y:true, window:false}
 	_position	:= {x:0, y:0} ; store position for init
 	
 	
@@ -24,7 +24,8 @@ Class GuiPosition_vgui
 	 */
 	center($xy:="", $toggle:=true)
 	{
-		this._center[$xy] := $toggle
+		if( $xy )
+			this._center[$xy] := $toggle
 		
 		if( this._hwnd )
 		{
@@ -34,7 +35,6 @@ Class GuiPosition_vgui
 				this._centerGui("y", "Center")
 			} else
 				this._centerToWindow()
-	
 		}
 		return this
 	}
@@ -87,8 +87,14 @@ Class GuiPosition_vgui
 		if ! WinExist( this.ahkId(this._last_active_window) )
 			return this
 		;MsgBox,262144,, % this._hwnd "`n" this._last_active_window 
-			
 		$size_gui	:= this._getGuiSize()
+		;MsgBox,262144,size_gui, %$size_gui%,3
+		;MsgBox,262144,_hwnd, % this._hwnd,2
+		WinGetPos, $x, $y,$w,$h, % this.ahkId()
+		$size_gui	:= { w:$w, h:$h }
+		
+		;MsgBox,262144,size_gui, % $size_gui.x,3
+		
 		
 		$size_win	:= this._getGuiSize(this._last_active_window)
 		$pos_win	:= this._getPostion(this._last_active_window)		
