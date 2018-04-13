@@ -5,8 +5,8 @@ Set color for focused control
 
 | __focus__( [$background], [$foreground], [$control_type] )    |Set color of focused control    |  
 |:---    |:---    |  
-|`@param string | hex` [ $background="" ]    |color    |  
-|`@param string | hex` [ $foreground="" ]    |color    |  
+|`@param string \| hex` [ $background="" ]    |color    |  
+|`@param string \| hex` [ $foreground="" ]    |color    |  
 |`@param string` [ $control_type="" ]    |    |  
 ##  
 
