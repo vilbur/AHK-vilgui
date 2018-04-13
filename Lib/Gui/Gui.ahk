@@ -3,6 +3,7 @@
 Class Gui_vgui extends GuiLayout_vgui
 {
 	Monitor	:= new Monitor()
+	
 	_last_active_window	:= "" ; store last active window for centering
 	   
 	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm
@@ -44,6 +45,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	submit()
 	{
 		$form_data := this.Controls.values()
+		
 		For $tabs_name, $address in this.Controls.Types.Tabs
 			$form_data[$tabs_name] := this[$tabs_name].getControlsValues()
 
@@ -70,7 +72,13 @@ Class Gui_vgui extends GuiLayout_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-
+	/** @return string "ahk_id hwnd"
+	 */
+	ahkId($hwnd:="")
+	{
+		return % "ahk_id " ( $hwnd ? $hwnd : this._hwnd )
+	}
+	
 	/** contvert boolean to string "+|-"
 	*/
 	_getPlusMinus($toggle)

@@ -5,7 +5,9 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	_size	:=	{"min":	{w:0,	h:256}	; store min sizes of gui
 			,"max":	{w:0,	h:1024}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
-			
+	
+	_resizable	:= false
+	
 	/** Resize GUI
 	  *
 	  */
@@ -24,11 +26,11 @@ Class GuiSize_vgui extends GuiPosition_vgui
 
 		;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
 		this.show("AutoSize")
-		this._correctMarginOfGui()
+		;this._correctMarginOfGui()
 		this._scrollbar()
 		
 		$size	:= this._getGuiSize()
-		this._size.auto 	:= {w:$size.w,	h:$size.h}
+		this._size.auto 	:= {"w": $size.w,	"h": $size.h}
 		
 		this.Events.Window.resume("size")
 
@@ -39,23 +41,33 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	resizeable($toggle:=true)
 	{
+		if( this._resizable == $toggle )
+			return this
+		
+		this._resizable := $toggle
+		
 		this.options(this._getPlusMinus($toggle) "Resize")
+		
 		return this
 	}
 	/** set minimal size of gui
 	*/
 	minSize($width:=512,$height:=128)
 	{
+		
 		this._minMaxSize("Min", "w", $width)
 		this._minMaxSize("Min", "h", $height)
+		
 		return this
 	}
 	/** set maximal size of gui
 	*/
 	maxSize($width :="",$height:="")
 	{
+		
 		this._minMaxSize("Max", "w", $width)
 		this._minMaxSize("Max", "h", $height)
+		
 		return this
 	}
 	/** set fixed with of gui
@@ -76,13 +88,17 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-	/** _getGuiSize
+	/** Get real size of window with menus and borders
 	*/
-	_getGuiSize()
+	_getGuiSize( $hwnd:="" )
 	{
+		if( ! $hwnd )
+			$hwnd := this._hwnd
+		
 		VarSetCapacity(rc, 16)
-		DllCall("GetClientRect", "uint", this._hwnd, "uint", &rc)
-		return {w:NumGet(rc, 8, "int"), h:NumGet(rc, 12, "int")}
+		DllCall("GetClientRect", "uint", $hwnd, "uint", &rc)
+		
+		return {"w":NumGet(rc, 8, "int"), "h":NumGet(rc, 12, "int")}
 	}
 	/** Set relative or absolute size of gui
 		@param "w|h"	$wh	width or height
@@ -98,7 +114,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 			$value := ($wh=="w" ? $size.w : $size.h) + $value
 		}
 		if($value)
-			this.show($wh $value, this._name )
+			this.show( $wh $value, this._name )
 			;this.show( $wh $value) ; Heght: -52 when menu is -32 without menu
 			;this.show( $wh this._getSizeValue($wh, $value)) ; Heght: -52 when menu is -32 without menu
 	}
@@ -106,6 +122,8 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	_minMaxSize($min_max, $wh, $value)
 	{
+		this.resizeable()
+		
 		this._size[$min_max][$wh] := $value
 		this.options( "+" $min_max "Size" ($wh=="w" ? $value : "") "x" ($h := $wh=="h" ? $value : ""))
 	}

@@ -12,7 +12,7 @@ Class ControlColor_vgui
 	  * @param string|hex $background color
 	  * @param string|hex $foreground color
 	  *
-	  * @param string $control_type
+	  * @param string $control_type type of control to apply focus colors
 	 */
 	focus( $background:="", $foreground:="", $control_type:="" )
 	{

@@ -37,7 +37,7 @@ Class GuiPosition_vgui
 	 */
 	move( $x:="", $y:="" )
 	{
-		WinMove, % this._name,, this._getPostion( "x", $x ), this._getPostion( "y", $y )
+		WinMove, % this._name,, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
 		return this
 	}
 	
@@ -45,9 +45,19 @@ Class GuiPosition_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-	/** return value x|y if exists or current window position
+	/** Get position of Gui or given window
+	  
 	 */
-	_getPostion( $xy, $value )
+	_getPostion($hwnd:="")
+	{
+		WinGetPos, $x, $y,,, % this.ahkId($hwnd)
+		
+		return  { "x": $x, "y": $y }
+	}
+	
+	/** return GIVEN value x|y if exists or CURRENT window position
+	 */
+	_getPostionValue( $xy, $value )
 	{
 		WinGetPos, $x, $y,,, % this._name
 		
@@ -63,14 +73,31 @@ Class GuiPosition_vgui
 	 */
 	_centerToWindow()
 	{
-		WinGetPos, $X, $Y, $W, $H, % "ahk_id " this._last_active_window
+		if ! WinExist( this.ahkId(this._last_active_window) )
+			return this
+
+		;MsgBox,262144,, % this._hwnd "`n" this._last_active_window 
+			
+		$size_gui	:= this._getGuiSize()
 		
-		if WinExist( "ahk_id " this._last_active_window )
-		{
-			WinGetPos,,, $mW, $mH, % this._name				
-			WinMove, % this._name,, ($W-$mW)/2 + $X, ($H-$mH)/2 + $Y
-		}
+		$size_win	:= this._getGuiSize(this._last_active_window)
+		$pos_win	:= this._getPostion(this._last_active_window)		
+		
+		$center_x	:= $pos_win.x + ($size_win.w - $size_gui.w)/2
+		$center_y	:= $pos_win.y + ($size_win.h - $size_gui.h)/2	
+		
+		WinMove, % this.ahkId(),, %$center_x%, %$center_y%
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+

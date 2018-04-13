@@ -9,10 +9,9 @@ Set color for focused control
 |:---	|:---	|  
 |`@param string|hex` [ $background="" ]	|color	|  
 |`@param string|hex` [ $foreground="" ]	|color	|  
-|`@param string` [ $control_type="" ]	|	|  
+|`@param string` [ $control_type="" ]	|type of control to apply focus colors	|  
 
 ##  
-
 
 
 ## Examples  

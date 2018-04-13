@@ -25,7 +25,8 @@ Class VilGUI extends Gui_vgui
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		this.Style	:= new Style_vgui()
-		
+	
+		this._saveLastWindowCentering()
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
@@ -33,16 +34,14 @@ Class VilGUI extends Gui_vgui
 	 */
 	create($options:="")
 	{
-		this._saveLastWindowCentering()
-		
 		this._sortLayouts()		
 		this._addMenu()
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
 		this._bindMouseEvents()
-		
-		this.minSize()
-		this.autosize()		
-		this._tabsAutoSize()
+		;
+		;this.minSize()
+		this.autosize()
+		;this._tabsAutoSize()
 		
 		;this.fixedWidth()
 		;this._setMaxHeightByMonitor()
@@ -52,7 +51,7 @@ Class VilGUI extends Gui_vgui
 		this._setHwnd()
 		
 		this.Style.Color.hwnd(this._hwnd)
-		
+
 		return this
 	}
 
@@ -82,9 +81,10 @@ Class VilGUI extends Gui_vgui
 	 */
 	_setHwnd()
 	{
-		WinGet, $hwnd, ID, A
+
+		;WinGet, $hwnd, ID, A
 		
-		this._hwnd := $hwnd
+		this._hwnd := WinExist("A")
 		
 		$_GUI[$hwnd]	:= this
 	} 
