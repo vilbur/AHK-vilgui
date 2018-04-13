@@ -21,9 +21,12 @@
 #Include %A_LineFile%\..\Controls\ItemTypes\ListBoxTest.ahk
 #Include %A_LineFile%\..\Controls\ItemTypes\ListBoxViewTest.ahk
 
+
 #Include %A_LineFile%\..\Controls\ListViewTest.ahk
 
 #Include %A_LineFile%\..\Controls\ListViewInTabsTest.ahk
+
+#Include %A_LineFile%\..\Controls\Colors\ColorsTest.ahk
 
 #Include %A_LineFile%\..\Controls\use-case\control-delete.ahk
 
@@ -40,14 +43,16 @@ Class VilGUITest{
 	/**
 		COMMENT IN\OUT ITEMS OF CONTROL TO ON\OFF TEST
 	*/
-	Controls	:=	[ new MarginTest()
+	_Tests	:=	[ new MarginTest()
 					 
 			;,new MenuTest()
-			,new GuiEventsTest()
-			
-			,new ControlsTest()
-			;,new ControlsEventTest()			
+			;,new GuiEventsTest()
 			;
+			;,new ControlsTest()
+			;,new ControlsEventTest()
+			,new ColorsTest()						
+			
+			
 			;,new CheckboxTest()
 			;,new RadioTest()
 			;,new DropdownTest()
@@ -56,33 +61,33 @@ Class VilGUITest{
 			;
 			;,new PathTest()
 			;,new LabelTest()
-			,new TabsTest()
+			;,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()
 			
 			;,new controlDelete()]			
 			
-			,new ButtonsTest()]
+			;,new ButtonsTest()
+			,""]
 
 
 	/** GuiTestTest
 	*/
-	test(){
+	TEST()
+	{
 		this.setupGui()
 		this.MenusTest.runMainTest()
 
-		For $c, $Control in this.Controls {
-			/* SPLIT UI TO SECTIONS
-			*/
-			; if(this._newSectionNeeded(A_Index))
-				; $GuiTest.Controls.section()
-				
-			$Control.runMainTest()
-		}
-		;this.showSetup_1()
-		 this.showSetup_2()
+		For $c, $test in this._Tests 
+			$test.runMainTest()
+
+		
+		this.showSetup_1()
+		 ;this.showSetup_2()
 		; this.showSetup_3()
+
+		;Dump($GuiTest, "GuiTest", 0)
 	}
 
 	/** setupGui
@@ -101,18 +106,20 @@ Class VilGUITest{
 	*/
 	/** GUI SETUP EXAMPLE 1
 	*/
-	showSetup_1(){
+	showSetup_1()
+	{
 		$GuiTest.create()
 				; .alwaysOnTop()
 			; .resizeable(false)
-			; .autosize()
+			 .autosize()
 		; $GuiTest2.controls.button().add()
 		; $GuiTest2.show()
 		
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/
-	showSetup_2(){
+	showSetup_2()
+	{
 		$GuiTest.create()
 				.alwaysOnTop()
 				.resizeable()
@@ -125,7 +132,8 @@ Class VilGUITest{
 		}
 	/** GUI SETUP EXAMPLE 3
 	*/
-	showSetup_3(){
+	showSetup_3()
+	{
 		$GuiTest.create()
 			   .resizeable()
 			   .autosize()
@@ -151,4 +159,4 @@ Class VilGUITest{
 	RUN TEST
 -----------------------------------------
 */
-new VilGUITest().test()
+new VilGUITest().TEST()

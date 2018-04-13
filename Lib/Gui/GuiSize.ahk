@@ -80,9 +80,8 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	_getGuiSize()
 	{
-		hwnd := WinExist(this._name)
 		VarSetCapacity(rc, 16)
-		DllCall("GetClientRect", "uint", hwnd, "uint", &rc)
+		DllCall("GetClientRect", "uint", this._hwnd, "uint", &rc)
 		return {w:NumGet(rc, 8, "int"), h:NumGet(rc, 12, "int")}
 	}
 	/** Set relative or absolute size of gui

@@ -48,18 +48,21 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 		GuiControl, % this.guiName() ":" $command, % this.hwnd, %$value%
 		return this
 	}
+		
 	/**
 	 */
-	color()
+	color( $foreground, $background:="")
 	{
-		;GuiControlGet, $name, Hwnd, % this.hwnd,
+	
+		$hwnd := this.Base()._hwnd
 		
-		;MsgBox,262144,gui(), % this._name
-		GuiControlGet, hwnd, hwnd, % this.hwnd
+		WinGet, ActiveControlList, ControlListHwnd , A
+			Loop, Parse, ActiveControlList, `n
+				ControlColor(A_LoopField, this.Base()._hwnd, "", "" )
 
-		ControlCol( hwnd , this.guiName(), 0x00FF00, 0x00FF00 )
-		
-	} 
+			ControlColor(this.hwnd,$hwnd, $background, $foreground )
+	}
+	
 	/** _move control 
 	 * @return object $Control
 	 */

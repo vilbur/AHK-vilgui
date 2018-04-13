@@ -1,0 +1,20 @@
+# Controls colors  
+
+Set color for focused control  
+* globally  
+* per control type  
+
+
+| __focus__( [$background], [$foreground], [$control_type] )	|Set color of focused control	|  
+|:---	|:---	|  
+|`@param string|hex` [ $background="" ]	|color	|  
+|`@param string|hex` [ $foreground="" ]	|color	|  
+|`@param string` [ $control_type="" ]	|	|  
+
+##  
+
+
+
+## Examples  
+
+[include:\controls-colors\controls-colors.ahk]  

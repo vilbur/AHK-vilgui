@@ -6,7 +6,8 @@
 		3) CUSTOM	CALLBACK 	- User defined callback for all events, NOT FIRED IF CALLBACK FOR EVENT EXISTS
 		4) EVENT	CALLBACK	- User defined callback for event type
 */
-Class ControlEvents_vgui {
+Class ControlEvents_vgui
+{
 
 	Event	:= new ControlEvent_vgui()
 
@@ -27,7 +28,8 @@ Class ControlEvents_vgui {
 	/** Bind Custom Callback for all events
 		@param	string $on_event
 	*/
-	on($on_event, $callback:="", $aParams*){
+	on($on_event, $callback:="", $aParams*)
+	{
 		this.Event.bind($on_event, $callback, $aParams*)
 		return this
 	}
@@ -45,13 +47,18 @@ Class ControlEvents_vgui {
 		GuiControl, +g, % this.hwnd, % fn
 	}
 
-	/** This Method is called, when user interact with control
-		It Calls Custom Events
+	/** DEFAULT CALLBACK - FIRED BEFORE EVERY CUSTOM CALLBACK
+	  * 
+	  * This Method is called, when user interact with control
+	  * It Calls Custom Events
 	*/
 	_mainCallback($params*)
 	{
 		;;;; /** TODO save to ini*/
-		;MsgBox,262144,, _mainCallback,2 
+		;MsgBox,262144,, _mainCallback,2
+		this.Base().Style.Color.setFocusColor(this.hwnd)
+		;this.Base().Style.colorTest()		
+		
 		this.Event.control(this).callAllCallbacks()
 	}
 	/*---------------------------------------

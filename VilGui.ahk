@@ -1,6 +1,6 @@
 #Include %A_LineFile%\..\Lib\Includes.ahk
 
-global $_GUI := {}
+global $_GUI := {} ; stores multiple GUIs by hwnd of gui window
 global $_GUI_margin
 global $_GUI_tab_last
 global $_last_window ; store gui name for lost focus event
@@ -9,11 +9,14 @@ global $_last_window ; store gui name for lost focus event
 */
 Class VilGUI extends Gui_vgui
 {
+	_name	:= "" ; sanitized title
+	_title	:= "" 
+	_hwnd	:= 0
 
-	__New($hwnd)
+	__New($title)
 	{	
-		this._title	:= $hwnd	; BUG: GUI breaks If title with whitespace is used
-		this._name	:= RegExReplace( $hwnd, "i)[^A-Z0-9]+", "" )
+		this._title	:= $title	; BUG: GUI breaks If title with whitespace is used
+		this._name	:= RegExReplace( $title, "i)[^A-Z0-9]+", "" )
 		;$_GUI[this._name]	:= this
 		
 		this.Margin	:= new GuiMargin_vgui()
@@ -21,11 +24,11 @@ Class VilGUI extends Gui_vgui
 		this.Controls	:= new Controls_vgui().parent(this).guiName(this._name)
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
+		this.Style	:= new Style_vgui()
 		
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
-	 *
 	 *
 	 */
 	create($options:="")
@@ -34,7 +37,7 @@ Class VilGUI extends Gui_vgui
 		
 		this._sortLayouts()		
 		this._addMenu()
-		;this._addTrayMenu() ; BUG: default menu does not show
+		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
 		this._bindMouseEvents()
 		
 		this.minSize()
@@ -46,11 +49,13 @@ Class VilGUI extends Gui_vgui
 		
 		this.show($options)
 		
-		this._setGuiToGlobal()
+		this._setHwnd()
+		
+		this.Style.Color.hwnd(this._hwnd)
 		
 		return this
 	}
-	
+
 	/*---------------------------------------
 		PRIVATE METHODS ON GUI CREATE
 	-----------------------------------------
@@ -75,9 +80,11 @@ Class VilGUI extends Gui_vgui
 	}
 	/**
 	 */
-	_setGuiToGlobal()
+	_setHwnd()
 	{
-		WinGet, $hwnd, ID, A		
+		WinGet, $hwnd, ID, A
+		
+		this._hwnd := $hwnd
 		
 		$_GUI[$hwnd]	:= this
 	} 
