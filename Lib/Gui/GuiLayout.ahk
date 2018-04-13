@@ -43,17 +43,22 @@ Class GuiLayout_vgui extends GuiSize_vgui
 	*/
 	_margin($x, $y)
 	{
-		Gui, % this._name ":Margin", %$x%, %$y%
+		Gui, % this._gui("Margin"), %$x%, %$y%
+		
 		return this
 	}
 	/** _scrollbar
 	*/
 	_scrollbar($toggle:=true)
 	{
+		;MsgBox,262144,_isScrollbarNeeded(), % this._isScrollbarNeeded(),2 
+		
 		if($toggle && this._isScrollbarNeeded())
 			UpdateScrollBars(this._name, $width, this._getGuiSize().h )
+			
 		else
-			Gui,% this._name ":-0x200000"
+			Gui, % this._gui("-0x200000")
+			
 		return this
 	}
 
@@ -69,8 +74,11 @@ Class GuiLayout_vgui extends GuiSize_vgui
 	*/
 	_isScrollbarNeeded()
 	{
-		;WinGetPos,,,$width, $height, % this._name
-		return % this._getGuiSize().h < this._getControlsBboxSize("y")
+		$gui_size	:= this._getGuiSize()
+		$bbox_size	:= this._getControlsBboxSize("y")	
+		;MsgBox,262144,, % $gui_size.h "`n" $bbox_size
+		
+		return % $gui_size.h < $bbox_size
 	}
 	/** _getControlsBboxSize
 	*/

@@ -38,17 +38,16 @@ Class VilGUI extends Gui_vgui
 		this._addMenu()
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
 		this._bindMouseEvents()
-		;
+		
 		;this.minSize()
-		this.autosize()
 		;this._tabsAutoSize()
 		
 		;this.fixedWidth()
 		;this._setMaxHeightByMonitor()
+		this.autosize()
 		
 		this.show($options)
-		
-		this._setHwnd()
+
 		
 		this.Style.Color.hwnd(this._hwnd)
 
@@ -77,17 +76,7 @@ Class VilGUI extends Gui_vgui
 	{
 		this.Events.Mouse.bindWheel().bindScroll()	; Allow scroll
 	}
-	/**
-	 */
-	_setHwnd()
-	{
 
-		;WinGet, $hwnd, ID, A
-		
-		this._hwnd := WinExist("A")
-		
-		$_GUI[$hwnd]	:= this
-	} 
 
 
 }

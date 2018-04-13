@@ -38,6 +38,7 @@ Class GuiControl_vgui extends ControlEvents_vgui{
 	{
 		this._setValue($value)
 		GuiControl,, % this.hwnd, % this._getValueOrItems()
+		
 		return this
 	}
 	/** guiControl of current control

@@ -48,7 +48,7 @@ Class VilGUITest{
 			;,new MenuTest()
 			;,new GuiEventsTest()
 			;
-			;,new ControlsTest()
+			,new ControlsTest()
 			;,new ControlsEventTest()
 			,new ColorsTest()						
 			
@@ -83,9 +83,9 @@ Class VilGUITest{
 			$test.runMainTest()
 
 		
-		this.showSetup_1()
-		 ;this.showSetup_2()
-		; this.showSetup_3()
+		;this.showDefault()
+		 ;this.showFixedHeight()
+		 this.showResizable()
 
 		;Dump($GuiTest, "GuiTest", 0)
 	}
@@ -106,39 +106,41 @@ Class VilGUITest{
 	*/
 	/** GUI SETUP EXAMPLE 1
 	*/
-	showSetup_1()
+	showDefault()
 	{
 		$GuiTest.create()
 				; .alwaysOnTop()
-			; .resizeable(false)
-			 .autosize()
+			 ;.autosize()
 		; $GuiTest2.controls.button().add()
 		; $GuiTest2.show()
 		
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/
-	showSetup_2()
+	showFixedHeight()
 	{
-		$GuiTest.create()
-				.alwaysOnTop()
-				.resizeable()
-				.minSize("500", "500" )
-				.maxSize("1000", "1000" )
-				.size(720, 720)
-				.resizeable(false)
-				.center("x")
-				.center("y")
+		$GuiTest
+			.alwaysOnTop()
+			;.resizeable()
+			;.minSize("500", "500" )
+			;.maxSize("1000", "1000" )
+			.resizeable(false)
+			.create()
+
 		}
 	/** GUI SETUP EXAMPLE 3
-	*/
-	showSetup_3()
+	 * Resizable gui with INIT and MAX height
+	 */
+	showResizable()
 	{
-		$GuiTest.create()
-			   .resizeable()
-			   .autosize()
-			   .fixedWidth()
-			   .size("", "720" )
+		$GuiTest
+			.resizeable()
+			.size("", 320 )
+			.fixedWidth()
+			.minSize("", 128 )
+			.maxSize("", 512 )						
+			.create()
+
 	}
 	/*---------------------------------------
 		PRIVATE METHODS

@@ -11,7 +11,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	*/
 	gui($command, $param1:="", $param2:="", $param3:="")
 	{
-		Gui, % this._name ":" $command, %$param1%, %$param2%, %$param3%
+		Gui, % this._gui($command), %$param1%, %$param2%, %$param3%		
 		return this
 	}
 	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
@@ -19,7 +19,10 @@ Class Gui_vgui extends GuiLayout_vgui
 	 */
 	show($options:="")
 	{
-		Gui, % this._name ":Show", %$options%, % this._title ; !!! BUG: GUI BREAKS if title "this.title" has whitespace
+		Gui, % this._gui("Show"), %$options%, % this._title
+		
+		this._setHwnd()
+
 		return this
 	}	
 	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm#Options
@@ -28,7 +31,8 @@ Class Gui_vgui extends GuiLayout_vgui
 	options($option:="")
 	{
 		;MsgBox,262144,option, %$option%,3 
-		Gui, % this._name ":" $option
+		;Gui, % this._name ":" $option
+		Gui, % this._gui($option)	
 		return this
 	}
 	/** set window always on top
@@ -72,6 +76,12 @@ Class Gui_vgui extends GuiLayout_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/** return string "GuiName"  OR "GuiName:command"
+	 */
+	_gui($command:="")
+	{
+		return % this._name ( $command ? ":" $command : $command )
+	} 
 	/** @return string "ahk_id hwnd"
 	 */
 	ahkId($hwnd:="")
@@ -85,7 +95,14 @@ Class Gui_vgui extends GuiLayout_vgui
 	{
 		return % $toggle ? "+" : "-"
 	}
-
+	/**
+	 */
+	_setHwnd()
+	{
+		this._hwnd := WinExist("A")
+		
+		$_GUI[$hwnd]	:= this
+	} 
 
 
 }

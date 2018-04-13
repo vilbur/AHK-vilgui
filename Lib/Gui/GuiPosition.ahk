@@ -37,7 +37,8 @@ Class GuiPosition_vgui
 	 */
 	move( $x:="", $y:="" )
 	{
-		WinMove, % this._name,, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
+		WinMove, % this._gui(),, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
+		
 		return this
 	}
 	
