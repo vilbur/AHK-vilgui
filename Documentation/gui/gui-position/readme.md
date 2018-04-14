@@ -1,0 +1,4 @@
+# Gui size  | __position__( [$x], [$y] )    |set gui init    |  |:---    |:---    |  |`@param string` $x    |    |  |`@param string` $y    |    |  ##  | __center__( [$xy], [$toggle] )    |center gui on display    |  |:---    |:---    |  |`@param string` $xy    |"x\|y|window" // center "x\|y" to screen, "window" center gui to CURRENT WINDOW    |  |`@param boolean` [ $toggle=true ]    |    |  ##  | __move__( [$x], [$y] )    |Move window to postion    |  |:---    |:---    |  |`@param string` $x    |    |  |`@param string` $y    |    |  ##  ## Examples  
+``` php
+$Gui := new VilGUI("Gui Position").create()/* */$Gui.size("", "+128")    ; // resize vertically relative
+```  ## Result    
