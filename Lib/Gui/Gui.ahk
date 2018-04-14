@@ -5,7 +5,16 @@ Class Gui_vgui extends GuiLayout_vgui
 	Monitor	:= new Monitor()
 	
 	_last_active_window	:= "" ; store last active window for centering
-	   
+
+	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
+	 *	@param string $options
+	 */
+	show($options:="")
+	{
+		Gui, % this._gui("Show"), %$options%, % this._title
+		;MsgBox,262144,options, %$options%
+		return this
+	}
 	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm
 	 ;*	@param string $options strings from documentation 
 	*/
@@ -13,26 +22,14 @@ Class Gui_vgui extends GuiLayout_vgui
 	{
 		Gui, % this._gui($command), %$param1%, %$param2%, %$param3%		
 		return this
-	}
-	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
-	 *	@param string $options
-	 */
-	show($options:="")
-	{
-		Gui, % this._gui("Show"), %$options%, % this._title
-		;;Gui, % this._gui("Show"), , % this._title		
-		;MsgBox,262144,options, %$options%
-
-		return this
 	}	
 	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm#Options
 	 *	@param string $options strings from documentation 
 	*/
 	options($option:="")
 	{
+		Gui, % this._gui($option)	 
 		;MsgBox,262144,option, %$option%,3 
-		;Gui, % this._name ":" $option
-		Gui, % this._gui($option)	
 		return this
 	}
 	/** set window always on top
@@ -42,7 +39,28 @@ Class Gui_vgui extends GuiLayout_vgui
 		this.options(this._getPlusMinus($toggle) "AlwaysOnTop")
 		return this
 	}
-	
+	/*---------------------------------------
+		HIDE & RESTORE
+	-----------------------------------------
+	*/
+	/** Hide gui to tray 
+	 */
+	hide()
+	{
+		this.Events.Window._removeOnMessageMain() ; remove onMessage, it breaks restore()
+		WinHide, % this.ahkId()		
+	}
+	/** restore gui from tray
+	 */
+	restore()
+	{
+		this.Events.Window._setOnMessageMain()
+		this.show()
+	}
+	/*---------------------------------------
+		SUBMIT, CLOSE & EXIT  METHODS
+	-----------------------------------------
+	*/
 	/** submit gui
 		@return object values of all controls
 	*/
@@ -62,7 +80,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	{
 		;MsgBox,262144,, CLOSE,2		
 		this.Events.gui.call("onClose")
-		this.options("Destroy")
+		this.gui("Destroy")
 	}
 	/** exit script
 	*/
@@ -101,7 +119,9 @@ Class Gui_vgui extends GuiLayout_vgui
 	{
 		this._hwnd := WinExist("A")
 		
-		$_GUI[$hwnd]	:= this
+		;MsgBox,262144,_hwnd, % this._hwnd,2 
+		$_GUI[this._hwnd]	:= this
+		;Dump($_GUI, "_GUI", 1)
 	} 
 
 

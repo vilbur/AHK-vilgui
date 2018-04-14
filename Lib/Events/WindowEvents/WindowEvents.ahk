@@ -26,19 +26,6 @@ Class WindowEvents_vgui extends EventBind_vgui
 		
 		return this 
 	}
-	;/**
-	; */
-	;_getEventObject($event, $event_data)
-	;{
-	;	$EventObj := new EventObj_vgui()
-	;	
-	;	$EventObj.set("event", $event)
-	;	
-	;	if( $event_data )
-	;		$EventObj.set($event_data)
-	;	
-	;	return $EventObj
-	;}
 	/** Call function on window event
 	*/
 	setMessages($event)
@@ -57,26 +44,25 @@ Class WindowEvents_vgui extends EventBind_vgui
 	*/
 	_setOnMessageMain()
 	{
-		if( ! this._messages.main )
-		{
-			Gui +LastFound
-			
-			hWnd := WinExist()
-			DllCall( "RegisterShellHookWindow", UInt,Hwnd )
-			MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
-			OnMessage( MsgNum, "onWindowMessage" )
-			
-			this._messages.main	:= true
-		}
+		if( this._messages.main )
+			return
+		
+		Gui +LastFound
+		
+		hWnd := WinExist()
+		DllCall( "RegisterShellHookWindow", UInt,Hwnd )
+		MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
+		OnMessage( MsgNum, "onWindowMessage" )
+		
+		this._messages.main	:= true
 	}
 	/** Call function on window event
 	*/
-	_setOnSizeMessage()
+	_removeOnMessageMain()
 	{
-		if( ! this._messages.size )
-			OnMessage(0x05, "onWindowSizeMessage")
-			
-			this._messages.size	:= true
+		OnMessage(  DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" ), "" )
+		
+		this._messages.main	:= false
 	}
 	/** Call function on window event
 	*/

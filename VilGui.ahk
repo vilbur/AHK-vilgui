@@ -34,18 +34,20 @@ Class VilGUI extends Gui_vgui
 	 */
 	create($options:="")
 	{
-		this._sortLayouts()		
+		this.Events.Window.pause("created")
+		
+		this._sortLayouts()
+		this._tabsAutoSize()
+		
 		this._addMenu()
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
-		this._bindMouseEvents()
 		
-		this._tabsAutoSize()
+		this._bindMouseEvents()
 		
 		this._setMaxHeightByMonitor()
 
 		this.show( this._getInitOptions() " " $options )
 		this._setHwnd()
-
 
 		this.autosize()
 		
@@ -58,7 +60,11 @@ Class VilGUI extends Gui_vgui
 			this.center()
 		
 		this.Style.Color.hwnd(this._hwnd)
-
+		
+		this.Events.Window.resume("created")
+		
+		this.show()
+		
 		return this
 	}
 
@@ -112,7 +118,9 @@ Class VilGUI extends Gui_vgui
 	*/
 	_addTrayMenu()
 	{
-		this.Menus.Tray.show()
+		this.Menus.Tray
+			.default(true)
+			.show()
 	}
 	/** _bindMouseEvents()
 	*/

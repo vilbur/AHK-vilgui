@@ -52,7 +52,6 @@
 -----------------------------------------
 */
 
-
 #Include %A_LineFile%\..\Controls\Controls.ahk
 #Include %A_LineFile%\..\Controls\ControlsTypes.ahk
 #Include %A_LineFile%\..\Controls\OptionsDefaults.ahk

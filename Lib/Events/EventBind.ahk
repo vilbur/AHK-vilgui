@@ -69,6 +69,49 @@ Class EventBind_vgui
 		return $EventObj 
 	}
 	/*-----------------------------------------
+		PAUSE & RESUME EVENTS
+	-----------------------------------------
+	*/
+	/**
+	  * @param string|array $events
+	 */
+	pause( $events )
+	{
+		this._pauseOrResume( "pause", $events )
+	}
+	/**
+	 */
+	resume( $events )
+	{
+		this._pauseOrResume( "resume", $events )
+	}
+	/**
+	 */
+	_pauseOrResume( $method, $events )
+	{
+		if( ! isObject($events) )
+			$events := [$events] 
+		
+		For $e, $event in $events
+			this["_" $method]( $event ) 
+	} 
+	/**
+	 */
+	_pause( $event )
+	{
+		this._paused[$event] := this.events[$event]
+		
+		this.events.delete($event)
+	}
+	/**
+	 */
+	_resume( $event )
+	{
+		this.events[$event] := this._paused[$event]
+		
+		this._paused.delete($event)
+	}
+	/*-----------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
