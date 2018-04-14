@@ -43,20 +43,16 @@ Class VilGUI extends Gui_vgui
 		
 		this._setMaxHeightByMonitor()
 
-		
 		this.show( this._getInitOptions() " " $options )
 		this._setHwnd()
 
-		this.minSize( this._sizes.min.w, this._sizes.min.h )
 
-		
 		this.autosize()
 		
 		if( this._fixed_width )
 			this.fixedWidth(this._fixed_width)		
 		
-		;if( ! this._resizeable )
-			;this.resizeable(this._resizeable)
+		this.resizeable( this._resizable )
 		
 		if( this._center.window )
 			this.center()
@@ -74,7 +70,7 @@ Class VilGUI extends Gui_vgui
 	 */
 	_getInitOptions()
 	{
-		;$abs_min_size := "w128 h24 " ; absolute minimum size to display gui without controls
+		$size_without_controls := ! this.Controls._Control ? "w128 h24 " : " " ; absolute minimum size to display gui without controls
 		
 		$options :=	{x:	this._position.x
 			,y:	this._position.y
@@ -83,7 +79,7 @@ Class VilGUI extends Gui_vgui
 			,xCenter:	this._center.x
 			,yCenter:	this._center.y}
 		;Dump($options, "options", 1)
-		return % $abs_min_size this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
+		return % $size_without_controls this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
 	}
 	/**
 	 */

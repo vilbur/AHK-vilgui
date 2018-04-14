@@ -1,12 +1,15 @@
 /** Class ControlsList
 */
-Class ControlsList_vgui{
+Class ControlsList_vgui
+{
 
 	_ControlsTypes	:= new ControlsListTypes_vgui()
-
+	
+	
 	/** Set Control to list
 	*/
-	set($Control){
+	set($Control)
+	{
 		this[$Control.hwnd] := $Control
 		this._ControlsTypes.add($Control)
 	}
@@ -24,18 +27,19 @@ Class ControlsList_vgui{
 	}
 	/** getUniqueName
 	*/
-	getUniqueName($Control){
+	getUniqueName($Control)
+	{
 		$control_name := $Control._name
 		While, this[$control_name]
 			$control_name := RegExReplace( $Control._name, "i)\d+$", "" ) A_Index ; remove digind on end of name, for right counting "button1, button2, button3'
 
-		;Dump($control_name, $Control._type, 1)
 		return %$control_name%
 	}
 
 	/** Class of control exists allready ?
 	*/
-	controlClassExists($Control){
+	controlClassExists($Control)
+	{
 		$control_address := &$Control
 		For $control_name, $address_in_list in this._ControlsTypes[$Control._type]
 			if($control_address==$address_in_list)

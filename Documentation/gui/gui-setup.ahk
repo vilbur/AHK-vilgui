@@ -1,59 +1,26 @@
 #SingleInstance force
 #Include %A_LineFile%\..\..\..\VilGUI.ahk
 
-/* GUI Default
+/* Example 1
 */
-$GuiDefault := new VilGUI("Gui Default")
+new VilGUI("Gui Default").create()
 
-$GuiDefault.Controls
-	.Button().add()
-	.Button().add()
-	.Button().add()
-	
-;$GuiDefault.create()
-		;.center("window")       ; center to active window
-
-/* GUI 
-*/	
-;new VilGUI("Gui Centered")
-;		.alwaysOnTop()
-;		.resizeable()
-;		.fixedWidth(512)
-;		.options("+MaximizeBox")
-;		.center("window")      ; center to active window
-;		.create()
-
-
-/**	RESIZABLE
- *	INIT position
- *	INIT size
- *	MIN & MAX height & width 
- *		
- */
+/* Example 2
+*/
 new VilGUI("Gui size & position")
 	.resizeable()
-	.position(512,512)
-	.size(640, 320 )
-	.minSize(128, 128 )
-	.maxSize(1024, 1024 )						
+	.position(512,512)   ; init position
+	.size(640, 320)      ; init size
+	.minSize(128, 128)   ; min height & width 
+	.maxSize("", 1024)   ; max height
 	.create()
 
-
-/* GUI setup 2this
+/* Example 3
 */
-/*
-$Gui2 := new VilGUI("Gui2")
-
-$Gui2.create()
-	.resizeable()
-	.autosize() 	; autoresize gui by content
-	.fixedWidth()	; with of gui is fixed
-	.center("x")	; center to monitor on init horizontal
-	.center("y")	; center to monitor on init vertically
-
-/**
- */
-TestX()
-{
-	MsgBox,262144,, % WinExist("A"),2 
-}
+new VilGUI("Gui Centered to window")
+		.alwaysOnTop()
+		.resizeable()
+		.fixedWidth(512)         ; without parameter fixed to current size
+		.options("+MaximizeBox") ; custom options
+		.center("window")        ; center to last active window 
+		.create()

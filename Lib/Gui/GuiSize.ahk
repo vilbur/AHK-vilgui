@@ -2,7 +2,7 @@
 */
 Class GuiSize_vgui extends GuiPosition_vgui
 {
-	_sizes	:=	{"size":	{w:128,	h:64}	; store min sizes of gui
+	_sizes	:=	{"size":	{w:0,	h:0}	; store min sizes of gui
 			,"min":	{w:128,	h:64}	; store min sizes of gui
 			,"max":	{w:0,	h:0}	; store max sizes of gui
 			,"auto":	{w:0,	h:0}}	; store auto sizes of gui
@@ -50,9 +50,6 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	resizeable($toggle:=true)
 	{
-		if( this._resizable == $toggle )
-			return this
-		
 		this._resizable := $toggle
 		
 		this.options(this._getPlusMinus($toggle) "Resize")
@@ -140,7 +137,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		if( ! $value )
 			return	
 		
-		this.resizeable()
+		this.options("+Resize")
 		
 		this._sizes[$min_max][$wh] := $value
 		
