@@ -1,9 +1,12 @@
 # Class Controls  
 ## Create controls  
 
-### Common Methods  
+## Common Methods  
 Methods shared with all control types  
 
+
+
+![controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)  
 [controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)  
 __[controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)__  
 
