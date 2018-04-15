@@ -6,11 +6,11 @@ Methods shared with all control types
 
 
 ![Test1](controls-items.jpeg)  
-![Test2](/controls-items.jpeg)  
 ![Test3](controls-items.jpeg?raw=true)  
-![Test4](/controls-items.jpeg?raw=true)  
-![Test5](https://github.com/vilbur/Documentation/controls/controls-main/controls-items.jpeg)  
-![Test6](https://github.com/vilbur/Documentation/controls/controls-main/controls-items.jpeg?raw=true)  
+
+![Test1](/../controls-guicontrol/controls-guicontrol-after)  
+![Test2](../controls-guicontrol/controls-guicontrol-after)  
+
 
 __add__( [string __$id__] ) // @return object __Control__  
     // add control to gui with given id, $id is used as value if value is not defined  
