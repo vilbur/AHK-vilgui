@@ -121,12 +121,12 @@ Class KeyEvents_vgui extends EventBindDefault_vgui
 /** Recive Key Down Message
 	https://autohotkey.com/board/topic/88725-detecting-keypress-in-edit-control/
   */
-onKeyDownMessage(wParam, lParam, M, H)
+onKeyDownMessage(wParam, lParam, msg, hwnd)
 {
 
-	;WinGetTitle, $winTitle, A
-	$GUI := $_GUI[lParam]
+	$GUI := $_GUI[hwnd]
 	
+
 	if($GUI && A_TimeIdleKeyboard==0 )
 	{
 		$Events	:= $GUI.Events.Key

@@ -61,7 +61,7 @@ Class VilGUITest{
 			;
 			;,new PathTest()
 			;,new LabelTest()
-			,new TabsTest()
+			;,new TabsTest()
 			
 			;,new ListViewTest()
 			;,new ListViewInTabsTest()
@@ -82,9 +82,9 @@ Class VilGUITest{
 		For $c, $test in this._Tests 
 			$test.runMainTest()
 		
-		;this.showDefault()
+		this.showDefault()
 		;this.showFixedHeight()
-		this.showResizable()
+		;this.showResizable()
 
 		;Dump($GuiTest, "GuiTest", 0)
 	}

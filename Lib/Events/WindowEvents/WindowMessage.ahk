@@ -97,44 +97,38 @@ Class WindowMessage_vgui
 */
 /**
  */
-onWindowMoveMessage( wParam, lParam )
+onWindowMoveMessage( wParam )
 {
-	onWindowMessage( "move" )
+	onWindowMessage( "move", WinExist("A") )
 }
 
 /**
  */
-onWindowSizeMessage( wParam, lParam )
+onWindowSizeMessage( wParam )
 {
-	onWindowMessage( "size" )
+	onWindowMessage( "size", WinExist("A") )
 }
 
 /**
  */
-onWindowSizedMovedMessage( wParam, lParam )
+onWindowSizedMovedMessage( wParam )
 {
-	onWindowMessage( "sizedmoved" )
+	onWindowMessage( "sizedmoved", WinExist("A") )
 }
 
 /** Recive Window Message
 */
-onWindowMessage( wParam, lParam:="" )
+onWindowMessage( wParam, lParam )
 {
 	DetectHiddenWindows, On
-	
-	if( ! lParam )
-		WinGet, lParam,	ID, A
-			
-	;WinGetTitle, $win_title, ahk_id %lParam%
 
-	;$GUI	:= $_GUI[$win_title]
 	$GUI	:= $_GUI[lParam]	
 						
-	if( $GUI ){
+	if( $GUI )
+	{
 		$_last_window	:= lParam ; save gui name for blur
 		$GUI.Events.Window.Message.callEvent(wParam, lParam)
 	}
-
 	else if( wParam==32772 ) { ; if blur
 		$_GUI[$_last_window].Events.Window.Message.callEvent("blur", lParam)
 		$_last_window	:= ""

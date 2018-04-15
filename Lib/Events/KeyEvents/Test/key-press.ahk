@@ -2,22 +2,22 @@
 #Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 
 $Gui.Events.Key
-	.onEscape("callbackKeyPress", "onEscape" ) 
+	.onEscape("onKeyPress", "onEscape" ) 
 	.onEscape("close")
 	
-	.onEnter("callbackKeyPress", "onEnter" ) 
+	.onEnter("onKeyPress", "onEnter" ) 
 	.onEnter("close")
 	
-	.on("number", "callbackKeyPress" ) 	; NOTE: "number" is for numbers 0-9
+	.on("number", "onKeyPress" ) 	; NOTE: "number" is for numbers 0-9
 
-	.on("Space", "callbackKeyPress" )                        ; modifiers are passed to $Event object
-	.on( ["control", "shift", "space"], "callbackKeyPress" ) ; event is called only if modifier keys are pressed
-	.on( ["control", "lwin",  "X"], "callbackKeyPress" )	
+	.on("Space", "onKeyPress" )                       ; // modifiers are passed to $Event object
+	.on(["control", "shift", "space"], "onKeyPress" ) ; // fired only if modifier keys are pressed
+	.on(["control", "lwin",  "X"], "onKeyPress" )	
 
-
-/** callbackKeyPress
+ 
+/** onKeyPress
 */
-callbackKeyPress($Event:="", $params*)
+onKeyPress($Event:="", $params*)
 {
 	$Event.message()
 }

@@ -36,7 +36,7 @@ callbackGui($Event:="", $params*)
 */
 confirmExit($Event:="", $params*)
 {
-	MsgBox, 4,, % $params[1]
+	MsgBox, 262148,, % $params[1]
 	IfMsgBox, Yes
 		return true
 }

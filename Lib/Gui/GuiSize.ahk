@@ -32,15 +32,15 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	autosize()
 	{
 		this.Events.Window.pause("size")
-
+		
 		this._fixSizeOnAutosize()
 		
-		;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
+		;;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
 		this.show("AutoSize")
 		
 		this._restoreSizeOnAutosize()
-
-		this._correctMarginOfGui()
+		
+		;this._correctMarginOfGui()
 		this._scrollbar()
 		
 		$size	:= this._getGuiSize()

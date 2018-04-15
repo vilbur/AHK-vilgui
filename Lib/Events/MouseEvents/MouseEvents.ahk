@@ -60,7 +60,6 @@ Class MouseEvents_vgui extends EventBind_vgui
 onMouseMainCallback(wParam, L, M, H)
 {
 	MsgBox,262144,, onMouseMainCallback,2 
-
 }
 
 /** onWheelOrScrollMessage

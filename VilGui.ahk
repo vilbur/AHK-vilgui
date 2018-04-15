@@ -45,10 +45,10 @@ Class VilGUI extends Gui_vgui
 		this._bindMouseEvents()
 		
 		this._setMaxHeightByMonitor()
-
+		
 		this.show( this._getInitOptions() " " $options )
 		this._setHwnd()
-
+		
 		this.autosize()
 		
 		if( this._fixed_width )
