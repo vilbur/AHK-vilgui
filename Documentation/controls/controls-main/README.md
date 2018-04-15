@@ -4,13 +4,7 @@
 ## Common Methods  
 Methods shared with all control types  
 
-
-![Test1](controls-items.jpeg)  
-![Test3](controls-items.jpeg?raw=true)  
-
-![Test1](/../controls-guicontrol/controls-guicontrol-after.jpeg)  
-![Test2](../controls-guicontrol/controls-guicontrol-after.jpeg)  
-
+__[controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)__  
 
 __add__( [string __$id__] ) // @return object __Control__  
     // add control to gui with given id, $id is used as value if value is not defined  
