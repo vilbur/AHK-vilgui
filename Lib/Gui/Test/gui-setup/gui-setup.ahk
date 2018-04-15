@@ -1,6 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\..\VilGUI.ahk
-
+#Include %A_LineFile%\..\..\..\..\..\VilGui.ahk
 /* Example 1
 */
 new VilGUI("Gui Default").create()

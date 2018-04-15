@@ -1,5 +1,10 @@
 __GUI__  
-__[Create Gui](/Documentation/gui)__  __[Styling - Control colors](/Documentation/style)__  
+__[Gui setup](/Lib/Gui/Test/gui-setup/readme.md)__  
+__[Gui methods](/Lib/Gui/Test/gui-methods/readme.md)__  
+__[Gui position](/Lib/Gui/Test/gui-position/readme.md)__  
+__[Gui size](/Lib/Gui/Test/gui-size/readme.md)__  
+
+__[Styling - Control colors](/Documentation/style)__  
 __Events__  __[Gui Events](/Documentation/events/gui-events)__  
 __[Key press Events](/Documentation/events/key-press)__  
 __[Mouse Events](/Documentation/events/mouse-events)__  

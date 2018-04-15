@@ -13,34 +13,47 @@ Class Control_vgui extends ControlSetup_vgui
 		this._type	:= RegExReplace(  this.__class, "_vgui$", "" )
 		this.address()
 	}
-	/** add
-	*/
+	/** Add control to Gui
+	 * 
+	 * @param	string	$name	name of control
+	 * 
+	 * @return	object Controls
+	 */
 	add($name:="")
 	{
 		this.name($name)
+		
 		return % this.Controls().add(this) ; clone added object if user insert one object multiple times
 	}
-	/** delete control from Layout, ControlList and Gui 
+	
+	/** Delete control from Gui, Layout & ControlList
 	 */
 	delete()
 	{
 		;MsgBox,262144,DELETE CONTROL, % this._name ,3
 		Object(this._layout_container).deleteControlFromSection(this)
 	}
-	/** Get configured Control object which is able passed to Controls.add()
-	*/
+	/** Get configured Control object which is prepared to be passed Controls.add( $Control )
+	 * 
+	 * @return	object	Control	  
+	 */
 	get()
 	{
 		this.preAdd()
 		return this
 	}
 	/** clear values in item types control
-	  * TODO: Tested on Dropdown, needs to be tesed on others
+	 * 
 	 */
 	clear()
 	{
 		return % this.edit("")
 	}
+	
+	/*---------------------------------------
+		PRIVATE
+	-----------------------------------------
+	*/
 	/** set Value Or Items
 	*/
 	_setValue($value)

@@ -10,8 +10,11 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	_resizable	:= false
 	_fixed_width	:= false	; store value for gui create()
 	
-	/** Resize GUI
+	/** Set size of gui
+	  * @param	int|string	$width	absolute or relative size e.g.: 512 OR "+128"
+	  * @param	int|string	$height	absolute or relative size
 	  *
+	  * @return self test description 
 	  */
 	size($width:="", $height:="")
 	{
@@ -19,10 +22,13 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		this._setSize("h", $height)
 		
 		this._scrollbar()
+		
 		return this
 	}
-	/** Resize GUI by its content
-	*/
+	/** Resize gui by content
+	 *
+	 *  Respect size(), minSize(), maxSize()
+	 */
 	autosize()
 	{
 		this.Events.Window.pause("size")
@@ -45,9 +51,10 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		return this
 	}
 	
-	/** make gui resizeable
-	  * default is unresizable gui 
-	*/
+	/** Make gui resizeable
+	 *
+	 * Default is unresizable gui 
+	 */
 	resizeable($toggle:=true)
 	{
 		this._resizable := $toggle
@@ -56,8 +63,11 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		
 		return this
 	}
-	/** set minimal size of gui
-	*/
+	/** Set minimal size of gui
+	 *
+	 * @param	int	$width
+	 * @param	int	$height
+	 */
 	minSize($width:="",$height:="")
 	{
 		this._minMaxSize("Min", "w", $width)
@@ -65,7 +75,10 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		
 		return this
 	}
-	/** set maximal size of gui
+	/** Set maximal size of gui
+	 *
+	 * @param	int	$width
+	 * @param	int	$height
 	*/
 	maxSize($width :="",$height:="")
 	{
@@ -74,7 +87,10 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		
 		return this
 	}
-	/** set fixed with of gui
+	/** Set fixed with of gui
+	 *
+	 * Fix to current without $width 
+	 * @param	int	$width
 	*/
 	fixedWidth($width:=true)
 	{
@@ -117,12 +133,9 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	*/
 	_setSize($wh, $value)
 	{
-		if(RegExMatch( $value, "^[\+\-]" )) ; if $value is relative
-		{ 
-			$size := this._getGuiSize()
-			$value := ($wh=="w" ? $size.w : $size.h) + $value
-		}
-		if( ! $value)
+		$value := this._getRelativeSize( $wh, $value )
+		
+		if( ! $value )
 			return
 
 		this._sizes.size[$wh] := $value
@@ -130,6 +143,17 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		if( this._hwnd )
 			this.show( $wh $value, this._name )
 	}
+	/** if $value is relative
+	 */
+	_getRelativeSize( $wh, $value )
+	{
+		if( ! RegExMatch( $value, "^[\+\-]" )) 
+			return $value
+		
+		$size := this._getGuiSize()
+		
+		return % ($wh=="w" ? $size.w : $size.h) + $value
+	} 
 	/** _minMaxSize
 	*/
 	_minMaxSize($min_max, $wh, $value)

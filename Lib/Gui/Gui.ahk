@@ -6,34 +6,52 @@ Class Gui_vgui extends GuiLayout_vgui
 	
 	_last_active_window	:= "" ; store last active window for centering
 
-	/**	wrapper for https://autohotkey.com/docs/commands/Gui.htm#Show
-	 *	@param string $options
-	 */
-	show($options:="")
-	{
-		Gui, % this._gui("Show"), %$options%, % this._title
-		;MsgBox,262144,options, %$options%
-		return this
-	}
-	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm
-	 ;*	@param string $options strings from documentation 
+	/*---------------------------------------
+		SHOW METHODS
+	-----------------------------------------
 	*/
+	/** Wrapper for [Gui, command](https://autohotkey.com/docs/commands/Gui.htm)
+	 *	 
+	 *	@param string $command command from documentation
+	 
+	 *	@param string $param1 param from documentation	 
+	 *	@param string $param2 param from documentation
+	 *	@param string $param3 param from documentation 	 	 	 
+	 *
+	 * @return self
+	 */
 	gui($command, $param1:="", $param2:="", $param3:="")
 	{
 		Gui, % this._gui($command), %$param1%, %$param2%, %$param3%		
 		return this
-	}	
-	/** wrapper for https://autohotkey.com/docs/commands/Gui.htm#Options
-	 *	@param string $options strings from documentation 
-	*/
-	options($option:="")
+	}
+	/** Wrapper for [Gui, Show](https://autohotkey.com/docs/commands/Gui.htm#Show)
+	 *
+	 *	@param string $options options from documentation
+	 *
+	 * @return self
+	 */
+	show($options:="")
 	{
-		Gui, % this._gui($option)	 
+		Gui, % this._gui("Show"), %$options%, % this._title
+		return this
+	}
+	/** Wrapper for [Gui +/- option](https://autohotkey.com/docs/commands/Gui.htm#Options)
+	 *
+	 *	@param string $options options from documentation 
+	 */
+	options($options:="")
+	{
+		Gui, % this._gui($options)	 
 		;MsgBox,262144,option, %$option%,3 
 		return this
 	}
-	/** set window always on top
-	*/
+	/** Set window always on top
+	 *
+	 * @param	boolean	$toggle
+	 *
+	 * @return self
+	 */
 	alwaysOnTop($toggle:=true)
 	{
 		this.options(this._getPlusMinus($toggle) "AlwaysOnTop")
@@ -50,7 +68,7 @@ Class Gui_vgui extends GuiLayout_vgui
 		this.Events.Window._removeOnMessageMain() ; remove onMessage, it breaks restore()
 		WinHide, % this.ahkId()		
 	}
-	/** restore gui from tray
+	/** Restore gui from tray
 	 */
 	restore()
 	{
@@ -61,9 +79,10 @@ Class Gui_vgui extends GuiLayout_vgui
 		SUBMIT, CLOSE & EXIT  METHODS
 	-----------------------------------------
 	*/
-	/** submit gui
-		@return object values of all controls
-	*/
+	/** Submit gui
+	 *
+	 *	@return {control_name:value}
+	 */
 	submit()
 	{
 		$form_data := this.Controls.values()
@@ -74,7 +93,7 @@ Class Gui_vgui extends GuiLayout_vgui
 		this.Events.gui.call("onSubmit", {data:$form_data})	; call GUI events
 		return %$form_data%
 	}
-	/** close window
+	/** Close window
 	*/
 	close()
 	{
@@ -82,7 +101,7 @@ Class Gui_vgui extends GuiLayout_vgui
 		this.Events.gui.call("onClose")
 		this.gui("Destroy")
 	}
-	/** exit script
+	/** Exit script
 	*/
 	exit()
 	{

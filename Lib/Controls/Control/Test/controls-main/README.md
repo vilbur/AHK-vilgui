@@ -6,11 +6,6 @@ Methods shared with all control types
 
 
 
-![controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)  
-[controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)  
-__[controls guicontrol after](../controls-guicontrol/controls-guicontrol-after.jpeg)__  
-
-
 __add__( [string __$id__] ) // @return object __Control__  
     // add control to gui with given id, $id is used as value if value is not defined  
 __callback__( $string __$fnName__, __$params__* ) // @return object __Control__  

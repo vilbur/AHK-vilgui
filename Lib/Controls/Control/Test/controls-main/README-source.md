@@ -1,6 +1,12 @@
-# Controls construct  
+# Class Controls  
+## Create controls  
 
-#### Methods  
+## Common Methods  
+Methods shared with all control types  
+
+
+
+
 __add__( [string __$id__] ) // @return object __Control__  
 	// add control to gui with given id, $id is used as value if value is not defined  
 
@@ -36,7 +42,7 @@ __value__( string __$value__ ) // @return object __Control__
 * Radio  
 * ListBox  
 
-#### Methods  
+### Methods  
 
 __items__( string|array|object __$items__ ) // @return object __Control__  
     // items in control  

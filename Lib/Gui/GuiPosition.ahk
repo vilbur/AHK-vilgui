@@ -10,52 +10,65 @@ Class GuiPosition_vgui
 	 */
 	position( $x:="", $y:="" )
 	{
-		if( $x )
-			this._position.x := $x
+		$x := this._getRelativePosition( "x", $x )
+		$y := this._getRelativePosition( "y", $y )		
 			
-		if( $y )
-			this._position.y := $y
+		if( ! this._hwnd )
+			this._position := {x: $x, y: $y} 
+
+		else
+			this._move( $x, $y )
 
 		return this
 	}
+	
+
 	/** center gui on display
-	 * @param string $xy	"x|y|window" // center "x|y" to screen, "window" center gui to CURRENT WINDOW
-	 * @param boolean $toggle  
+	 *	@param string  $xy	"x|y|window" // center("xy") center to screen, center("x") center only x, center("window") to current window
 	 */
-	center($xy:="", $toggle:=true)
+	center($xy:="")
 	{
-		if( $xy )
-			this._center[$xy] := $toggle
-		
 		if( this._hwnd )
 		{
-			if( ! this._center.window )
-			{
-				this._centerGui("x", "Center")
-				this._centerGui("y", "Center")
-			} else
+			if( $xy != "window" )
+				Loop, Parse, $xy
+					this._centerGui(A_LoopField)				
+
+			 else
 				this._centerToWindow()
 		}
 		return this
 	}
-	/** Move window to postion
-	 */
-	move( $x:="", $y:="" )
-	{
-		WinMove, % this.ahkId(),, this._getPostionValue( "x", $x ), this._getPostionValue( "y", $y )
-		
-		return this
-	}
+
 	/*---------------------------------------
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/** Move window to postion
+	 */
+	_move( $x, $y )
+	{
+		WinMove, % this.ahkId(),, %$x%, %$y%
+		
+		return this
+	}
 	/**
 	 */
-	_centerGui( $xy, $toggle )
+	_centerGui( $xy )
 	{
-		if($toggle)
-			this.show( $xy "Center")
+		this.show( $xy "Center")
+		;this._center[$xy] := $toggle
+	}
+	/** if $value is relative
+	 */
+	_getRelativePosition( $xy, $value )
+	{
+		if( ! RegExMatch( $value, "^[\+\-]" )) 
+			return $value
+		
+		$pos := this._getPostion()
+		
+		return % ($xy=="x" ? $pos.x : $pos.y) + $value
 	} 
 	/** Get position of Gui or given window
 	 */
@@ -65,12 +78,10 @@ Class GuiPosition_vgui
 		
 		return  { "x": $x, "y": $y }
 	}
-	
 	/** return GIVEN value x|y if exists or CURRENT window position
 	 */
 	_getPostionValue( $xy, $value )
 	{
-		;WinGetPos, $x, $y,,, % this._name
 		return % $value ? $value : ( $xy=="x" ? this._getPostion().x : this._getPostion().y )
 	} 
 	/**
