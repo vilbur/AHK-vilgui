@@ -8,8 +8,8 @@ Methods shared with all control types
 ![Test1](controls-items.jpeg)  
 ![Test3](controls-items.jpeg?raw=true)  
 
-![Test1](/../controls-guicontrol/controls-guicontrol-after)  
-![Test2](../controls-guicontrol/controls-guicontrol-after)  
+![Test1](/../controls-guicontrol/controls-guicontrol-after.jpeg)  
+![Test2](../controls-guicontrol/controls-guicontrol-after.jpeg)  
 
 
 __add__( [string __$id__] ) // @return object __Control__  
