@@ -1,1 +1,1 @@
-# Gui init setup  ## Examples  [include:\gui-setup.ahk]  ## Result  ![Result](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/gui/gui-setup/gui-setup.png?raw=true "after callback")  
+# Gui init setup  ## Examples  [include:\gui-setup.ahk]  ## Result  ![gui setup](/gui-setup.png)  

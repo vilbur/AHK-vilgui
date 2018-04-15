@@ -1,6 +1,6 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\Lib\gui-construct.ahk
-#Include %A_LineFile%\..\..\Lib\gui-create.ahk
+#Include %A_LineFile%\..\..\gui-setup\gui-construct.ahk
+#Include %A_LineFile%\..\..\gui-setup\gui-create.ahk
 
 $Gui.position("+512", "+256") ; move relative to current position
 	.position("", 128)        ; move only y position

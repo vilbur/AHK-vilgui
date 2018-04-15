@@ -1,6 +1,6 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\Lib\gui-construct.ahk
-#Include %A_LineFile%\..\..\Lib\gui-create.ahk
+#Include %A_LineFile%\..\..\gui-setup\gui-construct.ahk
+#Include %A_LineFile%\..\..\gui-setup\gui-create.ahk
 
 $Gui.size("", "+128")    ; // resize vertically relative
 	.size(512, 128)      ; // resize gui
