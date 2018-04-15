@@ -2,7 +2,7 @@
 
 global $Gui
 
-$gui_name := "Gui" RegExReplace( A_ScriptName, ".ahk", "" ) 
+$gui_name := "Gui " RegExReplace( A_ScriptName, ".ahk", "" ) 
 
 /* GUI setup
 */

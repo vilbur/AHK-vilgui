@@ -1,5 +1,4 @@
-$Gui
-	.resizeable()
+$Gui.resizeable()
+	.alwaysOnTop()
 	.autosize()	; autoresize gui by content
-	.fixedWidth()	; with of gui is fixed
 	.create()
