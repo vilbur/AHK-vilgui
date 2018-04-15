@@ -40,9 +40,4 @@
 >Fix to current size without $width  
 
 ##  
-## Examples  [include:\gui-size.ahk]  ## Result  
-
-
-
-
-  
+## Examples  [include:\gui-size.ahk]  

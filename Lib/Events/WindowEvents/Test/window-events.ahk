@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\lib\gui-construct.ahk
+#Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 
 $Gui.Events.Window
 	.on("created",	"callbackWindow", "On created")
@@ -19,4 +19,4 @@ callbackWindow($Event:="", $params*)
 	$Event.message(1)
 }
 
-#Include %A_LineFile%\..\..\..\gui\lib\gui-create.ahk
+#Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-create.ahk
