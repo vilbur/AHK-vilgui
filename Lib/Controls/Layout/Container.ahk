@@ -4,8 +4,8 @@
 
 */
 
-Class Container_vgui{
-
+Class Container_vgui
+{
 	_ctr_addr	:= ""
 	;_Control	:= ""
 	;_type	:= "container"	; type of container`s control "ui|container"
@@ -20,20 +20,23 @@ Class Container_vgui{
 	*/
 	/** hwnd
 	*/
-	hwnd($hwnd){
+	hwnd($hwnd)
+	{
 		;Dump($hwnd, "hwnd", 1)
 		this._hwnd := $hwnd
 		return this
 	}
 	/** origin
 	*/
-	origin($origin){
+	origin($origin)
+	{
 		this._origin	:= $origin
 		return this
 	}
-	/** control
+	/** Set control associated with container, GroupBox or Tabs
 	*/
-	control($ctr_addr:=""){
+	control($ctr_addr:="")
+	{
 		if(!$ctr_addr)
 			return % Object(this._ctr_addr)
 
@@ -58,7 +61,8 @@ Class Container_vgui{
 	*/
 	/** addContainer
 	*/
-	addContainer($Control){
+	addContainer($Control)
+	{
 
 		;$Container_nested._hwnd	:= $Control.hwnd		
 		this.sectionsLast().addContainer($Control)
@@ -66,22 +70,25 @@ Class Container_vgui{
 	/** Get last section, add first if not exists yet
 		@return Object Section
 	*/
-	sectionsLast(){
+	sectionsLast()
+	{
 		if(this._isSectionsEmpty())
 			this.newSection(this._origin)
 		return % this.Sections[this.Sections.MaxIndex()]
 	}
 	/** sortSections
 	*/
-	sortSections(){
-
+	sortSections()
+	{
 		this.Bbox	:= new Bbox_vgui()
 		this.Bbox.set(this._origin)
 		;this.Sections.origin(this._origin)
 
-		For $s, $Section in this.Sections {
+		For $s, $Section in this.Sections
+		{
 			$next_section_pos	:= this._getNextSectionOrigin($s)
 			$Section_Bbox	:= $Section.nextPosition( $next_section_pos ).sortControls()
+
 			this.Bbox.add( $Section_Bbox )
 		}
 		return this
@@ -89,24 +96,27 @@ Class Container_vgui{
 	/** setOriginByPosition
 		@param int $x|$y add margin to origin position
 	*/
-	setOriginByPosition($x:=0,$y:=0){
-		;if(this._hwnd!=""){
-			GuiControlGet, $pos, Pos, % this.control().hwnd
-			this._origin	:= {"x": $posX+$x, "y": $posY+$y }
-			this.Bbox.set(this._origin)
-		;}
+	setOriginByPosition($x:=0,$y:=0)
+	{
+		GuiControlGet, $pos, Pos, % this.control().hwnd
+
+		this._origin	:= {"x": $posX+$x, "y": $posY+$y }
+		this.Bbox.set(this._origin)
+	
 		return this
 	}
 	/** Resize Container To bounding box
 		Add margins to right and bottom of bounding box
 	*/
-	resizeContainerToBBox(){
+	resizeContainerToBBox()
+	{
 		if(!this._isSectionsEmpty())
 			this.control().size(this.Bbox.x - this._origin.x + $_GUI_margin.control.x(), this.Bbox.y - this._origin.y + 5 )
 	}
 	/** Add new section_vgui if last section is not empty
 	*/
-	newSection(){
+	newSection()
+	{
 		if(this._isSectionsEmpty() || !this._isLastSectionEmpty())
 			this.Sections.push( new Section_vgui()
 										.type(this._type=="ui"?"container":"control")
@@ -118,10 +128,10 @@ Class Container_vgui{
 	*/
 	/** _getNextSectionOrigin
 	*/
-	_getNextSectionOrigin($index){
-
+	_getNextSectionOrigin($index)
+	{
 		$control_type	:= this.control()._type
-		;Dump($control_type, "control_type", 1)
+
 		$margin_x	:= !$control_type ? $_GUI_margin.ui.x()	: $_GUI_margin.control.x()
 		$margin_y	:= !$control_type ? $_GUI_margin.container.y()	: $_GUI_margin.control.y()
 
@@ -138,12 +148,14 @@ Class Container_vgui{
 	*/
 	/** _isSectionsEmpty
 	*/
-	_isSectionsEmpty(){
+	_isSectionsEmpty()
+	{
 		return % !this.Sections.MaxIndex()
 	}
 	/** _isLastSectionEmpty
 	*/
-	_isLastSectionEmpty(){
+	_isLastSectionEmpty()
+	{
 		return % !this.Sections[this.Sections.MaxIndex()].Controls.MaxIndex()
 	}
 

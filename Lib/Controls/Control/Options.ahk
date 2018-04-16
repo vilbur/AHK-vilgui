@@ -1,6 +1,7 @@
 /** Class Options_vgui
 */
-Class Options_vgui{
+Class Options_vgui
+{
 
 	options	:= ""
 
@@ -8,14 +9,16 @@ Class Options_vgui{
 		@param string options of control // https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options
 		@param string $control_type_defaults ALLOWS CHANGE TYPE OF CONTROL for default values E.G: for control type Text set defaults of "Label"
 	*/
-	set($options){
+	set($options)
+	{
 		this.options := $options
 		;if($control_type_defaults!="")
 			;this.control_type := $control_type_defaults
 	}
 	/** add
 	*/
-	add($options){
+	add($options)
+	{
 		this.options .= " " $options
 	}
 	/** get All or on of options
@@ -25,7 +28,8 @@ Class Options_vgui{
 
 		@return string $option given option or all options
 	*/
-	get($option:=""){
+	get($option:="")
+	{
 		if($option!=""){
 			$option_match := this._getOptionFromString(this.options, $option )
 			return % $option_match ? $option_match : ""
@@ -34,7 +38,8 @@ Class Options_vgui{
 	}
 	/** _getOptionFromString
 	*/
-	_getOptionFromString($options, $option){
+	_getOptionFromString($options, $option)
+	{
 		RegExMatch( $options, "i)(?:^|\s)" $option "([^\s]+)" , $option_match )
 		return % $option_match1
 	}

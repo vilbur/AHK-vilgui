@@ -37,7 +37,7 @@ Class VilGUI extends Gui_vgui
 		this.Events.Window.pause("created")
 		
 		this._sortLayouts()
-		this._tabsAutoSize()
+		;this._tabsAutoSize()
 		
 		this._addMenu()
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING

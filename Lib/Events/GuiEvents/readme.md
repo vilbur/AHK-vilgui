@@ -22,7 +22,6 @@
 |`@param string` $callback    |callback function "close\|exit\|false\|customCallback"    |  
 |`@param mixed` $params*    |any number of parameters    |  
 |`@return self`    |    |  
-##  
 
 ## Examples  
 

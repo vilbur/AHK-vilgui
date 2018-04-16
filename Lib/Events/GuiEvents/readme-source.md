@@ -30,8 +30,6 @@
 |`@param mixed` $params*	|any number of parameters	|  
 |`@return self`	|	|  
 
-##  
-
 
 ## Examples  
 

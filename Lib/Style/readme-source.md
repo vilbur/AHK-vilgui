@@ -11,8 +11,6 @@ Set color for focused control
 |`@param string|hex` [ $foreground="" ]	|color	|  
 |`@param string` [ $control_type="" ]	|type of control to apply focus colors	|  
 
-##  
-
 
 ## Examples  
 [include:\Test\controls-colors.ahk]  

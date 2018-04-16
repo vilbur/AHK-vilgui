@@ -9,17 +9,21 @@
 |`@param string` $param3	|param from documentation	|  
 |`@return self`	|	|  
 
+##  
 
 | __show__( [$options] )	|Wrapper for [Gui, Show](https://autohotkey.com/docs/commands/Gui.htm#Show)	|  
 |:---	|:---	|  
 |`@param string` $options	|options from documentation	|  
 |`@return self`	|	|  
 
+##  
+
 | __options__( [$options] )	|Wrapper for [Gui +/- option](https://autohotkey.com/docs/commands/Gui.htm#Options)	|  
 |:---	|:---	|  
 |`@param string` $options	|options from documentation	|  
 |`@return self`	|	|  
 
+##  
 
 | __alwaysOnTop__( [$toggle] )	|Set window always on top	|  
 |:---	|:---	|  
@@ -31,6 +35,7 @@
 | __hide__()	|Hide gui to tray	|  
 |:---	|:---	|  
 
+##  
 
 | __restore__()	|Restore gui from tray	|  
 |:---	|:---	|  
@@ -42,9 +47,12 @@
 |:---	|:---	|  
 |`@return {control_name:value}`	|	|  
 
+##  
+
 | __close__()	|Close window	|  
 |:---	|:---	|  
 
+##  
 
 | __exit__()	|Exit script	|  
 |:---	|:---	|  

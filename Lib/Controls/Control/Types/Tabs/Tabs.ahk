@@ -102,27 +102,39 @@ Class Tabs_vgui extends ControlItems_vgui
 		Layout
 	-----------------------------------------
 	*/
-	/** sortTabsLayouts
+	/** Sort layout of each tab
 	*/
 	sortTabsLayouts()
 	{
-
 		$Bbox_all_tabs	:= new Bbox_vgui()
+		
 		For $t, $Tab in this.Tabs
-			$Bbox_all_tabs.add( $Tab.Controls._Layout.ContainerMain
+			$Bbox_all_tabs.add( this._getTabBoundingBox( $Tab ) ) ; Sort layout of tab, get tab`s bounding box and add bbox to bbox of all tabs
+		
+		this._resizeTabsByBoundingBox($Bbox_all_tabs.remove(this.pos()))
+	}
+	/**
+	 */
+	_getTabBoundingBox( $Tab )
+	{
+		$tab_bbox := $Tab.Controls._Layout.ContainerMain
 									.setOriginByPosition($_GUI_margin.container.x(), $_GUI_margin.container.y())  ; Set margins to TOP & LEFT of TAB
 									.sortSections()
-									.Bbox) ; Sort layout of tab, get tab`s bounding box and add bbox to bbox of all tabs
-		this.resizeTabsByBoundingBox($Bbox_all_tabs.remove(this.pos()))
-	}
-	/** resizeTabsByBoundingBox
+									.Bbox
+
+		return $tab_bbox							
+	} 
+	
+	
+	/** _resizeTabsByBoundingBox
 	*/
-	resizeTabsByBoundingBox($Bbox)
+	_resizeTabsByBoundingBox($Bbox)
 	{
 		;Dump($Bbox, "Bbox", 1)
 		$tabs_min_size	:= {"x":200, "y":100}
 		$width	:= ($Bbox.x>$tabs_min_size.x ? $Bbox.x : $tabs_min_size.x) + $_GUI_margin.container.x() +5	; Set margins to RIGHT of TAB
 		$height	:= ($Bbox.y>$tabs_min_size.y ? $Bbox.y : $tabs_min_size.y) + $_GUI_margin.container.y() +5	; Set margins to BOTTOM of TAB
+		
 		this.size($width, $height)
 		;Dump($height, $width, 1)
 		;$Tabs.size($Bbox.x + $_GUI_margin.ui.x(), $Bbox.y + $_GUI_margin.ui.y())

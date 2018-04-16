@@ -22,13 +22,15 @@ Class Layout_vgui {
 
 	/** setParentGui
 	*/
-	__New(){
+	__New()
+	{
 		this._firstContainer()
 		return this
 	}
 	/** add new GroupBox_vgui OR Control to last GroupBox
 	*/
-	addControl($Control){
+	addControl($Control)
+	{
 		;Dump($Control,  $Control._name, 0)
 		this._openNewSectionIfNeeded($Control)
 
@@ -86,23 +88,27 @@ Class Layout_vgui {
 	*/
 	/** _isGroupBoxOpen
 	*/
-	_isGroupBoxOpen(){
+	_isGroupBoxOpen()
+	{
 		return % isObject(this._lastGroupBox())
 	}
 	/** _lastGroupBox
 	*/
-	_lastGroupBox(){
+	_lastGroupBox()
+	{
 		return % this.ContainerMain.sectionsLast()._ControlLast()
 	}
 	/** _sectionsIsEmpty
 	*/
-	_sectionsIsEmpty(){
+	_sectionsIsEmpty()
+	{
 		return % this.ContainerMain.Sections.MaxIndex()==""
 	}
 	/** Add new container_vgui
 		Bind Layout in tabs to outer Layout.Containers.Tabs
 	*/
-	_firstContainer(){
+	_firstContainer()
+	{
 		;MsgBox,262144,Layout_vgui, %  $_GUI_margin.ui.x(),5
 		this.ContainerMain._layout	:= "column"
 		this.ContainerMain._type	:= "ui"

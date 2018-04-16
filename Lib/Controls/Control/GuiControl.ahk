@@ -37,6 +37,7 @@ Class GuiControl_vgui extends ControlEvents_vgui
 	edit($value:="")
 	{
 		this._setValue($value)
+		
 		GuiControl,, % this.hwnd, % this._getValueOrItems()
 		
 		return this
@@ -49,7 +50,6 @@ Class GuiControl_vgui extends ControlEvents_vgui
 		GuiControl, % this.guiName() ":" $command, % this.hwnd, %$value%
 		return this
 	}
-		
 	/**
 	 */
 	color( $foreground, $background:="")
@@ -63,16 +63,25 @@ Class GuiControl_vgui extends ControlEvents_vgui
 
 			ControlColor(this.hwnd,$hwnd, $background, $foreground )
 	}
-	
 	/** _move control 
 	 * @return object $Control
 	 */
 	_move($x:="",$y:="")
 	{
-		GuiControlGet, $pos, Pos, % this.hwnd
-		GuiControl, % this.guiName() ":Move", % this.hwnd, % "x" ($x=="" ? $posX : $x) " y" ($y=="" ? $posY : $y)
+		$pos := this._getPostion()
+		
+		GuiControl, % this.guiName() ":Move", % this.hwnd, % "x" ($x=="" ? $pos.X : $x) " y" ($y=="" ? $pos.Y : $y)
 		
 		return this
 	}
+	/**
+	 */
+	_getPostion()
+	{
+		GuiControlGet, $pos, Pos, % this.hwnd
+		
+		return % {"x": $posX ,"y": $posY}
+	} 
+	
 
 }
