@@ -3,8 +3,11 @@
 Class GuiEvents_vgui extends EventBindDefault_vgui
 {
 	/** Fired on gui is submitted.
-
-		@param string $callback event "close|exit|false|callbackFn"
+	 * 
+	 * @param string $callback callback function "close|exit|false|customCallback"
+	 *
+	 * @param	mixed	$params	any number of parameters
+	 * 	 	 
 	*/
 	onSubmit($callback, $params*)
 	{

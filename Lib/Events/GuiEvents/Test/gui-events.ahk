@@ -1,29 +1,17 @@
 #SingleInstance force
 #Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 
-$Gui.Controls.layout("row")
-	.Edit().value("Lorem ipsum").label("Test Input").add().section()
-	.GroupBox().layout("row").add("Event Buttons")
-
-/* EVENT BUTTONS
-*/
-	.Button().submit()
-	.Button().close()
-	.Button().exit()			
-
-/* GUI EVENTS
-*/
 $Gui.Events.Gui
 	.onSubmit("callbackGui", "onSubmit Custom") 
-	;.onSubmit("close")
+	.onSubmit("close")
 	
 	.onClose("callbackGui", "onClose Custom")	
 	.onClose("exit")
 	
 	.onExit("confirmExit", "Exit script ?")	
-	;.onExit(false) ; remove callback
+	.onExit(false) ; remove callback
 
-
+ 
 /** callbackGui
 */
 callbackGui($Event:="", $params*)

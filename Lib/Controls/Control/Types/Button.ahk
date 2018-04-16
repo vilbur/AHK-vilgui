@@ -2,21 +2,24 @@
 */
 Class Button_vgui extends Control_vgui{
 
-	/** Makes submit button  
-	*/
+	/** Makes submit button
+	 * @param	string	$text	button text
+	 */
 	submit($text:="Submit"){
 		this.name($text)
 		this._bindDefaultCallback( &this.Base() ".submit")
 		return % this.Controls().add(this)
 	}
 	/** Makes close button  
-	*/
+	 * @param	string	$text	button text
+	 */
 	close($text:="Close"){
 		this._bindDefaultCallback( &this.Base() ".close")
 		return % this.add($text)
 	}
 	/** Makes exit button  
-	*/
+	 * @param	string	$text	button text
+	 */
 	exit($text:="Exit"){
 		this._bindDefaultCallback( &this.Base() ".exit")
 		return % this.add($text)

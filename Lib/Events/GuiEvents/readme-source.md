@@ -1,62 +1,37 @@
-# Events  
-
-## Event Buttons  
-
-* Submit button  
-* Close button  
-* Exit button  
-
-### Button methods  
-
-| __submit__( [$text] )	|Makes submit button	|  
-|:---	|:---	|  
-|`@param string` [ $text="Submit" ]	|	|  
-
-##  
-
-| __close__( [$text] )	|Makes close button	|  
-|:---	|:---	|  
-|`@param string` [ $text="Close" ]	|	|  
-
-##  
-
-| __exit__( [$text] )	|Makes exit button	|  
-|:---	|:---	|  
-|`@param string` [ $text="Exit" ]	|	|  
-
-##  
-
-
-__Produce this buttons__  
-![event-buttons](https://github.com/vilbur/ahk-vilgui/blob/master/Documentation/events/gui/event-buttons.jpeg?raw=true "Event buttons")  
-
-## Gui events  
+# Gui events  
 
 * onSubmit  
 * onEscape  
 * onClose  
 * onExit  
 
-### Events methods  
+## Events methods  
 
-
-| __onSubmit__( $callback, $params* )	|Fired on gui is submitted.	|  
+| __onSubmit__( $callback, $params*, $params )	|Fired on gui is submitted.	|  
 |:---	|:---	|  
-|	|	|  
+|`@param string` $callback	|callback function "close|exit|false|customCallback"	|  
+|`@param string` $params*	|	|  
+|`@param mixed` $params	|any number of parameters	|  
+|`@return self`	|	|  
 
 ##  
 
 | __onClose__( $callback, $params* )	|Fired on gui close with "X" button.	|  
 |:---	|:---	|  
-|	|	|  
+|`@param string` $callback	|	|  
+|`@param string` $params*	|	|  
+|`@return self`	|	|  
 
 ##  
 
 | __onExit__( $callback, $params* )	|Fired on gui is exiting script.	|  
 |:---	|:---	|  
-|	|	|  
+|`@param string` $callback	|	|  
+|`@param string` $params*	|	|  
+|`@return self`	|	|  
 
 ##  
+
 
 __@pram $callback__  
 $callback := __"customFunction"__ // custom callback function  
@@ -70,4 +45,4 @@ First parameter passed to callback is __[$Event](Documentation/events/event/)__ 
 
 ## Examples  
 
-[include:\gui-events.ahk]  
+[include:\Test\gui-events.ahk]  

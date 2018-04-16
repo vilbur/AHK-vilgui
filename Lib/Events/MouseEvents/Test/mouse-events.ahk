@@ -2,21 +2,20 @@
 #Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 		
 $Gui.Events.Mouse
-	.on("enter",	"onMouse")
-	.on("move",	"onMouse")
-	.on("leftClick",	"onMouse")
-	.on("leftClickUp",	"onMouse")
-	.on("leftDoubleclick",	"onMouse")
-	.on("rightClick",	"onMouse")
-	.on("rightClickUp",	"onMouse")
-	.on("rightDoubleclick",	"onMouse")
-	.on("middleClick",	"onMouse")
-	.on("middleClickUp",	"onMouse")
-	.on("middleDoubleclick",	"onMouse")
-	.on("mouseWheel",	"onMouse")
-	.on("mouseWheelHorizontal",	"onMouse")
+    .on("enter",                "onMouse")
+    .on("move",                 "onMouse")
+    .on("leftClick",            "onMouse")
+    .on("leftClickUp",          "onMouse")
+    .on("leftDoubleclick",      "onMouse")
+    .on("rightClick",           "onMouse")
+    .on("rightClickUp",         "onMouse")
+    .on("rightDoubleclick",     "onMouse")
+    .on("middleClick",          "onMouse")
+    .on("middleClickUp",        "onMouse")
+    .on("middleDoubleclick",    "onMouse")
+    .on("mouseWheel",           "onMouse")
+    .on("mouseWheelHorizontal", "onMouse")
 	
-
 /** onMouse
 */
 onMouse($Event:="", $params*)

@@ -2,19 +2,19 @@
 #Include %A_LineFile%\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 
 $Gui.Events.Window
-	.on("created",	"callbackWindow", "On created")
-	.on("close",	"callbackWindow", "On close")	
-	.on("focus",	"callbackWindow", "On focus")
-	.on("blur",	"callbackWindow", "On blur")
+	.on("created", "onWindow", "On created")
+	.on("close",   "onWindow", "On close")	
+	.on("focus",   "onWindow", "On focus")
+	.on("blur",    "onWindow", "On blur")
 	
-	.on("size",	"callbackWindow", "On size")
-	.on("move",	"callbackWindow", "On move")		
-	.on("sizedmoved",	"callbackWindow", "On sizedmoved")	
+	.on("size",       "onWindow", "On size")
+	.on("move",       "onWindow", "On move")		
+	.on("sizedmoved", "onWindow", "On sizedmoved")	
 	
 
-/** callbackWindow
+/** onWindow
 */
-callbackWindow($Event:="", $params*)
+onWindow($Event:="", $params*)
 {
 	$Event.message(1)
 }
