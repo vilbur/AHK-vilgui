@@ -8,7 +8,7 @@ $Gui.Events.Key
 	.onEnter("onKeyPress", "onEnter" ) 
 	.onEnter("close")
 	
-	.on("number", "onKeyPress" ) 	; NOTE: "number" is for numbers 0-9
+	.on("number", "onKeyPress" ) 	; // "number" is for numbers 0-9
 
 	.on("Space", "onKeyPress" )                       ; // modifiers are passed to $Event object
 	.on(["control", "shift", "space"], "onKeyPress" ) ; // fired only if modifier keys are pressed

@@ -11,4 +11,5 @@ __[Mouse events](Lib/Events/MouseEvents/readme.md)__
 __[Window events](Lib/Events/WindowEvents/readme.md)__  
 __Controls__  
 __[Button, Edit, Text, Checkbox](Documentation/controls/controls-main#basic-controls)__  
-__[Dropdown, Radio, ListBox](Documentation/controls/controls-main#items-controls)__  __Control of Controls__  __[GuiControl](Documentation/controls/controls-guicontrol)__    
+__[Dropdown, Radio, ListBox](Documentation/controls/controls-main#items-controls)__  __[Controls buttons](Lib/Controls/Control/Test/controls-event/readme.md)__  
+__Control of Controls__  __[GuiControl](Documentation/controls/controls-guicontrol)__    

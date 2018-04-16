@@ -5,9 +5,9 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 	/** Fired on gui is submitted.
 	 * 
 	 * @param string $callback callback function "close|exit|false|customCallback"
+	 * @param	mixed	$params*	any number of parameters
 	 *
-	 * @param	mixed	$params	any number of parameters
-	 * 	 	 
+	 * @return self
 	*/
 	onSubmit($callback, $params*)
 	{
@@ -16,6 +16,11 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 		return this
 	}
 	/** Fired on gui close with "X" button.
+	 * 
+	 * @param string $callback callback function "close|exit|false|customCallback"
+	 * @param	mixed	$params*	any number of parameters
+	 *
+	 * @return self
 	*/
 	onClose($callback, $params*)
 	{
@@ -25,6 +30,11 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 		return this
 	}
 	/** Fired on gui is exiting script.
+	 * 
+	 * @param string $callback callback function "close|exit|false|customCallback"
+	 * @param	mixed	$params*	any number of parameters
+	 *
+	 * @return self
 	*/
 	onExit($callback, $params*)
 	{
@@ -32,16 +42,6 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 		
 		return this
 	}
-	;/**
-	; */
-	;_getEventObject($event)
-	;{
-	;	$EventObj := new EventObj_vgui()
-	;						.set("event", $event)
-	;	
-	;	return $EventObj 
-	;} 
-
-
+	
 }
 	
