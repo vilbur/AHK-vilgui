@@ -9,6 +9,9 @@ Class GuiControl_vgui extends ControlEvents_vgui
 	focus( )
 	{
 		ControlFocus,, % "ahk_id " this.hwnd
+		
+		this._setFocusColor()
+
 		return this
 	}
 	/** size
@@ -52,9 +55,9 @@ Class GuiControl_vgui extends ControlEvents_vgui
 	}
 	/**
 	 */
-	color( $foreground, $background:="")
+	color( $background:="", $foreground:="")
 	{
-		;CtlColors(this.hwnd, $background, $foreground )
+		CtlColors.change(this.hwnd, $background, $foreground )
 	}
 	/** _move control 
 	 * @return object $Control
@@ -74,6 +77,12 @@ Class GuiControl_vgui extends ControlEvents_vgui
 		GuiControlGet, $pos, Pos, % this.hwnd
 		
 		return % {"x": $posX ,"y": $posY}
+	}
+	/* Set focus color
+	*/
+	_setFocusColor()
+	{
+		this.controls().Base().Style.Color.setFocusColor(this.hwnd)		
 	} 
 	
 

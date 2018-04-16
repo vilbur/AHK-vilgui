@@ -122,9 +122,7 @@ Class KeyEvents_vgui extends EventBindDefault_vgui
   */
 onKeyDownMessage(wParam, lParam, msg, hwnd)
 {
-
-	$GUI := $_GUI[hwnd]
-	
+	$GUI := $_GUI[WinExist("A")]	
 
 	if($GUI && A_TimeIdleKeyboard==0 )
 	{

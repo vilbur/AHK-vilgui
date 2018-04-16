@@ -35,7 +35,7 @@ Class ControlColor_vgui
 		$type_ctrl	:= this._getClassName($hwnd_ctrl)
 		$colors	:= this._colors.hasKey($type_ctrl) ?  this._colors[$type_ctrl] : this._colors.global
 		
-		if( ! $colors.background || ! $colors.foreground )
+		if( ! $colors.background && ! $colors.foreground )
 			return
 	
 		this._resetControlsColors()

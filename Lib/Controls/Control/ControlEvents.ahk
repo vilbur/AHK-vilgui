@@ -56,8 +56,7 @@ Class ControlEvents_vgui
 	{
 		/* Set focus color
 		*/
-		this.controls().Base().Style.Color.setFocusColor(this.hwnd)
-
+		this._setFocusColor()
 		/* Call user callback
 		*/		
 		this.Event.control(this).callAllCallbacks()
