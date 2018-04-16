@@ -57,6 +57,7 @@ Class ControlEvents_vgui
 		/* Set focus color
 		*/
 		this._setFocusColor()
+		;MsgBox,262144,, % this._name,2 
 		/* Call user callback
 		*/		
 		this.Event.control(this).callAllCallbacks()

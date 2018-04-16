@@ -81,6 +81,20 @@ Class Gui_vgui extends GuiLayout_vgui
 		this.show()
 	}
 	/*---------------------------------------
+		Freeze\Unfreeze
+	-----------------------------------------
+	*/
+	/** Freeze\Unfreeze
+	 */
+	redraw($toggle:=true)
+	{
+		if( $toggle )
+			DllCall("LockWindowUpdate", Uint, 0)
+		else
+			DllCall("LockWindowUpdate", Uint, this._hwnd)
+	}
+
+	/*---------------------------------------
 		SUBMIT, CLOSE & EXIT  METHODS
 	-----------------------------------------
 	*/

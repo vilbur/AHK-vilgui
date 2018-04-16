@@ -6,6 +6,7 @@ Class ControlColor_vgui
 	_hwnd	:= 0 ; gui hwnd
 	_control_types	:= {"Combobox": "Dropdown"} ; convert class_nn to Vilgui control types
 	_colors	:= {global:{"background":"", "foreground":""}}
+	_ignore	:= {static:""} ; IGNORE text (class name==static)
 	
 	/** Set color of focused control
 	  *
@@ -32,13 +33,21 @@ Class ControlColor_vgui
 	 */
 	setFocusColor($hwnd_ctrl)
 	{
+		;if( ! $hwnd_ctrl )
+			;return
+		
 		$type_ctrl	:= this._getClassName($hwnd_ctrl)
+		
+		if( this._ignore.hasKey($type_ctrl) )
+			return
+		
 		$colors	:= this._colors.hasKey($type_ctrl) ?  this._colors[$type_ctrl] : this._colors.global
+		;MsgBox,262144,type_ctrl, %$type_ctrl%,2
 		
 		if( ! $colors.background && ! $colors.foreground )
 			return
 	
-		this._resetControlsColors()
+		this._resetControlsColors($hwnd_ctrl)
 		
 		CtlColors.Change($hwnd_ctrl, $colors.background, $colors.foreground  )		
 	}
@@ -70,13 +79,22 @@ Class ControlColor_vgui
 		if( ! this._colors[$type] )
 			this._colors[$type] := {}
 	} 
-	/**
+	/** Reset foccus color on all controls except current color
+	  *
+	  * @param	int	$hwnd_ctrl_current	hwnd of current control
 	 */
-	_resetControlsColors()
+	_resetControlsColors($hwnd_ctrl_current)
 	{
 		WinGet, ActiveControlList, ControlListHwnd , A
 			Loop, Parse, ActiveControlList, `n
-				CtlColors.Change( A_LoopField, "" )
+				if( $hwnd_ctrl_current!=A_LoopField )
+					CtlColors.Change( A_LoopField, "" )
+	}
+	/**
+	 */
+	_resetColor( $hwnd )
+	{
+		
 	} 
 	/**
 	  * @return string  HWND's class name without its instance number, e.g. "Edit" or "SysListView32"
