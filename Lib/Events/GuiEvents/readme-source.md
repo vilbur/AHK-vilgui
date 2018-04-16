@@ -5,6 +5,7 @@
 * onClose  
 * onExit  
 
+
 ## Events methods  
 
 | __onSubmit__( $callback, $params* )	|Fired on gui is submitted.	|  

@@ -4,32 +4,34 @@
 * Close button  
 * Exit button  
 
-### Button methods  
+
+## Button methods  
 
 | __submit__( [$text] )	|Makes submit button	|  
 |:---	|:---	|  
-|`@param string` [ $text="Submit" ]	|button text	|  
+|`@param string` [ $text="Submit" ]	|Text of button	|  
 |`@return self`	|	|  
 
 ##  
 
 | __close__( [$text] )	|Makes close button	|  
 |:---	|:---	|  
-|`@param string` [ $text="Close" ]	|button text	|  
+|`@param string` [ $text="Close" ]	|Text of button	|  
 |`@return self`	|	|  
 
 ##  
 
 | __exit__( [$text] )	|Makes exit button	|  
 |:---	|:---	|  
-|`@param string` [ $text="Exit" ]	|button text	|  
+|`@param string` [ $text="Exit" ]	|Text of button	|  
 |`@return self`	|	|  
 
-##  
+
+## Examples  
 
 [include:\controls-event.ahk]  
 
-__Produce this buttons__  
+## Result  
 ![event buttons](controls-event.jpeg)  
 
   

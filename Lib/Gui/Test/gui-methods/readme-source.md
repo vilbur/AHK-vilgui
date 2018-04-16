@@ -1,5 +1,5 @@
 # Gui methods  
-## Show methods  
+## Show  
 
 | __gui__( $command, [$param1], [$param2], [$param3] )	|Wrapper for [Gui, command](https://autohotkey.com/docs/commands/Gui.htm)	|  
 |:---	|:---	|  
