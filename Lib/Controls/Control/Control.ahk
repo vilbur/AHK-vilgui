@@ -79,7 +79,7 @@ Class Control_vgui extends ControlSetup_vgui
 	*/
 	_sanitizeName()
 	{
-		;this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
+		;;;this._name := RegExReplace( this._name, "i)[^A-Z0-9_]+", "" )
 		this._name := RegExReplace( this._name, "i)`n", " " )		
 		
 		return this
@@ -89,7 +89,6 @@ Class Control_vgui extends ControlSetup_vgui
 	removeFromGui()
 	{
 		;MsgBox,262144,DELETE CONTROL, % this._name ,3
-
 		this.Controls()._List.delete(this.hwnd)
 		WM_CLOSE=0x10
 		PostMessage, %WM_CLOSE%,,,, % "ahk_id " this.hwnd
@@ -99,6 +98,13 @@ Class Control_vgui extends ControlSetup_vgui
 		PARENTS
 	-----------------------------------------
 	*/
+	/** Set\Get Base class VilGUI
+		@return V
+	*/
+	Base()
+	{
+		return % this.Controls().Base()		
+	}
 	/** name of gui
 	*/
 	guiName($gui:="")
@@ -114,12 +120,6 @@ Class Control_vgui extends ControlSetup_vgui
 	{
 		return % Object(this._Controls)
 	}
-	/** Get Base class VilGUI
-		@return object
-	*/
-	Base()
-	{
-		return % this.Controls().Parent()
-	}
+
 
 }

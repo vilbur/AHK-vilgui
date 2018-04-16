@@ -47,10 +47,10 @@ Class VilGUITest{
 					 
 			;,new MenuTest()
 			;,new GuiEventsTest()
-			;
-			,new ControlsTest()
-			;,new ControlsEventTest()
-			,new ColorsTest()						
+			;;
+			;,new ControlsTest()
+			,new ControlsEventTest()
+			;,new ColorsTest()						
 			
 			
 			;,new CheckboxTest()

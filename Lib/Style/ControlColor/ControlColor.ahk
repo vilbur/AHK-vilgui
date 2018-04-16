@@ -21,7 +21,6 @@ Class ControlColor_vgui
 		
 		return this
 	}
-	
 	/**
 	 */
 	hwnd( $hwnd )
@@ -31,17 +30,17 @@ Class ControlColor_vgui
 	}
 	/**
 	 */
-	setFocusColor( $hwnd_ctrl)
+	setFocusColor($hwnd_ctrl)
 	{
 		$type_ctrl	:= this._getClassName($hwnd_ctrl)
 		$colors	:= this._colors.hasKey($type_ctrl) ?  this._colors[$type_ctrl] : this._colors.global
 		
 		if( ! $colors.background || ! $colors.foreground )
 			return
-			
+	
 		this._resetControlsColors()
 		
-		ControlColor($hwnd_ctrl, this._hwnd, $colors.background, $colors.foreground  )
+		CtlColors.Change($hwnd_ctrl, $colors.background, $colors.foreground  )		
 	}
 
 	/**
@@ -52,7 +51,7 @@ Class ControlColor_vgui
 			return 
 		
 		$type	:= this._getColorControlType($control_type)
-		$color	:= this._sanitizeColor( $color )
+		;$color	:= this._sanitizeColor( $color )
 		
 		this._setColorObject( $type )
 
@@ -63,12 +62,6 @@ Class ControlColor_vgui
 	_getColorControlType($control_type)
 	{
 		return % $control_type ? $control_type : "global"
-	}
-	/**
-	 */
-	_sanitizeColor( $color )
-	{
-		return % InStr( $color, "0x" ) ? $color : "0x" $color
 	}
 	/**
 	 */
@@ -83,7 +76,7 @@ Class ControlColor_vgui
 	{
 		WinGet, ActiveControlList, ControlListHwnd , A
 			Loop, Parse, ActiveControlList, `n
-				ControlColor( A_LoopField, this._hwnd )
+				CtlColors.Change( A_LoopField, "" )
 	} 
 	/**
 	  * @return string  HWND's class name without its instance number, e.g. "Edit" or "SysListView32"

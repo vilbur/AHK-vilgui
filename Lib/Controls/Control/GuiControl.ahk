@@ -54,14 +54,7 @@ Class GuiControl_vgui extends ControlEvents_vgui
 	 */
 	color( $foreground, $background:="")
 	{
-	
-		$hwnd := this.Base()._hwnd
-		
-		WinGet, ActiveControlList, ControlListHwnd , A
-			Loop, Parse, ActiveControlList, `n
-				ControlColor(A_LoopField, this.Base()._hwnd, "", "" )
-
-			ControlColor(this.hwnd,$hwnd, $background, $foreground )
+		;CtlColors(this.hwnd, $background, $foreground )
 	}
 	/** _move control 
 	 * @return object $Control

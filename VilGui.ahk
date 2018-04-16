@@ -14,7 +14,8 @@ Class VilGUI extends Gui_vgui
 	_hwnd	:= 0
 
 	__New($title)
-	{	
+	{
+		this._base	:= &this
 		this._title	:= $title	; BUG: GUI breaks If title with whitespace is used
 		this._name	:= RegExReplace( $title, "i)[^A-Z0-9]+", "" )
 		;$_GUI[this._name]	:= this
@@ -25,7 +26,7 @@ Class VilGUI extends Gui_vgui
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		this.Style	:= new Style_vgui()
-	
+
 		this._saveLastWindowCentering()
 	}
 	/** create gui
@@ -64,7 +65,7 @@ Class VilGUI extends Gui_vgui
 		this.Events.Window.resume("created")
 		
 		this.show()
-		
+		;Dump(this, "this.", 0)
 		return this
 	}
 

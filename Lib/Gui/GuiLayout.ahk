@@ -2,12 +2,7 @@
 */
 Class GuiLayout_vgui extends GuiSize_vgui
 {
-	/** Add tabs control
-	*/
-	tabs($tabs)
-	{
-		return % new Tabs_vgui(this.Controls).items($tabs)
-	}
+
 	/** _sortLayouts
 	*/
 	_sortLayouts()

@@ -139,8 +139,10 @@ Class Tabs_vgui extends ControlItems_vgui
 		;Dump($height, $width, 1)
 		;$Tabs.size($Bbox.x + $_GUI_margin.ui.x(), $Bbox.y + $_GUI_margin.ui.y())
 	}
-
-
+	/*---------------------------------------
+		SUBMIT
+	-----------------------------------------
+	*/
 
 }
 

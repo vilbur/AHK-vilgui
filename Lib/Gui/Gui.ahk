@@ -5,7 +5,12 @@ Class Gui_vgui extends GuiLayout_vgui
 	Monitor	:= new Monitor()
 	
 	_last_active_window	:= "" ; store last active window for centering
-
+	/** Add tabs control
+	*/
+	Tabs($tabs)
+	{
+		return % new Tabs_vgui(this.Controls).items($tabs)
+	}
 	/*---------------------------------------
 		SHOW METHODS
 	-----------------------------------------

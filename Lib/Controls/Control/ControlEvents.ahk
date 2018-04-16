@@ -54,11 +54,12 @@ Class ControlEvents_vgui
 	*/
 	_mainCallback($params*)
 	{
-		;;;; /** TODO save to ini*/
-		;MsgBox,262144,, _mainCallback,2
-		this.Base().Style.Color.setFocusColor(this.hwnd)
-		;this.Base().Style.colorTest()		
-		
+		/* Set focus color
+		*/
+		this.controls().Base().Style.Color.setFocusColor(this.hwnd)
+
+		/* Call user callback
+		*/		
 		this.Event.control(this).callAllCallbacks()
 	}
 	/*---------------------------------------

@@ -132,6 +132,7 @@
 #Include %A_LineFile%\..\Style\Style.ahk
 #Include %A_LineFile%\..\Controls\Layout\GuiMargin.ahk
 #Include %A_LineFile%\..\Style\ControlColor\ControlColor.ahk
+#Include %A_LineFile%\..\Style\ControlColor\Class_CtlColors.ahk
 
 /*---------------------------------------
 	MENUS

@@ -14,19 +14,26 @@ class ControlsEventTest
 	runMainTest()
 	{
 		$current_layout := $GuiTest.Controls.layout()
-		this.creeateScanfold()
+		this.creeateScanfold($GuiTest)
 		; this.creeateControlsItems()
+		
+		$Tabs	:= $GuiTest.Tabs( "A|B" ).add("TabsTest")
+		
+		For $t, $Tab in $GuiTest.TabsTest.Tabs
+			this.creeateScanfold($Tab)
+				
 	}
+	
 	/** creeateControlsMain
 	*/
-	creeateScanfold()
+	creeateScanfold($ParentGui)
 	{
 		$layout := "column"
 
-		$GuiTest.Controls.GroupBox().layout($layout).add("Controls Scanfold")
+		$ParentGui.Controls.GroupBox().layout($layout).add("Controls Scanfold")
 		
 		For $c, $Control in this.controls_main
-			this._addControl( $GuiTest.Controls.get($Control).clone() )
+			this._addControl( $ParentGui.Controls.get($Control).clone() )
 	}
 	/**
 	 */

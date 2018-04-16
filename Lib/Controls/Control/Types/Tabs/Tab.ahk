@@ -29,11 +29,21 @@ Class Tab_vgui
 	*/
 	setControls($Tabs)
 	{
-		this.Controls	:= new Controls_vgui().parent(this).guiName( $Tabs.Controls().guiName() )
+		;MsgBox,262144,, % $Tabs.Controls().Parent(),2 
+		this.Controls	:= new Controls_vgui().Base( $Tabs.Controls().Base() ).parent(this).guiName( $Tabs.Controls().guiName() )
 		this.Controls._Layout.ContainerMain.control(&$Tabs)
 		;Dump(this.Controls, "this.Controls", 0)
 		return this
 	}
-
+	/** Set\Get Base class VilGUI
+		@return VilGui
+	*/
+	Base($Base:="")
+	{
+		if($Base)
+			this._Base	:= &$Base
+			
+		return % $Base ? this : Object(this._Base)
+	}
 
 }

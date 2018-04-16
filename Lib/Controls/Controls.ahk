@@ -207,6 +207,17 @@ Class Controls_vgui extends ControlsTypes_vgui
 			
 		return % $Parent ? this : Object(this._Parent)
 	}
+	/** Set\Get Base class VilGUI
+		@return VilGui
+	*/
+	Base($Base:="")
+	{
+		if($Base)
+			this._Base	:= &$Base
+			
+		return % $Base ? this : (this._Base ? Object(this._Base) : this.Parent())
+	}
+	
 	/**
 	*/
 	ControlsList()
@@ -288,10 +299,7 @@ Class Controls_vgui extends ControlsTypes_vgui
 		if( $Control.value()!=0 )
 			$form_data[$Control.RadioGroup] := $Control._name
 	}
-	/*---------------------------------------
-		COLOR
-	-----------------------------------------
-	*/
+
 	
 
 }
