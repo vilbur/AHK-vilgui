@@ -8,7 +8,6 @@ Class KeyEvents_vgui extends EventBindDefault_vgui
 			,"Lwin":	0
 			,"Rwin":	0}						
 	
-	
 	/**
 	  * @param string|array $key name of key or array with modifiers E.G.: "space" OR ["control", "alt", "space"]
 	 */

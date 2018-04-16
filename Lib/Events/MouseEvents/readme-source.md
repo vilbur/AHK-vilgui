@@ -1,7 +1,5 @@
 # Mouse events  
 
-
-
 ## Examples  
 
-[include:\mouse-events.ahk]  
+[include:\Test\mouse-events.ahk]  
