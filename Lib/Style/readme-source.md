@@ -15,5 +15,7 @@ Set color for focused control
 
 
 ## Examples  
+[include:\Test\controls-colors.ahk]  
 
-[include:\controls-colors\controls-colors.ahk]  
+## Result  
+![controls colors](Test/controls-colors.gif)  
