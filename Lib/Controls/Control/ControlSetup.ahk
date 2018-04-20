@@ -6,14 +6,14 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	_type	:= ""
 	_value	:= ""
 
-	/** name
+	/** Set\Get control name
 	*/
 	name($name:="")
 	{
 		if($name)
 			this._name	:= $name
-		;MsgBox,262144,, % this._type "`nNAME",2
-		return this
+
+		return % $name ? this : this._name
 	}
 	/** Set value of control if not added in GUI yet
 	*/
