@@ -83,8 +83,8 @@ Class VilGUITest{
 			$test.runMainTest()
 		
 		this.showDefault()
-		;this.showFixedHeight()
-		;this.showResizable()
+		;this.showFixedAndCentered()
+		;this.showResizableOnPosition()
 
 		;Dump($GuiTest, "GuiTest", 0)
 	}
@@ -112,12 +112,12 @@ Class VilGUITest{
 	}
 	/** GUI SETUP EXAMPLE 2
 	*/
-	showFixedHeight()
+	showFixedAndCentered()
 	{
 		$GuiTest
 			.alwaysOnTop()
-			.center("window")      ; center to active window
 			.resizeable(false)
+			.center("window")      ; center to active window
 			.create()
 
 	}
@@ -126,15 +126,16 @@ Class VilGUITest{
 	 *		INIT, MIN MAX height
 	 *		FIXED width
 	 */
-	showResizable()
+	showResizableOnPosition()
 	{
 		$GuiTest
+			.create()
 			.resizeable()
 			.size("", 320 )
 			.minSize("", 128 )
-			.maxSize("", 512 )						
+			.maxSize("", 512 )
+			.position(512, 512)
 			.fixedWidth()
-			.create()
 
 	}
 	/*---------------------------------------

@@ -57,14 +57,15 @@ Class VilGUI extends Gui_vgui
 		
 		this.resizeable( this._resizable )
 		
+		;sleep, 500
 		if( this._center.window )
-			this.center()
+			this.center("window")
 		
 		this.Style.Color.hwnd(this._hwnd)
 		
 		this.Events.Window.resume("created")
 		
-		this.show()
+		;this.show()
 		;Dump(this, "this.", 0)
 		return this
 	}

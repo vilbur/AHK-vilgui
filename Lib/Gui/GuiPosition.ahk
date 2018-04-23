@@ -21,22 +21,23 @@ Class GuiPosition_vgui
 
 		return this
 	}
-	
-
 	/** center gui on display
 	 *	@param string  $xy	"x|y|window" // center("xy") center to screen, center("x") center only x, center("window") to current window
 	 */
-	center($xy:="")
+	center($center:="", $toggle:=true)
 	{
 		if( this._hwnd )
 		{
-			if( $xy != "window" )
-				Loop, Parse, $xy
-					this._centerGui(A_LoopField)				
+			if( InStr( $center, "xy" ) )
+				Loop, Parse, $center
+					this._centerXY(A_LoopField)				
 
-			 else
+			else if( $center == "window" )
 				this._centerToWindow()
 		}
+		else
+			this._setCenter( $center, $toggle  )
+		
 		return this
 	}
 
@@ -44,6 +45,17 @@ Class GuiPosition_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
+	/** Set values to this._center
+	 */
+	_setCenter( $center, $toggle )
+	{
+		if( InStr( $center, "xy" ) )
+			Loop, Parse, $center
+				this._center[A_LoopField] := $toggle
+				
+		else if( $center == "window" )
+			this._center.window := true
+	}  
 	/** Move window to postion
 	 */
 	_move( $x, $y )
@@ -54,10 +66,9 @@ Class GuiPosition_vgui
 	}
 	/**
 	 */
-	_centerGui( $xy )
+	_centerXY( $xy )
 	{
 		this.show( $xy "Center")
-		;this._center[$xy] := $toggle
 	}
 	/** if $value is relative
 	 */
@@ -88,8 +99,7 @@ Class GuiPosition_vgui
 	 */
 	_saveLastWindowCentering()
 	{
-		;MsgBox,262144,, _saveLastWindowCentering
-		this._last_active_window := WinExist("A")
+		this._last_active_window := WinActive("A")
 	} 
 	/** Center Gui window to active window
 	 */
@@ -97,15 +107,11 @@ Class GuiPosition_vgui
 	{
 		if ! WinExist( this.ahkId(this._last_active_window) )
 			return this
-		;MsgBox,262144,, % this._hwnd "`n" this._last_active_window 
+
 		$size_gui	:= this._getGuiSize()
-		;MsgBox,262144,size_gui, %$size_gui%,3
-		;MsgBox,262144,_hwnd, % this._hwnd,2
+
 		WinGetPos, $x, $y,$w,$h, % this.ahkId()
 		$size_gui	:= { w:$w, h:$h }
-		
-		;MsgBox,262144,size_gui, % $size_gui.x,3
-		
 		
 		$size_win	:= this._getGuiSize(this._last_active_window)
 		$pos_win	:= this._getPostion(this._last_active_window)		
