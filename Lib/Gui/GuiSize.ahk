@@ -33,14 +33,14 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	{
 		this.Events.Window.pause("size")
 		
-		this._fixSizeOnAutosize()
+		;this._fixSizeOnAutosize()
 		
 		;;;;this._margin($_GUI_margin.ui.x(), $_GUI_margin.ui.y())
 		this.show("AutoSize")
 		
-		this._restoreSizeOnAutosize()
+		;this._restoreSizeOnAutosize()
 		
-		;this._correctMarginOfGui()
+		this._correctMarginOfGui()
 		this._scrollbar()
 		
 		$size	:= this._getGuiSize()
@@ -161,43 +161,45 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		if( ! $value )
 			return	
 		
-		this.options("+Resize")
+		;this.options("+Resize")
 		
 		this._sizes[$min_max][$wh] := $value
 		
 		this.options( "+" $min_max "Size" ($wh=="w" ? $value : "") "x" ($h := $wh=="h" ? $value : ""))
-	}
-
-	/** Set size of guu as max size and backup this.sizes
-	  *
-	  * It allows autosize Gui only in one dimension
-	 */
-	_fixSizeOnAutosize()
-	{
-		if( ! this._sizes.size.w && ! this._sizes.size.h )
-			return
-
-		this._sizes_autosize_bak := this._objectClone(this._sizes)
-
-		this.minSize(this._sizes.size.w, this._sizes.size.h)
-		this.maxSize(this._sizes.size.w, this._sizes.size.h)		
-	}
-	/** restore backuped this._sizes
-	 */
-	_restoreSizeOnAutosize()
-	{
-		if( ! this._sizes_autosize_bak )
-			return
 		
-		this._sizes := this._objectClone(this._sizes_autosize_bak)
-	
-		this.options("-MaxSize")
+		;this.resizeable( this._resizable )
+	}
 
-		this.delete("_sizes_autosize_bak")
-	
-		this.minSize(this._sizes.min.w, this._sizes.min.h)
-		this.maxSize(this._sizes.max.w, this._sizes.max.h)		
-	} 
+	;/** Set size of guu as max size and backup this.sizes
+	;  *
+	;  * It allows autosize Gui only in one dimension
+	; */
+	;_fixSizeOnAutosize()
+	;{
+	;	if( ! this._sizes.size.w && ! this._sizes.size.h )
+	;		return
+	;
+	;	this._sizes_autosize_bak := this._objectClone(this._sizes)
+	;
+	;	this.minSize(this._sizes.size.w, this._sizes.size.h)
+	;	this.maxSize(this._sizes.size.w, this._sizes.size.h)		
+	;}
+	;/** restore backuped this._sizes
+	; */
+	;_restoreSizeOnAutosize()
+	;{
+	;	if( ! this._sizes_autosize_bak )
+	;		return
+	;	
+	;	this._sizes := this._objectClone(this._sizes_autosize_bak)
+	;
+	;	this.options("-MaxSize")
+	;
+	;	this.delete("_sizes_autosize_bak")
+	;
+	;	this.minSize(this._sizes.min.w, this._sizes.min.h)
+	;	this.maxSize(this._sizes.max.w, this._sizes.max.h)		
+	;} 
 	/* Fully clone object
 	*/
 	_objectClone($obj)

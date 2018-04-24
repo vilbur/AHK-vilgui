@@ -35,7 +35,7 @@ Class VilGUI extends Gui_vgui
 	 */
 	create($options:="")
 	{
-		this.Events.Window.pause("created")
+		;this.Events.Window.pause("created")
 		
 		this._sortLayouts()
 		;this._tabsAutoSize()
@@ -45,30 +45,33 @@ Class VilGUI extends Gui_vgui
 		
 		this._bindMouseEvents()
 		
-		this._setMaxHeightByMonitor()
+		;this._setMaxHeightByMonitor()
 		
-		this.show( this._getInitOptions() " " $options )
+		this.show( this._getPositionOptions() " " $options )
 		this._setHwnd()
 		
 		this.autosize()
 		
-		if( this._fixed_width )
-			this.fixedWidth(this._fixed_width)		
-		
-		this.resizeable( this._resizable )
-		
-		;sleep, 500
-		if( this._center.window )
-			this.center("window")
-		
+		this._applyInitOptions()
+
 		this.Style.Color.hwnd(this._hwnd)
 		
-		this.Events.Window.resume("created")
+		;this.Events.Window.resume("created")
 		
 		;this.show()
-		;Dump(this, "this.", 0)
+
 		return this
 	}
+	/**
+	 */
+	_applyInitOptions()
+	{
+		if( this._fixed_width )
+			this.fixedWidth(this._fixed_width)		
+				
+		if( this._center.window )
+			this.center("window")
+	}  
 
 	/*---------------------------------------
 		PRIVATE METHODS ON GUI CREATE
@@ -76,7 +79,7 @@ Class VilGUI extends Gui_vgui
 	*/
 	/**
 	 */
-	_getInitOptions()
+	_getPositionOptions()
 	{
 		$size_without_controls := ! this.Controls._Control ? "w128 h24 " : " " ; absolute minimum size to display gui without controls
 		

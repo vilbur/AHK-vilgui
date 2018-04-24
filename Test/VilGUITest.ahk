@@ -47,7 +47,7 @@ Class VilGUITest{
 					 
 			;,new MenuTest()
 			;,new GuiEventsTest()
-			;;
+			
 			;,new ControlsTest()
 			,new ControlsEventTest()
 			;,new ColorsTest()						
@@ -82,9 +82,10 @@ Class VilGUITest{
 		For $c, $test in this._Tests 
 			$test.runMainTest()
 		
-		this.showDefault()
-		;this.showFixedAndCentered()
-		;this.showResizableOnPosition()
+		;this.showDefault()
+		this.showFixedAndCentered()
+		;this.showMinMaxSize()
+		;this.showResizableFixedWidthOnPosition()		
 
 		;Dump($GuiTest, "GuiTest", 0)
 	}
@@ -121,21 +122,31 @@ Class VilGUITest{
 			.create()
 
 	}
+	/** GUI SETUP
+	  
+	 */
+	showMinMaxSize()
+	{
+		$GuiTest
+			.resizeable()
+			.size(320, 320 )
+			.minSize(128, 128 )
+			.maxSize(512, 512 )
+			.create()
+
+	}	
 	/** GUI SETUP EXAMPLE 3
 	 *		RESIZABLE 
 	 *		INIT, MIN MAX height
 	 *		FIXED width
 	 */
-	showResizableOnPosition()
+	showResizableFixedWidthOnPosition()
 	{
 		$GuiTest
-			.create()
 			.resizeable()
-			.size("", 320 )
-			.minSize("", 128 )
-			.maxSize("", 512 )
 			.position(512, 512)
 			.fixedWidth()
+			.create()
 
 	}
 	/*---------------------------------------

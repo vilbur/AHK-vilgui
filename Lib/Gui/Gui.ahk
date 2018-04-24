@@ -5,6 +5,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	Monitor	:= new Monitor()
 	
 	_last_active_window	:= "" ; store last active window for centering
+
 	/** Add tabs control
 	*/
 	Tabs($tabs)
@@ -48,7 +49,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	options($options:="")
 	{
 		Gui, % this._gui($options)	 
-		;MsgBox,262144,option, %$option%,3 
+		;MsgBox,262144,options, %$options%,3 
 		return this
 	}
 	/** Set window always on top
@@ -60,6 +61,7 @@ Class Gui_vgui extends GuiLayout_vgui
 	alwaysOnTop($toggle:=true)
 	{
 		this.options(this._getPlusMinus($toggle) "AlwaysOnTop")
+	
 		return this
 	}
 	/*---------------------------------------

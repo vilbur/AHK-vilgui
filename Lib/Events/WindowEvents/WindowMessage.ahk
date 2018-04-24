@@ -3,8 +3,8 @@
 Class WindowMessage_vgui
 {
 	_data	:= {}
-	_events	:=	{2:	"close"
-			,6:	"created"
+	_events	:=	{1:	"created"
+			,2:	"close"
 			,32772:	"focus"}
 	
 	/** Recive Window Message

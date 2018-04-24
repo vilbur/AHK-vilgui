@@ -9,8 +9,6 @@
   */
 Class Radio_vgui extends ControlItems_vgui
 {
-	
-	
 	_RadioGroup := {}
 
 	/** Add to GUI

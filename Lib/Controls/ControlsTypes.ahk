@@ -91,13 +91,5 @@ Class ControlsTypes_vgui{
 	label($value:=""){
 		return % new Label_vgui(this).value($value)
 	}
-	/** Keypress
-	*/
-	Keypress($value:=""){
-		;MsgBox,262144,, Keypress,2
-		;return % this.edit()
-		;.type("Edit")
-		;return % new Edit_vgui(this).value($value).type("Edit")
-		return % new Keypress_vgui(this).value($value)
-	}
+
 }

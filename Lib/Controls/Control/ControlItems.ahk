@@ -5,16 +5,29 @@ Class ControlItems_vgui extends Control_vgui
 
 	_items := {"string":"", "array":[]}
 
+	/** Get\Set items for radio buttons or tabs
+	 *  
+	 *  NOTE: THIS METHOD SHOULD BE IN EVERY CONTROL TYPE, AND GETTING OF ITEMS SHOUD BE DONE DYNAMICALLY
+	 *  
+	 *  @param	string|array	$items items for control E.G.: "A||B|C" OR ["A", "B", "C"]
+	 *  
+	 *  @return	self|array	return self when setting, or array when getting items  
+	 */
+	items($items:="~null")
+	{
+		return % $items!="~null" ? this._setItems($items) : this._items.array
+	}
+	
 	/** set items for radio buttons or tabs
 	*/
-	items($items:="")
+	_setItems($items)
 	{
 		if( isObject($items) )
 			$items := $items.clone() ; clone object, otherwise it will modify original array
 	
 		this._items.string	:= !isObject($items) ? $items : this._getItemsString($items)
 		this._items.array	:=  isObject($items) ? $items : this._getItemsArray($items)
-		;Dump(this._items, "this._items", 1)
+
 		return this
 	}
 	/** Set checked item
