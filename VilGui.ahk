@@ -51,7 +51,7 @@ Class VilGUI extends Gui_vgui
 		this._setHwnd()
 		
 		this.autosize()
-		
+
 		this._applyInitOptions()
 
 		this.Style.Color.hwnd(this._hwnd)

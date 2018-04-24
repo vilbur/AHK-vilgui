@@ -29,7 +29,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	 *
 	 *  Respect size(), minSize(), maxSize()
 	 */
-	autosize()
+	autosize() 
 	{
 		this.Events.Window.pause("size")
 		
@@ -40,8 +40,8 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		
 		;this._restoreSizeOnAutosize()
 		
-		this._correctMarginOfGui()
-		this._scrollbar()
+		;this._correctMarginOfGui()	; // BUG: sometimes makes gui huge, marging need review
+		;this._scrollbar()	; // BUG: sometimes shows scrollbar event it is not need, probably related to _correctMarginOfGui()	
 		
 		$size	:= this._getGuiSize()
 		this._sizes.auto 	:= {"w": $size.w,	"h": $size.h}

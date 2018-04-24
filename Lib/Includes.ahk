@@ -89,9 +89,6 @@
 /*
    ITEM TYPES
 */
-#Include %A_LineFile%\..\Controls\Control\Types\ItemTypes\keypress.ahk
-
-
 #Include %A_LineFile%\..\Controls\Control\Types\ItemTypes\Radio.ahk
 #Include %A_LineFile%\..\Controls\Control\Types\ItemTypes\Dropdown.ahk
 #Include %A_LineFile%\..\Controls\Control\Types\ItemTypes\ListBox\ListBox.ahk
