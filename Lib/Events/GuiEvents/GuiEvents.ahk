@@ -24,7 +24,7 @@ Class GuiEvents_vgui extends EventBindDefault_vgui
 	*/
 	onClose($callback, $params*)
 	{
-		;this.parent().Window.bindEvents()
+		this.parent().Window.setMessages("close")
 		this._setUserOrDefaultCallback("onClose", $callback, $params*)
 
 		return this

@@ -6,15 +6,11 @@ Class WindowEvents_vgui extends EventBind_vgui
 	_paused	:= {}	
 	Message 	:= new WindowMessage_vgui().WindowEvents(this)
 	
-	
 	/** 
 	*/
 	call($event, $event_data:="")
 	{	
 		this._call($event, $event_data)
-		
-		if( $event=="close" )
-			return % this.parent().gui.call("onClose")
 	}
 	
 	/**
@@ -46,7 +42,6 @@ Class WindowEvents_vgui extends EventBind_vgui
 	{
 		if( this._messages.main )
 			return
-		
 		Gui +LastFound
 		
 		hWnd := WinExist()

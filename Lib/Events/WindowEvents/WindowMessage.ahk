@@ -14,6 +14,11 @@ Class WindowMessage_vgui
 		$event	:= this._getEvent( wParam )
 		$method	:= this._getEventMethod( $event )
 		
+		;MsgBox,262144,, % $event ,2  
+
+		;if( $event=="close" )
+			;return % this.parent().gui.Test()
+			
 		if( ! this.WindowEvents().has( $event ) )
 			return
 			
@@ -128,6 +133,9 @@ onWindowMessage( wParam, lParam )
 	{
 		$_last_window	:= lParam ; save gui name for blur
 		$GUI.Events.Window.Message.callEvent(wParam, lParam)
+		
+		if( wParam==2 )
+			$GUI.Events.gui.call("onClose")				
 	}
 	else if( wParam==32772 ) { ; if blur
 		$_GUI[$_last_window].Events.Window.Message.callEvent("blur", lParam)
