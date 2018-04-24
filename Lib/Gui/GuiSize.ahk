@@ -118,11 +118,17 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	{
 		if( ! $hwnd )
 			$hwnd := this._hwnd
-		;MsgBox,262144,hwnd, %$hwnd%,3 
-		VarSetCapacity(rc, 16)
-		DllCall("GetClientRect", "uint", $hwnd, "uint", &rc)
+
+		if( $hwnd )
+		{
+			VarSetCapacity(rc, 16)
+			DllCall("GetClientRect", "uint", $hwnd, "uint", &rc)
+			
+			return {"w":NumGet(rc, 8, "int"), "h":NumGet(rc, 12, "int")}
+		}
+		else
+			return {"w":this._getControlsBboxSize("x"), "h":this._getControlsBboxSize("y")}
 		
-		return {"w":NumGet(rc, 8, "int"), "h":NumGet(rc, 12, "int")}
 	}
 	/** Set relative or absolute size of gui
 		@param "w|h"	$wh	width or height

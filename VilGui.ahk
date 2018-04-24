@@ -15,6 +15,8 @@ Class VilGUI extends Gui_vgui
 
 	__New($title)
 	{
+		this._saveLastWindowCentering()
+		
 		this._base	:= &this
 		this._title	:= $title	; BUG: GUI breaks If title with whitespace is used
 		this._name	:= RegExReplace( $title, "i)[^A-Z0-9]+", "" )
@@ -27,38 +29,34 @@ Class VilGUI extends Gui_vgui
 		this.Menus	:= new Menus()
 		this.Style	:= new Style_vgui()
 
-		this._saveLastWindowCentering()
 	}
 	/** create gui
 	 * Options are aplied after Gui is created
 	 *
 	 */
 	create($options:="")
-	{
-		;this.Events.Window.pause("created")
-		
+	{		
 		this._sortLayouts()
-		;this._tabsAutoSize()
-		
+		this._tabsAutoSize()
+
 		this._addMenu()
 		this._addTrayMenu() ; BUG: default menu does not show IN TESTING
 		
 		this._bindMouseEvents()
 		
-		;this._setMaxHeightByMonitor()
+		this._setMaxHeightByMonitor()
 		
-		this.show( this._getPositionOptions() " " $options )
+		this.show( this._getPositionOptions() "  " $options )
+		
 		this._setHwnd()
 		
 		this.autosize()
-
+	
 		this._applyInitOptions()
 
 		this.Style.Color.hwnd(this._hwnd)
 		
-		;this.Events.Window.resume("created")
-		
-		;this.show()
+		WinSet Redraw,, % this.ahkId()
 
 		return this
 	}
@@ -69,8 +67,8 @@ Class VilGUI extends Gui_vgui
 		if( this._fixed_width )
 			this.fixedWidth(this._fixed_width)		
 				
-		if( this._center.window )
-			this.center("window")
+		;if( this._center.window )
+		;	this.center("window")
 	}  
 
 	/*---------------------------------------
@@ -83,6 +81,14 @@ Class VilGUI extends Gui_vgui
 	{
 		$size_without_controls := ! this.Controls._Control ? "w128 h24 " : " " ; absolute minimum size to display gui without controls
 		
+		if( this._center.window )
+		{
+			$center_position := this._getCenterToWindowPositions()
+			;Dump($center_position, "center_position", 1)
+			this._position.x	:= $center_position.x
+			this._position.y	:= $center_position.y			
+		}
+		
 		$options :=	{x:	this._position.x
 			,y:	this._position.y
 			,w:	this._sizes.size.w
@@ -90,8 +96,14 @@ Class VilGUI extends Gui_vgui
 			,xCenter:	this._center.x
 			,yCenter:	this._center.y}
 		;Dump($options, "options", 1)
-		return % $size_without_controls this._joinOptions( this._removeCenterIfPositionDefined( $options ) )			
+		
+		$options_string := this._joinOptions( this._removeCenterIfPositionDefined( $options ) )
+		
+		;MsgBox,262144,options_string, %$options_string%,3 
+		
+		return % $size_without_controls " " $options_string 			
 	}
+	
 	/**
 	 */
 	_removeCenterIfPositionDefined( $options )

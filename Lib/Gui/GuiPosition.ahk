@@ -108,19 +108,25 @@ Class GuiPosition_vgui
 		if ! WinExist( this.ahkId(this._last_active_window) )
 			return this
 
+		$center_position := this._getCenterToWindowPositions()
+		
+		WinMove, % this.ahkId(),, % $center_position.x, % $center_position.y
+	}
+	/**
+	 */
+	_getCenterToWindowPositions()
+	{
 		$size_gui	:= this._getGuiSize()
 
-		WinGetPos, $x, $y,$w,$h, % this.ahkId()
-		$size_gui	:= { w:$w, h:$h }
-		
 		$size_win	:= this._getGuiSize(this._last_active_window)
 		$pos_win	:= this._getPostion(this._last_active_window)		
 		
 		$center_x	:= $pos_win.x + ($size_win.w - $size_gui.w)/2
 		$center_y	:= $pos_win.y + ($size_win.h - $size_gui.h)/2	
 		
-		WinMove, % this.ahkId(),, %$center_x%, %$center_y%
-	}
+		return { x: Round($center_x), y:Round($center_y) }	
+	}  
+	
 	
 	
 }

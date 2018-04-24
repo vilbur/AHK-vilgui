@@ -157,8 +157,9 @@ Class Gui_vgui extends GuiLayout_vgui
 	 */
 	_setHwnd()
 	{
+		sleep, 10
 		this._hwnd := WinExist("A")
-		;MsgBox,262144,_hwnd, % this._hwnd +0
+		
 		$_GUI[this._hwnd]	:= this
 	} 
 
