@@ -5,13 +5,19 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 {
 	/** Adds a string to a list box.
 	 *
-	 * @param	String	$string	Item for adding
+	 * @param	string|arra|object	$string	Item for adding
 	 *
-	 * @return Control
+	 * @return self
 	*/
-	LBEX_Add( ByRef $string ) 
+	LBEX_Add( $items ) 
 	{
-		return % LBEX_Add( this.hwnd, ByRef $string ) 
+		if( ! isObject($items) )
+			$items	:= StrSplit( $items, "|") 
+		
+		For $i, $item in $items
+			LBEX_Add( this.hwnd, $item )
+
+		return this 
 	}
 	/** Calculates the ideal width of a list box needed to display the current content.
 	 *
@@ -28,17 +34,22 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 	/** Deletes an item (row) in a list box.
 	 *
 	 * @param	int	$index Index of row
+	 *
+	 * @return self
 	*/
 	Delete( $index ) 
 	{
-		return % LBEX_Delete( this.hwnd, $index ) 
+		LBEX_Delete( this.hwnd, $index ) 
+		return this 
 	}
 	/** Removes all items from a list box.
 	 *
+	 * @return self
 	*/
 	DeleteAll() 
 	{
-		return % LBEX_DeleteAll( this.hwnd ) 
+		LBEX_DeleteAll( this.hwnd ) 
+		return this 
 	}
 	/** Finds the first string in a list box that begins with the specified string.
 	 *
@@ -157,10 +168,13 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 	 *
 	 * @param	int	$index	Index of row
 	 * @param	String	$string	Item to search
-	 */
+	 *
+	 * @return self
+	*/
 	Insert( $index, ByRef $string ) 
 	{
-		return % LBEX_Insert( this.hwnd, $index, $string ) 
+		LBEX_Insert( this.hwnd, $index, $string ) 
+		return this 
 	}
 	/** Gets the index of the item nearest the specified point in a list box.
 	 *
@@ -171,28 +185,36 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 	}
 	/** Selects or deselects one or more consecutive items in a multiple-selection list box.
 	 *
+	 * @param	int	$first	First item
+	 * @param	int	$last	Last item
+	 *
+	 * @return self
 	*/
-	SelectRange( First, Last, Select := True ) 
+	SelectRange( $first, $last ) 
 	{
-		return % LBEX_SelectRange( this.hwnd, First, Last, Select := True ) 
+		LBEX_SelectRange( this.hwnd, $first, $last, $select := true) ; $slect has no efffect
+		return this 
 	}
 	/** Searches a list box for an item that begins with the characters in a specified string.
 	 *  
 	 *  @param	String	$string	Item to search
 	 *  @param	int	$index	Index of row
-	 *  
-	 */
+	 *
+	 * @return self
+	*/
 	SelectString( $string, $index := 0 ) 
 	{
 		;;LBEX_SelectString( this.hwnd, $string, $index := 0 )  ; THIS DOES NOT WORK IN TEST, used hotfix
 		$index := this.Find( $string, $index )
 		this.SetCurSel($index)
+		return this 
 	}
 	/** Sets the tab stop positions according to the columns of a list box.
 	 *  
 	 *  NOT TESTED ON LISTBOX WITH COLUMNS	 
-	 *  
-	 */
+	 *
+	 * @return self
+	*/
 	SetColumnTabs( ColGap := 2 ) 
 	{
 		LBEX_SetColumnTabs( this.hwnd, ColGap := 2 )
@@ -201,46 +223,60 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 	/** Selects an item and scrolls it into view, if necessary.
 	 *
 	 * @param	int	$index Index of row
-	 */
+	 *
+	 * @return self
+	*/
 	SetCurSel( $index ) 
 	{
 		;;return % LBEX_SetCurSel( this.hwnd, $index ) ; THIS DOES NOT WORK IN TEST, SelectRange() is used as hotfix
 		this.SelectRange($index, $index)
+		return this 
 	}
 	/** Sets the focus rectangle to the specified item in a multiple-selection list box.
 	 *
 	 * @param	int	$index Index of row
-	 */
+	 *
+	 * @return self
+	*/
 	SetFocus( $index ) 
 	{
-		return % LBEX_SetFocus( this.hwnd, $index ) 
+		LBEX_SetFocus( this.hwnd, $index ) 
+		return this 
 	}
 	/** Sets a value associated with the specified item in a list box.
 	 *
 	 * @param	int	$index Index of row
 	 * @param	int	$data	Set data to item, works only intyeger values 
 	 *
-	 */
+	 * @return self
+	*/
 	SetItemData( $index, $data ) 
 	{
-		return % LBEX_SetItemData( this.hwnd, $index, $data ) 
+		LBEX_SetItemData( this.hwnd, $index, $data ) 
+		return this 
 	}
 	/** Sets the height, in pixels, of items in a list box.
 	 *
 	 * @param	int	$index  Index of row
 	 * @param	int	$height Height of row
-	 */
+	 *
+	 * @return self
+	*/
 	SetItemHeight( $index, $height ) 
 	{
-		return % LBEX_SetItemHeight( this.hwnd, $index, $height ) 
+		LBEX_SetItemHeight( this.hwnd, $index, $height ) 
+		return this 
 	}
 	/** Selects an item in a multiple-selection list box and scrolls the item into view, if necessary.
 	 *
 	 * @param	int	$index Index of row
-	 */
+	 *
+	 * @return self
+	*/
 	SetSel( $index, $select := true ) 
 	{
-		return % LBEX_SetSel( this.hwnd, $index, $select ) 
+		LBEX_SetSel( this.hwnd, $index, $select ) 
+		return this 
 	}
 	/** Sets the anchor item, that is, the item from which a multiple selection starts.
 	 *  
@@ -265,10 +301,13 @@ Class ListBoxLBEX_vgui extends ControlItems_vgui
 	/** Ensures that the specified item in a list box is visible.
 	 *
 	 * @param	int	$index Index of row
-	 */
+	 *
+	 * @return self
+	*/
 	SetTopIndex( $index ) 
 	{
-		return % LBEX_SetTopIndex( this.hwnd, $index ) 
+		LBEX_SetTopIndex( this.hwnd, $index ) 
+		return this 
 	}
 
 
