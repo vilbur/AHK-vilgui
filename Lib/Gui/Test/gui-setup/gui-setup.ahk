@@ -10,9 +10,9 @@ new VilGUI("Gui Default").create()
 new VilGUI("Gui size & position")
 	.resizeable()
 	.position(512,512)   ; init position
-	.size(512)      ; init size
+	.size(512)           ; init size
 	.minSize(256, 128)   ; min height & width 
-	.maxSize(1024, 1024)   ; max height
+	.maxSize(1024, 1024) ; max height
 	.create()
 
 /* Example 3
