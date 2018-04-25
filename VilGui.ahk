@@ -59,6 +59,8 @@ Class VilGUI extends Gui_vgui
 		
 		WinSet Redraw,, % this.ahkId()
 
+		this.Events.Window._setOnSizedMovedMessage()
+		
 		return this
 	}
 	/**
@@ -68,8 +70,8 @@ Class VilGUI extends Gui_vgui
 		if( this._fixed_width )
 			this.fixedWidth(this._fixed_width)
 			
-		;if( this._center.window )
-			;this.center("window")
+		if( this._center.window )
+			this.center("window")
 	}  
 
 	/*---------------------------------------
@@ -83,7 +85,7 @@ Class VilGUI extends Gui_vgui
 		$size_without_controls := ! this.Controls._Control ? "w256 h24 " : " " ; absolute minimum size to display gui without controls
 		
 		/* Get window position if centered to window
-		* Size of window is precomputed by bounding box of controls
+		*  Size of window is precomputed by bounding box of controls
 		*/
 		if( this._center.window )
 		{
@@ -124,7 +126,7 @@ Class VilGUI extends Gui_vgui
 		For $i, $xy in ["x", "y"]
 			if( $options[$xy] )
 				$options.delete($xy "Center")
-		;Dump($options, "options", 1)
+
 		return $options
 	}
 	/**

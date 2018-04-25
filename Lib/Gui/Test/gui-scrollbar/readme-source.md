@@ -1,0 +1,1 @@
+# Gui scrollbar  * VilGui covers Autohotkey`s difficulties with scrollbar  * Vertical bar __appears or disappear when gui window is resized__  * Horizontal scrollbar is not tested yet  ## Examples  [include:\gui-scrollbar.ahk]  ## Result  ![gui setup](gui-scrollbar.gif)  

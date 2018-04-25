@@ -25,18 +25,18 @@ new VilGUI("Gui Centered to window")
 	.center("window")        ; center to last active window 
 	.create()
 	
-;/* Example 4
-;*/
-;$GUI_controls := new VilGUI("Gui autosized with controls")
-;
-;$GUI_controls.Controls
-;	.text("Text 1").add()
-;	.text("Text 2").add()
-;	.text("Text 3").add()
-;
-;$GUI_controls
-;	.Tabs("A|B|C").add()
-;
-;$GUI_controls
-;	.position("",320)   ; init position
-;	.create()
+/* Example 4
+*/
+$GUI_controls := new VilGUI("Gui autosized with controls")
+
+$GUI_controls.Controls
+	.text("Text 1").add()
+	.text("Text 2").add()
+	.text("Text 3").add()
+
+$GUI_controls
+	.Tabs("A|B|C").add()
+
+$GUI_controls
+	.position("",380)   ; init position
+	.create()

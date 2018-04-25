@@ -31,9 +31,6 @@ Class GuiSize_vgui extends GuiPosition_vgui
 	 */
 	autosize() 
 	{
-		if( this._sizes.size.w && this._sizes.size.h )
-			return			
-		
 		this.Events.Window.pause("size")
 		
 		;this._fixSizeOnAutosize()
@@ -114,8 +111,10 @@ Class GuiSize_vgui extends GuiPosition_vgui
 		PRIVATE METHODS
 	-----------------------------------------
 	*/
-	/** Get real size of window with menus and borders
-	*/
+	/** Get clinet size of window with menus and borders
+	 *  Or get bounding box of control, if gui does not exist yet
+	 *  
+	 */
 	_getGuiSize( $hwnd:="" )
 	{
 		if( ! $hwnd )
@@ -132,6 +131,7 @@ Class GuiSize_vgui extends GuiPosition_vgui
 			return {"w":this._getControlsBboxSizeWithMargin("x"), "h":this._getControlsBboxSizeWithMargin("y")}
 		
 	}
+	
 	/** Set relative or absolute size of gui
 		@param "w|h"	$wh	width or height
 		@param int|string	$value	absolute or relative size of gui E.G: ABSOLUTE: 1024 | RELATIVE: -128 or "+128"

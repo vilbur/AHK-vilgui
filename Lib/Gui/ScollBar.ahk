@@ -84,7 +84,8 @@ UpdateScrollBars(GuiNum, GuiWidth, GuiHeight){
     ; Calculate scrolling area.
     $Left	:= $Top	:= 9999
     $Right	:= $Bottom	:= 0
-    WinGet, $ControlList, ControlList
+    ;WinGet, $ControlList, ControlList
+    WinGet, $ControlList, ControlList	
     Loop, Parse, $ControlList, `n
     {
         GuiControlGet, c, Pos, %A_LoopField%
@@ -128,5 +129,7 @@ UpdateScrollBars(GuiNum, GuiWidth, GuiHeight){
         y := Abs($Top) > GuiHeight-$Bottom ? GuiHeight-$Bottom : Abs($Top)
     if (x || y)
         DllCall("ScrollWindow", "uint", WinExist(), "int", x, "int", y, "uint", 0, "uint", 0)
+	
+		
 
 }
