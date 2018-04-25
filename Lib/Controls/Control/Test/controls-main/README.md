@@ -3,12 +3,13 @@
 ## Common Methods  
 Methods shared with all control types  
 
-    // add control to gui with given id, $id is used as value if value is not defined  
+__add__( [string __$id__] ) // @return object __Control__  
+// add control to gui with given id, $id is used as value if value is not defined  
 __callback__( $string __$fnName__, __$params__* ) // @return object __Control__  
-    // callback fn for control, any number of parameters  
+// callback fn for control, any number of parameters  
 __options__( string __$options__ ) // @return object __Control__  
-    // @param __$options__ strings of [options](https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options)  
-    // E.G: "w256 h64 x+16 y+32 border"  
+// @param __$options__ strings of [options](https://autohotkey.com/docs/commands/Gui.htm#Controls_Uncommon_Styles_and_Options)  
+// E.G: "w256 h64 x+16 y+32 border"  
 ------------------------------------------------------------------------------------------------------------------------------------  
 ## Basic controls  
 * Button  
