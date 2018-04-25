@@ -3,12 +3,18 @@
 -----------------------------------------
 */
 
-/** Scroll Gui Window
-	https://autohotkey.com/board/topic/84209-scrollbars-in-a-gui/
-*/
-OnScroll(wParam, lParam, msg, hwnd){
+ /** Scroll Gui Window
+  *		https://autohotkey.com/board/topic/84209-scrollbars-in-a-gui/
+  *		
+  *		NOTES: 0xFFFF must be added to positions to get correct values
+  *		
+  */
+OnScroll(wParam, lParam, msg, hwnd)
+{
+	;if( wParam==0 || wParam==1 )
+		;MsgBox,262144,, %wParam%,1
+	
     static SIF_ALL=0x17, SCROLL_STEP=30
-
     bar := msg=0x115 ; SB_HORZ=0, SB_VERT=1
 
     VarSetCapacity(si, 28, 0)
@@ -20,9 +26,10 @@ OnScroll(wParam, lParam, msg, hwnd){
     VarSetCapacity(rect, 16)
     DllCall("GetClientRect", "uint", hwnd, "uint", &rect)
 
-    new_pos := NumGet(si, 20) ; nPos
+    new_pos := NumGet(si, 20) & 0xFFFF ; nPos
 
     action := wParam & 0xFFFF
+		
     if action = 0 ; SB_LINEUP
         new_pos -= SCROLL_STEP
     else if action = 1 ; SB_LINEDOWN
@@ -40,26 +47,32 @@ OnScroll(wParam, lParam, msg, hwnd){
     else
         return
 
-    min := NumGet(si, 8, "int") ; nMin
-    max := NumGet(si, 12, "int") - NumGet(si, 16) ; nMax-nPage
-    new_pos := new_pos > max ? max : new_pos
-    new_pos := new_pos < min ? min : new_pos
-
     old_pos := NumGet(si, 20, "int") ; nPos
 
+    min := NumGet(si, 8, "int") ; nMin
+    max := NumGet(si, 12, "int") - ( NumGet(si, 16) & 0xFFFF )
+		
+    new_pos := new_pos > max ? max : new_pos
+    new_pos := new_pos < min ? min : new_pos
+	
+	;MsgBox,262144,, %  "$dbg_pos:	" $dbg_pos "`nmin:	" min "`nmax:	" max  "`nold_pos:	" old_pos "`nnew_pos:	" new_pos "`ny:	" y
+		
     x := y := 0
     if bar = 0 ; SB_HORZ
         x := old_pos-new_pos
     else
         y := old_pos-new_pos
+
     ; Scroll contents of window and invalidate uncovered area.
     DllCall("ScrollWindow", "uint", hwnd, "int", x, "int", y, "uint", 0, "uint", 0)
 
     ; Update scroll bar.
     NumPut(new_pos, si, 20, "int") ; nPos
     DllCall("SetScrollInfo", "uint", hwnd, "int", bar, "uint", &si, "int", 1)
+	
+	
 }
-/**
+/** Add or remove scrollbar
   */
 UpdateScrollBars(GuiNum, GuiWidth, GuiHeight){
 

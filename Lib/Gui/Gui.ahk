@@ -153,12 +153,14 @@ Class Gui_vgui extends GuiLayout_vgui
 	{
 		return % $toggle ? "+" : "-"
 	}
-	/**
+	/** Set hwnd of Gui`s window
+	  *
 	 */
 	_setHwnd()
 	{
-		sleep, 10
-		this._hwnd := WinExist("A")
+		WinWaitActive, % this._title,,2
+
+		this._hwnd := WinActive(this._title)
 		
 		$_GUI[this._hwnd]	:= this
 	} 

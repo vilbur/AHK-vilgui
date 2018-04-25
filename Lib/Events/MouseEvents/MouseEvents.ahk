@@ -5,7 +5,6 @@ Class MouseEvents_vgui extends EventBind_vgui
 {
 	/* https://autohotkey.com/docs/misc/SendMessageList.htm
 	*/
-	
 	_messages := 	{"enter":	0x200
 		,"move":	0x200
 		,"leftClick":	0x201
@@ -72,20 +71,13 @@ Class MouseEvents_vgui extends EventBind_vgui
 }
 
 /*-----------------------------------------
-	CALLBACK
+	CALLBACKS
 -----------------------------------------
 */
-
-
-
-
 /** onWheelOrScrollMessage
 */
 onMouseMainCallback(wParam, lParam, msg, hwnd)
 {
-	;MsgBox,262144,, onMouseMainCallback,2
-	;MsgBox,262144,wParam, %msg%,3
-	;MsgBox,262144,wParam, % msg +0,3 	
 	$GUI := $_GUI[hwnd]
 	;dump($GUI)
 	if( $GUI )
@@ -96,51 +88,18 @@ onMouseMainCallback(wParam, lParam, msg, hwnd)
 */
 onWheelOrScrollMessage(wParam, lParam, msg, hwnd)
 {
-	;hwnd := WinExist()
-	DetectHiddenWindows, On
-	WinGetTitle, $winTitle, A
-
-	if(wParam==4287102976) ; mouse wheel down
-		OnScroll(1, lParam, 0x115, hwnd )
-	else if(wParam==7864320)  ; mouse wheel up
+	;MsgBox,262144,, %hwnd%,2
+	hwnd := WinExist("A")
+	
+	if(wParam==7864320) ; mouse wheel down
 		OnScroll(0, lParam, 0x115, hwnd )
-	else if(wParam==4287102976) ; on scrollbar drag
+	else if(wParam==-7864320)  ; mouse wheel up
+		OnScroll(1, lParam, 0x115, hwnd )
+
+	else ; on scrollbar drag
 		OnScroll(wParam,lParam, 0x115, hwnd )
 
 	;;; call custom callback on control
-	$_GUI[lParam].List.get(H, "hwnd" ).Event.mouse.call(wParam, L, M, H)
-
+	;$_GUI[lParam].List.get(H, "hwnd" ).Event.mouse.call(wParam, L, M, H)
 
 }
-
-
-
-;/** Recive Mouse Wheel Message
-;  */
-;onMouseWheelMessage( wParam, lParam ){
-;
-;	MsgBox,262144,, onMouseWheelMessage,2
-;
-;	DetectHiddenWindows, On
-;	hwnd := WinExist()
-;	if(wParam==4287102976) ; mouse wheel down
-;		OnScroll(1, lParam, 0x115, hwnd )
-;	else if(wParam==7864320)  ; mouse wheel up
-;		OnScroll(0, lParam, 0x115, hwnd )
-;	;else
-;	;	MsgBox,262144,, %wParam%,3
-;}
-;/** Recive Mouse Wheel Message
-;*/
-;onScrollMessage( wParam, lParam ){
-;	DetectHiddenWindows, On
-;	hwnd := WinExist()
-;	;;if(wParam==4287102976) ; mouse wheel down
-;		OnScroll(wParam,lParam, 0x115, hwnd )
-;	;;else if(wParam==7864320)  ; mouse wheel up
-;	;;	OnScroll(0, 0, 0x115, hwnd )
-;	;;else
-;		;MsgBox,262144,SCROLL, %lParam%,1
-;}
-
-

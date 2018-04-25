@@ -9,6 +9,8 @@
 </livefolder>
 <livefolder id="b66eb00c-529b-4ae7-8f3e-e53000838827" idref="68ca1dae-cc62-4473-a9eb-e9d29e877138" name="Gui" url="Lib/Gui/">
 </livefolder>
+<livefolder id="35cfb947-d4a9-4c25-b163-050c68ce5763" idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" name="Gui" url="Lib/Gui/">
+</livefolder>
 <livefolder id="390c137e-93ca-46d4-8553-61eea417a4a7" idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" name="Documentation" url="Documentation/">
 </livefolder>
 <folder id="68ca1dae-cc62-4473-a9eb-e9d29e877138" idref="aa2cfb20-df12-4737-95d0-2065c8d1cba2" name="_LIB">
