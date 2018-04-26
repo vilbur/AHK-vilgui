@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\lib\gui-construct.ahk
+#Include %A_LineFile%\..\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 /* Button
 */
 $Gui.Controls
@@ -41,4 +41,5 @@ callbackFnCtrs($Event, $params*){
 	$Event.message(100)
 	MsgBox,262144,, % $params[1] "`n" $params[2] "`n" $params[3],5
 }
-#Include %A_LineFile%\..\..\..\gui\lib\gui-create.ahk 
+
+#Include %A_LineFile%\..\..\..\..\..\Gui\Test\gui-setup\gui-create.ahk

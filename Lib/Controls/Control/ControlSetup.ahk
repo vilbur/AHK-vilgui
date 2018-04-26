@@ -5,6 +5,7 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 	_name	:= ""
 	_type	:= ""
 	_value	:= ""
+	_tooltip	:= ""	
 
 	/** Set\Get control name
 	*/
@@ -39,6 +40,19 @@ Class ControlSetup_vgui extends GuiControl_vgui{
 		this._Options.set($options)
 		return this
 	}
+	/*---------------------------------------
+		TOOLTIP
+	-----------------------------------------
+	*/
+	/**
+	 */
+	tooltip( $tooltip )
+	{
+		this._tooltip	:= $tooltip
+		
+		return this
+	} 
+	
 	/*---------------------------------------
 		PRIVATE
 	-----------------------------------------

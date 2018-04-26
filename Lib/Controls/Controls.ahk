@@ -25,8 +25,10 @@ Class Controls_vgui extends ControlsTypes_vgui
 		
 		this._addToControlsList()
 		this._addToLayout()
+		this._setTooltip()		
 
 		this._Control	:= &this._Control
+
 		return this
 	}
 	/** setControl
@@ -170,7 +172,7 @@ Class Controls_vgui extends ControlsTypes_vgui
 		return % this._OptionsDefaults.get(this._Control._type) " " this._Control._Options.get()
 	}
 	/*---------------------------------------
-		ADD TO LISTS AND LAYOUT
+		POST ADDING METHODS
 	-----------------------------------------
 	*/
 	/** _addToControlsList
@@ -185,6 +187,13 @@ Class Controls_vgui extends ControlsTypes_vgui
 	{
 		this._Layout.addControl(this._Control)
 	}
+	/** Set tooltip to control
+	 */
+	_setTooltip()
+	{
+		if( this._Control._Tooltip )
+			this.Base().Tooltip.Attach(this._Control.hwnd, this._Control._Tooltip)
+	} 
 	/*---------------------------------------
 		PARENT METHODS
 	-----------------------------------------

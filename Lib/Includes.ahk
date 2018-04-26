@@ -56,7 +56,6 @@
 	CONTROLS
 -----------------------------------------
 */
-
 #Include %A_LineFile%\..\Controls\Controls.ahk
 #Include %A_LineFile%\..\Controls\ControlsTypes.ahk
 #Include %A_LineFile%\..\Controls\OptionsDefaults.ahk
@@ -118,6 +117,10 @@
 #Include %A_LineFile%\..\Controls\Control\Types\Tabs\Tabs.ahk
 #Include %A_LineFile%\..\Controls\Control\Types\Tabs\Tab.ahk
 
+/*
+   TOOLTIP
+*/
+#Include %A_LineFile%\..\Controls\GuiControlTips\GuiControlTips.ahk   
 
 /*---------------------------------------
 	LAYOUT

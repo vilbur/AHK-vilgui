@@ -1,5 +1,5 @@
 #SingleInstance force
-#Include %A_LineFile%\..\..\..\gui\lib\gui-construct.ahk
+#Include %A_LineFile%\..\..\..\..\..\Gui\Test\gui-setup\gui-construct.ahk
 /* Items for controls
 */
 $items := {"1_string":               "String A selected||String B|String C"
@@ -13,6 +13,7 @@ $Gui.Controls
 	*/
 	.Dropdown()
 		.items($items["1_string"]) ; checked by pipe "||"
+		.tooltip( "Dropdown" )
 		.add()
 		
 	/* Radio
@@ -20,6 +21,7 @@ $Gui.Controls
 	.Radio()
 		.items($items["2_array"])
 		.checked(3) ; checked by array index
+		.tooltip( "Tooltip Radio" )
 		.add()
 		
 	/* ListBox
@@ -29,4 +31,4 @@ $Gui.Controls
 		.checked("key2") ; checked by object key
 		.add()
 		
-#Include %A_LineFile%\..\..\..\gui\lib\gui-create.ahk 
+#Include %A_LineFile%\..\..\..\..\..\Gui\Test\gui-setup\gui-create.ahk

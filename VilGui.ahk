@@ -28,6 +28,7 @@ Class VilGUI extends Gui_vgui
 		this.Events	:= new Events_vgui().parent(this)
 		this.Menus	:= new Menus()
 		this.Style	:= new Style_vgui()
+		this.Tooltip 	:= new GuiControlTips(this._hwnd)
 
 	}
 	/** create gui
@@ -56,6 +57,8 @@ Class VilGUI extends Gui_vgui
 		this._applyInitOptions()
 
 		this.Style.Color.hwnd(this._hwnd)
+
+
 		
 		WinSet Redraw,, % this.ahkId()
 
