@@ -18,4 +18,3 @@ __[Dropdown, Radio, ListBox](Lib/Controls/Control/Test/controls-main#items-contr
 ### Used external libraries  
 [LBEX](https://github.com/AHK-just-me/LBEX) library  
 [GuiControlTips](https://autohotkey.com/boards/viewtopic.php?t=2598) library  
-  
