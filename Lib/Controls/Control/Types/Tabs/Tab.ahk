@@ -18,10 +18,10 @@ Class Tab_vgui
 	*/
 	name($name:="~null")
 	{
-		if($name=="~null"){
-			return % RegExReplace( this._name, "\|+", "" ) 
-		}
-		this._name := $name
+		if($name=="~null")
+			return % this._name
+		
+		this._name := RegExReplace( $name, "\|+", "" ) 
 		return this
 	}
 

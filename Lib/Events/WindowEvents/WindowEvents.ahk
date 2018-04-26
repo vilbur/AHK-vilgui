@@ -42,6 +42,7 @@ Class WindowEvents_vgui extends EventBind_vgui
 	{
 		if( this._messages.main )
 			return
+			
 		Gui +LastFound
 		
 		hWnd := WinExist()
